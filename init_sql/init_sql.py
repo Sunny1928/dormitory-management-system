@@ -122,7 +122,7 @@ def parse_opt(known = False):
     parser.add_argument("--host",type=str, default = '127.0.0.1')
     parser.add_argument("--port",type= int  , default=3307)
     parser.add_argument("--user",type=str, default = 'root')
-    parser.add_argument("--password",type=str, default = 'yourpassword')
+    parser.add_argument("--password",type=str, default = '12345678')
     parser.add_argument("--database",type=str, default = 'nukdms')
 
 
