@@ -14,14 +14,14 @@ CREATE TABLE system_administrator
 (
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (account),
-  FOREIGN KEY (account) REFERENCES user(account)
+  FOREIGN KEY (account) REFERENCES `user`(account) ON DELETE CASCADE
 );
 
 CREATE TABLE dorm_manager
 (
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (account),
-  FOREIGN KEY (account) REFERENCES user(account)
+  FOREIGN KEY (account) REFERENCES `user`(account) ON DELETE CASCADE
 );
 
 CREATE TABLE message
@@ -31,7 +31,7 @@ CREATE TABLE message
   content VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (message_id),
-  FOREIGN KEY (account) REFERENCES user(account)
+  FOREIGN KEY (account) REFERENCES `user`(account) ON DELETE CASCADE
 );
 
 CREATE TABLE announcement
@@ -41,7 +41,7 @@ CREATE TABLE announcement
   content VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (announcement_id),
-  FOREIGN KEY (account) REFERENCES user(account)
+  FOREIGN KEY (account) REFERENCES `user`(account) ON DELETE CASCADE
 );
 
 CREATE TABLE rule
@@ -64,7 +64,7 @@ CREATE TABLE student
   department VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (account),
-  FOREIGN KEY (account) REFERENCES user(account)
+  FOREIGN KEY (account) REFERENCES user(account) ON DELETE CASCADE
 );
 
 CREATE TABLE parent
@@ -72,17 +72,17 @@ CREATE TABLE parent
   parent_account VARCHAR(255) NOT NULL,
   student_account VARCHAR(255) NOT NULL,
   PRIMARY KEY (parent_account),
-  FOREIGN KEY (parent_account) REFERENCES user(account),
-  FOREIGN KEY (student_account) REFERENCES student(account)
+  FOREIGN KEY (parent_account) REFERENCES `user`(account) ON DELETE CASCADE,
+  FOREIGN KEY (student_account) REFERENCES student(account) ON DELETE CASCADE
 );
 
 CREATE TABLE apply_dorm
 (
   state INT DEFAULT 0,
-  apply_drom_id INT NOT NULL AUTO_INCREMENT,
+  apply_dorm_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255) NOT NULL,
-  PRIMARY KEY (apply_drom_id),
-  FOREIGN KEY (account) REFERENCES student(account)
+  PRIMARY KEY (apply_dorm_id),
+  FOREIGN KEY (account) REFERENCES student(account) ON DELETE CASCADE
 );
 
 CREATE TABLE parking_permit_record
@@ -92,18 +92,18 @@ CREATE TABLE parking_permit_record
   datetime INT NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (parking_permit_record_id),
-  FOREIGN KEY (account) REFERENCES parent(parent_account)
+  FOREIGN KEY (account) REFERENCES parent(parent_account) ON DELETE CASCADE
 );
 
 CREATE TABLE room
 (
   num_of_people INT NOT NULL,
   fee INT NOT NULL,
-  clean_state INT DEFAULT 0,
+  clean_state INT DEFAULT 1,
   room_number VARCHAR(255) NOT NULL,
   dormitory_id INT NOT NULL,
   PRIMARY KEY (room_number, dormitory_id),
-  FOREIGN KEY (dormitory_id) REFERENCES dormitory(dormitory_id)
+  FOREIGN KEY (dormitory_id) REFERENCES dormitory(dormitory_id) ON DELETE CASCADE
 );
 
 CREATE TABLE border
@@ -112,11 +112,11 @@ CREATE TABLE border
   apply_story_manager_state INT DEFAULT 0,
   `year` INT NOT NULL,
   account VARCHAR(255) NOT NULL,
-  room_number VARCHAR(255) NOT NULL,
-  dormitory_id INT NOT NULL,
+  room_number VARCHAR(255) DEFAULT NULL,
+  dormitory_id INT DEFAULT NULL,
   PRIMARY KEY (account, `year`),
-  FOREIGN KEY (account) REFERENCES student(account),
-  FOREIGN KEY (room_number, dormitory_id) REFERENCES room(room_number, dormitory_id)
+  FOREIGN KEY (account) REFERENCES student(account) ON DELETE CASCADE,
+  FOREIGN KEY (room_number, dormitory_id) REFERENCES room(room_number, dormitory_id) ON DELETE CASCADE
 );
 
 CREATE TABLE apply_change_dorm
@@ -127,7 +127,7 @@ CREATE TABLE apply_change_dorm
   final_state INT DEFAULT 0,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (apply_change_dorm_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE temporary_access_card_record
@@ -137,17 +137,17 @@ CREATE TABLE temporary_access_card_record
   datetime INT NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (temporary_access_card_record_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE roll_call_state_record
 (
   roll_call_state_record_id INT NOT NULL AUTO_INCREMENT,
   state INT DEFAULT 0,
-  datetime INT NOT NULL,
+  `datetime` INT NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (roll_call_state_record_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE apply_quit_dorm
@@ -156,7 +156,7 @@ CREATE TABLE apply_quit_dorm
   apply_quit_dorm_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255),
   PRIMARY KEY (apply_quit_dorm_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE violated_record
@@ -167,8 +167,8 @@ CREATE TABLE violated_record
   rule_id INT NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (violated_record_id),
-  FOREIGN KEY (rule_id) REFERENCES rule(rule_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (rule_id) REFERENCES rule(rule_id) ON DELETE CASCADE,
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE equipment
@@ -179,9 +179,9 @@ CREATE TABLE equipment
   apply_fix_state INT DEFAULT 0,
   equipment_id INT NOT NULL AUTO_INCREMENT,
   room_number VARCHAR(255) NOT NULL,
-  dormitory_id INT,
+  dormitory_id INT NOT NULL,
   PRIMARY KEY (equipment_id),
-  FOREIGN KEY (room_number, dormitory_id) REFERENCES room(room_number, dormitory_id)
+  FOREIGN KEY (room_number, dormitory_id) REFERENCES room(room_number, dormitory_id) ON DELETE CASCADE
 );
 
 CREATE TABLE entry_and_exit_dormitory_record
@@ -191,7 +191,7 @@ CREATE TABLE entry_and_exit_dormitory_record
   entry_and_exit_dormitory_record_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (entry_and_exit_dormitory_record_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
 
 CREATE TABLE bill
@@ -203,5 +203,5 @@ CREATE TABLE bill
   state INT DEFAULT 0,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (bill_id),
-  FOREIGN KEY (account) REFERENCES border(account)
+  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
 );
