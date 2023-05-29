@@ -100,8 +100,8 @@ CREATE TABLE room
   num_of_people INT NOT NULL,
   fee INT NOT NULL,
   clean_state INT DEFAULT 0,
-  room_number INT NOT NULL,
-  dormitory_id INT NOT NULL AUTO_INCREMENT,
+  room_number VARCHAR(255) NOT NULL,
+  dormitory_id INT NOT NULL,
   PRIMARY KEY (room_number, dormitory_id),
   FOREIGN KEY (dormitory_id) REFERENCES dormitory(dormitory_id)
 );
@@ -112,7 +112,7 @@ CREATE TABLE border
   apply_story_manager_state INT DEFAULT 0,
   `year` INT NOT NULL,
   account VARCHAR(255) NOT NULL,
-  room_number INT NOT NULL,
+  room_number VARCHAR(255) NOT NULL,
   dormitory_id INT NOT NULL,
   PRIMARY KEY (account, `year`),
   FOREIGN KEY (account) REFERENCES student(account),
@@ -178,7 +178,7 @@ CREATE TABLE equipment
   name VARCHAR(255) NOT NULL,
   apply_fix_state INT DEFAULT 0,
   equipment_id INT NOT NULL AUTO_INCREMENT,
-  room_number INT,
+  room_number VARCHAR(255) NOT NULL,
   dormitory_id INT,
   PRIMARY KEY (equipment_id),
   FOREIGN KEY (room_number, dormitory_id) REFERENCES room(room_number, dormitory_id)
