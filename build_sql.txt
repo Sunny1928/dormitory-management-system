@@ -54,7 +54,7 @@ CREATE TABLE rule
 
 CREATE TABLE dormitory
 (
-  dormitory_id INT NOT NULL AUTO_INCREMENT,
+  dormitory_id INT NOT NULL,
   name VARCHAR(255) NOT NULL,
   PRIMARY KEY (dormitory_id)
 );
