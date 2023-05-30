@@ -89,7 +89,7 @@ CREATE TABLE parking_permit_record
 (
   state INT DEFAULT 0,
   parking_permit_record_id INT NOT NULL AUTO_INCREMENT,
-  datetime INT NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (parking_permit_record_id),
   FOREIGN KEY (account) REFERENCES parent(parent_account) ON DELETE CASCADE
@@ -149,7 +149,7 @@ CREATE TABLE temporary_access_card_record
 (
   state INT DEFAULT 0,
   temporary_access_card_record_id INT NOT NULL AUTO_INCREMENT,
-  datetime INT NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (temporary_access_card_record_id),
   FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
@@ -159,7 +159,7 @@ CREATE TABLE roll_call_state_record
 (
   roll_call_state_record_id INT NOT NULL AUTO_INCREMENT,
   state INT DEFAULT 0,
-  `datetime` INT NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (roll_call_state_record_id),
   FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
