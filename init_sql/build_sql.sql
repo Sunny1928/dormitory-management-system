@@ -141,8 +141,10 @@ CREATE TABLE apply_change_dorm
   change_dorm_id INT NOT NULL,
   change_room_number VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (apply_change_dorm_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
+
 );
 
 CREATE TABLE temporary_access_card_record
@@ -151,8 +153,9 @@ CREATE TABLE temporary_access_card_record
   temporary_access_card_record_id INT NOT NULL AUTO_INCREMENT,
   `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (temporary_access_card_record_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
 
 CREATE TABLE roll_call_state_record
@@ -161,8 +164,9 @@ CREATE TABLE roll_call_state_record
   state INT DEFAULT 0,
   `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (roll_call_state_record_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
 
 CREATE TABLE apply_quit_dorm
@@ -170,8 +174,9 @@ CREATE TABLE apply_quit_dorm
   state INT DEFAULT 0,
   apply_quit_dorm_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255),
+  `year` INT NOT NULL,
   PRIMARY KEY (apply_quit_dorm_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
 
 CREATE TABLE violated_record
@@ -181,9 +186,10 @@ CREATE TABLE violated_record
   apply_cancel INT DEFAULT 0,
   rule_id INT NOT NULL,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (violated_record_id),
   FOREIGN KEY (rule_id) REFERENCES rule(rule_id) ON DELETE CASCADE,
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
 
 CREATE TABLE equipment
@@ -205,8 +211,9 @@ CREATE TABLE entry_and_exit_dormitory_record
   state INT DEFAULT 0,
   entry_and_exit_dormitory_record_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (entry_and_exit_dormitory_record_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
 
 CREATE TABLE bill
@@ -217,6 +224,7 @@ CREATE TABLE bill
   title VARCHAR(255) NOT NULL,
   state INT DEFAULT 0,
   account VARCHAR(255) NOT NULL,
+  `year` INT NOT NULL,
   PRIMARY KEY (bill_id),
-  FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
+  FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );
