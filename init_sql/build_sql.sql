@@ -95,6 +95,19 @@ CREATE TABLE parking_permit_record
   FOREIGN KEY (account) REFERENCES parent(parent_account) ON DELETE CASCADE
 );
 
+CREATE TABLE public_equipment
+(
+  public_equipment_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  apply_fix_state INT DEFAULT 0,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  expired_year INT NOT NULL,
+  dormitory_id INT NOT NULL,
+  PRIMARY KEY (public_equipment_id),
+  FOREIGN KEY (dormitory_id) REFERENCES dormitory(dormitory_id) ON DELETE CASCADE
+);
+
+
 CREATE TABLE room
 (
   num_of_people INT NOT NULL,
@@ -125,6 +138,8 @@ CREATE TABLE apply_change_dorm
   apply_change_dorm_id INT NOT NULL AUTO_INCREMENT,
   another_border VARCHAR(255) NOT NULL,
   final_state INT DEFAULT 0,
+  change_dorm_id INT NOT NULL,
+  change_room_number VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (apply_change_dorm_id),
   FOREIGN KEY (account) REFERENCES border(account) ON DELETE CASCADE
