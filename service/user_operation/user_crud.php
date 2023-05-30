@@ -61,7 +61,7 @@
         $rel = user_read($conn, $account);
         
         if($rel->num_rows == 0)
-        return False;
+            return False;
         
         return password_verify($password, $rel->fetch_assoc()["password"]);
     }

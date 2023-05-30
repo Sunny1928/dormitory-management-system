@@ -25,7 +25,7 @@
     }
     
     // 查詢所有學生資訊
-    function student_read_all($conn , $account){
+    function student_read_all($conn){
         
         $sql = "SELECT * FROM user JOIN student ON user.account = student.account";
         $result = $conn->query($sql);    
