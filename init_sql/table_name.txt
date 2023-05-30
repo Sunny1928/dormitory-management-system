@@ -2,6 +2,7 @@ user
 system_administrator
 dorm_manager
 message
+public_equipment
 announcement
 rule
 dormitory
