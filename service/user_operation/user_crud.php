@@ -54,7 +54,7 @@
     }
 
     // 查詢所有用戶資訊
-    function user_read_all($conn , $account){
+    function user_read_all($conn){
 
         $sql = "SELECT * FROM user";
         $result = $conn->query($sql);
