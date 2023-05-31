@@ -48,10 +48,13 @@
             for($j = 101 ;$j<111;$j++){
                 room_create($conn,$i,$j,4,$fee);
                 # 新增 equipment
-                equipment_create($conn,$i,$j ,'檯燈',2);
-                equipment_create($conn,$i,$j,'桌子',3);
-                equipment_create($conn,$i,$j,'椅子',3);
-                equipment_create($conn,$i,$j,'床',5);
+                for($k = 0 ;$k<4;$k++){
+                    equipment_create($conn,$i,$j ,'檯燈',2);
+                    equipment_create($conn,$i,$j,'桌子',3);
+                    equipment_create($conn,$i,$j,'椅子',3);
+                    equipment_create($conn,$i,$j,'床',5);
+                }
+                
             }
         }
         for($i=0;$i<4;$i++){
