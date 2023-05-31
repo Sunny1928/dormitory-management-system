@@ -3,9 +3,9 @@
 
     $servername = "localhost";
     $username = "root";
-    $password = "12345678";
+    $password = "";
     $dbname = "Nukdms";
-    $port = "3307";
+    $port = "3306";
 
 
     $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
