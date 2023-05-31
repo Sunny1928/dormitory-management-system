@@ -38,6 +38,7 @@ CREATE TABLE announcement
 (
   announcement_id INT NOT NULL AUTO_INCREMENT,
   `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  title VARCHAR(255) NOT NULL,
   content VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (announcement_id),
