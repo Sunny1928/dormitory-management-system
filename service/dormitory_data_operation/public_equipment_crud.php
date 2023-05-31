@@ -27,7 +27,7 @@
     }
 
     // 根據public_equipment_id更新設備apply_fix_state
-    function equipment_update($conn , $public_equipment_id , $apply_fix_state){  
+    function public_equipment_update($conn , $public_equipment_id , $apply_fix_state){  
 
         $sql = "UPDATE public_equipment SET apply_fix_state = ? WHERE public_equipment_id = ?";
         $stmt = $conn->prepare($sql);

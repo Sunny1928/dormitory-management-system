@@ -93,12 +93,12 @@ class init_sql:
 
     def create_all(cursor):
         init_sql.__create_table(cursor)
-        init_sql.__create_data(cursor)
+        #init_sql.__create_data(cursor)
 
 
     def delete_all(cursor):
         init_sql.__delete_data(cursor)
-        init_sql.__delete_table(cursor)
+        #init_sql.__delete_table(cursor)
 
 def main(opt):
 
@@ -118,7 +118,7 @@ def main(opt):
 def parse_opt(known = False):
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode",type=str, default = 'c')
+    parser.add_argument("--mode",type=str, default = 'd')
     parser.add_argument("--host",type=str, default = '127.0.0.1')
     parser.add_argument("--port",type= int  , default=3307)
     parser.add_argument("--user",type=str, default = 'root')

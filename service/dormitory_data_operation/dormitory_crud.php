@@ -34,6 +34,14 @@
         $stmt->bind_param('i' ,$dormitory_id);
         return $stmt->execute();
     }
+
+    //  刪除全部宿舍
+    function dormitory_delete_all($conn){     
+
+        $sql = "DELETE FROM dormitory";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
     
     
 ?>

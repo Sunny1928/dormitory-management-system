@@ -21,6 +21,14 @@
         $stmt->bind_param('s' , $account);
         return $stmt->execute();
     }
+
+    // 刪除全部用戶
+    function user_delete_all($conn ){
+        
+        $sql = "DELETE FROM user ";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
     
     // 更新密碼
     function user_update_password($conn , $account , $password){
