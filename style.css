@@ -125,6 +125,20 @@ nav .fa{
     }
 }
 
+.subtitle {
+    text-align:left;
+    position: relative; /*相對定位*/
+}
+
+.subtitle::before{
+    position: absolute; /*絕對定位*/
+    content: ""; /*沒有加這段就不會產生偽元素*/
+    width: 10px;
+    height: 50px;
+    background: #E09200;
+    top: 0;
+    left: -25px;
+}
 /*course*/
 
 .course{
@@ -133,6 +147,7 @@ nav .fa{
     text-align: center;
     padding-top: 100px;
 }
+
 h1{
     font-size: 36px;
     font-weight: 600;
@@ -146,20 +161,22 @@ p{
 }
 
 .row{
-    margin-top: 5%;
+    margin-top: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
+
 .course-col{
-    flex-basis: 31%;
+    flex-basis: 20%;
     background: #fff3f3;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    padding: 20px 12px;
+    border-radius: 20px;
+    margin-bottom: 10%;
+    padding: 20px 120px;
     box-sizing: border-box;
     transition: 0.5s;
 }
-h3{
+h4{
+    color: black;
     text-align: center;
     font-weight: 600;
     margin: 10px 0;
@@ -167,7 +184,7 @@ h3{
 .course-col:hover{
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
 }
-@media(max-width:700px){
+@media(max-width:250px){
     .row{
         flex-direction: column;
     }
@@ -204,7 +221,7 @@ h3{
     transition: 0.5s;
 }
 .layer:hover{
-    background: rgba(226,0,0,0.7);
+    background: rgba(127, 117, 117, 0.7);
 }
 .layer h3{
     width: 100%;
