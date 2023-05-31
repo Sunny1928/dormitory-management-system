@@ -30,5 +30,10 @@
         return $result;
     }
 
+    function system_admin_root_check($conn , $account){
+
+        return ($account == "root");
+    }
+
     
 ?>
