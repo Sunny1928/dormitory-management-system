@@ -1,11 +1,11 @@
 <?php
 
     // 新增公告
-    function announcement_create($conn , $account , $content){  
+    function announcement_create($conn , $account , $title , $content){  
     
-        $sql = "INSERT INTO announcement (account , content) VALUES (?, ?)";
+        $sql = "INSERT INTO announcement (account , title , content) VALUES (? , ? , ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss' ,$account ,$content);
+        $stmt->bind_param('sss' ,$account , $title , $content);
         return $stmt->execute(); 
     }
 
@@ -32,11 +32,13 @@
     }
 
     // 根據id更新公告內容
-    function announcement_update($conn , $announcement_id , $content){  
+    function announcement_update($conn , $announcement_id , $title , $content){  
 
-        $sql = "UPDATE announcement SET content = ? WHERE announcement_id = ?";
+        $sql = "UPDATE announcement 
+                SET  title = ? , content = ?
+                WHERE announcement_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si' ,$content ,$announcement_id);
+        $stmt->bind_param('ssi' , $title , $content , $announcement_id);
         return $stmt->execute();
     }
 
