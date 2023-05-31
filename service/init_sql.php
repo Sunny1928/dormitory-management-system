@@ -1,21 +1,18 @@
 <?php
     
-    require  "./service/user_operation/user_crud.php";
-    require  "./service/dormitory_data_operation/dormitory_crud.php";
-    require  "./service/dormitory_data_operation/rule_crud.php";
-    require  "./service/dormitory_data_operation/equipment_crud.php";
-    require  "./service/dormitory_data_operation/public_equipment_crud.php";
-    require  "./service/dormitory_data_operation/room_crud.php";
-    require  "./service/user_operation/student_crud.php";
-    require  "./service/user_operation/system_admin_crud.php";
-    require  "./service/user_operation/dorm_manager_crud.php";
+    require_once("./service/user_operation/user_crud.php");
+    require_once("./service/dormitory_data_operation/dormitory_crud.php");
+    require_once("./service/dormitory_data_operation/rule_crud.php");
+    require_once("./service/dormitory_data_operation/equipment_crud.php");
+    require_once("./service/dormitory_data_operation/public_equipment_crud.php");
+    require_once("./service/dormitory_data_operation/room_crud.php");
+    require_once("./service/user_operation/student_crud.php");
+    require_once("./service/user_operation/system_admin_crud.php");
+    require_once("./service/user_operation/dorm_manager_crud.php");
     
-    
+    # 新增 table 初始化資料 
     function data_create_init($conn){
         
-                
-        
-            
         student_create($conn,'A1095551','A1095551','A1095551@mail.nuk.edu.tw','0987654321','A1095551',0,3,'csie');
         student_create($conn,'A1095550','A1095550','A1095550@mail.nuk.edu.tw','0987654321','A1095550',1,3,'csie');
         student_create($conn,'A1095509','A1095509','A1095509@mail.nuk.edu.tw','0987654321','A1095509',1,3,'csie');
@@ -66,9 +63,8 @@
         
     }
     
-        
     
-
+    # 刪除 table 全部資料 
     function data_delete_all($conn){
         user_delete_all($conn);
         dormitory_delete_all($conn);
