@@ -12,18 +12,23 @@
     //  根據宿舍查詢公共設備
     function public_equipment_read($conn , $dormitory_id ){   
                
-        $sql = "SELECT * FROM public_equipment WHERE dormitory_id = ?";
+        $sql = "SELECT * FROM public_equipment 
+                JOIN dormitory ON dormitory.dormitory_id = public_equipment.dormitory_id
+                WHERE public_equipment.dormitory_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$dormitory_id );
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  查詢全部公共設備
     function public_equipment_read_all($conn){  
         
-        $sql = "SELECT * FROM public_equipment";
+        $sql = "SELECT * FROM public_equipment
+                JOIN dormitory ON dormitory.dormitory_id = public_equipment.dormitory_id";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     // 根據public_equipment_id更新設備apply_fix_state

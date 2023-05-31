@@ -15,7 +15,9 @@
     // 查詢系統管理員
     function system_admin_read($conn , $account){
 
-        $sql = "SELECT * FROM user JOIN system_administrator ON user.account = system_administrator.account WHERE user.account = ?";
+        $sql = "SELECT * FROM user 
+                JOIN system_administrator ON user.account = system_administrator.account 
+                WHERE user.account = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $account);
         $stmt->execute();
@@ -25,7 +27,8 @@
     // 查詢所有系統管理員
     function system_admin_read_all($conn){
 
-        $sql = "SELECT * FROM user JOIN system_administrator ON user.account = system_administrator.account";
+        $sql = "SELECT * FROM user 
+                JOIN system_administrator ON user.account = system_administrator.account";
         $result = $conn->query($sql);  
         return $result;
     }

@@ -15,7 +15,9 @@
     // 查詢舍監
     function dorm_manager_read($conn , $account){
 
-        $sql = "SELECT * FROM user JOIN dorm_manager ON user.account = dorm_manager.account WHERE user.account = ?";
+        $sql = "SELECT * FROM user 
+                JOIN dorm_manager ON user.account = dorm_manager.account 
+                WHERE user.account = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $account);
         $stmt->execute();
@@ -25,7 +27,8 @@
     // 查詢所有舍監
     function dorm_manager_read_all($conn){
 
-        $sql = "SELECT * FROM user JOIN dorm_manager ON user.account = dorm_manager.account";
+        $sql = "SELECT * FROM user 
+                JOIN dorm_manager ON user.account = dorm_manager.account";
         $result = $conn->query($sql);  
         return $result;
     }

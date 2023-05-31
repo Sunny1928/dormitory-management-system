@@ -15,7 +15,20 @@
         $sql = "SELECT * FROM dormitory WHERE dormitory_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$dormitory_id);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    //  根據id查詢宿舍的所有房間
+    function dormitory_read_all_room($conn , $dormitory_id){   
+               
+        $sql = "SELECT * FROM dormitory 
+                JOIN room ON dormitory.dormitory_id = room.dormitory_id
+                WHERE dormitory.dormitory_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' ,$dormitory_id);
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  查詢全部宿舍
@@ -23,7 +36,8 @@
         
         $sql = "SELECT * FROM dormitory";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  根據id刪除宿舍

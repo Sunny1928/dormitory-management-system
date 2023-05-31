@@ -12,18 +12,23 @@
     // 根據account查詢公告
     function announcement_read($conn , $account){   
                
-        $sql = "SELECT * FROM announcement WHERE account = ?";
+        $sql = "SELECT * FROM announcement 
+                JOIN user ON user.account = announcement.account 
+                WHERE user.account = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     // 查詢全部公告
     function announcement_read_all($conn){  
         
-        $sql = "SELECT * FROM announcement";
+        $sql = "SELECT * FROM announcement 
+                JOIN user ON user.account = announcement.account";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     // 根據id更新公告內容

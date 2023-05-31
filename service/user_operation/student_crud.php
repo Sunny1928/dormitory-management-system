@@ -16,7 +16,9 @@
     // 查詢學生資訊
     function student_read($conn , $account){
         
-        $sql = "SELECT * FROM user JOIN student ON user.account = student.account WHERE user.account = ?";        
+        $sql = "SELECT * FROM user 
+                JOIN student ON user.account = student.account 
+                WHERE user.account = ?";        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $account);
         $stmt->execute();
@@ -27,7 +29,8 @@
     // 查詢所有學生資訊
     function student_read_all($conn){
         
-        $sql = "SELECT * FROM user JOIN student ON user.account = student.account";
+        $sql = "SELECT * FROM user 
+                JOIN student ON user.account = student.account";
         $result = $conn->query($sql);    
         
         return $result;

@@ -1,0 +1,9 @@
+<?php
+    require_once('service/user_operation/user_crud.php');
+    require_once('service/user_operation/student_crud.php');
+    require_once('service/user_operation/parents_crud.php');
+    require_once('service/user_operation/border_crud.php');
+    require_once('service/user_operation/story_manager_crud.php');
+    require_once('service/user_operation/dorm_manager_crud.php');
+    require_once('service/user_operation/system_admin_crud.php');
+?>

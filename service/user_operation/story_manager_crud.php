@@ -14,7 +14,7 @@
     // 檢查一個border是否為樓長
     function story_manager_check($conn , $account , $year){
 
-        $rel =  story_manager_read_account_year($conn , $account , $year);
+        $rel = story_manager_read_account_year($conn , $account , $year);
 
         if($rel->num_rows == 0)
             return False;
@@ -25,7 +25,10 @@
     // 用帳號及年份查詢樓長
     function story_manager_read_account_year($conn , $account , $year){
 
-        $sql = "SELECT * FROM user JOIN student ON user.account = student.account  JOIN border ON user.account = border.account WHERE user.account = ? AND border.year = ? AND border.type > 1";
+        $sql = "SELECT * FROM user 
+                JOIN student ON user.account = student.account 
+                JOIN border ON user.account = border.account 
+                WHERE user.account = ? AND border.year = ? AND border.type > 1";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si', $account , $year);
         $stmt->execute();
@@ -35,7 +38,10 @@
     // 查詢特定年分宿舍的樓長
     function story_manager_read_dorm_year($conn , $type , $year){
 
-        $sql = "SELECT * FROM user JOIN student ON user.account = student.account  JOIN border ON user.account = border.account WHERE border.type = ? AND border.year = ? ";
+        $sql = "SELECT * FROM user 
+                JOIN student ON user.account = student.account 
+                JOIN border ON user.account = border.account 
+                WHERE border.type = ? AND border.year = ? ";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ii', $type , $year);
         $stmt->execute();

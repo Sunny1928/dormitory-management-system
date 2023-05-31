@@ -15,7 +15,8 @@
         $sql = "SELECT * FROM rule WHERE rule_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$rule_id);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     // 查詢全部規範
@@ -23,7 +24,8 @@
         
         $sql = "SELECT * FROM rule";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
 

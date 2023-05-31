@@ -12,18 +12,23 @@
     //  根據account查詢留言
     function message_read($conn , $account){   
                
-        $sql = "SELECT * FROM message WHERE account = ?";
+        $sql = "SELECT * FROM message 
+                JOIN user ON message.account = user.account 
+                WHERE user.account = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  查詢全部留言
     function message_read_all($conn){  
         
-        $sql = "SELECT * FROM message";
+        $sql = "SELECT * FROM message
+                JOIN user ON message.account = user.account";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  根據id更新留言內容

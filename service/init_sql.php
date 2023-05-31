@@ -18,6 +18,21 @@
         student_create($conn,'A1095550','A1095550','A1095550@mail.nuk.edu.tw','0987654321','A1095550',1,3,'csie');
         student_create($conn,'A1095509','A1095509','A1095509@mail.nuk.edu.tw','0987654321','A1095509',1,3,'csie');
         student_create($conn,'A1095514','A1095514','A1095514@mail.nuk.edu.tw','0987654321','A1095514',0,3,'csie');
+
+        apply_dorm_create($conn , "A1095514");
+        apply_dorm_create($conn , "A1095509");
+        apply_dorm_create($conn , "A1095551");
+        apply_dorm_create($conn , "A1095550");
+        apply_dorm_update($conn , 1 , 1);
+        apply_dorm_update($conn , 2 , 1);
+
+        parents_create($conn , "father1" , "father1" , "father1@gmail.com" , "0987654321" , "father1" , 0 , 2 , "A1095514");
+        parents_create($conn , "father2" , "father2" , "father2@gmail.com" , "0987654321" , "father2" , 0 , 2 , "A1095509");
+
+        parking_permit_create($conn , "father1");
+        parking_permit_create($conn , "father2");
+        parking_permit_update($conn , 0, 1);
+
         system_admin_create($conn,'admin1','admin1','admin1@mail.nuk.edu.tw','0987654321','admin1',0,0);
         system_admin_create($conn,'admin2','admin2','admin2@mail.nuk.edu.tw','0987654321','admin2',1,0);
         system_admin_create($conn,'root','root','root@mail.nuk.edu.tw','0987654321','root',1,0);

@@ -13,18 +13,35 @@
     //  根據account查詢停車證
     function parking_permit_read($conn , $account){   
                
-        $sql = "SELECT * FROM parking_permit_record WHERE account = ?";
+        $sql = "SELECT * FROM parking_permit_record 
+                JOIN parent ON parent.parent_account = parking_permit_record.account
+                WHERE parent.parent_account = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    //  根據state查詢停車證
+    function parking_permit_read_state($conn , $state){   
+               
+        $sql = "SELECT * FROM parking_permit_record 
+                JOIN parent ON parent.parent_account = parking_permit_record.account
+                WHERE parking_permit_record.state = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' ,$state);
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  查詢全部停車證
     function parking_permit_read_all($conn){  
         
-        $sql = "SELECT * FROM parking_permit_record";
+        $sql = "SELECT * FROM parking_permit_record
+                JOIN parent ON parent.parent_account = parking_permit_record.account";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  根據id更新停車證state

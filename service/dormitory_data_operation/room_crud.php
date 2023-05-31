@@ -9,13 +9,16 @@
         return $stmt->execute(); 
     }
 
-    //  根據宿舍查詢房間
-    function room_read($conn , $dormitory_id){   
+    //  根據宿舍及房號查詢房間
+    function room_read($conn , $dormitory_id , $room_number){   
                
-        $sql = "SELECT * FROM room WHERE dormitory_id = ?";
+        $sql = "SELECT * FROM room 
+                JOIN dormitory ON dormitory.dormitory_id = room.dormitory_id
+                WHERE room.dormitory_id = ? AND room.room_number =?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i' ,$dormitory_id);
-        return $stmt->execute();
+        $stmt->bind_param('is' ,$dormitory_id , $room_number);
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     //  查詢全部房間
@@ -23,7 +26,8 @@
         
         $sql = "SELECT * FROM room";
         $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->get_result();
     }
 
     // 根據宿舍和房號更新申請住宿clean_state
