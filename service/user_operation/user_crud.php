@@ -30,6 +30,20 @@
         return $stmt->execute();
     }
     
+    // 更新user
+    function user_update($conn , $name, $email , $phone , $account , $gender){
+        
+
+        $sql = "UPDATE user 
+                SET name = ? , email = ? , phone = ? , gender = ? 
+                WHERE account = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sssis', $name, $email , $phone , $gender , $account);
+        return $stmt->execute();
+    }
+
+    
     // 更新密碼
     function user_update_password($conn , $account , $password){
         

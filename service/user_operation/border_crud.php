@@ -11,26 +11,27 @@
     }
 
     // 分配住宿生的宿舍大樓及房間
-    function border_update_dorm_room($conn , $account , $dorm_id , $room_number){
+    function border_update_dorm_room($conn , $account , $dorm_id , $room_number , $year){
 
         $sql = "UPDATE border 
-                SET dormitory_id = ? , room_number = ? WHERE account = ?";
+                SET dormitory_id = ? , room_number = ? 
+                WHERE account = ? AND year = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('iss' , $dorm_id , $room_number , $account);
+        $stmt->bind_param('issi' , $dorm_id , $room_number , $account , $year);
         return $stmt->execute();
     }
 
 
     // 將住宿生設為退宿狀態
-    function border_update_quit($conn , $account){
+    function border_update_quit($conn , $account , $year){
 
         $sql = "UPDATE border 
                 SET type = 1 , room_number = NULL , dormitory_id = NULL 
-                WHERE account = ?";
+                WHERE account = ? AND year = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s' , $account);
+        $stmt->bind_param('si' , $account , $year);
         return $stmt->execute();
     }
 
