@@ -12,15 +12,9 @@
     //  根據樓長管理的宿舍、年份和狀態查詢點名
     function roll_call_read_dormitory_year_state($conn , $account, $year, $state){   
     
-        $sql = "SELECT type FROM border WHERE account = ? AND year = ?";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si' ,  $account , $year);
-        $stmt->execute();
-        $rel = $stmt->get_result();
+        require_once("service/user_operation/story_manager_crud.php");
+        $rel = story_manager_read_account_year($conn , $account , $year);
         $dormitory = $rel->fetch_assoc()["type"];
-        mysqli_stmt_close($stmt);
-
         $dormitory -= 2;
 
         $sql = "SELECT * FROM roll_call_state_record 
