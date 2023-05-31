@@ -1,6 +1,7 @@
 <?php
     
     require_once("./service/user_operation/user_crud.php");
+    require_once("./service/user_operation/border_crud.php");
     require_once("./service/dormitory_data_operation/dormitory_crud.php");
     require_once("./service/dormitory_data_operation/rule_crud.php");
     require_once("./service/dormitory_data_operation/equipment_crud.php");
@@ -23,7 +24,9 @@
         dorm_manager_create($conn,'dorm1','dorm1','dorm1@mail.nuk.edu.tw','0987654321','dorm1',0,0);
         dorm_manager_create($conn,'dorm2','dorm2','dorm2@mail.nuk.edu.tw','0987654321','dorm2',1,0);
 
-    
+        border_create($conn , 'A1095509' , 109);
+        border_create($conn , 'A1095509' , 110);
+
         dormitory_create($conn,0,'學一男');
         dormitory_create($conn,1,'學一女');
         dormitory_create($conn,2,'學二男');

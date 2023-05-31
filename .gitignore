@@ -2,3 +2,5 @@ test
 .vscode
 test.php
 init_sql/*
+.DS_Store
+ service/.DS_Store
