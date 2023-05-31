@@ -4,7 +4,7 @@
     //  新增停車證 state預設0
     function parking_permit_create($conn , $account){  
     
-        $sql = "INSERT INTO parking_permit_record (account, state) VALUES (?, 0)";
+        $sql = "INSERT INTO parking_permit_record (account) VALUES (?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         return $stmt->execute(); 
@@ -27,7 +27,7 @@
         return $stmt->execute();
     }
 
-    //  根據id更新停車證status
+    //  根據id更新停車證state
     function parking_permit_update($conn , $parking_permit_record_id, $state){  
 
         $sql = "UPDATE parking_permit_record SET state = ? WHERE parking_permit_record_id = ?";
