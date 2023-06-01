@@ -12,7 +12,7 @@
     //  根據宿舍和房號查詢設備
     function equipment_read_dormid_roomnum($conn , $dormitory_id , $room_number){   
                
-        $sql = "SELECT * FROM equipment 
+        $sql = "SELECT dormitory.dormitory_id  , dormitory.name as dormitory_name , room.* ,  equipment.* FROM equipment
                 JOIN room ON equipment.dormitory_id = room.dormitory_id 
                     AND equipment.room_number = room.room_number
                 JOIN dormitory ON equipment.dormitory_id = dormitory.dormitory_id
@@ -26,7 +26,7 @@
     //  查詢全部設備
     function equipment_read_all($conn){  
         
-        $sql = "SELECT * FROM equipment
+        $sql = "SELECT dormitory.dormitory_id  , dormitory.name as dormitory_name , room.* ,  equipment.* FROM equipment
                 JOIN room ON equipment.dormitory_id = room.dormitory_id 
                     AND equipment.room_number = room.room_number
                 JOIN dormitory ON equipment.dormitory_id = dormitory.dormitory_id";
