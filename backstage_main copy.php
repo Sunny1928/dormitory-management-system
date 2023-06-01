@@ -1506,7 +1506,7 @@
                                     <label class='form-label' for='RuleContent'>內容</label>
                                     <div class='form-notch'><div class='form-notch-leading' style='width: 9px;'></div><div class='form-notch-middle' style='width: 114.4px;'></div><div class='form-notch-trailing'></div></div>
                                   </div>
-                                  <input hidden value='$rule_id' readonly name='rule_id' id='RuleId' class='form-control' />
+                                  <input hidden value='$rule_id' readonly name='rule_id' class='form-control' />
                                 </div>
                               </div>
                               <div class='modal-footer'>
