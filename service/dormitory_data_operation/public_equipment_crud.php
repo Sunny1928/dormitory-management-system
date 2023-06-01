@@ -31,12 +31,14 @@
         return $stmt->get_result();
     }
 
-    // 根據public_equipment_id更新設備apply_fix_state
-    function public_equipment_update($conn , $public_equipment_id , $apply_fix_state){  
+    // 根據public_equipment_id更新公共設備
+    function public_equipment_update($conn , $public_equipment_id , $name ,  $apply_fix_state  , $expired_year){  
 
-        $sql = "UPDATE public_equipment SET apply_fix_state = ? WHERE public_equipment_id = ?";
+        $sql = "UPDATE public_equipment 
+                SET name = ? , apply_fix_state = ? , expired_year = ?
+                WHERE public_equipment_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' ,$apply_fix_state , $public_equipment_id);
+        $stmt->bind_param('siis' , $name ,$apply_fix_state , $expired_year , $public_equipment_id);
         return $stmt->execute();
     }
 

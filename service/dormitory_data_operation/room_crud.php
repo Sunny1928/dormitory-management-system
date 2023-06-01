@@ -24,18 +24,22 @@
     //  查詢全部房間
     function room_read_all($conn){  
         
-        $sql = "SELECT * FROM room";
+        $sql = "SELECT * FROM room 
+                JOIN dormitory ON dormitory.dormitory_id = room.dormitory_id
+                ORDER BY room.dormitory_id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
     }
 
     // 根據宿舍和房號更新申請住宿clean_state
-    function room_update($conn , $room_number , $dormitory_id , $clean_state){  
+    function room_update($conn , $room_number , $dormitory_id , $num_of_people , $fee , $clean_state){  
 
-        $sql = "UPDATE room SET clean_state = ? WHERE room_number = ? AND dormitory_id = ?";
+        $sql = "UPDATE room 
+                SET num_of_people = ? , fee = ? , clean_state = ?
+                WHERE room_number = ? AND dormitory_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('isi' ,$clean_state , $room_number , $dormitory_id);
+        $stmt->bind_param('iiisi' , $num_of_people , $fee ,$clean_state , $room_number , $dormitory_id);
         return $stmt->execute();
     }
 
