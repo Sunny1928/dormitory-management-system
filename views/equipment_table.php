@@ -27,9 +27,7 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              $apply_fix_states = array("未申請報修", "申請報修");
-            
-              require_once('service/dormitory_data_operation/equipment_crud.php');
+              $apply_fix_states = array("未申請報修", "申請報修", "通過", "未通過");
 
               $result = equipment_read_all($conn);
 
@@ -38,7 +36,7 @@
                 while ($info = mysqli_fetch_assoc($result)) 
                 {
                   $id = $info['equipment_id'];
-                  $ename = $info['name'];
+                  $name = $info['name'];
                   $expired_year = $info['expired_year'];
                   $datetime = $info['datetime'];
                   $apply_fix_state = $info['apply_fix_state'];
@@ -49,7 +47,7 @@
                     "<td> " . $dormitory_id . "</td>".
                     "<td> " . $room_number . "</td>".
                     "<td> " . $id . "</td>".
-                    "<td> " . $ename . "</td>".
+                    "<td> " . $name . "</td>".
                     "<td> " . $apply_fix_states[$apply_fix_state] . "</td>".
                     "<td> " . $expired_year . "</td>".
                     "<td> " . $datetime . "</td>".
@@ -72,19 +70,32 @@
                       <div class='modal-body'>
                         <div class='text-center mb-3'>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='dormitory_id' class='form-control' />
-                            <label class='form-label'>宿舍大樓編號</label>
+                            <input value='$id' readonly required type='text' name='equipment_id' class='form-control' />
+                            <label class='form-label'>設備編號</label>
                           </div>
+                          <select class='form-select mb-4' name='dormitory_room' required>
+                            <option value=''>房間</option>";
+                            $res = room_read_all($conn);
+                            if (mysqli_num_rows($res) > 0) {
+                              while ($info = mysqli_fetch_assoc($res)){
+                                echo "<option value=".$info['dormitory_id'].'-'.$info['room_number'];
+                                if($dormitory_id ==$info['dormitory_id'] && $room_number ==$info['room_number']) echo " selected";
+                                echo " >".$info['dormitory_id'].'-'.$info['room_number'].''."</option>";
+                              }
+                            }
+                          echo "</select>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='room_number'class='form-control' />
-                            <label class='form-label'>房號</label>
-                          </div>
-                          <div class='form-outline mb-4'>
-                            <input required type='text' name='name' class='form-control' />
+                            <input value='$name' required type='text' name='name' class='form-control' />
                             <label class='form-label'>名稱</label>
                           </div>
+                          <select class='form-select mb-4' name='apply_fix_state' required>
+                            <option value=''>報修紀錄</option>";
+                            for($i = 0; $i<4; $i++){
+                              echo "<option value=$i"; if($apply_fix_state ==$i) echo " selected"; echo ">".$apply_fix_states[$i]."</option>";
+                            }
+                          echo "</select>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='expired_year' class='form-control' />
+                            <input value='$expired_year' required type='text' name='expired_year' class='form-control' />
                             <label class='form-label'>過期年限</label>
                           </div>
                         </div>

@@ -9,7 +9,7 @@
     } else if(isset($_POST['delete'])){
         violated_record_delete($conn, $_POST['violated_record_id']);
     } else if(isset($_POST['update'])){
-        violated_record_update($conn, $_POST['violated_record_id'], $_POST['apply_cancel']);
+        violated_record_update($conn, $_POST['violated_record_id'], $_POST['apply_cancel'], $_POST['rule_id']);
     }
 
     header("Location: ../backstage_main.php#pills-violated-record");

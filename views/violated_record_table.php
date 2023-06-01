@@ -19,7 +19,7 @@
               <th scope="col">年</th>
               <th scope="col">帳號</th>
               <th scope="col">規範</th>
-              <th scope="col">申請取消狀態</th>
+              <th scope="col">申請取消</th>
               <th scope="col">時間</th>
               <th scope="col">操作</th>
             </tr>
@@ -28,7 +28,7 @@
             <?php
     
               $result = violated_record_read_all($conn);
-              $apply_cancel_states = array("未申請違規紀錄取消", "申請違規紀錄取消", "申請違規紀錄取消通過", "申請違規紀錄取消未通過");
+              $apply_cancel_states = array("未申請", "已申請", "通過", "未通過");
 
 
               if (mysqli_num_rows($result) > 0) 
@@ -38,6 +38,7 @@
                   $id = $info['violated_record_id']; // 不要改
                   $year = $info['year'];
                   $account = $info['account'];
+                  $rule_id = $info['rule_id'];
                   $content = $info['content'];
                   $apply_cancel = $info['apply_cancel'];
                   $datetime	 = $info['datetime'];
@@ -70,6 +71,17 @@
                             <input value='$id' readonly required type='text' name='violated_record_id' class='form-control' />
                             <label class='form-label'>違規紀錄編號</label>
                           </div>
+                          <select class='form-select mb-4' name='rule_id' required>
+                            <option value=''>規範</option>";
+                            $res = rule_read_all($conn);
+                            if (mysqli_num_rows($res) > 0) {
+                              while ($info = mysqli_fetch_assoc($res)){
+                                echo "<option value=".$info['rule_id'];
+                                if($rule_id ==$info['rule_id']) echo " selected";
+                                echo " >".$info['content']."</option>";
+                              }
+                            }
+                          echo "</select>
                           <select class='form-select mb-4' name='apply_cancel' required>
                             <option value=''>申請取消狀態</option>";
                             for($i = 0; $i<4; $i++){

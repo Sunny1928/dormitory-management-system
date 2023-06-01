@@ -2,6 +2,8 @@
     require_once('../service/require_all.php');
 
     if(isset($_POST['create'])){
+        student_create($conn , $name , $password , $email , $phone , $account , $gender , $type , $department)
+        dorm_manager_create($conn , $name , $password , $email , $phone , $account , $gender , $type)
         $output = explode("-", $_POST['year_account']);
         $year = $output[0];
         $account = $output[1];
@@ -12,5 +14,5 @@
         bill_update($conn , $_POST['bill_id'], $_POST['fee'], $_POST['type'], $_POST['title'] , $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-bill");
+    header("Location: ../backstage_main.php#pills-user");
 ?>

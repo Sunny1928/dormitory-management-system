@@ -9,7 +9,7 @@
     } else if(isset($_POST['delete'])){
         rule_delete($conn, $_POST['rule_id']);
     } else if(isset($_POST['update'])){
-
+        rule_update($conn, $_POST['rule_id'], $_POST['content'], $_POST['point']);
     }
 
     header("Location: ../backstage_main.php#pills-rule");

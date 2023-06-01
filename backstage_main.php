@@ -82,6 +82,13 @@
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
             <i class="fas fa-door-open pe-3"></i>出入卡紀錄 
           </a>
+          
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
+            <i class="fas fa-door-open pe-3"></i>公告 
+          </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
+            <i class="fas fa-door-open pe-3"></i>訊息 
+          </a>
         </div>
         <div class="list-group list-group-flush mx-3">
           <a href="./backstage_index.php" class="list-group-item py-2 ripple pb-2">
@@ -101,7 +108,7 @@
       <!--user-->
       <div class="tab-pane fade show active" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
         <?php
-          require("./views/user_table.php") 
+          require("./views/student_table.php") 
         ?>
       </div>
 
@@ -172,6 +179,20 @@
       <div class="tab-pane fade" id="pills-access-card" role="tabpanel" aria-labelledby="tab-access-card">
         <?php
           //require("./views/access_card_table.php")
+        ?>
+      </div>
+
+      <!--access card-->
+      <div class="tab-pane fade" id="pills-announcement" role="tabpanel" aria-labelledby="tab-announcement">
+        <?php
+          require("./views/announcement_table.php")
+        ?>
+      </div>
+
+      <!--access card-->
+      <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
+        <?php
+          require("./views/message_table.php")
         ?>
       </div>
 
@@ -276,6 +297,24 @@
       }
     } else if (location.hash === "#pills-access-card") {
       const triggerEl = document.querySelector('a[href="#pills-access-card"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-announcement") {
+      const triggerEl = document.querySelector('a[href="#pills-announcement"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-message") {
+      const triggerEl = document.querySelector('a[href="#pills-message"]');
       if (triggerEl) {
         let instance = mdb.Tab.getInstance(triggerEl)
         if (!instance) {

@@ -6,7 +6,7 @@
     } else if(isset($_POST['delete'])){
         room_delete($conn, $_POST['room_number'], $_POST['dormitory_id']);
     } else if(isset($_POST['update'])){
-
+        room_update($conn , $_POST['room_number'] , $_POST['dormitory_id'] , $_POST['num_of_people'] , $_POST['fee'] , $_POST['clean_state']);
     }
 
     header("Location: ../backstage_main.php#pills-room");

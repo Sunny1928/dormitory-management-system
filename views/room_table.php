@@ -25,8 +25,7 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-            
-
+              $clean_states = array("未整理", "整理完");
               $result = room_read_all($conn);
 
               if (mysqli_num_rows($result) > 0) 
@@ -38,13 +37,14 @@
                   $num_of_people = $info['num_of_people'];
                   $clean_state = $info['clean_state'];
                   $dormitory_id = $info['dormitory_id'];
+                  $dormitory_name = $info['name'];
                   
                   echo "<tr>" .
-                    "<td> " . $dormitory_id . "</td>".
+                    "<td> " . $dormitory_name . "</td>".
                     "<td> " . $id . "</td>".
                     "<td> " . $fee . "</td>".
                     "<td> " . $num_of_people . "</td>".
-                    "<td> " . $clean_state . "</td>".
+                    "<td> " . $clean_states[$clean_state] . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRoomModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRoomModal$id'><i class='fa fa-trash'></i></button>
@@ -52,6 +52,7 @@
                     "</tr>";
 
                   // Update Modal
+
                   echo "
                   <div class='modal fade' id='updateRoomModal$id' tabindex='-1' aria-labelledby='updateRoomModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
@@ -63,21 +64,28 @@
                       <div class='modal-body'>
                         <div class='text-center mb-3'>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='dormitory_id' class='form-control' />
+                            <input value='$dormitory_id' required type='hidden' name='dormitory_id' class='form-control' />
+                            <input value='$dormitory_name' readonly required type='text' name='name' class='form-control' />
                             <label class='form-label' >宿舍大樓編號</label>
                           </div>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='room_number' class='form-control' />
+                            <input value='$id' readonly required type='text' name='room_number' class='form-control' />
                             <label class='form-label'>房號</label>
                           </div>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='fee' class='form-control' />
+                            <input value='$fee' required type='text' name='fee' class='form-control' />
                             <label class='form-label'>費用</label>
                           </div>
                           <div class='form-outline mb-4'>
-                            <input required type='text' name='num_of_people' class='form-control' />
+                            <input value='$num_of_people' required type='text' name='num_of_people' class='form-control' />
                             <label class='form-label'>人數</label>
                           </div>
+                          <select class='form-select mb-4' name='clean_state' required>
+                            <option value=''>申請取消狀態</option>";
+                            for($i = 0; $i<2; $i++){
+                              echo "<option value=$i"; if($clean_state ==$i) echo " selected"; echo ">".$clean_states[$i]."</option>";
+                            }
+                          echo "</select>
                         </div>
                       </div>
                       <div class='modal-footer'>
@@ -132,10 +140,17 @@
       <form method='post' action='./controller/room_controller.php'>
         <div class='modal-body'>
           <div class='text-center mb-3'>
-            <div class='form-outline mb-4'>
-              <input required type='text' name='dormitory_id' id='dormitoryId' class='form-control' />
-              <label class='form-label' for='dormitoryId'>宿舍大樓編號</label>
-            </div>
+            <select class='form-select mb-4' name='dormitory_id' required>
+              <option value=''>宿舍大樓編號</option>
+              <?php
+                $res = dormitory_read_all($conn);
+                if (mysqli_num_rows($res) > 0) {
+                  while ($info = mysqli_fetch_assoc($res)){
+                    echo "<option value=".$info['dormitor_id'].">".$info['name'].''."</option>";
+                  }
+                }
+              ?>
+            </select>
             <div class='form-outline mb-4'>
               <input required type='text' name='room_number' id='roomNumber' class='form-control' />
               <label class='form-label' for='roomNumber'>房號</label>
