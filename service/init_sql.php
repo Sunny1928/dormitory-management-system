@@ -36,6 +36,12 @@
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095551",0,110);
+        #新增bill
+        bill_create($conn,"A1095551","1","電費",200,110);
+        bill_create($conn,"A1095509","1","電費",200,109);
+        bill_create($conn,"A1095551","2","水費",200,110);
+        bill_create($conn,"A1095551","3","網路費",200,110);
+        bill_create($conn,"A1095551","4","修繕費",200,110);
         # 新增宿舍
         dormitory_create($conn,0,'學一男');
         dormitory_create($conn,1,'學一女');

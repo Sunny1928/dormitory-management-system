@@ -108,11 +108,11 @@
     }
 
     // 根據bill_id更新state
-    function bill_update($conn , $bill_id , $state){  
+    function bill_update($conn , $bill_id,   $fee, $type, $title , $state){  
 
-        $sql = "UPDATE bill SET state = ? WHERE bill_id = ?";
+        $sql = "UPDATE bill SET fee = ? , type = ? , title = ?  , state = ? WHERE bill_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' , $state , $bill_id);
+        $stmt->bind_param('iisii' ,$fee, $type, $title , $state , $bill_id);
         return $stmt->execute();
     }
 

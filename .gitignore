@@ -1,6 +1,6 @@
 test
 .vscode
-test.php
+views/test.php
 init_sql/*
 .DS_Store
  service/.DS_Store
