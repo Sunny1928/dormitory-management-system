@@ -55,30 +55,27 @@
         rule_create($conn,4,'惡意破壞器材');
         rule_create($conn,3,'使用禁用的電器');
         
-        $fee = 7463;
-        $equment = array('檯燈' , '桌子' , '椅子' , '床')
-        for($i = 0 ;$i<4;$i++){
+        $fee = array(7463 , 7463 , 9985 , 9985);
+        $equment = array('檯燈' , '桌子' , '椅子' , '床');
+        $equment_year = array(3 , 4 , 5 , 6);
+        $public_equipment = array('垃圾桶' , '洗衣機' , '飲水機');
+        for($i = 0;$i<4;$i++){
 
-            if($i >=2){
-                $fee = 9985;
-            }
             for($j = 101 ;$j<111;$j++){
-                room_create($conn,$i,$j,4,$fee);
+                room_create($conn,$i,$j,4,$fee[$i]);
                 # 新增 equipment
                 for($k = 0 ;$k<4;$k++){
-                    equipment_create($conn,$i,$j ,'檯燈',2);
-                    equipment_create($conn,$i,$j,'桌子',3);
-                    equipment_create($conn,$i,$j,'椅子',3);
-                    equipment_create($conn,$i,$j,'床',5);
+                    for($q = 0; $q < count($equment); $q++)
+                        equipment_create($conn,$i,$j ,$equment[$q],$equment_year[$q]);
                 }
                 
             }
         }
+
         for($i=0;$i<4;$i++){
             # 新增公共設施
-            public_equipment_create($conn,$i,"垃圾桶",5);   
-            public_equipment_create($conn,$i,"洗衣機",4);
-            public_equipment_create($conn,$i,"飲水機",3);   
+            for($q = 0; $q < count($public_equipment); $q++)
+                public_equipment_create($conn,$i,$j , $public_equipment[$q] , $equment_year[$q]);
         }
         
         
