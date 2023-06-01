@@ -12,7 +12,7 @@
     //  根據宿舍查詢公共設備
     function public_equipment_read($conn , $dormitory_id ){   
                
-        $sql = "SELECT * FROM public_equipment 
+        $sql = "SELECT dormitory.dormitory_id  , dormitory.name as dormitory_name , public_equipment.* FROM  public_equipment
                 JOIN dormitory ON dormitory.dormitory_id = public_equipment.dormitory_id
                 WHERE public_equipment.dormitory_id = ?";
         $stmt = $conn->prepare($sql);
@@ -24,7 +24,7 @@
     //  查詢全部公共設備
     function public_equipment_read_all($conn){  
         
-        $sql = "SELECT * FROM public_equipment
+        $sql = "SELECT dormitory.dormitory_id  , dormitory.name as dormitory_name , public_equipment.* FROM  public_equipment
                 JOIN dormitory ON dormitory.dormitory_id = public_equipment.dormitory_id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
