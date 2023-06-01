@@ -64,4 +64,12 @@
         return $stmt->execute();
     }
     
+    //  根據id更新進出紀錄
+    function entry_and_exit_update($conn , $entry_and_exit_id , $state){  
+
+        $sql = "UPDATE entry_and_exit_dormitory_record SET state = ?  WHERE entry_and_exit_dormitory_record_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii' ,$state , $entry_and_exit_id);
+        return $stmt->execute();
+    }
 ?>

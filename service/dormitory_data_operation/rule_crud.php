@@ -27,7 +27,7 @@
         $stmt->execute();
         return $stmt->get_result();
     }
-
+    
 
     // 根據id刪除規範
     function rule_delete($conn , $rule_id){     
@@ -38,5 +38,12 @@
         return $stmt->execute();
     }
     
-    
+    //  根據id更新違規紀錄內容與點數
+    function rule_update($conn , $rule_id , $content, $point){  
+
+        $sql = "UPDATE rule SET content = ? , point = ? WHERE rule_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sii' ,$content ,$point , $rule_id);
+        return $stmt->execute();
+    }
 ?>
