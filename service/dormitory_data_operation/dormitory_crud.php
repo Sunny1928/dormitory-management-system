@@ -1,5 +1,11 @@
 <?php
-
+    /*
+    id  
+        -0 OA 
+        -1 OB 
+        -2 OE 
+        -3 OF
+    */
     //  新增宿舍 
     function dormitory_create($conn , $dormitory_id , $name){  
     

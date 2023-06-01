@@ -36,6 +36,13 @@
         return $result;
     }
     
-    
+    //  根據id更新學生系所
+    function student_update($conn , $account , $department){  
+
+        $sql = "UPDATE student SET department = ? WHERE account = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss' ,$department , $account);
+        return $stmt->execute();
+    }
     
 ?>

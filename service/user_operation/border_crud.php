@@ -1,4 +1,9 @@
 <?php
+    /*
+    type    
+        -0 住宿生 
+        -1 無效 
+    */
 
     // 新增住宿生
     function border_create($conn , $account , $year){

@@ -1,5 +1,13 @@
 <?php
 
+    /*
+    gender -0 男生 -1 女生
+    type 
+        -0 system admin 
+        -1 dorm manager 
+        -2 parent 
+        -3 student
+    */
     // 新增用戶 
     function user_create($conn , $name , $password , $email , $phone , $account , $gender , $type){
         $password = password_hash($password ,PASSWORD_DEFAULT);

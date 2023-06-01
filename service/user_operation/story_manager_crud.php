@@ -1,5 +1,11 @@
 <?php
-
+    /*
+    type    
+        -2 學一 OA樓長 
+        -3 學一 OB樓長 
+        -4 學二 OE樓長 
+        -5 學二 OF樓長
+    */
     require_once('service/user_operation/user_crud.php');
     // 將學生變成樓長 
     function story_manager_create($conn , $account , $year , $type){
