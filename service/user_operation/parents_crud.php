@@ -1,6 +1,5 @@
 <?php
 
-    require_once('service/user_operation/user_crud.php');
     // 新增家長 
     function parents_create($conn , $name , $password , $email , $phone , $account , $gender , $type , $student_account){
 

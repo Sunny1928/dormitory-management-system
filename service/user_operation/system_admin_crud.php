@@ -1,6 +1,5 @@
 <?php
 
-    require_once('service/user_operation/user_crud.php');
     // 新增系統管理員 
     function system_admin_create($conn , $name , $password , $email , $phone , $account , $gender , $type){
 

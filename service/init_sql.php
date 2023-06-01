@@ -1,12 +1,5 @@
 <?php
     
-    require_once("./service/user_operation/require_all.php");
-    require_once("./service/dormitory_data_operation/require_all.php");
-    require_once("./service/apply_data_operation/require_all.php");
-    require_once("./service/inform_operation/require_all.php");
-    require_once("./service/border_operation/require_all.php");
-    
-    
     # 新增 table 初始化資料 
     function data_create_init($conn){
         

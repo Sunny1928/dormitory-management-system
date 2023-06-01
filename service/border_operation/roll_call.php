@@ -12,7 +12,6 @@
     //  根據樓長管理的宿舍、年份和狀態查詢點名
     function roll_call_read_dormitory_year_state($conn , $account, $year, $state){   
     
-        require_once("service/user_operation/story_manager_crud.php");
         $rel = story_manager_read_account_year($conn , $account , $year);
         $dormitory = $rel->fetch_assoc()["type"];
         $dormitory -= 2;
