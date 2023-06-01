@@ -68,4 +68,16 @@
         return $stmt->get_result();
     }
 
+    // 查詢所有住宿生
+    function border_read_all($conn){
+
+        $sql = "SELECT * FROM student 
+                JOIN border ON student.account = border.account 
+                JOIN user ON user.account = student.account";        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
+
 ?>
