@@ -11,7 +11,7 @@
 
     //  根據帳號和年份查詢違規紀錄
     function violated_record_read_account_year($conn , $account, $year){   
-               
+            
         $sql = "SELECT * FROM violated_record 
                 JOIN rule ON violated_record.rule_id = rule.rule_id 
                 JOIN border ON violated_record.account = border.account 
@@ -58,11 +58,11 @@
     }
 
     // 根據id更新apply_cancel
-    function violated_record_update($conn , $violated_record_id , $apply_cancel){  
+    function violated_record_update($conn , $violated_record_id , $apply_cancel,$rule_id){  
 
-        $sql = "UPDATE violated_record SET apply_cancel = ? WHERE violated_record_id = ?";
+        $sql = "UPDATE violated_record SET apply_cancel = ? , rule_id =? WHERE violated_record_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' , $apply_cancel , $violated_record_id);
+        $stmt->bind_param('iii' , $apply_cancel,$rule_id , $violated_record_id);
         return $stmt->execute();
     }
 

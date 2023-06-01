@@ -36,11 +36,11 @@
     }
 
     // 根據equipment_id更新設備apply_fix_state
-    function equipment_update($conn , $equipment_id ,$expired_year,$name, $apply_fix_state){  
+    function equipment_update($conn , $equipment_id ,$expired_year,$name, $apply_fix_state,$room_number,$dormitory_id){  
 
-        $sql = "UPDATE equipment SET expired_year = ? , name =? , apply_fix_state = ? WHERE equipment_id = ?";
+        $sql = "UPDATE equipment SET expired_year = ? , name =? , apply_fix_state = ? , room_number=? , dormitory_id =? WHERE equipment_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('isii' ,$expired_year , $name , $apply_fix_state , $equipment_id);
+        $stmt->bind_param('isisii' ,$expired_year , $name , $apply_fix_state,$room_number,$dormitory_id , $equipment_id);
         return $stmt->execute();
     }
 
