@@ -36,7 +36,7 @@
     }
     
     //  根據id更新學生系所
-    function student_update($conn , $account , $department){  
+    function student_update_department($conn , $account , $department){  
 
         $sql = "UPDATE student SET department = ? WHERE account = ?";
         $stmt = $conn->prepare($sql);
@@ -44,4 +44,8 @@
         return $stmt->execute();
     }
     
+    function student_update($conn , $name, $email , $phone , $account , $gender , $department){
+        student_update_department($conn , $account , $department);
+        user_update($conn , $name, $email , $phone , $account , $gender);
+    }
 ?>
