@@ -28,8 +28,6 @@
             <?php
               $apply_fix_states = array("未申請報修", "申請報修");
             
-              require_once('service/dormitory_data_operation/public_equipment_crud.php');
-
               $result = public_equipment_read_all($conn);
 
               if (mysqli_num_rows($result) > 0) 
@@ -57,7 +55,6 @@
                     "</tr>";
 
                   // Update Modal
-                 // $conn , $dormitory_id , $room_number , $name , $expired_year)
                   echo "
                   <div class='modal fade' id='updatePublicEquipmentModal$id' tabindex='-1' aria-labelledby='updatePublicEquipmentModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>

@@ -1,6 +1,4 @@
 <?php
-require_once('service/border_operation/bill_crud.php');
-require_once('service/user_operation/border_crud.php');
 
 $year = 110;
 $bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");

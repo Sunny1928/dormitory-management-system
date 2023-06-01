@@ -25,7 +25,6 @@
           <tbody class="datatable-body">
             <?php
             
-              require_once('service/dormitory_data_operation/dormitory_crud.php');
 
               $result = dormitory_read_all($conn);
 

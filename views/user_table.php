@@ -1,5 +1,4 @@
 <?php
-  require_once('service/user_operation/user_crud.php');
   $genders = array("男", "女");
   $types = array("系統管理員", "舍監", "家長", "學生");
 ?>

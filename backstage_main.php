@@ -6,7 +6,8 @@
   //   die();
   // }		
 
-  require_once('./service/connect_db.php');
+  require_once('./service/mainpage_require_all.php');
+
   $genders = array("男", "女");
   $types = array("系統管理員", "舍監", "家長", "學生");
 ?>
@@ -97,7 +98,7 @@
   <main>
     <div class="tab-content h-100">
 
-      <!--student-->
+      <!--user-->
       <div class="tab-pane fade show active" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
         <?php
           require("./views/user_table.php") 

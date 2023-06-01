@@ -23,9 +23,6 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-            
-              require_once('service/dormitory_data_operation/rule_crud.php');
-
               $result = rule_read_all($conn);
 
               if (mysqli_num_rows($result) > 0) 
