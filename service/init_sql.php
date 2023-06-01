@@ -29,6 +29,7 @@
         parents_create($conn , "father1" , "father1" , "father1@gmail.com" , "0987654321" , "father1" , 0 , 2 , "A1095514");
         parents_create($conn , "father2" , "father2" , "father2@gmail.com" , "0987654321" , "father2" , 0 , 2 , "A1095509");
 
+
         parking_permit_create($conn , "father1");
         parking_permit_create($conn , "father2");
         parking_permit_update($conn , 0, 1);
@@ -55,6 +56,7 @@
         rule_create($conn,3,'使用禁用的電器');
         
         $fee = 7463;
+        $equment = array('檯燈' , '桌子' , '椅子' , '床')
         for($i = 0 ;$i<4;$i++){
 
             if($i >=2){
