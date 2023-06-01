@@ -28,6 +28,13 @@
         return $stmt->get_result();
     }
     
+    // 根據id刪除規範
+    function rule_delete_all($conn ){     
+
+        $sql = "DELETE FROM rule ";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
 
     // 根據id刪除規範
     function rule_delete($conn , $rule_id){     

@@ -33,15 +33,34 @@
         border_create($conn , 'A1095509' , 109);
         border_create($conn , 'A1095509' , 110);
         border_create($conn , 'A1095551' , 110);
+        border_create($conn , 'A1095514' , 110);
+        story_manager_create($conn,'A1095514',110,1);
+        # 新增進出紀錄
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095551",0,110);
-        #新增bill
+        # 新增臨時證
+        access_card_create($conn,"A1095551",110);
+        access_card_create($conn,"A1095509",110);
+        # 新增點名
+        roll_call_create($conn,"A1095551",110,0);
+        roll_call_create($conn,"A1095509",110,0);
+        # 新增bill
         bill_create($conn,"A1095551","1","電費",200,110);
         bill_create($conn,"A1095509","1","電費",200,109);
         bill_create($conn,"A1095551","2","水費",200,110);
         bill_create($conn,"A1095551","3","網路費",200,110);
         bill_create($conn,"A1095551","4","修繕費",200,110);
+        # 新增公告
+        announcement_create($conn,"A1095514","A1095514","A1095514");
+        announcement_create($conn,"admin1","admin1","admin1");
+        announcement_create($conn,"dorm1","dorm1","dorm1");
+        # 新增留言
+        message_create($conn,"A1095514","A1095514");
+        message_create($conn,"admin1","admin1");
+        message_create($conn,"dorm1","dorm1");
+        message_create($conn,"A1095551","A1095551");
+        message_create($conn,"A1095550","A1095550");
         # 新增宿舍
         dormitory_create($conn,0,'學一男');
         dormitory_create($conn,1,'學一女');
@@ -55,8 +74,8 @@
         rule_create($conn,3,'使用禁用的電器');
         
         $fee = array(7463 , 7463 , 9985 , 9985);
-        $equment = array('檯燈' , '桌子' , '椅子' , '床');
-        $equment_year = array(3 , 4 , 5 , 6);
+        $equipment = array('檯燈' , '桌子' , '椅子' , '床');
+        $equipment_year = array(3 , 4 , 5 , 6);
         $public_equipment = array('垃圾桶' , '洗衣機' , '飲水機');
         for($i = 0;$i<4;$i++){
 
@@ -64,8 +83,8 @@
                 room_create($conn,$i,$j,4,$fee[$i]);
                 # 新增 equipment
                 for($k = 0 ;$k<4;$k++){
-                    for($q = 0; $q < count($equment); $q++)
-                        equipment_create($conn,$i,$j ,$equment[$q],$equment_year[$q]);
+                    for($q = 0; $q < count($equipment); $q++)
+                        equipment_create($conn,$i,$j ,$equipment[$q],$equipment_year[$q]);
                 }
                 
             }
@@ -74,7 +93,7 @@
         for($i=0;$i<4;$i++){
             # 新增公共設施
             for($q = 0; $q < count($public_equipment); $q++)
-                public_equipment_create($conn,$i,$j , $public_equipment[$q] , $equment_year[$q]);
+                public_equipment_create($conn,$i,$j , $public_equipment[$q] , $equipment_year[$q]);
         }
         
         
@@ -85,6 +104,7 @@
     function data_delete_all($conn){
         user_delete_all($conn);
         dormitory_delete_all($conn);
+        rule_delete_all($conn);
     }
     
 
