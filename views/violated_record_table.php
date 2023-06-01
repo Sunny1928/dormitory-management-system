@@ -7,7 +7,7 @@
 <!--Title-->
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
-    <h4 class="mb-0">使用者資料</h4>
+    <h4 class="mb-0">違規紀錄資料</h4>
     <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addStudentModal'><i class='fa fa-add me-1'></i>新增</button>
   </div>
 </div>
