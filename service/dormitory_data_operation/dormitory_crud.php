@@ -56,6 +56,15 @@
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }
+
+    //  根據id更新宿舍的名稱
+    function dormitory_update($conn , $dormitory_id , $name){  
+
+        $sql = "UPDATE dormitory SET name = ?  WHERE dormitory_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si' , $name , $dormitory_id);
+        return $stmt->execute();
+    }
     
     
 ?>
