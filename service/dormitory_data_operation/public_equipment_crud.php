@@ -32,13 +32,13 @@
     }
 
     // 根據public_equipment_id更新公共設備
-    function public_equipment_update($conn , $public_equipment_id , $name ,  $apply_fix_state  , $expired_year){  
+    function public_equipment_update($conn , $public_equipment_id , $name ,  $apply_fix_state  , $expired_year ,$dormitory_id){  
 
         $sql = "UPDATE public_equipment 
-                SET name = ? , apply_fix_state = ? , expired_year = ?
+                SET name = ? , apply_fix_state = ? , expired_year = ? , dormitory_id = ?
                 WHERE public_equipment_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('siis' , $name ,$apply_fix_state , $expired_year , $public_equipment_id);
+        $stmt->bind_param('siiii' , $name ,$apply_fix_state , $expired_year ,$dormitory_id, $public_equipment_id);
         return $stmt->execute();
     }
 
