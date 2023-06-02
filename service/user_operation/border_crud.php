@@ -80,4 +80,16 @@
         return $stmt->get_result();
     }
 
+
+
+    function border_update($conn , $account , $year , $type, $apply_story_manager_state, $room_number ,$dormitory_id){
+
+        $sql = "UPDATE border 
+                SET type = ? ,apply_story_manager_state =? , room_number = ? , dormitory_id = ? 
+                WHERE account = ? AND year = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('iisisi' ,$type, $apply_story_manager_state, $room_number ,$dormitory_id, $account , $year);
+        return $stmt->execute();
+    }
 ?>
