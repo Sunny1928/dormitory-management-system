@@ -43,9 +43,10 @@
     // 查詢該學生的所有住宿資料
     function border_read_student($conn , $account){
 
-        $sql = "SELECT * FROM student 
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
                 JOIN border ON student.account = border.account 
                 JOIN user ON user.account = student.account 
+                JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
                 WHERE student.account = ?";        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $account);
@@ -57,9 +58,10 @@
     // 查詢該年度的所有住宿資料
     function border_read_year($conn , $year){
 
-        $sql = "SELECT * FROM student 
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
                 JOIN border ON student.account = border.account 
                 JOIN user ON user.account = student.account 
+                JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
                 WHERE border.year = ?";        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $year);
@@ -71,15 +73,33 @@
     // 查詢所有住宿生
     function border_read_all($conn){
 
-        $sql = "SELECT * FROM student 
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
                 JOIN border ON student.account = border.account 
-                JOIN user ON user.account = student.account";        
+                JOIN user ON user.account = student.account
+                JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id";        
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->get_result();
     }
 
+    // 查詢住宿生的室友
+    function border_read_roommate($conn , $account , $year){
+
+        $sql = "SELECT * FROM border
+                JOIN student ON border.account = student.account
+                JOIN user ON user.account = student.account
+                JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
+                WHERE EXISTS  (
+                    SELECT dormitory_id , room_number FROM border
+                    WHERE account = ? AND year = ?
+                ) AND year = ?" ;        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sii' ,$account, $year , $year);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
 
 
     function border_update($conn , $account , $year , $type, $apply_story_manager_state, $room_number ,$dormitory_id){
