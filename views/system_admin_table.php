@@ -1,9 +1,9 @@
-<!--Student-->
+<!--System Admin-->
 <!--Title-->
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
-    <h4 class="mb-0">學生資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addStudentModal'><i class='fa fa-add me-1'></i>新增</button>
+    <h4 class="mb-0">系統管理員資料</h4>
+    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addSystemAdminModal'><i class='fa fa-add me-1'></i>新增</button>
   </div>
 </div>
 
@@ -20,14 +20,13 @@
               <th scope="col">Email</th>
               <th scope="col">電話</th>
               <th scope="col">性別</th>
-              <th scope="col">系所</th>
               <th scope="col">操作</th>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
 
-              $result = student_read_all($conn);
+              $result = system_admin_read_all($conn);
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -40,7 +39,6 @@
                   $phone = $info['phone'];
                   $gender = $info['gender'];
                   $type = $info['type'];
-                  $department = $info['department'];
                   
                   
                   echo "<tr>" .
@@ -49,21 +47,20 @@
                     "<td> " . $email . "</td>".
                     "<td> " . $phone . "</td>".
                     "<td> " . $genders[$gender] . "</td>".
-                    "<td> " . $department . "</td>".
                     "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateStudentModal$account'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteStudentModal$account'><i class='fa fa-trash'></i></button>
+                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateSystemAdminModal$account'><i class='fa fa-pencil'></i></button>
+                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteSystemAdminModal$account'><i class='fa fa-trash'></i></button>
                     </td>".
                     "</tr>";
 
                   // Update Modal
                   echo "
-                  <div class='modal fade' id='updateStudentModal$account' tabindex='-1' aria-labelledby='updateStudentModalLabel' aria-hidden='true'>
+                  <div class='modal fade' id='updateSystemAdminModal$account' tabindex='-1' aria-labelledby='updateSystemAdminModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
                     <form method='post' action='./controller/user_controller.php'>
                     <div class='modal-content'>
                       <div class='modal-header'>
-                        <h5 class='modal-title' id='updateStudentModalLabel'>修改學生</h5>
+                        <h5 class='modal-title' id='updateSystemAdminModalLabel'>修改系統管理員</h5>
                       </div>
                       <div class='modal-body'>
                           <div class='text-center mb-3'>
@@ -89,16 +86,13 @@
                               echo "<option value=$i"; if($gender ==$i) echo " selected"; echo ">".$genders[$i]."</option>";
                             }
                           echo "</select>
-                          <input value='$type'  required type='hidden' name='type' class='form-control' />
-                          <div class='form-outline mb-4'>
-                            <input value='$department' required type='tel' name='department' class='form-control' />
-                            <label class='form-label'>系所</label>
-                          </div>
+                          <input value='$type' required type='hidden' name='type' class='form-control' />
+                          
                         </div>
                       </div>
                       <div class='modal-footer'>
                         <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                        <button type='submit' class='btn btn-primary' name='student_update' value='student_update'>確認</button>
+                        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
                       </div>
                     </div>
                     </form>
@@ -107,15 +101,16 @@
 
                   // Delete  Modal
                   echo "
-                  <div class='modal fade' id='deleteStudentModal$account' tabindex='-1' aria-labelledby='deleteStudentModalLabel' aria-hidden='true'>
+                  <div class='modal fade' id='deleteSystemAdminModal$account' tabindex='-1' aria-labelledby='deleteSystemAdminModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
                       <form method='post' action='./controller/user_controller.php'>
                         <div class='modal-content'>
                           <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteStudentModalLabel'>刪除學生</h5>
+                            <h5 class='modal-title' id='deleteSystemAdminModalLabel'>刪除系統管理員</h5>
                           </div>
-                          <div class='modal-body'>您確認要刪除此學生嗎？</div>
+                          <div class='modal-body'>您確認要刪除此系統管理員嗎？</div>
                           <div class='modal-footer'>
+                            <input value='$type' required type='hidden' name='type' class='form-control' />
                             <input value='$account' required type='hidden' name='account' class='form-control' />
                             <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                             <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
@@ -136,12 +131,12 @@
 </div>
 <!-- Add Modal -->
 
-<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel"
+<div class="modal fade" id="addSystemAdminModal" tabindex="-1" aria-labelledby="addSystemAdminModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addSystemManagerModalLabel">新增學生</h5>
+          <h5 class="modal-title" id="addSystemManagerModalLabel">新增系統管理員</h5>
         </div>
         <form method="post" action="./controller/user_controller.php">
           <div class="modal-body">
@@ -174,16 +169,12 @@
                 }
                 ?>
               </select>
-              <input value='3' required type='hidden' name='type' class='form-control' />
-              <div class="form-outline mb-4">
-                <input required type="text" name="department" class="form-control" />
-                <label class="form-label">系所</label>
-              </div>
+              <input value='0' required type='hidden' name='type' class='form-control' />
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">取消</button>
-            <button type="submit" class="btn btn-primary" name='student_create' value='student_create'>確認</button>
+            <button type="submit" class="btn btn-primary" name='system_admin_create' value='system_admin_create'>確認</button>
           </div>
         </form>
       </div>

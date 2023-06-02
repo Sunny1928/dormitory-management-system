@@ -71,7 +71,13 @@
   <!--Main layout-->
   <main>
     <div class="tab-content" style="max-height: 100vh;">
-      
+      <!--message-->
+      <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
+        <?php
+          require("./components/messageComponent.php")
+        ?>
+      </div>
+
     </div>
   </main>
 

@@ -25,6 +25,12 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-5457803….css?vsn=d">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
   <title>Database Final Project</title>
 </head>
@@ -33,7 +39,7 @@
   <!-- Sidebar -->
   <header>
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
-      <div class="position-sticky">
+      <div class="sidebar-sticky position-sticky ">
         <div class="mt-4">
           <div id="header-content" class="w-auto">
             <div class="d-flex justify-content-center">
@@ -47,10 +53,27 @@
           </div>
           <hr class="mb-0">
         </div>
+        
         <div class="align-items-end list-group list-group-flush mx-3 mt-4">
-          <a class="list-group-item list-group-item-action py-2 ripple active" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
-            <i class="fas fa-school pe-3"></i>使用者
+          <a class="list-group-item list-group-item-action py-2 ripple active" id="tab-system-admin" data-mdb-toggle="pill" href="#pills-system-admin" role="tab" aria-controls="pills-system-admin" aria-selected="true">
+            <i class="fas fa-user-gear pe-3"></i>系統管理員
           </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dorm-manager" data-mdb-toggle="pill" href="#pills-dorm-manager" role="tab" aria-controls="pills-dorm-manager" aria-selected="true">
+            <i class="fas fa-house-person-return pe-3"></i>宿舍管理員
+          </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parents" data-mdb-toggle="pill" href="#pills-parents" role="tab" aria-controls="pills-parents" aria-selected="true">
+            <i class="fas fa-people-simple pe-3"></i>家長
+          </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
+            <i class="fas fa-user-graduate pe-3"></i>學生
+          </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
+            <i class="fas fa-person-shelter pe-3"></i>住宿生
+          </a>
+          <!-- <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-story-manager" data-mdb-toggle="pill" href="#pills-story-manager" role="tab" aria-controls="pills-story-manager" aria-selected="true">
+            <i class="fas fa-school pe-3"></i>樓長
+          </a> -->
+
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dormitory" data-mdb-toggle="pill" href="#pills-dormitory" role="tab" aria-controls="pills-dormitory" aria-selected="false">
             <i class="fas fa-house-chimney pe-3"></i>宿舍大樓
           </a>
@@ -58,36 +81,43 @@
             <i class="fas fa-door-open pe-3"></i>宿舍房間
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>宿舍設備
+            <i class="fas fa-bed pe-3"></i>宿舍設備
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>宿舍規範
+            <i class="fas fa-scroll pe-3"></i>宿舍規範
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>公共設施 
+            <i class="fas fa-washing-machine pe-3"></i>公共設施 
           </a>
           
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>違規紀錄
+            <i class="fas fa-book pe-3"></i>違規紀錄
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-entry-and-exit" data-mdb-toggle="pill" href="#pills-entry-and-exit" role="tab" aria-controls="pills-entry-and-exit" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>進出紀錄紀錄 
+            <i class="fas fa-note pe-3"></i>進出紀錄
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roll-call" data-mdb-toggle="pill" href="#pills-roll-call" role="tab" aria-controls="pills-roll-call" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>點名紀錄 
+            <i class="fas fa-clipboard-list-check pe-3"></i>點名紀錄 
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>帳單紀錄 
+            <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>出入卡紀錄 
+            <i class="fas fa-address-card pe-3"></i>出入卡紀錄 
           </a>
           
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>公告 
+            <i class="fas fa-volume-low pe-3"></i>公告 
           </a>
           <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
-            <i class="fas fa-door-open pe-3"></i>訊息 
+            <i class="fas fa-comment pe-3"></i>訊息 
+          </a>
+
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
+            <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
+          </a>
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
+            <i class="fas fa-car pe-3"></i>停車許可
           </a>
         </div>
         <div class="list-group list-group-flush mx-3">
@@ -105,12 +135,42 @@
   <main>
     <div class="tab-content h-100">
 
-      <!--user-->
-      <div class="tab-pane fade show active" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
+    <!--system admin-->
+      <div class="tab-pane fade show active" id="pills-system-admin" role="tabpanel" aria-labelledby="tab-system-admin">
+        <?php
+          require("./views/system_admin_table.php") 
+        ?>
+      </div>
+
+      <!--dorm manager-->
+      <div class="tab-pane fade" id="pills-dorm-manager" role="tabpanel" aria-labelledby="tab-dorm-manager">
+        <?php
+          require("./views/dorm_manager_table.php") 
+        ?>
+      </div>
+
+      <!--parents-->
+      <div class="tab-pane fade" id="pills-parents" role="tabpanel" aria-labelledby="tab-parents">
+        <?php
+          require("./views/parents_table.php") 
+        ?>
+      </div>
+
+      <!--student-->
+      <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
         <?php
           require("./views/student_table.php") 
         ?>
       </div>
+
+      <!--border-->
+      <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
+        <?php
+          require("./views/border_table.php") 
+        ?>
+      </div>
+
+      
 
       <!--dormitory-->
       <div class="tab-pane fade" id="pills-dormitory" role="tabpanel" aria-labelledby="tab-dormitory">
@@ -129,7 +189,7 @@
       <!--equipment-->
       <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
         <?php
-          //require("./views/equipment_table.php")
+          require("./views/equipment_table.php")
         ?>
       </div>
 
@@ -182,19 +242,33 @@
         ?>
       </div>
 
-      <!--access card-->
+      <!--announcement-->
       <div class="tab-pane fade" id="pills-announcement" role="tabpanel" aria-labelledby="tab-announcement">
         <?php
           require("./views/announcement_table.php")
         ?>
       </div>
 
-      <!--access card-->
+      <!--message-->
       <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
         <?php
           require("./views/message_table.php")
         ?>
-      </div>
+      </div> 
+
+      <!--apply dorm-->
+      <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm">
+        <?php
+          require("./views/apply_dorm_table.php")
+        ?>
+      </div> 
+
+      <!--parking permit-->
+      <div class="tab-pane fade" id="pills-parking-permit" role="tabpanel" aria-labelledby="tab-parking-permit">
+        <?php
+          require("./views/parking_permit_table.php")
+        ?>
+      </div> 
 
     </div>
 
@@ -205,8 +279,53 @@
       new mdb.Input(formOutline).init();
     });
 
-    if (location.hash === "#pills-student") {
+    if (location.hash === "#pills-system-admin") {
+      const triggerEl = document.querySelector('a[href="#pills-system-admin"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-dorm-manager") {
+      const triggerEl = document.querySelector('a[href="#pills-dorm-manager"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-parents") {
+      const triggerEl = document.querySelector('a[href="#pills-parents"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-student") {
       const triggerEl = document.querySelector('a[href="#pills-student"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-border") {
+      const triggerEl = document.querySelector('a[href="#pills-border"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-story-manager") {
+      const triggerEl = document.querySelector('a[href="#pills-story-manager"]');
       if (triggerEl) {
         let instance = mdb.Tab.getInstance(triggerEl)
         if (!instance) {
@@ -315,6 +434,24 @@
       }
     } else if (location.hash === "#pills-message") {
       const triggerEl = document.querySelector('a[href="#pills-message"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-apply-dorm") {
+      const triggerEl = document.querySelector('a[href="#pills-apply-dorm"]');
+      if (triggerEl) {
+        let instance = mdb.Tab.getInstance(triggerEl)
+        if (!instance) {
+          instance = new mdb.Tab(triggerEl);
+        }
+        instance.show();
+      }
+    } else if (location.hash === "#pills-parking-permit") {
+      const triggerEl = document.querySelector('a[href="#pills-parking-permit"]');
       if (triggerEl) {
         let instance = mdb.Tab.getInstance(triggerEl)
         if (!instance) {

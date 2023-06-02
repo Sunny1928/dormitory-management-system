@@ -109,7 +109,7 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addMessageModal' tabindex='-1' aria-labelledby='addRuleModalLabel' aria-hidden='true'>
+<div class='modal fade' id='addMessageModal' tabindex='-1' aria-labelledby='addMessageModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>

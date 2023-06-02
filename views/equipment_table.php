@@ -58,7 +58,6 @@
                     "</tr>";
 
                   // Update Modal
-                 // $conn , $dormitory_id , $room_number , $name , $expired_year)
                   echo "
                   <div class='modal fade' id='updateEquipmentModal$id' tabindex='-1' aria-labelledby='updateEquipmentModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>

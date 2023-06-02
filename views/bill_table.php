@@ -1,6 +1,5 @@
 <?php
 
-$year = 110;
 $bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");
 $bill_states = array("未繳費", "已繳費");
 ?>
@@ -65,8 +64,6 @@ $bill_states = array("未繳費", "已繳費");
                     "</tr>";
 
                   // Update Modal
-        // bill_update($conn , $_POST['bill_id'], $_POST['fee'], $_POST['type'], $_POST['title'] , $_POST['state']);
-
                   echo "
                   <div class='modal fade' id='updateBillModal$id' tabindex='-1' aria-labelledby='updateBillModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>

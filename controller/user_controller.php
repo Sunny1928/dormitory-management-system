@@ -1,18 +1,46 @@
 <?php
     require_once('../service/require_all.php');
 
-    if(isset($_POST['create'])){
-        student_create($conn , $name , $password , $email , $phone , $account , $gender , $type , $department)
-        dorm_manager_create($conn , $name , $password , $email , $phone , $account , $gender , $type)
-        $output = explode("-", $_POST['year_account']);
-        $year = $output[0];
-        $account = $output[1];
-        bill_create($conn, $account, $_POST['type'], $_POST['title'], $_POST['fee'], $year);
+    // echo $_POST['account'];
+
+    if(isset($_POST['student_create'])){
+        student_create($conn, $_POST['name'], $_POST['password'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['type'], $_POST['department']);
+    
+    } else if(isset($_POST['dorm_manager_create'])){
+        dorm_manager_create($conn, $_POST['name'], $_POST['password'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['type']);
+    
+    } else if(isset($_POST['parents_create'])){
+        parents_create($conn, $_POST['name'], $_POST['password'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['type'], $_POST['student_account']);
+
+    }  else if(isset($_POST['system_admin_create'])){
+        system_admin_create($conn, $_POST['name'], $_POST['password'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['type']);
+
     } else if(isset($_POST['delete'])){
-        bill_delete($conn, $_POST['bill_id']);
+        user_delete($conn , $_POST['account']);
+    
     } else if(isset($_POST['update'])){
-        bill_update($conn , $_POST['bill_id'], $_POST['fee'], $_POST['type'], $_POST['title'] , $_POST['state']);
+        user_update($conn, $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender']);
+
+    } else if(isset($_POST['student_update'])){
+        student_update($conn , $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['department']);
+
+    }
+    echo $_POST['type'];
+    
+    //$types = array("系統管理員", "舍監", "家長", "學生");
+
+    if($_POST['type']==0){
+        header("Location: ../backstage_main.php#pills-system-admin");
+    
+    } else if($_POST['type']==1){
+        header("Location: ../backstage_main.php#pills-dorm-manager");
+    
+    } else if($_POST['type']==2){
+        header("Location: ../backstage_main.php#pills-parents");
+
+    } else if($_POST['type']==3){
+        header("Location: ../backstage_main.php#pills-student");
     }
 
-    header("Location: ../backstage_main.php#pills-user");
+    // header("Location: ../backstage_main.php");
 ?>
