@@ -125,6 +125,7 @@
         $_SESSION['name'] = $rel['name'];
         $_SESSION['phone'] = $rel['phone'];
         $_SESSION['email'] = $rel['email'];
+        $_SESSION['permission'] = $rel['type'];
 
     }
     // user登入
@@ -146,9 +147,9 @@
 
                 border_session_load($conn , $account , $year);
                 if(story_manager_check($conn , $account , $year))
-                    $_SESSION['type'] = 5;
+                    $_SESSION['permission'] = 5;
                 else
-                    $_SESSION['type'] = 4;
+                    $_SESSION['permission'] = 4;
             }
         }
 
