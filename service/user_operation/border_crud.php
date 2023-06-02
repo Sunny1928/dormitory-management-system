@@ -92,4 +92,14 @@
         $stmt->bind_param('iisisi' ,$type, $apply_story_manager_state, $room_number ,$dormitory_id, $account , $year);
         return $stmt->execute();
     }
+
+    function border_delete($conn , $account , $year){
+
+        $sql = "DELETE FROM border 
+                WHERE account = ? AND year = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si' ,$account , $year);
+        return $stmt->execute();
+    }
 ?>
