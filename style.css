@@ -124,7 +124,20 @@ nav .fa{
         padding: 30px;
     }
 }
+.subtitle {
+    text-align:left;
+    position: relative; /*相對定位*/
+}
 
+.subtitle::before{
+    position: absolute; /*絕對定位*/
+    content: ""; /*沒有加這段就不會產生偽元素*/
+    width: 10px;
+    height: 50px;
+    background: #E09200;
+    top: 0;
+    left: -25px;
+}
 /*course*/
 
 .course{
@@ -133,6 +146,7 @@ nav .fa{
     text-align: center;
     padding-top: 100px;
 }
+
 h1{
     font-size: 36px;
     font-weight: 600;
@@ -149,6 +163,11 @@ p{
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
+}
+.row-2{
+    margin-top: 50%;
+    display: flex;
+    justify-content: space-around;
 }
 .course-col{
     flex-basis: 45%;
@@ -179,7 +198,22 @@ p{
     box-sizing: border-box;
     transition: 0.5s;
 }
+.course-col-4{  /*鄭*/
+    flex-basis: 20%;
+    background: #fff3f3;
+    border-radius: 20px;
+    margin-bottom: 10%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
 h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+h4{
+    color: black;
     text-align: center;
     font-weight: 600;
     margin: 10px 0;
@@ -187,8 +221,16 @@ h3{
 .course-col:hover{
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
 }
+.course-col-4:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
+}
 @media(max-width:700px){
     .row{
+        flex-direction: column;
+    }
+}
+@media(max-width:250px){
+    .row-2{
         flex-direction: column;
     }
 }
@@ -330,9 +372,140 @@ h3{
 
 
 /* call to action */
-/* .cta{
+.cta{
     margin: 100px auto;
     width: 80%;
-    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7),url(image/OB_family.jpg);
-    ba
-} */
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(image/banner2.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+.cta h1{
+    color: #fff;
+    margin-bottom: 40px;
+    padding: 0;
+
+}
+@media(max-width:700px){
+    .cta h1{
+        font: size 24px;
+    }
+}
+/* footer */
+.footer{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer h4{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.fa .far, .fas{
+    font-family: "Font Awesome 5 Pro";
+}
+.icons .fa{
+    color:#f44336;
+    margin:0 13px;
+    cursor: pointer;
+    padding:18px 0;
+}
+.fa-solid fa-heart{
+    color:#f44336;
+}
+
+
+/* sub-header */
+.sub-header{
+    height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(image/background.jpg);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+}
+
+.sub-header h1{
+    margin-top: 100px;
+}
+.about-us{
+    width: 80%;
+    margin: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+.about-us-2{
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.course-col-5{
+    flex-basis: 48%;
+    background: #fff3f3;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 30px 2px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.about-col{
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+.about-col-2{
+    flex-basis: 48%;
+    padding: 25px 2px;
+}
+.about-col img{
+    width: 100%;
+}
+.about-col h1{
+    padding-top: 0;
+}
+.about-col p{
+    padding: 15px 0 25px;
+}
+/* blog content */
+.blog-content{
+    width: 80%;
+    margin: auto;
+    padding: 60px 0;
+}
+.blog-left{
+    flex-basis: 65%;
+}
+.blog-left img{
+    width: 100%;
+}
+.blog-left h2{
+    color: #222;
+    font-weight: 600;
+    margin: 30px 0;
+}
+.blog-left p{
+    color: #222;
+    padding: 0;
+}
+.blog-right{
+    flex-basis: 32%;
+}
+.blog-right h3{
+    background: #f4a236;
+    color: #fff;
+    padding: 7px 0;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.blog-right div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+    padding: 8px;
+    box-sizing: border-box;
+}

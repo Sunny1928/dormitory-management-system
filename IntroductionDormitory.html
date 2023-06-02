@@ -9,7 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css">
+<!-- https://fontawesome.com/search網址的link -->
 <!-- cdnjs -->
 <!-- Font Awesome -->
 <link
@@ -31,15 +35,15 @@
 <body>
 <section class="header">
             <nav>
-                <!--左上角logo-->
-                <a href=""><img src="image/nuk.png"alt=""></a>
+                <!--左上角<logo-->
+           
                 <div class="nav-links" id="navLinks">
+                    <a href="IntroductionDormitory.html"><img src="image/nuk_new.png"></a>
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
                         <li><a href="IntroductionDormitory.html">HOME</a></li>
-                        <li><a href="IntroductionDormitory_Devices.html">Devices</a></li>
                         <li><a href="IntroductionDormitory_DormitoryOffice.html">Dormitory Office</a></li>
-                        <li><a href="IntroductionDormitory_DomitoryPost.html">Domitory Post</a></li>
+                        <li><a href="IntroductionDormitory_DomitoryPost_full.html">Domitory Post</a></li>
                         <li><a href="IntroductionDormitory_LivingConvention.html">Living Convention</a></li>
                     </ul>
                 </div>
@@ -77,34 +81,43 @@
     </div>
 </section> -->
 <!---campus-->
-<section class="campus"id="course">
-    <h1>宿舍介紹</h1>
-    <!-- <p>內文</p> -->
+<section class="course"id="course">
+    <div class = "subtitle">
+        <h1>
+            宿舍、設備介紹
+        </h1>
+        <br>
+    </div>
 
     <div class="row">
-        <div class="campus-col">   
-            <!--宿舍照片class-->
-            <a href="IntroductionDormitory_One.html"><img src="image/OA_new.png">
-            <div class="layer">
-                <h3>學生第一宿舍</h3>
-            </div>
+        <div class="course-col-4">
+            <a href="IntroductionDormitory_OA.html">
+            <img src="image/OA_new.png"alt=""  width="300" height="300">
+            <h4><br>學生第一宿舍-OA男宿</h4>
+            <!-- <p>大空間<br>租金低<br>滿足學生基本生活需求</p> -->
             </a>
         </div>
-        <div class="campus-col">   
-            <!--宿舍照片class-->
-            <a href="IntroductionDormitory_One.html"><img src="image/OB_new.png">
-            <div class="layer">
-                <h3>學生第二宿舍</h3>
-            </div>
-           </a>
+        <div class="course-col-4">
+            <a href="IntroductionDormitory_OB.html">
+            <img src="image/Comprehensive_new.png"alt=""  width="300" height="300">
+            <h4><br>學生第一宿舍-OB女宿</h4>
+            <!-- <p>大空間<br>租金低<br>滿足學生基本生活需求</p> -->
+            </a>
         </div>
-        <!-- <div class="campus-col">    -->
-            <!--宿舍照片class-->
-            <!-- <img src="image/Comprehensive_new.png">
-            <div class="layer">
-                <h3>學生綜合宿舍</h3>
-            </div>
-        </div> -->
+        <div class="course-col-4">
+            <a href="IntroductionDormitory_OE.html">
+            <img src="image/OB_new.png"alt=""  width="300" height="300">
+            <h4><br>學生第二宿舍-OE男宿</h4>
+            <!-- <p>大空間<br>租金低<br>滿足學生基本生活需求</p> -->
+            </a>
+        </div>
+        <div class="course-col-4">
+            <a href="IntroductionDormitory_OF.html">
+            <img src="image/OAOB_device.jpg"alt=""  width="300" height="300">
+            <h4><br>學生第二宿舍-OF女宿</h4>
+            <!-- <p>大空間<br>租金低<br>滿足學生基本生活需求</p> -->
+            </a>
+        </div>
     </div>
 
 </section>
@@ -122,8 +135,7 @@
             <img src="image/OB_room_new.png">
             <h3>學二</h3>
             <p>第二新的宿舍,含有飲水機,洗衣機,有階梯式上下床的樓梯,良好的規劃,舒適的空間,但空間大小相對小一些.</p>
-        </div>
-        <div class="facilities-col">
+
             <img src="image/Comprehensive_room_new.png">
             <h3>綜合</h3>
             <p>最新翻修的宿舍,含有飲水機,洗衣機,有階梯式上下床的樓梯,鄰近工學院與綜合學院,良好的室內裝潢,舒適的氛圍.</p>
@@ -193,10 +205,27 @@
 
 <!-- call action -->
 
-<!-- <section class="cta">
-    <h1>dadadadad</h1>
-    <a href="">CONTACT US</a>
-</section> -->
+<section class="cta">
+    <h1>詳細完整資訊點擊頂層右上角查看</h1>
+    <a href=""class="hero-btn">回頂層</a>
+</section>
+<!-- footer -->
+
+<Section class="footer">
+    <h4>About Us</h4>
+    <p>811726 高雄市楠梓區高雄大學路700號<br>
+        700, Kaohsiung University Rd., Nanzih District, Kaohsiung 811, Taiwan, <br>
+        高大總機:886-7-5919000 ｜ 傳真號碼:886-7-5919083 <br>
+        高大校園緊急聯絡電話:886-7-5917885 ｜ 高大警衛室:886-7-5919009 <br>
+        網頁維護:秘書室 ｜ 系統維護:圖書資訊館</p>
+    <div class="icons">
+        <a href="https://www.facebook.com/nuk.edu.tw/"><i class="fa-brands fa-facebook fa-2xl"></i></a>
+        <a href="https://www.youtube.com/watch?v=skiRj8LXxpg&ab_channel=LearnNowOnline"><i class="fa-brands fa-youtube fa-2xl"></i></a>
+        <a href="https://www.instagram.com/nuk.tw/"><i class="fa-brands fa-instagram fa-2xl"></i></a>
+    </div>
+    <p>Made with<i class="fa-solid fa-heart"></i>NUK SE Project</p>
+</Section>
+
 
 <!---------javascript for toggle menu----->    
 
