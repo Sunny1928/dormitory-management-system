@@ -34,6 +34,14 @@
         
         return $result;
     }
+
+    // 設定student session資料
+    function student_session_load($conn , $account){
+        $rel = student_read($conn , $account);
+        $rel = $rel->fetch_assoc();
+
+        $_SESSION['department'] = $rel['department'];
+    }
     
     //  根據id更新學生系所
     function student_update_department($conn , $account , $department){  

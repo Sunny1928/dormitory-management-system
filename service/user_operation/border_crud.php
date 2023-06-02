@@ -55,6 +55,44 @@
         return $stmt->get_result();
     }
 
+    // 查詢該學生的當年度住宿資料
+    function border_read_student_year($conn , $account , $year){
+
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
+                JOIN border ON student.account = border.account 
+                JOIN user ON user.account = student.account 
+                LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
+                WHERE student.account = ? AND border.year = ?";        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $account , $year);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
+
+    // 查詢該學生是否為當年度住宿生
+    function border_check($conn , $account , $year){
+        
+        $rel = border_read_student_year($conn , $account , $year);
+        if($rel->num_rows == 0)
+            return False;
+        else
+            return True;
+    }
+
+    // 設定border session資料
+    function border_session_load($conn , $account , $year){
+
+        $rel = border_read_student_year($conn , $account , $year);
+        $rel = $rel->fetch_assoc();
+        $_SESSION['border_type'] = $rel['type'];
+        $_SESSION['apply_story_manager_state'] = $rel['apply_story_manager_state'];
+        $_SESSION['year'] = $rel['year'];
+        $_SESSION['room_number'] = $rel['room_number'];
+        $_SESSION['dormitory_id'] = $rel['dormitory_id'];
+        
+    }
+
     // 查詢該年度的所有住宿資料
     function border_read_year($conn , $year){
 

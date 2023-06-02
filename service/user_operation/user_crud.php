@@ -109,8 +109,49 @@
         return $_SESSION['permission'] == $permissions;
     }
 
-    // 移除權限
-    function user_reset_permissions(){
-        unset($_SESSION['permission']);
+    // // 移除權限
+    // function user_reset_permissions(){
+    //     unset($_SESSION['permission']);
+    // }
+
+    // 設定user session資料
+    function user_session_load($conn , $account){
+        $rel = user_read($conn, $account);
+        $rel = $rel->fetch_assoc();
+
+        $_SESSION['account'] = $rel['account'];
+        $_SESSION['type'] = $rel['type'];
+        $_SESSION['gender'] = $rel['gender'];
+        $_SESSION['name'] = $rel['name'];
+        $_SESSION['phone'] = $rel['phone'];
+        $_SESSION['email'] = $rel['email'];
+
+    }
+    // user登入
+    function user_login($conn , $account, $password , $year=112){
+
+        if(! user_login_verify($conn , $account , $password))
+            return False;
+
+        user_session_load($conn , $account);
+        
+        // 家長
+
+        if($_SESSION['type'] == 2){
+            parents_session_load($conn , $account , $year);
+        }
+        else if($_SESSION['type'] ==3){
+            student_session_load($conn , $account);
+            if(border_check($conn , $account , $year)){
+
+                border_session_load($conn , $account , $year);
+                if(story_manager_check($conn , $account , $year))
+                    $_SESSION['type'] = 5;
+                else
+                    $_SESSION['type'] = 4;
+            }
+        }
+
+        return True;
     }
 ?>
