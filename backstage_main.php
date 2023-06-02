@@ -189,7 +189,7 @@
       <!--equipment-->
       <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
         <?php
-          require("./views/equipment_table.php")
+          //require("./views/equipment_table.php")
         ?>
       </div>
 
@@ -217,14 +217,14 @@
       <!--entry and exit-->
       <div class="tab-pane fade" id="pills-entry-and-exit" role="tabpanel" aria-labelledby="tab-entry-and-exit">
         <?php
-          //require("./views/entry_and_exit_table.php")
+          require("./views/entry_and_exit_table.php")
         ?>
       </div>
 
       <!--roll call-->
       <div class="tab-pane fade" id="pills-roll-call" role="tabpanel" aria-labelledby="tab-roll-call">
         <?php
-          //require("./views/roll_call_table.php")
+          require("./views/roll_call_table.php")
         ?>
       </div>
 
@@ -238,7 +238,7 @@
       <!--access card-->
       <div class="tab-pane fade" id="pills-access-card" role="tabpanel" aria-labelledby="tab-access-card">
         <?php
-          //require("./views/access_card_table.php")
+          require("./views/access_card_table.php")
         ?>
       </div>
 

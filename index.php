@@ -1,3 +1,9 @@
+<?php
+// -0 system_admin -1 dorm_manager -2 parent -3 student -4 border -5 story_manager
+  $genders = array("男", "女");
+  $_SESSION['account']='A1095514';
+	$_SESSION['permission'] = 3;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,65 +88,56 @@
           <button type="submit" value="Login" class="btn btn-primary btn-block mb-4">登入</button>
         </form>
       </div>
+      
 
       <!-- register -->
       <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-      <form method="post" action="./service/register.php">
-        <div class="text-center mb-3">
-
-        <div class="form-outline mb-4">
-          <input required type="text" name="account" id="registerAccount" class="form-control" />
-          <label class="form-label" for="registerAccount">帳號</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="password" name="password" id="registerPassword" class="form-control" />
-          <label class="form-label" for="registerPassword">密碼</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="text" name="name" id="registerName" class="form-control" />
-          <label class="form-label" for="registerName">名稱</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="email" name="email" id="registerEmail" class="form-control" />
-          <label class="form-label" for="registerEmail">Email</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="tel" name="phone" id="registerPhone" class="form-control" />
-          <label class="form-label" for="registerPhone">電話</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-
-        <div class="form-outline mb-4">
-          <input required type="number" name="academic_year" id="registerAcademicYear" class="form-control" />
-          <label class="form-label" for="registerAcademicYear">學年</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="number" name="major_year" id="registerMajorYear" class="form-control" />
-          <label class="form-label" for="registerMajorYear">系級</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-        <div class="form-outline mb-4">
-          <input required type="text" name="student_id" id="registerStudentNo" class="form-control" />
-          <label class="form-label" for="registerStudentNo">學號</label>
-          <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
-        </div>
-
-        <div class="form-check form-check-inline mb-4 required">
-          <input name="gender" value="male" required class="form-check-input" type="radio" id="male"/>
-          <label class="form-check-label" for="male">男</label>
-        </div>
-        <div class="form-check form-check-inline mb-4">
-          <input name="gender" value="female" required class="form-check-input" type="radio" id="female"/>
-          <label class="form-check-label" for="female">女</label>
-        </div>
-
-        <button type="submit" value="Login" class="btn btn-primary btn-block mb-3">註冊</button>
-      </form>
+        <form method="post" action="./controller/user_controller.php">
+          <div class="text-center mb-3">
+            <div class="form-outline mb-4">
+              <input required type="text" name="name" class="form-control" />
+              <label class="form-label">名稱</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <div class="form-outline mb-4">
+              <input required type="text" name="account" class="form-control" />
+              <label class="form-label">帳號</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <div class="form-outline mb-4">
+              <input required type="password" name="password" class="form-control" />
+              <label class="form-label" >密碼</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <div class="form-outline mb-4">
+              <input required type="email" name="email"  class="form-control" />
+              <label class="form-label">Email</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <div class="form-outline mb-4">
+              <input required type="tel" name="phone" class="form-control" />
+              <label class="form-label">電話</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <select class='form-select mb-4' name=gender required>
+              <option value=''>性別</option>
+              <?php
+              for($i = 0; $i<2; $i++){
+                echo "<option value=$i>".$genders[$i]."</option>";
+              }
+              ?>
+            </select>
+            <input value='3' required type='hidden' name='type' class='form-control' />
+            <div class="form-outline mb-4">
+              <input required type="text" name="department" class="form-control" />
+              <label class="form-label">系所</label>
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
+            </div>
+            <input value='10' required type='hidden' name='cheche' class='form-control' />
+            <button type="submit" value="Login" class="btn btn-primary btn-block mb-3" name='student_create' value='student_create'>註冊</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <!-- Pills content -->

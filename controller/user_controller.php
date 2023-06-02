@@ -28,8 +28,11 @@
     echo $_POST['type'];
     
     //$types = array("系統管理員", "舍監", "家長", "學生");
+    // 10 login page
+    if($_POST['cheche'] == 10){
+        header("Location: ../index.php");
 
-    if($_POST['type']==0){
+    }else if($_POST['type']==0){
         header("Location: ../backstage_main.php#pills-system-admin");
     
     } else if($_POST['type']==1){

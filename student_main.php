@@ -1,3 +1,10 @@
+<?php
+// -0 system_admin -1 dorm_manager -2 parent -3 student -4 border -5 story_manager
+  require_once('./service/mainpage_require_all.php');
+  $_SESSION['account']='A1095514';
+	$_SESSION['permission'] = 3;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,26 +41,19 @@
           <hr class="mb-0">
         </div>
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-dashboard"
-            data-mdb-toggle="pill" href="#pills-dashboard" role="tab" aria-controls="pills-dashboard"
-            aria-selected="true">
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-dashboard" data-mdb-toggle="pill" href="#pills-dashboard" role="tab" aria-controls="pills-dashboard" aria-selected="true">
             <i class="fas fa-house pe-3"></i>主畫面
           </a>
-          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-news" data-mdb-toggle="pill"
-            href="#pills-news" role="tab" aria-controls="pills-news" aria-selected="false">
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
             <i class="fas fa-envelope pe-3"></i>公告
           </a>
-          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill"
-            href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
             <i class="fas fa-comment pe-3"></i>留言板
           </a>
-          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violate-record"
-            data-mdb-toggle="pill" href="#pills-violate-record" role="tab" aria-controls="pills-violate-record"
-            aria-selected="false">
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violate-record" data-mdb-toggle="pill" href="#pills-violate-record" role="tab" aria-controls="pills-violate-record" aria-selected="false">
             <i class="fas fa-book pe-3"></i>違規紀錄
           </a>
-          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-all" data-mdb-toggle="pill"
-            href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="false">
+          <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-all" data-mdb-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="false">
             <i class="fas fa-house-chimney pe-3"></i>宿舍資料
           </a>
         </div>
@@ -71,6 +71,13 @@
   <!--Main layout-->
   <main>
     <div class="tab-content" style="max-height: 100vh;">
+      <!--announcement-->
+      <div class="tab-pane fade" id="pills-announcement" role="tabpanel" aria-labelledby="tab-announcement">
+        <?php
+          require("./components/announcementComponent.php")
+        ?>
+      </div>
+
       <!--message-->
       <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
         <?php
@@ -86,8 +93,8 @@
       new mdb.Input(formOutline).init();
     });
 
-    if (location.hash === "#pills-news") {
-      const triggerEl = document.querySelector('a[href="#pills-news"]');
+    if (location.hash === "#pills-announcement") {
+      const triggerEl = document.querySelector('a[href="#pills-announcement"]');
       if (triggerEl) {
         let instance = mdb.Tab.getInstance(triggerEl)
         if (!instance) {
