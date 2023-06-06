@@ -9,5 +9,5 @@
         apply_dorm_update($conn, $_POST['apply_dorm_id'], $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-apply-dorm");
+    header("Location: ../main.php#pills-apply-dorm");
 ?>

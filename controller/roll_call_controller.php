@@ -12,5 +12,5 @@
         roll_call_update($conn , $_POST['roll_call_state_record_id'] , $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-roll-call");
+    header("Location: ../main.php#pills-roll-call");
 ?>

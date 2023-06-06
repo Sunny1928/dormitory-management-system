@@ -12,5 +12,5 @@
         bill_update($conn , $_POST['bill_id'], $_POST['fee'], $_POST['type'], $_POST['title'] , $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-bill");
+    header("Location: ../main.php#pills-bill");
 ?>

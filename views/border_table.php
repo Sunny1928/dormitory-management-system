@@ -1,7 +1,6 @@
 <?php
 $default_year = 113;
-$border_types = array("住宿生", "無效", "學一OA樓長", "學一OB樓長", "學二OE樓長", "學二OF樓長");
-$border_apply_story_manager_states = array("未申請", "已申請");
+
 ?>
 
 <!--Border-->
@@ -9,7 +8,30 @@ $border_apply_story_manager_states = array("未申請", "已申請");
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">住宿生資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBorderModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class='d-flex'>
+      <select type="text" id="borderYearFilter" onchange="border_year_filter()" class='form-select-sm'  required>
+        <option value=''>年度</option>
+        <?php
+        for($i = 111; $i<114; $i++){
+          echo "<option value=".$i.">".$i."</option>";
+        }?>
+      </select>
+      <select type="text" id="borderTypeFilter" onchange="border_type_filter()" class='form-select-sm ms-2'  required>
+        <option value=''>住宿生類別</option>
+        <?php
+        for($i = 0; $i<count($border_types); $i++){
+          echo "<option value=".$border_types[$i].">".$border_types[$i]."</option>";
+        }?>
+      </select>
+      <select type="text" id="borderApplyFilter" onchange="border_apply_filter()" class='form-select-sm ms-2'  required>
+        <option value=''>申請樓長狀態</option>
+        <?php
+        for($i = 0; $i<count($border_apply_story_manager_states); $i++){
+          echo "<option value=".$border_apply_story_manager_states[$i].">".$border_apply_story_manager_states[$i]."</option>";
+        }?>
+      </select>
+      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBorderModal'><i class='fa fa-add me-1'></i>新增</button>
+    </div>
   </div>
 </div>
 
@@ -18,7 +40,7 @@ $border_apply_story_manager_states = array("未申請", "已申請");
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="borderTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
               <th scope="col">年</th>
@@ -49,12 +71,12 @@ $border_apply_story_manager_states = array("未申請", "已申請");
 
                   
                   echo "<tr>" .
-                    "<td> " . $year . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $border_types[$type] . "</td>".
-                    "<td> " . $border_apply_story_manager_states[$state] . "</td>".
-                    "<td> " . $dormitory_name . "</td>".
-                    "<td> " . $room_number . "</td>".
+                    "<td>" . $year . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $border_types[$type] . "</td>".
+                    "<td>" . $border_apply_story_manager_states[$state] . "</td>".
+                    "<td>" . $dormitory_name . "</td>".
+                    "<td>" . $room_number . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBorderModal$year-$account'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBorderModal$year-$account'><i class='fa fa-trash'></i></button>
@@ -179,3 +201,62 @@ $border_apply_story_manager_states = array("未申請", "已申請");
   </div>
 </div>
 
+<script>
+function border_year_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("borderYearFilter").value;
+  tr = document.getElementById("borderTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0].innerText;
+
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function border_type_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("borderTypeFilter").value;
+  tr = document.getElementById("borderTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function border_apply_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("borderApplyFilter").value;
+  tr = document.getElementById("borderTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>

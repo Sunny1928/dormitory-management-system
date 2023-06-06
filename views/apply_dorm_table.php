@@ -3,7 +3,16 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">申請宿舍資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addApplyDormModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="applyDormStateFilter" onchange="apply_dorm_state_filter()" class='form-select-sm'  required>
+        <option value=''>申請宿舍狀態</option>
+        <?php
+        for($i = 0; $i<count($apply_dorm_states); $i++){
+          echo "<option value=".$apply_dorm_states[$i].">".$apply_dorm_states[$i]."</option>";
+        }?>
+      </select>
+      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addApplyDormModal'><i class='fa fa-add me-1'></i>新增</button>
+    </div>
   </div>
 </div>
 
@@ -12,10 +21,10 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="applyDormTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">申請宿舍編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">帳號</th>
               <th scope="col">狀態</th>
               <th scope="col">操作</th>
@@ -24,7 +33,6 @@
           <tbody class="datatable-body">
             <?php
               $result = apply_dorm_read_all($conn);
-              $apply_dorm_states = array("申請等待核准", "核准通過分發", "分發完成", "沒通過");
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -35,9 +43,9 @@
                   $state = $info['state'];
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $apply_dorm_states[$state] . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $apply_dorm_states[$state] . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateApplyDormModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteApplyDormModal$id'><i class='fa fa-trash'></i></button>
@@ -141,3 +149,25 @@
   </div>
 </div>
 
+<script>
+
+function apply_dorm_state_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("applyDormStateFilter").value;
+  tr = document.getElementById("applyDormTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+</script>

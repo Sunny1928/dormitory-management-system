@@ -16,7 +16,7 @@
         <table class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">進出紀錄編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">年</th>
               <th scope="col">帳號</th>
               <th scope="col">進出狀態</th>
@@ -42,11 +42,11 @@
                   $datetime	 = $info['datetime'];
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $year . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $entry_exit_states[$state] . "</td>".
-                    "<td> " . $datetime . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $year . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $entry_exit_states[$state] . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateEntryandexitRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteEntryandexitRecordModal$id'><i class='fa fa-trash'></i></button>

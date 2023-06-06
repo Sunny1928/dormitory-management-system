@@ -9,7 +9,16 @@ $bill_states = array("未繳費", "已繳費");
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">帳單資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBillModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="billTypeFilter" onchange="bill_type_filter()" class='form-select-sm'  required>
+        <option value=''>帳單類別</option>
+        <?php
+        for($i = 0; $i<count($bill_states); $i++){
+          echo "<option value=".$bill_states[$i].">".$bill_states[$i]."</option>";
+        }?>
+      </select>
+      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBillModal'><i class='fa fa-add me-1'></i>新增</button>
+    </div>
   </div>
 </div>
 
@@ -18,10 +27,10 @@ $bill_states = array("未繳費", "已繳費");
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="billTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">帳單編號</th> 
+              <th scope="col">編號</th>
               <th scope="col">年</th>
               <th scope="col">帳號</th>
               <th scope="col">標題</th>
@@ -50,13 +59,13 @@ $bill_states = array("未繳費", "已繳費");
 
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $year . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $title . "</td>".
-                    "<td> " . $bill_types[$type] . "</td>".
-                    "<td> " . $fee . "</td>".
-                    "<td> " . $bill_states[$state] . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $year . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $title . "</td>".
+                    "<td>" . $bill_types[$type] . "</td>".
+                    "<td>" . $fee . "</td>".
+                    "<td>" . $bill_states[$state] . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBillModal$id'><i class='fa fa-trash'></i></button>
@@ -102,8 +111,8 @@ $bill_states = array("未繳費", "已繳費");
                             <label class='form-label'>名稱</label>
                           </div>
                           <div class='form-outline mb-4'>
-                            <input value='$fee' required type='text' name='fee' id='fee' class='form-control' />
-                            <label class='form-label' for='fee'>費用</label>
+                            <input value='$fee' required type='text' name='fee' class='form-control' />
+                            <label class='form-label' >費用</label>
                           </div>
                           <select class='form-select mb-4' name='state' required>
                             <option value=''>狀態</option>";
@@ -190,8 +199,8 @@ $bill_states = array("未繳費", "已繳費");
               <label class='form-label' for='title'>名稱</label>
             </div>
             <div class='form-outline mb-4'>
-              <input required type='text' name='fee' id='fee' class='form-control' />
-              <label class='form-label' for='fee'>費用</label>
+              <input required type='text' name='fee' class='form-control' />
+              <label class='form-label'>費用</label>
             </div>
           </div>
         </div>
@@ -205,3 +214,23 @@ $bill_states = array("未繳費", "已繳費");
   </div>
 </div>
 
+<script>
+function bill_type_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("billTypeFilter").value;
+  tr = document.getElementById("billTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>

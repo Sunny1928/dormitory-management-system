@@ -16,7 +16,7 @@
         <table class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">申請停車編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">帳號</th>
               <th scope="col">狀態</th>
               <th scope="col">時間</th>
@@ -38,10 +38,10 @@
                   $datetime = $info['datetime'];
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $parking_permit_states[$state] . "</td>".
-                    "<td> " . $datetime . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $parking_permit_states[$state] . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateParkingPermitModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteParkingPermitModal$id'><i class='fa fa-trash'></i></button>

@@ -12,5 +12,5 @@
         access_card_update($conn , $_POST['temporary_access_card_record_id'] , $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-access-card");
+    header("Location: ../main.php#pills-access-card");
 ?>

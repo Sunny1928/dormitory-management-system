@@ -1,10 +1,5 @@
 <?php
   session_start();
-
-  $genders = array("男", "女");
-  $types = array("系統管理員", "舍監", "家長", "學生");
-  $_SESSION['account']='A1095514';
-  $_SESSION['permission'] = 3;
 ?>
 
 
@@ -95,10 +90,9 @@
                     </div>
                     <div class='modal-body'>
                         <div class='form-outline'>
-                        <textarea name='content' class='form-control border' id='textAreaExample' rows='4' required>$content</textarea>
+                        <textarea name='content' class='form-control border' rows='4' required>$content</textarea>
                         <input type='hidden' name='account' value='$account'>
                         <input type='hidden' name='message_id' value='$id'>
-                        <input type='hidden' name='cheche' value=".$_SESSION['permission']." />
                         </div>
                     </div>
                     <div class='modal-footer'>
@@ -124,7 +118,6 @@
                         <div class='modal-footer'>
                             <form method='post' action='./controller/message_controller.php'>
                                 <input type='hidden' name='message_id' value='$id'>
-                                <input type='hidden' name='cheche' value=".$_SESSION['permission']." />
                                 <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                                 <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
                             </form>
@@ -147,7 +140,6 @@
             <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
                 <img src='./image/user.png' alt="avatar 3" style="width: 40px; height: 100%; border-radius: 100%;">
                 <input name="content" required type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Type message">
-                <input name='cheche' value='<?php echo $_SESSION['permission'] ?>' required type='hidden' />
                 <input name="account" value='<?php echo $_SESSION['account'] ?>' type="hidden" >
                 
                 <button type='submit' class='btn btn-link' name='create' value='create'>
@@ -155,5 +147,5 @@
                 </button>
             </div>
         </form>
-        </div>
+    </div>
 </div>

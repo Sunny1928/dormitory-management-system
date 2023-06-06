@@ -3,7 +3,23 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">違規紀錄資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addViolatedRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="violatedRecordAccountFilter" onchange="violated_record_account_filter()" class='form-select-sm ms-2'  required>
+        <option value=''>帳號</option>
+        <?php
+        for($i = 0; $i<count($border_apply_story_manager_states); $i++){
+          echo "<option value=".$border_apply_story_manager_states[$i].">".$border_apply_story_manager_states[$i]."</option>";
+        }?>
+      </select>
+      <select type="text" id="violatedRecordStateFilter" onchange="violated_record_state_filter()" class='form-select-sm ms-2'  required>
+        <option value=''>申請取消狀態</option>
+        <?php
+        for($i = 0; $i<count($apply_cancel_states); $i++){
+          echo "<option value=".$apply_cancel_states[$i].">".$apply_cancel_states[$i]."</option>";
+        }?>
+      </select>
+      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addViolatedRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    </div>
   </div>
 </div>
 
@@ -12,10 +28,10 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id='violatedRecordTable' class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">違規紀錄編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">年</th>
               <th scope="col">帳號</th>
               <th scope="col">規範</th>
@@ -28,7 +44,6 @@
             <?php
     
               $result = violated_record_read_all($conn);
-              $apply_cancel_states = array("未申請", "已申請", "通過", "未通過");
 
 
               if (mysqli_num_rows($result) > 0) 
@@ -44,12 +59,12 @@
                   $datetime	 = $info['datetime'];
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $year . "</td>".
-                    "<td> " . $account . "</td>".
-                    "<td> " . $content . "</td>".
-                    "<td> " . $apply_cancel_states[$apply_cancel] . "</td>".
-                    "<td> " . $datetime . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $year . "</td>".
+                    "<td>" . $account . "</td>".
+                    "<td>" . $content . "</td>".
+                    "<td>" . $apply_cancel_states[$apply_cancel] . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateViolatedRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteViolatedRecordModal$id'><i class='fa fa-trash'></i></button>
@@ -177,3 +192,45 @@
   </div>
 </div>
 
+<script>
+function violated_record_account_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("violatedRecordAccountFilter").value;
+  tr = document.getElementById("violatedRecordTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2].innerText;
+
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+
+
+function violated_record_state_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("violatedRecordStateFilter").value;
+  tr = document.getElementById("violatedRecordTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>

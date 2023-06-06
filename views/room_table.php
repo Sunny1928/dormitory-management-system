@@ -15,7 +15,7 @@
         <table class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">大樓編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">房號</th>
               <th scope="col">費用</th>
               <th scope="col">人數</th>
@@ -40,11 +40,11 @@
                   $dormitory_name = $info['name'];
                   
                   echo "<tr>" .
-                    "<td> " . $dormitory_name . "</td>".
-                    "<td> " . $id . "</td>".
-                    "<td> " . $fee . "</td>".
-                    "<td> " . $num_of_people . "</td>".
-                    "<td> " . $clean_states[$clean_state] . "</td>".
+                    "<td>" . $dormitory_name . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $fee . "</td>".
+                    "<td>" . $num_of_people . "</td>".
+                    "<td>" . $clean_states[$clean_state] . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRoomModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRoomModal$id'><i class='fa fa-trash'></i></button>

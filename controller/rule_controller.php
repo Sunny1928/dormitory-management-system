@@ -12,5 +12,5 @@
         rule_update($conn, $_POST['rule_id'], $_POST['content'], $_POST['point']);
     }
 
-    header("Location: ../backstage_main.php#pills-rule");
+    header("Location: ../main.php#pills-rule");
 ?>

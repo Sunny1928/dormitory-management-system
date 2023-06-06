@@ -15,7 +15,7 @@
         <table class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">規範編號</th> 
+              <th scope="col">編號</th> 
               <th scope="col">內容</th>
               <th scope="col">點數</th>
               <th scope="col">操作</th>
@@ -34,9 +34,9 @@
                   $point = $info['point'];
                   
                   echo "<tr>" .
-                    "<td> " . $id . "</td>".
-                    "<td> " . $content . "</td>".
-                    "<td> " . $point . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $content . "</td>".
+                    "<td>" . $point . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRuleModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRuleModal$id'><i class='fa fa-trash'></i></button>

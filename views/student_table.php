@@ -3,7 +3,11 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">學生資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addStudentModal'><i class='fa fa-add me-1'></i>新增</button>
+    <?php
+      if($_SESSION["account"] == 'root'){
+        echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addStudentModal'><i class='fa fa-add me-1'></i>新增</button>";
+      }
+    ?>
   </div>
 </div>
 
@@ -21,7 +25,11 @@
               <th scope="col">電話</th>
               <th scope="col">性別</th>
               <th scope="col">系所</th>
-              <th scope="col">操作</th>
+              <?php
+                if($_SESSION["account"] == 'root'){
+                  echo "<th scope='col'>操作</th>";
+                }
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -44,17 +52,19 @@
                   
                   
                   echo "<tr>" .
-                    "<td> " . $name . "</td>".
-                    "<td> ". $account ."</td> ".
-                    "<td> " . $email . "</td>".
-                    "<td> " . $phone . "</td>".
-                    "<td> " . $genders[$gender] . "</td>".
-                    "<td> " . $department . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateStudentModal$account'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteStudentModal$account'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $name . "</td>".
+                    "<td>". $account ."</td> ".
+                    "<td>" . $email . "</td>".
+                    "<td>" . $phone . "</td>".
+                    "<td>" . $genders[$gender] . "</td>".
+                    "<td>" . $department . "</td>";
+                    if($_SESSION["account"] == 'root'){
+                      echo "<td>
+                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateStudentModal$account'><i class='fa fa-pencil'></i></button>
+                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteStudentModal$account'><i class='fa fa-trash'></i></button>
+                      </td>";
+                    }
+                  echo "</tr>";
 
                   // Update Modal
                   echo "

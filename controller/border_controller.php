@@ -22,5 +22,5 @@
 
     }
     
-    header("Location: ../backstage_main.php#pills-border");
+    header("Location: ../main.php#pills-border");
 ?>

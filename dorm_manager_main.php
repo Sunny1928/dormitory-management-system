@@ -25,12 +25,19 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violate-record" data-mdb-toggle="pill" href="#pills-violate-record" role="tab" aria-controls="pills-violate-record" aria-selected="false">
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
+          <i class="fas fa-person-shelter pe-3"></i>住宿生
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-all" data-mdb-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="false">
-          <i class="fas fa-house-chimney pe-3"></i>宿舍資料
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-entry-and-exit" data-mdb-toggle="pill" href="#pills-entry-and-exit" role="tab" aria-controls="pills-entry-and-exit" aria-selected="false">
+          <i class="fas fa-note pe-3"></i>進出紀錄
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
+          <i class="fas fa-bed pe-3"></i>宿舍設備
+        </a>
+
       </div>
       <div class="list-group list-group-flush mx-3">
         <a href="./index.php" class="list-group-item py-2 ripple pb-2">
@@ -63,10 +70,6 @@
           <p class="m-1">電話：<?php echo $_SESSION['phone'];?></p>
           <p class="m-1">種類：<?php echo $types[$_SESSION['type']];?></p>
           <p class="m-1">性別：<?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1">科系：<?php echo $_SESSION['department'];?></p>
-          <p class="m-1">學生帳號：<?php echo $_SESSION['student_account'];?></p>
-          <p class="m-1">宿舍：<?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1">房號：<?php echo $_SESSION['room_number'];?></p>
         </div>
       </div>
     </div>
@@ -82,6 +85,37 @@
     <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
       <?php
         require("./components/messageComponent.php")
+      ?>
+    </div>
+
+
+    <!--border-->
+    <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
+      <?php
+        require("./views/border_table.php") 
+      ?>
+    </div>
+
+    <!--violated record-->
+    <div class="tab-pane fade" id="pills-violated-record" role="tabpanel" aria-labelledby="tab-violated-record">
+      <?php
+        require("./views/violated_record_table.php")
+      ?>
+    </div>
+
+    <!--entry and exit-->
+    <div class="tab-pane fade" id="pills-entry-and-exit" role="tabpanel" aria-labelledby="tab-entry-and-exit">
+      
+      <?php
+      // add account
+        require("./views/entry_and_exit_table.php")
+      ?>
+    </div>
+
+    <!--equipment-->
+    <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
+      <?php
+        // require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -120,8 +154,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-violate-record") {
-    const triggerEl = document.querySelector('a[href="#pills-violate-record"]');
+  } else if (location.hash === "#pills-equipment") {
+    const triggerEl = document.querySelector('a[href="#pills-equipment"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -129,8 +163,26 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-all") {
-    const triggerEl = document.querySelector('a[href="#pills-all"]');
+  } else if (location.hash === "#pills-border") {
+    const triggerEl = document.querySelector('a[href="#pills-border"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-entry-and-exit") {
+    const triggerEl = document.querySelector('a[href="#pills-entry-and-exit"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-violated-record") {
+    const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {

@@ -1,7 +1,5 @@
 <?php
-    echo $_POST['account'];
-    echo $_POST['content'];
-    echo $_POST['cheche'] ;
+    session_start();
 
     require_once('../service/require_all.php');
 
@@ -13,28 +11,18 @@
         message_update($conn, $_POST['message_id'], $_POST['content']);
     }
 
-    // -0 system_admin -1 dorm_manager -2 parent -3 student -4 border -5 story_manager -6 root
-    if($_POST['cheche'] == 0){
-        header("Location: ../system_admin_main.php#pills-message");
+    header("Location: ../main.php#pills-message");
 
-    } else if($_POST['cheche'] == 1){
-        header("Location: ../dorm_manager_main.php#pills-message");
 
-    } else if($_POST['cheche'] == 2){
-        header("Location: ../parent_main.php#pills-message");
+    // -0 system_admin 
+    // -1 dorm_manager 
+    // -2 parent 
+    // -3 student 
+    // -4 border 
+    // -5 story_manager 
+    // -6 root
+    
+    // header("Location: ../backstage_main.php#pills-message");
 
-    } else if($_POST['cheche'] == 3){
-        header("Location: ../student_main.php#pills-message");
-
-    } else if($_POST['cheche'] == 4){
-        header("Location: ../border_main.php#pills-message");
-
-    } else if($_POST['cheche'] == 5){
-        header("Location: ../story_manager_main.php#pills-message");
-
-    } else if($_POST['cheche'] == 6){
-        header("Location: ../backstage_main.php#pills-message");
-
-    }
 
 ?>

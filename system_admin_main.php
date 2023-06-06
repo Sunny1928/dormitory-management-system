@@ -25,12 +25,22 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violate-record" data-mdb-toggle="pill" href="#pills-violate-record" role="tab" aria-controls="pills-violate-record" aria-selected="false">
-          <i class="fas fa-book pe-3"></i>違規紀錄
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
+          <i class="fas fa-user-graduate pe-3"></i>學生
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-all" data-mdb-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="false">
-          <i class="fas fa-house-chimney pe-3"></i>宿舍資料
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
+          <i class="fas fa-person-shelter pe-3"></i>住宿生
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
+          <i class="fas fa-bed pe-3"></i>宿舍設備
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
+          <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
+        </a>
+
       </div>
       <div class="list-group list-group-flush mx-3">
         <a href="./index.php" class="list-group-item py-2 ripple pb-2">
@@ -63,10 +73,6 @@
           <p class="m-1">電話：<?php echo $_SESSION['phone'];?></p>
           <p class="m-1">種類：<?php echo $types[$_SESSION['type']];?></p>
           <p class="m-1">性別：<?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1">科系：<?php echo $_SESSION['department'];?></p>
-          <p class="m-1">學生帳號：<?php echo $_SESSION['student_account'];?></p>
-          <p class="m-1">宿舍：<?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1">房號：<?php echo $_SESSION['room_number'];?></p>
         </div>
       </div>
     </div>
@@ -82,6 +88,43 @@
     <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
       <?php
         require("./components/messageComponent.php")
+      ?>
+    </div>
+
+    <!--student-->
+    <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
+      <?php
+        require("./views/student_table.php") 
+      ?>
+    </div>
+
+    <!--apply dorm-->
+    <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm">
+      <?php
+        require("./views/apply_dorm_table.php")
+      ?>
+    </div> 
+
+    <!--border-->
+    <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
+      <p>分配住宿生房間</p>
+      
+      <?php
+        require("./views/border_table.php") 
+      ?>
+    </div>
+
+    <!--bill-->
+    <div class="tab-pane fade" id="pills-bill" role="tabpanel" aria-labelledby="tab-bill">
+      <?php
+        require("./views/bill_table.php")
+      ?>
+    </div>
+
+    <!--equipment-->
+    <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
+      <?php
+        // require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -120,8 +163,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-violate-record") {
-    const triggerEl = document.querySelector('a[href="#pills-violate-record"]');
+  } else if (location.hash === "#pills-equipment") {
+    const triggerEl = document.querySelector('a[href="#pills-equipment"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -129,8 +172,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-all") {
-    const triggerEl = document.querySelector('a[href="#pills-all"]');
+  } else if (location.hash === "#pills-student") {
+    const triggerEl = document.querySelector('a[href="#pills-student"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -138,7 +181,34 @@
       }
       instance.show();
     }
-  }
+  } else if (location.hash === "#pills-apply-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-apply-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-border") {
+    const triggerEl = document.querySelector('a[href="#pills-border"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-bill") {
+    const triggerEl = document.querySelector('a[href="#pills-bill"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } 
 </script>
 
 

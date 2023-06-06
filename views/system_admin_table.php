@@ -42,11 +42,11 @@
                   
                   
                   echo "<tr>" .
-                    "<td> " . $name . "</td>".
-                    "<td> ". $account ."</td> ".
-                    "<td> " . $email . "</td>".
-                    "<td> " . $phone . "</td>".
-                    "<td> " . $genders[$gender] . "</td>".
+                    "<td>" . $name . "</td>".
+                    "<td>". $account ."</td> ".
+                    "<td>" . $email . "</td>".
+                    "<td>" . $phone . "</td>".
+                    "<td>" . $genders[$gender] . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateSystemAdminModal$account'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteSystemAdminModal$account'><i class='fa fa-trash'></i></button>

@@ -12,5 +12,5 @@
         entry_and_exit_update($conn , $_POST['entry_and_exit_dormitory_record_id'] , $_POST['state']);
     }
 
-    header("Location: ../backstage_main.php#pills-entry-and-exit");
+    header("Location: ../main.php#pills-entry-and-exit");
 ?>

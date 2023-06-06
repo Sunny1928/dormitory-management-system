@@ -1,8 +1,7 @@
 <?php
 // -0 system_admin -1 dorm_manager -2 parent -3 student -4 border -5 story_manager
   $genders = array("男", "女");
-  $_SESSION['account']='A1095514';
-	$_SESSION['permission'] = 3;
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +67,7 @@
     <div class="tab-content">
       <!-- login -->
       <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        <form action="./service/login.php" method="post">
+        <form action="./controller/user_controller.php" method="post">
           <div class="form-outline mb-4">
             <input required name="account" type="text" id="loginName" class="form-control" />
             <label class="form-label" for="loginName">帳號</label>
@@ -85,7 +84,7 @@
               echo "<p class='text-danger ms-1'>帳號或密碼錯誤</p>";
               }
             ?>
-          <button type="submit" value="Login" class="btn btn-primary btn-block mb-4">登入</button>
+          <button type="submit" name='user_login' value="user_login" class="btn btn-primary btn-block mb-4">登入</button>
         </form>
       </div>
       
@@ -133,8 +132,7 @@
               <label class="form-label">系所</label>
               <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
             </div>
-            <input value='10' required type='hidden' name='cheche' class='form-control' />
-            <button type="submit" value="Login" class="btn btn-primary btn-block mb-3" name='student_create' value='student_create'>註冊</button>
+            <button type="submit" class="btn btn-primary btn-block mb-3" name='student_create' value='student_create'>註冊</button>
           </div>
         </form>
       </div>

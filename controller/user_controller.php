@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
     require_once('../service/require_all.php');
 
     // echo $_POST['account'];
@@ -24,26 +26,30 @@
     } else if(isset($_POST['student_update'])){
         student_update($conn , $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['department']);
 
-    }
-    echo $_POST['type'];
-    
-    //$types = array("系統管理員", "舍監", "家長", "學生");
-    // 10 login page
-    if($_POST['cheche'] == 10){
-        header("Location: ../index.php");
+    } else if(isset($_POST['user_login'])){
+        user_login($conn , $_POST['account'], $_POST['password']);
 
-    }else if($_POST['type']==0){
-        header("Location: ../backstage_main.php#pills-system-admin");
+    }
+
+    // echo "hi";
+    // echo $_SESSION['account'].' ';
+    // echo $_SESSION['permission'].' ';
+    // echo $_SESSION['email'].' ';
+    // echo $_SESSION['phone'].' ';
+    // echo $_SESSION['gender'].' ';
+    // echo $_SESSION['department'].' ';
+
+    if($_POST['type']==0){
+        header("Location: ../main.php#pills-system-admin");
     
     } else if($_POST['type']==1){
-        header("Location: ../backstage_main.php#pills-dorm-manager");
+        header("Location: ../main.php#pills-dorm-manager");
     
     } else if($_POST['type']==2){
-        header("Location: ../backstage_main.php#pills-parents");
+        header("Location: ../main.php#pills-parents");
 
     } else if($_POST['type']==3){
-        header("Location: ../backstage_main.php#pills-student");
+        header("Location: ../main.php#pills-student");
     }
 
-    // header("Location: ../backstage_main.php");
 ?>

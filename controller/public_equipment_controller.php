@@ -10,5 +10,5 @@
         public_equipment_update($conn, $_POST['public_equipment_id'], $_POST['name'], $_POST['apply_fix_state'], $_POST['expired_year'], $_POST['dormitory_id']);
     }
 
-    header("Location: ../backstage_main.php#pills-public-equipment");
+    header("Location: ../main.php#pills-public-equipment");
 ?>

@@ -43,12 +43,12 @@
                   $dormitory_name = $info['dormitory_name'];
                   
                   echo "<tr>" .
-                    "<td> " . $dormitory_name . "</td>".
-                    "<td> " . $id . "</td>".
-                    "<td> " . $name . "</td>".
-                    "<td> " . $apply_fix_states[$apply_fix_state] . "</td>".
-                    "<td> " . $expired_year . "</td>".
-                    "<td> " . $datetime . "</td>".
+                    "<td>" . $dormitory_name . "</td>".
+                    "<td>" . $id . "</td>".
+                    "<td>" . $name . "</td>".
+                    "<td>" . $apply_fix_states[$apply_fix_state] . "</td>".
+                    "<td>" . $expired_year . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updatePublicEquipmentModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deletePublicEquipmentModal$id'><i class='fa fa-trash'></i></button>

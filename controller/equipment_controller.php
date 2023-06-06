@@ -13,5 +13,5 @@
         equipment_update($conn, $_POST['equipment_id'], $_POST['expired_year'], $_POST['name'], $_POST['apply_fix_state'], $room, $dormitory);
     }
 
-    header("Location: ../backstage_main.php#pills-equipment");
+    header("Location: ../main.php#pills-equipment");
 ?>
