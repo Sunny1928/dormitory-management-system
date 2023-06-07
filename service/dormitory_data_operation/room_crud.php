@@ -11,7 +11,7 @@
 
     //  根據宿舍及房號查詢房間
     function room_read($conn , $dormitory_id , $room_number){   
-               
+            
         $sql = "SELECT * FROM room 
                 JOIN dormitory ON dormitory.dormitory_id = room.dormitory_id
                 WHERE room.dormitory_id = ? AND room.room_number =?";
@@ -42,8 +42,6 @@
         $stmt->bind_param('iiisi' , $num_of_people , $fee ,$clean_state , $room_number , $dormitory_id);
         return $stmt->execute();
     }
-
-
 
     //  根據宿舍和房號刪除房間
     function room_delete($conn , $room_number , $dormitory_id){     

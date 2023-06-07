@@ -160,4 +160,26 @@
         $stmt->bind_param('si' ,$account , $year);
         return $stmt->execute();
     }
+
+    function border_get_unique_account($conn ){
+        $sql = "SELECT DISTINCT account FROM border";
+        
+        # create array
+        $account_array = array();
+        if ($result =$conn -> query($sql)) {
+            # get result
+            while ($row = $result -> fetch_array()) {
+                array_push($account_array,$row[0]);
+            }
+            $result -> free_result();
+        }
+
+        # testing
+        // for($i=0; $i<count($account_array);$i++){
+        //     echo  " $account_array[$i]";
+        // } 
+        
+        return $account_array;
+    
+    }
 ?>

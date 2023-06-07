@@ -27,8 +27,8 @@
         system_admin_create($conn,'admin2','admin2','admin2@mail.nuk.edu.tw','0987654321','admin2',1,0);
         system_admin_create($conn,'root','root','root@mail.nuk.edu.tw','0987654321','root',1,0);
         # 新增舍監
-        dorm_manager_create($conn,'dorm1','dorm1','dorm1@mail.nuk.edu.tw','0987654321','dorm1',0,0);
-        dorm_manager_create($conn,'dorm2','dorm2','dorm2@mail.nuk.edu.tw','0987654321','dorm2',1,0);
+        dorm_manager_create($conn,'dorm1','dorm1','dorm1@mail.nuk.edu.tw','0987654321','dorm1',0,1);
+        dorm_manager_create($conn,'dorm2','dorm2','dorm2@mail.nuk.edu.tw','0987654321','dorm2',1,1);
         # 將學生變成住宿生
         border_create($conn , 'A1095509' , 109);
         border_create($conn , 'A1095509' , 110);
