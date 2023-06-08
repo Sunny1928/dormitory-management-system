@@ -12,7 +12,7 @@
 
     // 根據account和year查詢退宿申請
     function quit_dorm_read_account_year($conn , $account, $year){   
-               
+    
         $sql = "SELECT * FROM apply_quit_dorm 
                 JOIN border ON apply_quit_dorm.account = border.account 
                     AND apply_quit_dorm.year = border.year
@@ -72,5 +72,10 @@
         return $stmt->execute();
     }
     
+    // 根據student為分宿生 與 刪除 該家長帳號
+    function quit_dorm_delete_data($conn , $account, $year){
+        border_update_quit($conn,$account,$year);
+        user_delete($conn,$account);
+    }
     
 ?>
