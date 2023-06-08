@@ -47,7 +47,8 @@
                 JOIN border ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
-                WHERE student.account = ?";        
+                WHERE student.account = ?
+                ORDER BY border.year";        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $account);
         $stmt->execute();
@@ -100,7 +101,8 @@
                 JOIN border ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
-                WHERE border.year = ?";        
+                WHERE border.year = ?
+                ORDER BY border.account";        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $year);
         $stmt->execute();
@@ -114,7 +116,8 @@
         $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
                 JOIN border ON student.account = border.account 
                 JOIN user ON user.account = student.account
-                LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id";        
+                LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
+                ORDER BY border.year DESC, border.account";        
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
@@ -128,10 +131,11 @@
                 JOIN student ON border.account = student.account
                 JOIN user ON user.account = student.account
                 JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
-                WHERE EXISTS  (
+                WHERE (border.dormitory_id, border.room_number) IN  (
                     SELECT dormitory_id , room_number FROM border
                     WHERE account = ? AND year = ?
-                ) AND year = ?" ;        
+                ) AND year = ?
+                ORDER BY student.account" ;        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sii' ,$account, $year , $year);
         $stmt->execute();
