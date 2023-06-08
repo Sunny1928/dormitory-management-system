@@ -2,20 +2,27 @@
 
 
     // 新增換宿申請
-    function change_dorm_create($conn , $account, $year, $another_border){  
+    function change_dorm_create($conn , $account, $year, $another_border, $student_state = 0){  
     
         $rel = border_read_student_year($conn , $another_border , $year);
         $rel = $rel->fetch_assoc();
         $change_room_number = $rel['room_number'];
         $change_dorm_id = $rel['dormitory_id'];
 
-        $sql = "INSERT INTO apply_change_dorm (account, year, change_dorm_id, change_room_number, another_border) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO apply_change_dorm (account, year, change_dorm_id, change_room_number, another_border, student_state) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('siiss' ,$account, $year, $change_dorm_id, $change_room_number, $another_border);
+        $stmt->bind_param('siissi' ,$account, $year, $change_dorm_id, $change_room_number, $another_border, $student_state);
         return $stmt->execute(); 
     }
 
-    // 根據account和year查詢換宿申請
+    // 新增換宿流程
+    function change_dorm_create_process($conn , $account, $year, $another_border){
+
+        change_dorm_create($conn , $account, $year, $another_border , 1);
+        change_dorm_create($conn , $another_border, $year, $account);
+    }
+
+    // 根據account和year查詢換宿申請(包含another_border)
     function change_dorm_read_account_year($conn , $account, $year){   
                
         $sql = "SELECT * FROM apply_change_dorm 
@@ -25,6 +32,20 @@
                 WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ? AND border.year = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ssi' ,$account ,$account ,$year);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    // 根據account和year查詢換宿申請
+    function change_dorm_read_self_account_year($conn , $account, $year){   
+            
+        $sql = "SELECT * FROM apply_change_dorm 
+                JOIN student ON apply_change_dorm.account = student.account
+                JOIN user ON user.account = student.account
+                JOIN border ON apply_change_dorm.another_border = border.account AND border.year = apply_change_dorm.year
+                WHERE apply_change_dorm.account = ? AND border.year = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si' ,$account ,$year);
         $stmt->execute();
         return $stmt->get_result();
     }
@@ -43,67 +64,6 @@
         return $stmt->get_result();
     }
 
-    // 根據student_state和year查詢換宿申請
-    function change_dorm_read_student_state_year($conn , $student_state , $year){   
-            
-        $sql = "SELECT * FROM apply_change_dorm 
-                JOIN border ON apply_change_dorm.account = border.account 
-                    AND apply_change_dorm.year = border.year 
-                JOIN student ON apply_change_dorm.account = student.account
-                JOIN user ON user.account = student.account
-                WHERE apply_change_dorm.student_state = ? AND apply_change_dorm.year = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' ,$student_state ,$year);
-        $stmt->execute();
-        return $stmt->get_result();
-    }
-
-
-    // 根據student_state查詢換宿申請
-    function change_dorm_read_student_state($conn , $student_state){   
-               
-        $sql = "SELECT * FROM apply_change_dorm 
-                JOIN border ON apply_change_dorm.account = border.account 
-                    AND apply_change_dorm.year = border.year 
-                JOIN student ON apply_change_dorm.account = student.account
-                JOIN user ON user.account = student.account
-                WHERE apply_change_dorm.student_state = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i' ,$student_state);
-        $stmt->execute();
-        return $stmt->get_result();
-    }
-
-    // 根據final_state查詢換宿申請
-    function change_dorm_read_final_state_year($conn , $final_state , $year){   
-        
-        $sql = "SELECT * FROM apply_change_dorm 
-                JOIN border ON apply_change_dorm.account = border.account 
-                    AND apply_change_dorm.year = border.year 
-                JOIN student ON apply_change_dorm.account = student.account
-                JOIN user ON user.account = student.account
-                WHERE apply_change_dorm.final_state = ? AND apply_change_dorm.year = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' ,$final_state ,$year);
-        $stmt->execute();
-        return $stmt->get_result();
-    }
-
-    // 根據final_state查詢換宿申請
-    function change_dorm_read_final_state($conn , $final_state){   
-            
-        $sql = "SELECT * FROM apply_change_dorm 
-                JOIN border ON apply_change_dorm.account = border.account 
-                    AND apply_change_dorm.year = border.year 
-                JOIN student ON apply_change_dorm.account = student.account
-                JOIN user ON user.account = student.account
-                WHERE apply_change_dorm.final_state = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i' ,$final_state);
-        $stmt->execute();
-        return $stmt->get_result();
-    }
-
     // 查詢全部換宿申請
     function change_dorm_read_all($conn){  
         
@@ -117,31 +77,44 @@
         return $stmt->get_result();
     }
 
-    // 根據id更新換宿資料
-    function change_dorm_update($conn , $apply_change_dorm_id ,$student_state, $final_state, $another_border, $year){  
+    // 更新換宿申請流程
+    function change_dorm_update_process($conn , $apply_change_dorm_id ,$account ,$student_state, $final_state, $new_another_border, $year){  
 
-        $rel = border_read_student_year($conn , $another_border , $year);
+        $rel = border_read_student_year($conn , $new_another_border , $year);
         $rel = $rel->fetch_assoc();
         $change_room_number = $rel['room_number'];
         $change_dorm_id = $rel['dormitory_id'];
 
         $sql = "UPDATE apply_change_dorm 
-                SET student_state = ? , final_state = ? , another_border = ? 
-                    , year = ? , change_room_number = ? , change_dorm_id = ? 
+                SET student_state = ? , final_state = ? , account = ? , year = ?
+                WHERE account = (SELECT another_border FROM apply_change_dorm WHERE apply_change_dorm_id = ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('iisii' ,$student_state ,$final_state ,$new_another_border ,$year , $apply_change_dorm_id);
+        $stmt->execute();
+        
+        $sql = "UPDATE apply_change_dorm 
+                SET student_state = ? , final_state = ? , another_border = ? , change_dorm_id = ? , change_room_number = ?
                 WHERE apply_change_dorm_id = ?";
+        
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('iisisii' ,$student_state ,$final_state ,$another_border, $year, $change_room_number, $change_dorm_id, $apply_change_dorm_id);
+        $stmt->bind_param('iisisi' ,$student_state ,$final_state ,$new_another_border 
+                    , $change_dorm_id , $change_room_number ,$apply_change_dorm_id);
+        $stmt->execute();
+    }
+
+    // 根據account year刪除換宿申請
+    function change_dorm_delete_account_year($conn , $account , $another_border , $year){     
+
+        $sql = "DELETE FROM apply_change_dorm WHERE account = ? AND another_border = ? AND year = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ssi' ,$account , $another_border , $year);
         return $stmt->execute();
     }
 
-    // 根據id刪除換宿申請
-    function change_dorm_delete($conn , $apply_change_dorm_id){     
+    // 刪除換宿流程
+    function change_dorm_delete_process($conn , $account , $year , $another_border){     
 
-        $sql = "DELETE FROM apply_change_dorm WHERE apply_change_dorm_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i' ,$apply_change_dorm_id);
-        return $stmt->execute();
+        change_dorm_delete_account_year($conn , $account , $another_border , $year);
+        change_dorm_delete_account_year($conn , $another_border , $account , $year);
     }
-    
-    
 ?>
