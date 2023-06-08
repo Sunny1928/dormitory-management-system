@@ -1,23 +1,28 @@
-<?php
-
-$bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");
-$bill_states = array("未繳費", "已繳費");
-?>
-
 <!--Bill-->
 <!--Title-->
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">帳單資料</h4>
     <div class="d-flex">
-      <select type="text" id="billTypeFilter" onchange="bill_type_filter()" class='form-select-sm'  required>
+      <select type="text" id="billTypeFilter" onchange="bill_type_filter()" class='form-select-sm ms-2'  required>
         <option value=''>帳單類別</option>
+        <?php
+        for($i = 0; $i<count($bill_types); $i++){
+          echo "<option value=".$bill_types[$i].">".$bill_types[$i]."</option>";
+        }?>
+      </select>
+      <select type="text" id="billStateFilter" onchange="bill_state_filter()" class='form-select-sm ms-2'  required>
+        <option value=''>帳單狀態</option>
         <?php
         for($i = 0; $i<count($bill_states); $i++){
           echo "<option value=".$bill_states[$i].">".$bill_states[$i]."</option>";
         }?>
       </select>
-      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBillModal'><i class='fa fa-add me-1'></i>新增</button>
+      <?php 
+        if( $_SESSION["permission"] == 0){
+            echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addBillModal'><i class='fa fa-add me-1'></i>新增</button>";
+        }
+      ?>
     </div>
   </div>
 </div>
@@ -37,7 +42,11 @@ $bill_states = array("未繳費", "已繳費");
               <th scope="col">類別</th>
               <th scope="col">費用</th>
               <th scope="col">狀態</th>
-              <th scope="col">操作</th>
+              <?php
+                if( $_SESSION["permission"] == 0){
+                  echo "<th scope='col'>操作</th>";
+                }
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -65,12 +74,14 @@ $bill_states = array("未繳費", "已繳費");
                     "<td>" . $title . "</td>".
                     "<td>" . $bill_types[$type] . "</td>".
                     "<td>" . $fee . "</td>".
-                    "<td>" . $bill_states[$state] . "</td>".
-                    "<td>
+                    "<td>" . $bill_states[$state] . "</td>";
+                  if( $_SESSION["permission"] == 0){
+                    echo "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBillModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    </td>";
+                  }
+                  echo  "</tr>";
 
                   // Update Modal
                   echo "
@@ -218,6 +229,25 @@ $bill_states = array("未繳費", "已繳費");
 function bill_type_filter() {
   var filter, tr, td, i;
   filter = document.getElementById("billTypeFilter").value;
+  tr = document.getElementById("billTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[4].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function bill_state_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("billStateFilter").value;
   tr = document.getElementById("billTable").getElementsByTagName("tr");
 
   for (i = 1; i < tr.length; i++) {

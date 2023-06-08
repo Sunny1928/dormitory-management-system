@@ -82,6 +82,12 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-check pe-3"></i>申請退宿 
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-check pe-3"></i>申請換宿 
+        </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
           <i class="fas fa-car pe-3"></i>停車許可
         </a>
@@ -172,7 +178,7 @@
     <!--room-->
     <div class="tab-pane fade" id="pills-room" role="tabpanel" aria-labelledby="tab-room">
       <?php
-        require("./views/room_table.php")
+        // require("./views/room_table.php")
       ?>
     </div>
 
@@ -193,7 +199,7 @@
     <!--public equipment-->
     <div class="tab-pane fade" id="pills-public-equipment" role="tabpanel" aria-labelledby="tab-public-equipment">
       <?php
-        require("./views/public_equipment_table.php")
+        // require("./views/public_equipment_table.php")
       ?>
     </div>
 
@@ -251,7 +257,21 @@
       <?php
         require("./views/apply_dorm_table.php")
       ?>
-    </div> 
+    </div>
+    
+    <!--quit dorm-->
+    <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm">
+      <?php
+        // require("./views/quit_dorm_table.php")
+      ?>
+    </div>
+
+    <!--change dorm-->
+    <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm">
+      <?php
+        // require("./views/change_dorm_table.php")
+      ?>
+    </div>
 
     <!--parking permit-->
     <div class="tab-pane fade" id="pills-parking-permit" role="tabpanel" aria-labelledby="tab-parking-permit">
@@ -442,6 +462,24 @@
     }
   } else if (location.hash === "#pills-apply-dorm") {
     const triggerEl = document.querySelector('a[href="#pills-apply-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-quit-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-quit-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-change-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-change-dorm"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {

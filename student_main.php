@@ -25,11 +25,13 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violate-record" data-mdb-toggle="pill" href="#pills-violate-record" role="tab" aria-controls="pills-violate-record" aria-selected="false">
+
+        border
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-all" data-mdb-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="false">
-          <i class="fas fa-house-chimney pe-3"></i>宿舍資料
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
+          <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
         </a>
       </div>
       <div class="list-group list-group-flush mx-3">
@@ -69,19 +71,49 @@
           <p class="m-1">房號：<?php echo $_SESSION['room_number'];?></p>
         </div>
       </div>
+      <div class="card m-2 px-4 py-3">
+        <div class="d-flex justify-content-between">
+            <h4 class="mb-0">宿舍申請</h4>
+        </div>
+      </div>
+      <?php
+        require("./components/applyDormComponent.php");
+      ?>
+      <div class="card m-2 px-4 py-3">
+        <div class="d-flex justify-content-between">
+            <h4 class="mb-0">通行證申請</h4>
+        </div>
+      </div>
+      <?php
+        require("./components/accessCardComponent.php");
+      ?>
     </div>
   
     <!--announcement-->
     <div class="tab-pane fade" id="pills-announcement" role="tabpanel" aria-labelledby="tab-announcement">
       <?php
-        require("./components/announcementComponent.php")
+        require("./components/announcementComponent.php");
       ?>
     </div>
 
     <!--message-->
     <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
       <?php
-        require("./components/messageComponent.php")
+        require("./components/messageComponent.php");
+      ?>
+    </div>
+
+     <!--bill-->
+     <div class="tab-pane fade" id="pills-bill" role="tabpanel" aria-labelledby="tab-bill">
+      <?php
+        require("./views/bill_table.php");
+      ?>
+    </div>
+
+    <!--violated record-->
+    <div class="tab-pane fade" id="pills-violated-record" role="tabpanel" aria-labelledby="tab-violated-record">
+      <?php
+        require("./views/violated_record_table.php")
       ?>
     </div>
 
@@ -120,8 +152,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-violate-record") {
-    const triggerEl = document.querySelector('a[href="#pills-violate-record"]');
+  } else if (location.hash === "#pills-violated-record") {
+    const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -129,8 +161,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-all") {
-    const triggerEl = document.querySelector('a[href="#pills-all"]');
+  } else if (location.hash === "#pills-bill") {
+    const triggerEl = document.querySelector('a[href="#pills-bill"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -138,7 +170,7 @@
       }
       instance.show();
     }
-  }
+  } 
 </script>
 
 

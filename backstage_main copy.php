@@ -999,8 +999,8 @@
                   <div class="modal-body">
                     <div class="text-center mb-3">
                       <div class="form-outline mb-4">
-                        <input required type="text" name="name" id="dormitoryName" class="form-control" />
-                        <label class="form-label" for="dormitoryName">名稱</label>
+                        <input required type="text" name="name" class="form-control" />
+                        <label class="form-label" \>名稱</label>
                         <div class="form-notch">
                           <div class="form-notch-leading" style="width: 9px;"></div>
                           <div class="form-notch-middle" style="width: 114.4px;"></div>

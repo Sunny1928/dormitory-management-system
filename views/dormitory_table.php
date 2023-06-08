@@ -117,12 +117,12 @@
         <div class="modal-body">
           <div class="text-center mb-3">
             <div class="form-outline mb-4">
-              <input required type="text" name="dormitory_id" id="dormitoryId" class="form-control" />
-              <label class="form-label" for="dormitoryId">id</label>
+              <input required type="text" name="dormitory_id" class="form-control" />
+              <label class="form-label">id</label>
             </div>
             <div class="form-outline mb-4">
-              <input required type="text" name="name" id="registerName" class="form-control" />
-              <label class="form-label" for="registerName">名稱</label>
+              <input required type="text" name="name"  class="form-control" />
+              <label class="form-label">名稱</label>
             </div>
           </div>
         </div>

@@ -18,7 +18,11 @@
           echo "<option value=".$apply_cancel_states[$i].">".$apply_cancel_states[$i]."</option>";
         }?>
       </select>
-      <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addViolatedRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+      <?php 
+        if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+          echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addViolatedRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
+        }
+      ?>
     </div>
   </div>
 </div>
@@ -37,14 +41,22 @@
               <th scope="col">規範</th>
               <th scope="col">申請取消</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <?php
+                if($_SESSION["permission"] != 2){
+                  echo "<th scope='col'>操作</th>";
+                }
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
-    
-              $result = violated_record_read_all($conn);
-
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = violated_record_read_all($conn);
+              }else if($_SESSION["permission"] == 2) {
+                $result = violated_record_read_all($conn); //
+              }else{
+                $result = violated_record_read_all($conn); //
+              }
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -64,12 +76,22 @@
                     "<td>" . $account . "</td>".
                     "<td>" . $content . "</td>".
                     "<td>" . $apply_cancel_states[$apply_cancel] . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
+                    "<td>" . $datetime . "</td>";
+                  if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                    echo "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateViolatedRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteViolatedRecordModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    </td>";
+                  } else if($_SESSION["permission"] == 3){
+                    echo "<td>
+                      <button ";
+                    if($apply_cancel != 0){
+                      echo " disabled ";
+                    } 
+                    echo  "class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmViolatedRecordModal$id'><i class='fa fa-square-info'></i></button>
+                    </td>";
+                  }
+                  echo  "</tr>";
 
                   // Update Modal
                   echo "
@@ -78,7 +100,7 @@
                     <form method='post' action='./controller/violated_record_controller.php'>
                     <div class='modal-content'>
                       <div class='modal-header'>
-                        <h5 class='modal-title' id='updateViolatedRecordModalLabel'>修改宿舍</h5>
+                        <h5 class='modal-title' id='updateViolatedRecordModalLabel'>修改違規紀錄</h5>
                       </div>
                       <div class='modal-body'>
                         <div class='text-center mb-3'>
@@ -122,13 +144,35 @@
                       <form method='post' action='./controller/violated_record_controller.php'>
                         <div class='modal-content'>
                           <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteViolatedRecordModalLabel'>刪除宿舍</h5>
+                            <h5 class='modal-title' id='deleteViolatedRecordModalLabel'>刪除違規紀錄</h5>
                           </div>
-                          <div class='modal-body'>您確認要刪除此宿舍嗎？</div>
+                          <div class='modal-body'>您確認要刪除此違規紀錄嗎？</div>
                           <div class='modal-footer'>
                             <input value='$id' required type='hidden' name='violated_record_id' class='form-control' />
                             <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                             <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>";
+
+                  // Confirm  Modal
+                  echo "
+                  <div class='modal fade' id='confirmViolatedRecordModal$id' tabindex='-1' aria-labelledby='confirmViolatedRecordModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                      <form method='post' action='./controller/violated_record_controller.php'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <h5 class='modal-title' id='confirmViolatedRecordModalLabel'>申請違規紀錄取消</h5>
+                          </div>
+                          <div class='modal-body'>您確認要申請此違規紀錄取消嗎？</div>
+                          <div class='modal-footer'>
+                            <input value='$id' required type='hidden' name='violated_record_id' class='form-control' />
+                            <input value='$rule_id' required type='hidden' name='rule_id' class='form-control' />
+                            <input value='1' required type='hidden' name='apply_cancel' class='form-control' />
+                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+                            <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
                           </div>
                         </div>
                       </form>
@@ -151,7 +195,7 @@
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增宿舍</h5>
+        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增違規紀錄</h5>
       </div>
 
       <form method='post' action='./controller/violated_record_controller.php'>

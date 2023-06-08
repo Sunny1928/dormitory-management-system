@@ -3,7 +3,20 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">宿舍公共設備資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addPublicEquipmentModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="applyPublicEquipmentFixStateFilter" onchange="apply_public_equipment_fix_state_filter()" class='form-select-sm'  required>
+        <option value=''>報修紀錄</option>
+        <?php
+        for($i = 0; $i<count($apply_fix_states); $i++){
+          echo "<option value=".$apply_fix_states[$i].">".$apply_fix_states[$i]."</option>";
+        }?>
+      </select>
+      <?php 
+        if( $_SESSION["permission"] == 0){
+            echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addPublicEquipmentModal'><i class='fa fa-add me-1'></i>新增</button>";
+        }
+      ?>
+    </div>
   </div>
 </div>
 
@@ -12,11 +25,11 @@
   <section class="border p-4">
     <div id="datatable-custom" data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id='publicEquipmentTable' class="table datatable-table">
           <thead class="datatable-header">
             <tr>
-              <th scope="col">大樓編號</th> 
-              <th scope="col">公共設備編號</th>
+              <th scope="col">宿舍</th> 
+              <th scope="col">編號</th>
               <th scope="col">名稱</th>
               <th scope="col">報修紀錄</th>
               <th scope="col">過期年限</th>
@@ -26,8 +39,6 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              $apply_fix_states = array("未申請報修", "申請報修", "通過", "未通過");
-            
               $result = public_equipment_read_all($conn);
 
               if (mysqli_num_rows($result) > 0) 
@@ -148,10 +159,17 @@
       <form method='post' action='./controller/public_equipment_controller.php'>
         <div class='modal-body'>
           <div class='text-center mb-3'>
-            <div class='form-outline mb-4'>
-              <input required type='text' name='dormitory_id' id='dormitoryId' class='form-control' />
-              <label class='form-label' for='dormitoryId'>宿舍大樓編號</label>
-            </div>
+            <select class='form-select mb-4' name='dormitory_id' required>
+              <option value=''>宿舍大樓</option>
+              <?php
+                $res = dormitory_read_all($conn);
+                if (mysqli_num_rows($res) > 0) {
+                  while ($info = mysqli_fetch_assoc($res)){
+                    echo "<option value=".$info['dormitory_id'].">".$info['name']."</option>";
+                  }
+                }
+              ?>
+            </select>
             <div class='form-outline mb-4'>
               <input required type='text' name='name' id='name' class='form-control' />
               <label class='form-label' for='name'>名稱</label>
@@ -173,3 +191,23 @@
   </div>
 </div>
 
+<script>
+function apply_public_equipment_fix_state_filter() {
+  var filter, tr, td, i;
+  filter = document.getElementById("applyPublicEquipmentFixStateFilter").value;
+  tr = document.getElementById("publicEquipmentTable").getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3].innerText;
+    if (td) {
+      if (filter == '') {
+        tr[i].style.display = "";
+      } else if (td == filter) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>

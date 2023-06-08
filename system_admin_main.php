@@ -34,11 +34,14 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
           <i class="fas fa-person-shelter pe-3"></i>住宿生
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
+          <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
+        </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
           <i class="fas fa-bed pe-3"></i>宿舍設備
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
-          <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
+          <i class="fas fa-washing-machine pe-3"></i>公共設施 
         </a>
 
       </div>
@@ -48,7 +51,7 @@
         </a>
       </div>
       <div class=" text-center text-reset mt-5">
-        <em><small>Copyright © 2023 - PYSY</small></em>
+        <em><small>Copyright © 2023 - </small></em>
       </div>
   </nav>
 </header>
@@ -125,6 +128,13 @@
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
         // require("./views/equipment_table.php")
+      ?>
+    </div>
+
+    <!--public equipment-->
+    <div class="tab-pane fade" id="pills-public-equipment" role="tabpanel" aria-labelledby="tab-public-equipment">
+      <?php
+        require("./views/public_equipment_table.php")
       ?>
     </div>
 
@@ -208,7 +218,25 @@
       }
       instance.show();
     }
-  } 
+  } else if (location.hash === "#pills-equipment") {
+    const triggerEl = document.querySelector('a[href="#pills-equipment"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-public-equipment") {
+    const triggerEl = document.querySelector('a[href="#pills-public-equipment"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  }
 </script>
 
 

@@ -37,6 +37,9 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
           <i class="fas fa-bed pe-3"></i>宿舍設備
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
+          <i class="fas fa-washing-machine pe-3"></i>公共設施 
+        </a>
 
       </div>
       <div class="list-group list-group-flush mx-3">
@@ -119,6 +122,13 @@
       ?>
     </div>
 
+    <!--public equipment-->
+    <div class="tab-pane fade" id="pills-public-equipment" role="tabpanel" aria-labelledby="tab-public-equipment">
+      <?php
+        require("./views/public_equipment_table.php")
+      ?>
+    </div>
+
   </div>
 </main>
 
@@ -183,6 +193,15 @@
     }
   } else if (location.hash === "#pills-violated-record") {
     const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-public-equipment") {
+    const triggerEl = document.querySelector('a[href="#pills-public-equipment"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {

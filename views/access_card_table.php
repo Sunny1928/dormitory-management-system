@@ -28,7 +28,6 @@
             <?php
     
               $result = access_card_read_all($conn);
-              $access_card_state = array("審核中", "通過","未通過");
 
 
               if (mysqli_num_rows($result) > 0) 
@@ -45,7 +44,7 @@
                     "<td>" . $id . "</td>".
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
-                    "<td>" . $access_card_state[$state] . "</td>".
+                    "<td>" . $access_card_states[$state] . "</td>".
                     "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal$id'><i class='fa fa-pencil'></i></button>
@@ -71,7 +70,7 @@
                           <select class='form-select mb-4' name='state' required>
                             <option value=''>申請狀態</option>";
                             for($i = 0; $i<3; $i++){
-                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$access_card_state[$i]."</option>";
+                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$access_card_states[$i]."</option>";
                             }
                           echo "</select>
                         </div>
@@ -128,7 +127,7 @@
       <form method='post' action='./controller/access_card_controller.php'>
         <div class='modal-body'>
           <div class='text-center mb-3'>
-          <select class='form-select mb-4' name='year_account' required>
+            <select class='form-select mb-4' name='year_account' required>
               <option value=''>年度-帳號</option>
               <?php
                 $res = border_read_all($conn);
