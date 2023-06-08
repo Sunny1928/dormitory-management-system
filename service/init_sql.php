@@ -4,15 +4,23 @@
     function data_create_init($conn){
         
         # 新增學生
-        student_create($conn,'A1095551','A1095551','A1095551@mail.nuk.edu.tw','0987654321','A1095551',0,3,'csie');
-        student_create($conn,'A1095550','A1095550','A1095550@mail.nuk.edu.tw','0987654321','A1095550',1,3,'csie');
-        student_create($conn,'A1095509','A1095509','A1095509@mail.nuk.edu.tw','0987654321','A1095509',1,3,'csie');
-        student_create($conn,'A1095514','A1095514','A1095514@mail.nuk.edu.tw','0987654321','A1095514',0,3,'csie');
+        for($i=1;$i<=60;$i++){
+
+            if($i < 10 ) $i = "0".$i;
+            $gender = 0;
+            if($i>=31) $gender =1 ;
+            
+            student_create($conn,'A10955'.$i,'A10955'.$i,'A10955'.$i.'@mail.nuk.edu.tw','0987654321','A10955'.$i,$gender,3,'csie');
+    
+        }
+        
         # 申請變成住宿生 & 更新狀態
-        apply_dorm_create($conn , "A1095514");
-        apply_dorm_create($conn , "A1095509");
-        apply_dorm_create($conn , "A1095551");
-        apply_dorm_create($conn , "A1095550");
+        for($i=1;$i<=50;$i++){
+            if($i < 10 ) $i = "0".$i;
+            apply_dorm_create($conn , "A10955".$i);
+        }
+
+        
         apply_dorm_update($conn , 1 , 1);
         apply_dorm_update($conn , 2 , 1);    
         # 建立家長帳號
