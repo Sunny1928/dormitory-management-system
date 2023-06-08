@@ -35,7 +35,7 @@
         return $stmt->get_result();
     }
 
-    // 根據equipment_id更新設備apply_fix_state
+    // 根據equipment_id更新設備
     function equipment_update($conn , $equipment_id ,$expired_year,$name, $apply_fix_state,$room_number,$dormitory_id){  
 
         $sql = "UPDATE equipment SET expired_year = ? , name =? , apply_fix_state = ? , room_number=? , dormitory_id =? WHERE equipment_id = ?";

@@ -5,3 +5,4 @@ views/test.php
 init_sql/*
 .DS_Store
  service/.DS_Store
+service/print_table.php
