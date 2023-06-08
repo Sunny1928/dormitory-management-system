@@ -84,11 +84,13 @@
     }
 
     // 根據id更新退宿資料
-    function quit_dorm_update($conn , $apply_quit_dorm_id , $state){  
+    function quit_dorm_update($conn , $apply_quit_dorm_id , $state ,$account ,$year){  
 
-        $sql = "UPDATE apply_quit_dorm SET state = ? WHERE apply_quit_dorm_id = ?";
+        $sql = "UPDATE apply_quit_dorm 
+                SET state = ? , account = ? , year = ?
+                WHERE apply_quit_dorm_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii' , $state , $apply_quit_dorm_id);
+        $stmt->bind_param('isii' , $state , $account , $year , $apply_quit_dorm_id);
         return $stmt->execute();
     }
 

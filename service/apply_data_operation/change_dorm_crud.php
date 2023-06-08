@@ -125,9 +125,12 @@
         $change_room_number = $rel['room_number'];
         $change_dorm_id = $rel['dormitory_id'];
 
-        $sql = "UPDATE apply_change_dorm SET student_state = ? , final_state = ? , another_border = ? , change_room_number = ? , change_dorm_id = ? WHERE apply_change_dorm_id = ?";
+        $sql = "UPDATE apply_change_dorm 
+                SET student_state = ? , final_state = ? , another_border = ? 
+                    , year = ? , change_room_number = ? , change_dorm_id = ? 
+                WHERE apply_change_dorm_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('iissii' ,$student_state ,$final_state ,$another_border, $change_room_number, $change_dorm_id, $apply_change_dorm_id);
+        $stmt->bind_param('iisisii' ,$student_state ,$final_state ,$another_border, $year, $change_room_number, $change_dorm_id, $apply_change_dorm_id);
         return $stmt->execute();
     }
 
