@@ -81,6 +81,7 @@ CREATE TABLE apply_dorm
 (
   state INT DEFAULT 0,
   apply_dorm_id INT NOT NULL AUTO_INCREMENT,
+  `year` INT NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (apply_dorm_id),
   FOREIGN KEY (account) REFERENCES student(account) ON DELETE CASCADE
