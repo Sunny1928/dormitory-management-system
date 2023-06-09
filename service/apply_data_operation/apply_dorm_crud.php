@@ -33,6 +33,7 @@
     function apply_dorm_read_account_year($conn , $account , $year){   
     
         $sql = "SELECT * FROM apply_dorm
+                JOIN student ON apply_dorm.account = student.account
                 JOIN user ON apply_dorm.account = user.account
                 WHERE apply_dorm.account = ? AND apply_dorm.year = ?";
         $stmt = $conn->prepare($sql);
