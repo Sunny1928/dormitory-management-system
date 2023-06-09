@@ -2,6 +2,7 @@
 // -0 system_admin -1 dorm_manager -2 parent -3 student -4 border -5 story_manager
   $genders = array("男", "女");
 	session_start();
+  session_destroy() ;
 ?>
 
 <!DOCTYPE html>
