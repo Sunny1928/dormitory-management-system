@@ -50,7 +50,16 @@
     } else if($_SESSION['permission'] == 1){
       require('./dorm_manager_main.php');
 
-    } else{
+    } else if($_SESSION['permission'] == 2){
+      require('./student_main.php');
+
+    } else if($_SESSION['permission'] == 3){
+      require('./student_main.php');
+
+    } else if($_SESSION['permission'] == 4){
+      require('./border_main.php');
+
+    } else if($_SESSION['permission'] == 5){
       require('./student_main.php');
 
     } 

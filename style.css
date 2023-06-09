@@ -230,9 +230,14 @@ p{
     box-sizing: border-box;
     transition: 0.5s;
 }
-.course-col-3 h5{
+.course-col-3 h4{
     text-align: start;
     margin-top: 20px;
+}
+
+.course-col-3 h5{
+    text-align: start;
+    margin-top: 10px;
 }
 .course-col-3 p{
     line-height: 25px;
