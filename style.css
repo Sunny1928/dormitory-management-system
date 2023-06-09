@@ -5,7 +5,8 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 .header{
     min-height: 100vh;
@@ -202,7 +203,7 @@ p{
 }
 .course-col{
     flex-basis: 45%;
-    background: #fff3f3;
+    background: #ffefbc;
     border-radius: 10px;
     margin-bottom: 5%;
     padding: 20px 12px;
@@ -211,7 +212,7 @@ p{
 }
 .course-col-2{
     flex-basis: 45%;
-    background: #fff3f3;
+    background: #ffefbc;
     border-radius: 10px;
     margin:auto;
     margin-bottom: 5%;
@@ -221,7 +222,7 @@ p{
 }
 .course-col-3{
     flex-basis: 95%;
-    background: #fff3f3;
+    background: #ffefbc;
     border-radius: 10px;
     margin:auto;
     margin-bottom: 5%;
@@ -231,7 +232,7 @@ p{
 }
 .course-col-4{  /*鄭*/
     flex-basis: 20%;
-    background: #fff3f3;
+    background: #ffefbc;
     border-radius: 20px;
     margin-bottom: 10%;
     padding: 20px 12px;
@@ -372,7 +373,7 @@ h4{
     border-radius: 10px;
     margin-bottom: 5%;
     text-align: left;
-    background: #fff3f3;
+    background: #ffefbc;
     padding: 25px;
     cursor: pointer;
     display: flex;
@@ -477,7 +478,7 @@ h4{
 }
 .course-col-5{
     flex-basis: 48%;
-    background: #fff3f3;
+    background: #ffefbc;
     border-radius: 10px;
     margin-bottom: 5%;
     padding: 30px 2px;
@@ -541,3 +542,6 @@ h4{
     box-sizing: border-box;
 }
 
+.text-right{
+    text-align: start;
+}
