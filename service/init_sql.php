@@ -46,7 +46,7 @@
         border_create($conn , 'A1095509' , 110);
         border_create($conn , 'A1095551' , 110);
         border_create($conn , 'A1095514' , 110);
-        story_manager_create($conn,'A1095514',110,1);
+        story_manager_create($conn,'A1095514',110,2);
         # 新增進出紀錄
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095509",0,110);
