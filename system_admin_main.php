@@ -127,7 +127,7 @@
     <!--equipment-->
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
-        // require("./views/equipment_table.php")
+        require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -137,7 +137,7 @@
         require("./views/public_equipment_table.php")
       ?>
     </div>
-
+  
   </div>
 </main>
 

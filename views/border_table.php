@@ -1,6 +1,3 @@
-<?php
-  $default_year = 113;
-?>
 
 <!--Border-->
 <!--Title-->

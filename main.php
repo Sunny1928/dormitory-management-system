@@ -15,6 +15,10 @@
   $border_apply_story_manager_states = array("未申請", "已申請");
   $bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");
   $bill_states = array("未繳費", "已繳費");
+  $state_classes = array("text-warning", "text-success", "text-danger");
+  $state_classes_defaults = array("","text-warning", "text-success", "text-danger");
+  $default_year = 112;
+
 ?>
 
 <!DOCTYPE html>

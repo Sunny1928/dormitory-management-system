@@ -41,8 +41,11 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-
-              $result = equipment_read_all($conn);
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = equipment_read_all($conn);
+              }else{ // parents
+                $result = equipment_read_dormid_roomnum($conn , $_SESSION['dormitory_id'], $_SESSION['room_number']);
+              }
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -62,7 +65,7 @@
                     "<td>" . $room_number . "</td>".
                     "<td>" . $id . "</td>".
                     "<td>" . $name . "</td>".
-                    "<td>" . $apply_fix_states[$apply_fix_state] . "</td>".
+                    "<td class='"."' >" . $apply_fix_states[$apply_fix_state] . "</td>".
                     "<td>" . $expired_year . "</td>".
                     "<td>" . $datetime . "</td>".
                     "<td>

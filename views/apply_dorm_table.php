@@ -27,6 +27,7 @@
               <th scope="col">編號</th> 
               <th scope="col">帳號</th>
               <th scope="col">狀態</th>
+              <th scope="col">時間</th>
               <th scope="col">操作</th>
             </tr>
           </thead>
@@ -41,11 +42,13 @@
                   $id = $info['apply_dorm_id'];
                   $account = $info['account'];
                   $state = $info['state'];
+                  $datetime	 = $info['datetime'];
                   
                   echo "<tr>" .
                     "<td>" . $id . "</td>".
                     "<td>" . $account . "</td>".
                     "<td>" . $apply_dorm_states[$state] . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateApplyDormModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteApplyDormModal$id'><i class='fa fa-trash'></i></button>

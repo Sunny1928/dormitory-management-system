@@ -20,6 +20,7 @@
               <th scope="col">年</th>
               <th scope="col">帳號</th>
               <th scope="col">申請狀態</th>
+              <th scope="col">時間</th>
               <th scope="col">操作</th>
             </tr>
           </thead>
@@ -38,13 +39,15 @@
                   $year = $info['year'];
                   $account = $info['account'];
                   $state = $info['state'];
+                  $datetime	 = $info['datetime'];
                   
                   
                   echo "<tr>" .
                     "<td>" . $id . "</td>".
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
-                    "<td>" . $quit_dorm_states[$state] . "</td>".
+                    "<td class='".$state_classes[$state]."'>" . $quit_dorm_states[$state] . "</td>".
+                    "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateQuitDormRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteQuitDormRecordModal$id'><i class='fa fa-trash'></i></button>

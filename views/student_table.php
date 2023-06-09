@@ -34,8 +34,11 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-
-              $result = student_read_all($conn);
+              if($_SESSION['permission']==2 || $_SESSION['permission']==4 || $_SESSION['permission']==5){
+                $result = border_read_roommate($conn , $_SESSION['account'] , $_SESSION['year']);
+              }else{
+                $result = student_read_all($conn);
+              }
 
               if (mysqli_num_rows($result) > 0) 
               {

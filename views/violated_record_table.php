@@ -53,9 +53,9 @@
               if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                 $result = violated_record_read_all($conn);
               }else if($_SESSION["permission"] == 2) {
-                $result = violated_record_read_all($conn); //
+                $result = violated_record_read_account($conn , $_SESSION['student_account']);
               }else{
-                $result = violated_record_read_all($conn); //
+                $result = violated_record_read_account($conn , $_SESSION['account']);
               }
 
               if (mysqli_num_rows($result) > 0) 
@@ -179,6 +179,8 @@
                     </div>
                   </div>";
                 }
+              } else{
+                echo "<td class='text-center' colspan='100%'>無</td>";
               }
             ?>
           </tbody>

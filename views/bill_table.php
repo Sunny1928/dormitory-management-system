@@ -65,7 +65,6 @@
                   $state = $info['state'];
                   $account = $info['account'];
                   $year = $info['year'];
-
                   
                   echo "<tr>" .
                     "<td>" . $id . "</td>".
@@ -74,7 +73,7 @@
                     "<td>" . $title . "</td>".
                     "<td>" . $bill_types[$type] . "</td>".
                     "<td>" . $fee . "</td>".
-                    "<td>" . $bill_states[$state] . "</td>";
+                    "<td class='".$state_classes[$state]."'>" . $bill_states[$state] . "</td>";
                   if( $_SESSION["permission"] == 0){
                     echo "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal$id'><i class='fa fa-pencil'></i></button>

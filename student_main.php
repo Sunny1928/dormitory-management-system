@@ -26,12 +26,15 @@
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
 
-        border
+        <!-- border
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
           <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
+        </a> -->
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-help" data-mdb-toggle="pill" href="#pills-help" role="tab" aria-controls="pills-help" aria-selected="false">
+          <i class="fas fa-square-info pe-3"></i>協助
         </a>
       </div>
       <div class="list-group list-group-flush mx-3">
@@ -103,20 +106,40 @@
       ?>
     </div>
 
-     <!--bill-->
-     <div class="tab-pane fade" id="pills-bill" role="tabpanel" aria-labelledby="tab-bill">
+    <!--bill-->
+    <!-- <div class="tab-pane fade" id="pills-bill" role="tabpanel" aria-labelledby="tab-bill">
       <?php
-        require("./views/bill_table.php");
+        // require("./views/bill_table.php");
       ?>
-    </div>
+    </div> -->
 
     <!--violated record-->
-    <div class="tab-pane fade" id="pills-violated-record" role="tabpanel" aria-labelledby="tab-violated-record">
+    <!-- <div class="tab-pane fade" id="pills-violated-record" role="tabpanel" aria-labelledby="tab-violated-record">
       <?php
-        require("./views/violated_record_table.php")
+        // require("./views/violated_record_table.php")
       ?>
-    </div>
+    </div> -->
 
+    <!--help-->
+    <div class="tab-pane fade" id="pills-help" role="tabpanel" aria-labelledby="tab-help">
+      <div class="card m-2 px-4 py-3">
+        <div class="d-flex justify-content-between">
+            <h4 class="mb-0">關於高雄大學宿舍辦公室</h4>
+        </div>
+      </div>
+      <div class="card m-2 px-4 py-3">
+        <div>
+          <p class="m-1"><b>地址:</b> 811726 高雄市楠梓區高雄大學路700號</p>
+          <p class="m-1"><b>address:</b> 700, Kaohsiung University Rd., Nanzih District, Kaohsiung 811, Taiwan,</p>
+          <p class="m-1"><b>高大總機:</b> 886-7-5919000</p>
+          <p class="m-1"><b>傳真號碼:</b> 886-7-5919083</p>
+          <p class="m-1"><b>高大校園緊急聯絡電話:</b> 886-7-5917885</p>
+          <p class="m-1"><b>高大警衛室:</b> 886-7-5919009</p>
+          <p class="m-1"><b>網頁維護:</b> 秘書室</p>
+          <p class="m-1"><b>系統維護:</b> 圖書資訊館</p>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -152,17 +175,8 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-violated-record") {
-    const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
-    if (triggerEl) {
-      let instance = mdb.Tab.getInstance(triggerEl)
-      if (!instance) {
-        instance = new mdb.Tab(triggerEl);
-      }
-      instance.show();
-    }
-  } else if (location.hash === "#pills-bill") {
-    const triggerEl = document.querySelector('a[href="#pills-bill"]');
+  } else if (location.hash === "#pills-help") {
+    const triggerEl = document.querySelector('a[href="#pills-help"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
@@ -171,6 +185,25 @@
       instance.show();
     }
   } 
+  // else if (location.hash === "#pills-violated-record") {
+  //   const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
+  //   if (triggerEl) {
+  //     let instance = mdb.Tab.getInstance(triggerEl)
+  //     if (!instance) {
+  //       instance = new mdb.Tab(triggerEl);
+  //     }
+  //     instance.show();
+  //   }
+  // } else if (location.hash === "#pills-bill") {
+  //   const triggerEl = document.querySelector('a[href="#pills-bill"]');
+  //   if (triggerEl) {
+  //     let instance = mdb.Tab.getInstance(triggerEl)
+  //     if (!instance) {
+  //       instance = new mdb.Tab(triggerEl);
+  //     }
+  //     instance.show();
+  //   }
+  // } 
 </script>
 
 

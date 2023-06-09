@@ -4,12 +4,15 @@
 
 <?php
     //輸出申請住宿資料
-    $result = apply_dorm_read($conn , $_SESSION['account']);
+    // $result = apply_dorm_read($conn, $_SESSION['account']);
+    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , 112);
+    
     if (mysqli_num_rows($result) > 0) {
+        echo "hi";
         $result=mysqli_fetch_array($result);
         $id = $result['apply_dorm_id'];
         $account = $result['account'];
-        $state = $result['state'];
+        $state = $result['state'];  // 1
     } else{
         $state = -1;
     }
