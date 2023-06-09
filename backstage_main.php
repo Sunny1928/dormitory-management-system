@@ -262,7 +262,7 @@
     <!--quit dorm-->
     <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm">
       <?php
-        // require("./views/quit_dorm_table.php")
+        require("./views/quit_dorm_table.php")
       ?>
     </div>
 
