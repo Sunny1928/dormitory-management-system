@@ -144,6 +144,7 @@ CREATE TABLE apply_change_dorm
   change_room_number VARCHAR(255) NOT NULL,
   account VARCHAR(255) NOT NULL,
   `year` INT NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (apply_change_dorm_id),
   FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 
@@ -177,6 +178,7 @@ CREATE TABLE apply_quit_dorm
   apply_quit_dorm_id INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(255),
   `year` INT NOT NULL,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (apply_quit_dorm_id),
   FOREIGN KEY (account,`year`) REFERENCES border(account,`year`) ON DELETE CASCADE
 );

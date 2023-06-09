@@ -24,7 +24,6 @@
         
         $account_array = array();
         while($rowData = $result -> fetch_array()){
-            // echo  $rowData[0];
             array_push($account_array, $rowData[0]);
         }
         return $account_array;
