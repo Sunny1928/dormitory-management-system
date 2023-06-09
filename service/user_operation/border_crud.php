@@ -127,7 +127,7 @@
     // 查詢住宿生的室友
     function border_read_roommate($conn , $account , $year){
 
-        $sql = "SELECT * FROM border
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM border
                 JOIN student ON border.account = student.account
                 JOIN user ON user.account = student.account
                 JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
