@@ -79,6 +79,8 @@
         bill_create($conn,"A1095551","2","水費",200,110);
         bill_create($conn,"A1095551","3","網路費",200,110);
         bill_create($conn,"A1095551","4","修繕費",200,110);
+        
+        quit_dorm_create($conn,"A1095551",110);
         # 新增公告
         announcement_create($conn,"A1095514","A1095514","A1095514");
         announcement_create($conn,"admin1","admin1","admin1");

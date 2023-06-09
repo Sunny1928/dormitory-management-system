@@ -78,4 +78,21 @@
         user_delete($conn,$account);
     }
     
+    // 根據account與 year找退宿申請的state，判斷是否刪除
+    function quit_dorm_state_check($conn,$account,$year){
+        
+        
+        $sql = "SELECT apply_quit_dorm.state FROM apply_quit_dorm 
+                WHERE apply_quit_dorm.account = ? AND apply_quit_dorm.year = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si' ,$account,$year);
+        $stmt->execute();
+        $state  = $stmt->get_result() -> fetch_array()[0];
+
+        # 如果state = 1 ，通過才刪除資料
+        if($state){
+            quit_dorm_delete_data($conn,$account,$year);
+        }
+    }
+    
 ?>
