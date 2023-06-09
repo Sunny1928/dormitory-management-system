@@ -4,7 +4,7 @@
     function data_create_init($conn){
         
         # 新增學生
-        for($i=1;$i<=60;$i++){
+        for($i=1;$i<=64;$i++){
 
             if($i < 10 ) $i = "0".$i;
             $gender = 0;
@@ -28,25 +28,41 @@
         apply_dorm_update($conn , 1 , 1);
         apply_dorm_update($conn , 2 , 1);    
         # 建立家長帳號
-        parents_create($conn , "father1" , "father1" , "father1@gmail.com" , "0987654321" , "father1" , 0 , 2 , "A1095514");
-        parents_create($conn , "father2" , "father2" , "father2@gmail.com" , "0987654321" , "father2" , 0 , 2 , "A1095509");
+        parents_create($conn , "father1" , "father1" , "a1095509@mail.nuk.edu.tw" , "0987654321" , "father1" , 0 , 2 , "A1095509");
+        parents_create($conn , "father2" , "father2" , "a1095514@mail.nuk.edu.tw" , "0987654321" , "father2" , 0 , 2 , "A1095514");
+        parents_create($conn , "father3" , "father3" , "a1095546@mail.nuk.edu.tw" , "0987654321" , "father3" , 0 , 2 , "A1095546");
+        parents_create($conn , "father4" , "father4" , "a1095550@mail.nuk.edu.tw" , "0987654321" , "father4" , 0 , 2 , "A1095550");
+        parents_create($conn , "father5" , "father5" , "a1095551@mail.nuk.edu.tw" , "0987654321" , "father5" , 0 , 2 , "A1095551");
+        parents_create($conn , "father6" , "father6" , "a1095562@mail.nuk.edu.tw" , "0987654321" , "father6" , 0 , 2 , "A1095562");
+        parents_create($conn , "father7" , "father7" , "a1095564@mail.nuk.edu.tw" , "0987654321" , "father7" , 0 , 2 , "A1095564");
         # 申請停車證 & 更新狀態
         parking_permit_create($conn , "father1");
         parking_permit_create($conn , "father2");
         parking_permit_update($conn , 0, 1);
         # 新增系統管理員
-        system_admin_create($conn,'admin1','admin1','admin1@mail.nuk.edu.tw','0987654321','admin1',0,0);
-        system_admin_create($conn,'admin2','admin2','admin2@mail.nuk.edu.tw','0987654321','admin2',1,0);
-        system_admin_create($conn,'root','root','root@mail.nuk.edu.tw','0987654321','root',1,0);
+        system_admin_create($conn,'admin1','admin1','a1095509@mail.nuk.edu.tw','0987654321','admin1',0,0);
+        system_admin_create($conn,'admin2','admin2','a1095514@mail.nuk.edu.tw','0987654321','admin2',1,0);
+        system_admin_create($conn,'admin3','admin3','a1095546@mail.nuk.edu.tw','0987654321','admin3',1,0);
+        system_admin_create($conn,'admin4','admin4','a1095551@mail.nuk.edu.tw','0987654321','admin4',1,0);
+        system_admin_create($conn,'admin5','admin5','a1095562@mail.nuk.edu.tw','0987654321','admin5',1,0);
+        system_admin_create($conn,'admin6','admin6','a1095564@mail.nuk.edu.tw','0987654321','admin6',1,0);
+
+        system_admin_create($conn,'root','root','a1095550@mail.nuk.edu.tw','0987654321','root',1,0);
         # 新增舍監
-        dorm_manager_create($conn,'dorm1','dorm1','dorm1@mail.nuk.edu.tw','0987654321','dorm1',0,1);
-        dorm_manager_create($conn,'dorm2','dorm2','dorm2@mail.nuk.edu.tw','0987654321','dorm2',1,1);
+        dorm_manager_create($conn,'dorm1','dorm1','a1095509@mail.nuk.edu.tw','0987654321','dorm1',0,1);
+        dorm_manager_create($conn,'dorm2','dorm2','a1095514@mail.nuk.edu.tw','0987654321','dorm2',1,1);
+        dorm_manager_create($conn,'dorm3','dorm3','a1095546@mail.nuk.edu.tw','0987654321','dorm3',0,1);
+        dorm_manager_create($conn,'dorm4','dorm4','a1095550@mail.nuk.edu.tw','0987654321','dorm4',1,1);
+        dorm_manager_create($conn,'dorm5','dorm5','a1095551@mail.nuk.edu.tw','0987654321','dorm5',0,1);
+        dorm_manager_create($conn,'dorm6','dorm6','a1095562@mail.nuk.edu.tw','0987654321','dorm6',1,1);
+        dorm_manager_create($conn,'dorm7','dorm7','a1095564@mail.nuk.edu.tw','0987654321','dorm7',1,1);
+
         # 將學生變成住宿生
         border_create($conn , 'A1095509' , 109);
         border_create($conn , 'A1095509' , 110);
         border_create($conn , 'A1095551' , 110);
         border_create($conn , 'A1095514' , 110);
-        story_manager_create($conn,'A1095514',110,1);
+        story_manager_create($conn,'A1095514',110,2);
         # 新增進出紀錄
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095509",0,110);
