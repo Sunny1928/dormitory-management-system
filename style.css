@@ -176,7 +176,7 @@ nav .fa{
     width: 80%;
     margin: auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 h1{
@@ -229,6 +229,13 @@ p{
     padding: 20px 12px;
     box-sizing: border-box;
     transition: 0.5s;
+}
+.course-col-3 h5{
+    text-align: start;
+    margin-top: 20px;
+}
+.course-col-3 p{
+    line-height: 25px;
 }
 .course-col-4{  /*鄭*/
     flex-basis: 20%;
@@ -479,12 +486,20 @@ h4{
 .course-col-5{
     flex-basis: 48%;
     background: #ffefbc;
-    border-radius: 10px;
     margin-bottom: 5%;
+    margin-top: 5%;
     padding: 30px 2px;
     box-sizing: border-box;
     transition: 0.5s;
 }
+/* new class */
+.about-col-context{
+    flex-basis: 48%;
+    background: #ffefbc;
+    padding: 30px 2px;
+    border-radius: 10px;
+}
+
 .about-col{
     flex-basis: 48%;
     padding: 30px 2px;
