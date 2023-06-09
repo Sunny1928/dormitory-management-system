@@ -37,5 +37,18 @@
         return ($account == "root");
     }
 
-    
+    // 選擇border
+    function system_admin_choose_border($conn ,$year,$need_people){
+        $apply_account = apply_dorm_read_year_number($conn,$year);
+        $cur_people = 0;
+        while($cur_people <$need_people){
+            $number = rand(0,count($apply_account));
+            // echo "$number $apply_account[$number]\n";
+            border_create($conn , $apply_account[$number] , $year);
+            array_splice( $apply_account, $number,1);
+            $cur_people += 1;
+        }
+    }
+
+
 ?>

@@ -15,9 +15,13 @@
         }
         
         # 申請變成住宿生 & 更新狀態
-        for($i=1;$i<=50;$i++){
+        for($i=1;$i<=30;$i++){
             if($i < 10 ) $i = "0".$i;
-            apply_dorm_create($conn , "A10955".$i);
+            apply_dorm_create($conn , "A10955".$i,110);
+        }
+        for($i=1;$i<=10;$i++){
+            if($i < 10 ) $i = "0".$i;
+            apply_dorm_create($conn , "A10955".$i,109);
         }
 
         

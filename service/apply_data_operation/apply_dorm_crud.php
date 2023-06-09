@@ -2,17 +2,37 @@
 
 
     // 新增申請住宿
-    function apply_dorm_create($conn , $account){  
+    function apply_dorm_create($conn , $account , $year){  
     
-        $sql = "INSERT INTO apply_dorm (account) VALUES (?)";
+        $sql = "INSERT INTO apply_dorm (account,year) VALUES (? , ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s' ,$account);
-        return $stmt->execute(); 
+        $stmt->bind_param('si' ,$account,$year);
+        $stmt->execute(); 
+        return $stmt->get_result();
+    }
+
+    # 根據year找出申請學生(Account)
+    function apply_dorm_read_year_number($conn ,$year){
+        $sql = "SELECT apply_dorm.account FROM apply_dorm
+                JOIN user ON apply_dorm.account = user.account
+                WHERE apply_dorm.year = ?";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' ,$year);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $account_array = array();
+        while($rowData = $result -> fetch_array()){
+            // echo  $rowData[0];
+            array_push($account_array, $rowData[0]);
+        }
+        return $account_array;
     }
 
     // 根據account查詢申請住宿
     function apply_dorm_read($conn , $account){   
-               
+    
         $sql = "SELECT * FROM apply_dorm 
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
@@ -21,11 +41,12 @@
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
         return $stmt->get_result();
+
     }
 
     // 根據state查詢申請住宿
     function apply_dorm_read_state($conn , $state){   
-               
+    
         $sql = "SELECT * FROM apply_dorm 
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
