@@ -29,8 +29,21 @@
         return $account_array;
     }
 
+    // 根據account、year查詢申請住宿
+    function apply_dorm_read_account_year($conn , $account , $year){   
+    
+        $sql = "SELECT * FROM apply_dorm
+                JOIN user ON apply_dorm.account = user.account
+                WHERE apply_dorm.account = ? AND apply_dorm.year = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt-> bind_param('si' ,$account, $year);
+        $stmt-> execute();
+        return $stmt->get_result();
+
+    }
+
     // 根據account查詢申請住宿
-    function apply_dorm_read($conn , $account){   
+    function apply_dorm_read_account($conn , $account){   
     
         $sql = "SELECT * FROM apply_dorm 
                 JOIN student ON apply_dorm.account = student.account
