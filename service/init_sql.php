@@ -111,6 +111,10 @@
 
         # 測試用 109學生變成住宿生
         border_create($conn , 'A1095509' , 109);
+        border_create($conn , 'A1095514' , 109);
+        border_create($conn , 'A1095550' , 109);
+        border_create($conn , 'A1095551' , 109);
+        
     }
     
     function add_dorm($conn){
@@ -190,27 +194,29 @@
     }
 
     function add_entry_and_exit($conn){
-        // entry_and_exit_create($conn,"A1095509",0,109);
-        // entry_and_exit_create($conn,"A1095509",0,110);
-        entry_and_exit_create($conn,"A1095550",0,110);
+        entry_and_exit_create($conn,"A1095509",0,109);
+        entry_and_exit_create($conn,"A1095509",1,109);
+        entry_and_exit_create($conn,"A1095550",1,109);
         
     }
     function add_access_card($conn){
-        access_card_create($conn,"A1095550",110);
-        // access_card_create($conn,"A1095509",110);
+        access_card_create($conn,"A1095550",109);
+        access_card_create($conn,"A1095551",109);
+
     }
     function add_roll_call($conn){
-        roll_call_create($conn,"A1095550",110,0);
-        // roll_call_create($conn,"A1095509",110,0);
+        roll_call_create($conn,"A1095514",109,0);
+        roll_call_create($conn,"A1095550",109,0);
+        roll_call_create($conn,"A1095550",109,1);
     }
 
     function add_announcement_and_message($conn){
         
-        bill_create($conn,"A1095550","1","電費",200,110);
-        // bill_create($conn,"A1095509","1","電費",200,109);
-        bill_create($conn,"A1095550","2","水費",200,110);
-        bill_create($conn,"A1095550","3","網路費",200,110);
-        bill_create($conn,"A1095550","4","修繕費",200,110);
+        bill_create($conn,"A1095550","1","電費",200,109);
+        bill_create($conn,"A1095509","1","電費",200,109);
+        bill_create($conn,"A1095550","2","水費",200,109);
+        bill_create($conn,"A1095550","3","網路費",200,109);
+        bill_create($conn,"A1095550","4","修繕費",200,109);
 
         announcement_create($conn,"A1095514","A1095514","A1095514");
         announcement_create($conn,"admin1","admin1","admin1");

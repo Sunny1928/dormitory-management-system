@@ -76,7 +76,7 @@
                     $remain_account[$i] = $return_array[1];
                 }
             }
-            # 設置 apply_state 為 未通過
+            # 設置 apply_state 為 3 不通過
             for($j=0 ; $j < count($remain_account[$i]) ;$j++){
                 apply_dorm_update_state($conn,$remain_account[$i][$j],$year,3);
             }
