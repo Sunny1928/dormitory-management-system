@@ -15,9 +15,25 @@
                
         $sql = "SELECT * FROM parking_permit_record 
                 JOIN parent ON parent.parent_account = parking_permit_record.account
-                WHERE parent.parent_account = ?";
+                JOIN user ON parent.parent_account = user.account
+                WHERE parent.parent_account = ?
+                ORDER BY parking_permit_record.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    //  根據id查詢停車證
+    function parking_permit_read_id($conn , $parking_permit_id){   
+               
+        $sql = "SELECT * FROM parking_permit_record 
+                JOIN parent ON parent.parent_account = parking_permit_record.account
+                JOIN user ON parent.parent_account = user.account
+                WHERE parking_permit_record.parking_permit_record_id = ?
+                ORDER BY parking_permit_record.datetime DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' ,$parking_permit_id);
         $stmt->execute();
         return $stmt->get_result();
     }
@@ -27,7 +43,9 @@
                
         $sql = "SELECT * FROM parking_permit_record 
                 JOIN parent ON parent.parent_account = parking_permit_record.account
-                WHERE parking_permit_record.state = ?";
+                JOIN user ON parent.parent_account = user.account
+                WHERE parking_permit_record.state = ?
+                ORDER BY parking_permit_record.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$state);
         $stmt->execute();
@@ -38,7 +56,9 @@
     function parking_permit_read_all($conn){  
         
         $sql = "SELECT * FROM parking_permit_record
-                JOIN parent ON parent.parent_account = parking_permit_record.account";
+                JOIN parent ON parent.parent_account = parking_permit_record.account
+                JOIN user ON parent.parent_account = user.account
+                ORDER BY parking_permit_record.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
@@ -62,5 +82,38 @@
         return $stmt->execute();
     }
     
+
+    // 生成qrcode data
+    function parking_permit_gen_qrcode_data($conn , $parking_permit_id){
+        $rel = parking_permit_read_id($conn , $parking_permit_id);
+        if($rel->num_rows == 0)
+            return -1;
+        $rel = $rel->fetch_assoc();
+
+        $message = $rel['parent_account'] . "|" . $rel['student_account'] . "|" .  $rel['parking_permit_record_id'];
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "parking_permit");
+        return $qrcode_data;
+    }
+    
+    // 驗證qrcode data
+    function parking_permit_check_qrcode_data($conn , $cipgher){
+        $msg = decrypt_qrcode_data($cipgher);
+        $msg = explode("|" , $msg);
+
+        if( count($msg) < 3)
+            return -1;
+
+        $rel = parking_permit_read_id($conn , $msg[2]);
+        if($rel->num_rows == 0)
+            return -1;
+
+        $rel = $rel->fetch_assoc();
+        if($rel['parent_account'] == $msg[0] && $rel['state'] == 1){
+            return $rel['parking_permit_record_id'];
+        }
+        else
+            return -1;
+        
+    }
     
 ?>
