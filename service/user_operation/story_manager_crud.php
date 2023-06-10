@@ -53,4 +53,17 @@
         return $stmt->get_result();
     }
 
+    // 樓長創建點名資料
+    function story_manager_create_roll_call($conn , $type , $year){
+
+        $type -=2;
+        $rel = border_read_year_dorm($conn ,$year, $type);
+
+        if($rel->num_rows > 0){
+            while ($border = $rel->fetch_assoc()) {
+                roll_call_create($conn , $border['account'], $year, 0);
+            }
+        }
+        return;
+    }
 ?>
