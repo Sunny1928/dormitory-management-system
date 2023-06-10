@@ -1,7 +1,7 @@
 <?php
 
     //  新增住宿繳費 
-    function bill_create_room_fee($conn , $account , $title , $year){  
+    function bill_create_room_fee($conn , $account , $title , $year , $send_mail = false){  
     
         $sql = "SELECT fee FROM room 
                 JOIN border ON room.room_number = border.room_number
@@ -15,19 +15,33 @@
         $fee = $rel->fetch_assoc()["fee"];
         mysqli_stmt_close($stmt);
 
-        $sql = "INSERT INTO bill (account , type , title , fee , year) VALUES (?, 0, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssii' ,  $account , $title , $fee , $year);
-        return $stmt->execute(); 
+        bill_create($conn , $account , 0 , $title , $fee , $year , $send_mail);
+        return;
     }
 
     //  新增其他繳費 
-    function bill_create($conn , $account , $type , $title , $fee , $year){  
+    function bill_create($conn , $account , $type , $title , $fee , $year  , $send_mail = false){  
 
         $sql = "INSERT INTO bill (account , type , title , fee , year) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sisii' ,  $account , $type , $title , $fee , $year);
-        return $stmt->execute(); 
+        $stmt->execute(); 
+
+        if($send_mail == True)
+            bill_send_mail($conn , $account , $type , $title , $fee , $year);
+        return;
+    }
+
+    //  寄送繳費mail
+    function bill_send_mail($conn , $account , $type , $title , $fee , $year){  
+ 
+        $rel = border_read_student_year($conn, $account , $year);
+        $rel = $rel->fetch_assoc();
+        
+        $message = $rel['name'] . "同學您好，您有一筆新的高雄大學宿舍帳單<br>" . "款項為 : " . $title . "<br>" . "費用為 :" . $fee . "<br>" . 
+                    "請您再去高雄大學宿舍網站確認並盡速繳納";
+        send_email($rel['email'] , "高雄大學宿舍帳單" , $message);
+
     }
 
     //  根據帳號和年份查詢繳費
