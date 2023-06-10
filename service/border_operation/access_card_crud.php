@@ -101,7 +101,7 @@
 
         $rel = $rel->fetch_assoc();
         $message = $rel['account'] . "|" . $rel['year'] . "|" .  $rel['temporary_access_card_record_id'];
-        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "access_card");
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "main.php");
         return $qrcode_data;
     }
     
@@ -121,6 +121,7 @@
 
         if($rel['account'] == $msg[0] && $rel['year'] == $msg[1] && $rel['state'] == 1)
             return $rel['temporary_access_card_record_id'];
+            
         else
             return -1;
         

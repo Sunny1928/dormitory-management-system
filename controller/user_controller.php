@@ -27,7 +27,7 @@
         student_update($conn , $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['department']);
 
     } else if(isset($_POST['user_login'])){
-        user_login($conn , $_POST['account'], $_POST['password']);
+        user_login($conn , $_POST['account'], $_POST['password'], 110);
 
     }
 

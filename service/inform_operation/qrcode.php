@@ -1,6 +1,6 @@
 <?php
 
-    $url = 'http://localhost/';
+    $url = 'http://localhost/SE_final_project/';
 
     function encrypt_qrcode_data($url , $data , $path){
 

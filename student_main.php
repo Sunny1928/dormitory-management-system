@@ -69,9 +69,6 @@
           <p class="m-1">種類：<?php echo $types[$_SESSION['type']];?></p>
           <p class="m-1">性別：<?php echo $genders[$_SESSION['gender']];?></p>
           <p class="m-1">科系：<?php echo $_SESSION['department'];?></p>
-          <p class="m-1">學生帳號：<?php echo $_SESSION['student_account'];?></p>
-          <p class="m-1">宿舍：<?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1">房號：<?php echo $_SESSION['room_number'];?></p>
         </div>
       </div>
       <div class="card m-2 px-4 py-3">
@@ -81,14 +78,6 @@
       </div>
       <?php
         require("./components/applyDormComponent.php");
-      ?>
-      <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">通行證申請</h4>
-        </div>
-      </div>
-      <?php
-        require("./components/applyAccessCardComponent.php");
       ?>
     </div>
   

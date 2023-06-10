@@ -1,3 +1,4 @@
+<?php ob_start();?>
 <!-- Sidebar -->
 <header>
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
@@ -25,13 +26,13 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="false">
           <i class="fas fa-user-graduate pe-3"></i>學生
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="false">
           <i class="fas fa-person-shelter pe-3"></i>住宿生
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
@@ -61,6 +62,27 @@
 
   <div class="tab-content" style="max-height: 100vh;">
 
+    <!-- check access card -->
+    <?php
+      $cipgher = $_SERVER["QUERY_STRING"];
+      $iiid = access_card_check_qrcode_data($conn , $cipgher);
+      $info = access_card_read_id($conn , $iiid);
+      
+      $info=mysqli_fetch_array($info);
+      $record_name=$info['name'];
+      if($iiid==-1){
+        echo "<div class='alert alert-dismissible fade show alert-danger' role='alert' data-mdb-color='danger'>
+        <strong>出入卡驗證失敗</strong> 
+        <button type='button' class='btn-close' data-mdb-dismiss='alert' aria-label='Close'></button>
+      </div>";
+      }else{
+      echo "<div class='alert alert-dismissible fade show alert-success' role='alert' data-mdb-color='success'>
+      <strong>$record_name 出入卡驗證成功</strong> 
+      <button type='button' class='btn-close' data-mdb-dismiss='alert' aria-label='Close'></button>
+    </div>";
+      }
+    ?>
+    
     <!--main-->
     <div class="tab-pane fade show active" id="pills-main" role="tabpanel" aria-labelledby="tab-main">
       <div class="card m-2 px-4 py-3">
@@ -97,7 +119,7 @@
     <!--student-->
     <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
       <?php
-        require("./views/student_table.php") 
+        // require("./views/student_table.php") 
       ?>
     </div>
 
@@ -113,7 +135,7 @@
       <p>分配住宿生房間</p>
       
       <?php
-        require("./views/border_table.php") 
+        // require("./views/border_table.php") 
       ?>
     </div>
 
@@ -127,7 +149,7 @@
     <!--equipment-->
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
-        require("./views/equipment_table.php")
+        // require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -240,3 +262,4 @@
 </script>
 
 
+<?php ob_end_flush();?>

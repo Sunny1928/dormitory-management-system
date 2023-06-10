@@ -1,8 +1,8 @@
 <?php
     require_once('../service/require_all.php');
 
-    echo $_POST['account'];
-    echo $_POST['year'];
+    // echo $_POST['account'];
+    // echo $_POST['year'];
 
     if(isset($_POST['create'])){
         border_create($conn, $_POST['account'], $_POST['year']);

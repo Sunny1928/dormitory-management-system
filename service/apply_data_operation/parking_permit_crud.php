@@ -91,7 +91,7 @@
         $rel = $rel->fetch_assoc();
 
         $message = $rel['parent_account'] . "|" . $rel['student_account'] . "|" .  $rel['parking_permit_record_id'];
-        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "parking_permit");
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "main.php");
         return $qrcode_data;
     }
     
