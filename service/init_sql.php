@@ -52,12 +52,19 @@
 
             if($i < 10 ) $i = "0".$i;
             $gender = 0;
-            if($i>=31) $gender =1 ;
+            if($i >= 31) $gender =1 ;
             
-            student_create($conn,'A10955'.$i,'A10955'.$i,'A10955'.$i.'@mail.nuk.edu.tw','0987654321','A10955'.$i,$gender,3,'CSIE');
-            student_create($conn,'A10951'.$i,'A10951'.$i,'A10951'.$i.'@mail.nuk.edu.tw','0987654321','A10951'.$i,$gender,3,'EE');
+            student_create($conn,'A10955'.$i,'A10955'.$i,'A10955'.$i.'@asdasdasda','0987654321','A10955'.$i,$gender,3,'CSIE');
+            student_create($conn,'A10951'.$i,'A10951'.$i,'A10951'.$i.'@fdfdsfasad','0987654321','A10951'.$i,$gender,3,'EE');
     
         }
+        # 建立實際需要用的
+        $using_arr =array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        foreach($using_arr as $i){
+            user_delete($conn,$i);
+            student_create($conn,$i,$i,$i.'@mail.nuk.edu.tw','0987654321',$i,$gender,3,'CSIE');
+        }
+                
     }
     
     function add_apply_dorm($conn){
@@ -111,13 +118,13 @@
     }
     
     function add_system_admin($conn){
-        system_admin_create($conn,'admin1','admin1','a1095558@mail.nuk.edu.tw','0987654321','admin1',0,0);
-        system_admin_create($conn,'admin2','admin2','a1095559@mail.nuk.edu.tw','0987654321','admin2',1,0);
-        system_admin_create($conn,'admin3','admin3','a1095560@mail.nuk.edu.tw','0987654321','admin3',1,0);
-        system_admin_create($conn,'admin4','admin4','a1095561@mail.nuk.edu.tw','0987654321','admin4',1,0);
+        system_admin_create($conn,'admin1','admin1','a1095509@mail.nuk.edu.tw','0987654321','admin1',0,0);
+        system_admin_create($conn,'admin2','admin2','a1095514@mail.nuk.edu.tw','0987654321','admin2',1,0);
+        system_admin_create($conn,'admin3','admin3','a1095546@mail.nuk.edu.tw','0987654321','admin3',1,0);
+        system_admin_create($conn,'admin4','admin4','a1095551@mail.nuk.edu.tw','0987654321','admin4',1,0);
         system_admin_create($conn,'admin5','admin5','a1095562@mail.nuk.edu.tw','0987654321','admin5',1,0);
-        system_admin_create($conn,'admin6','admin6','a1095563@mail.nuk.edu.tw','0987654321','admin6',1,0);
-        system_admin_create($conn,'root','root','a1095564@mail.nuk.edu.tw','0987654321','root',1,0);
+        system_admin_create($conn,'admin6','admin6','a1095564@mail.nuk.edu.tw','0987654321','admin6',1,0);
+        system_admin_create($conn,'root','root','a1095550@mail.nuk.edu.tw','0987654321','root',1,0);
     }
 
     function add_rule($conn){
@@ -154,13 +161,13 @@
     }
 
     function add_parent($conn){
-        parents_create($conn , "father1" , "father1" , "a1095551@mail.nuk.edu.tw" , "0987654321" , "father1" , 0 , 2 , "A1095551");
-        parents_create($conn , "father2" , "father2" , "a1095552@mail.nuk.edu.tw" , "0987654321" , "father2" , 0 , 2 , "A1095552");
-        parents_create($conn , "father3" , "father3" , "a1095553@mail.nuk.edu.tw" , "0987654321" , "father3" , 0 , 2 , "A1095553");
-        parents_create($conn , "father4" , "father4" , "a1095554@mail.nuk.edu.tw" , "0987654321" , "father4" , 0 , 2 , "A1095554");
-        parents_create($conn , "father5" , "father5" , "a1095555@mail.nuk.edu.tw" , "0987654321" , "father5" , 0 , 2 , "A1095555");
-        parents_create($conn , "father6" , "father6" , "a1095556@mail.nuk.edu.tw" , "0987654321" , "father6" , 0 , 2 , "A1095556");
-        parents_create($conn , "father7" , "father7" , "a1095557@mail.nuk.edu.tw" , "0987654321" , "father7" , 0 , 2 , "A1095557");
+        parents_create($conn , "father1" , "father1" , "a1095509@mail.nuk.edu.tw" , "0987654321" , "father1" , 0 , 2 , "A1095551");
+        parents_create($conn , "father2" , "father2" , "a1095514@mail.nuk.edu.tw" , "0987654321" , "father2" , 0 , 2 , "A1095552");
+        parents_create($conn , "father3" , "father3" , "a1095546@mail.nuk.edu.tw" , "0987654321" , "father3" , 0 , 2 , "A1095553");
+        parents_create($conn , "father4" , "father4" , "a1095550@mail.nuk.edu.tw" , "0987654321" , "father4" , 0 , 2 , "A1095554");
+        parents_create($conn , "father5" , "father5" , "a1095551@mail.nuk.edu.tw" , "0987654321" , "father5" , 0 , 2 , "A1095555");
+        parents_create($conn , "father6" , "father6" , "a1095562@mail.nuk.edu.tw" , "0987654321" , "father6" , 0 , 2 , "A1095556");
+        parents_create($conn , "father7" , "father7" , "a1095564@mail.nuk.edu.tw" , "0987654321" , "father7" , 0 , 2 , "A1095557");
     }
 
     function add_parking_permit($conn){
@@ -180,9 +187,10 @@
     }
 
     function add_entry_and_exit($conn){
-        entry_and_exit_create($conn,"A1095509",0,110);
+        entry_and_exit_create($conn,"A1095509",0,109);
         entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095550",0,110);
+        
     }
     function add_access_card($conn){
         access_card_create($conn,"A1095550",110);
