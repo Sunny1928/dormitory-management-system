@@ -37,7 +37,8 @@
                     AND roll_call_state_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE roll_call_state_record.account = ? AND border.year = ?";
+                WHERE roll_call_state_record.account = ? AND border.year = ?
+                ORDER BY roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' ,$account , $year);
@@ -107,6 +108,34 @@
         $stmt->bind_param('i' , $access_card_id);
         return $stmt->execute();
     }
+
+    function roll_call_gen_qrcode_data($conn , $account , $year){
+        $rel = roll_call_read_account_year($conn , $account, $year);
+        $rel = $rel->fetch_assoc();
+        $message = $account . "|" . $year . "|" .  $rel['roll_call_state_record_id'];
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "roll_call");
+        return $qrcode_data;
+    }
     
+    function roll_call_check_qrcode_data($conn , $cipgher){
+        $msg = decrypt_qrcode_data($cipgher);
+        $msg = explode("|" , $msg);
+
+        if( count($msg) < 3)
+            return False;
+
+        $rel = roll_call_read_account_year($conn , $msg[0], $msg[1]);
+        if($rel->num_rows == 0)
+            return False;
+
+        $rel = $rel->fetch_assoc();
+        if($rel['roll_call_state_record_id'] == $msg[2]){
+            roll_call_update($conn , $rel['roll_call_state_record_id'] , 1);
+            return True;
+        }
+        else
+            return False;
+        
+    }
     
 ?>
