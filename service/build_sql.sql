@@ -83,6 +83,8 @@ CREATE TABLE apply_dorm
   apply_dorm_id INT NOT NULL AUTO_INCREMENT,
   `year` INT NOT NULL,
   `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  first_priority_dorm int NOT NULL,
+  second_priority_dorm int NOT NULL,
   account VARCHAR(255) NOT NULL,
   PRIMARY KEY (apply_dorm_id),
   FOREIGN KEY (account) REFERENCES student(account) ON DELETE CASCADE
