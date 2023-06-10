@@ -45,6 +45,22 @@
     }
 
     //  根據帳號和年份查詢繳費
+    function bill_read_account($conn , $account){   
+        
+        $sql = "SELECT * FROM bill
+                JOIN border ON bill.account = border.account 
+                    AND bill.year = border.year 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account 
+                WHERE bill.account = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s' , $account);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    //  根據帳號和年份查詢繳費
     function bill_read_account_year($conn , $account , $year){   
                
         $sql = "SELECT * FROM bill
