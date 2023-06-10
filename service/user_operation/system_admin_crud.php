@@ -39,11 +39,13 @@
 
     function system_admin_choose_all_border($conn,$year){
         
-        # 每間宿舍需要的人數
         $need_people =array();
-        # 第一、第二優先分配後，剩下的人
-        $remain_account=array();
-        $remain_need_people =0 ;
+        # 第一、第二優先分配後，剩下的男女生
+        $remain_account=array(array(),array());
+        # 第一、第二優先分配後，剩下的人數
+        $remain_need_people = array(0,0) ;
+        
+        # 每間宿舍需要的人數
         for($i=0 ; $i<=3 ; $i++){
             array_push($need_people,system_admin_get_room_number($conn,$i));
         }
@@ -54,25 +56,33 @@
                 # 抽籤，return 該宿舍剩餘數量，還沒被分配到的學生
                 $return_array= system_admin_choose_border($conn,$year,$dorm_id,$need_people[$dorm_id],$apply_account);
                 $need_people[$dorm_id] = $return_array[0];
+                # 分配完第二次後
                 if($priority==2){
-                    # 還沒分配到的人
+                    
+                    # 0 , 2 : 男  1 ,3 : 女
+                    # 將男女分開
                     for($i=0 ; $i < count($return_array[1]) ;$i++){
-                        array_push($remain_account,$return_array[1][$i]);
+                        array_push($remain_account[$dorm_id%2],$return_array[1][$i]);
                     }
-                    $remain_need_people += $need_people[$dorm_id];
+                    $remain_need_people[$dorm_id%2] += $need_people[$dorm_id];
                 }
             }
         }
         # 如果有剩餘房間 且 還有人沒被抽到 ，就分最後一次
-        if($remain_need_people > 0 && count($remain_account) > 0){
-            for($dorm_id=0 ; $dorm_id<4; $dorm_id++){
-                $return_array= system_admin_choose_border($conn,$year,$dorm_id,$need_people[$dorm_id],$remain_account);
-                $remain_account = $return_array[1];
+        for($i=0;$i<=1;$i++){
+            if($remain_need_people[$i] > 0 && count($remain_account[$i]) > 0){
+                for($dorm_id=0 ; $dorm_id<3; $dorm_id+=2){
+                    $return_array= system_admin_choose_border($conn,$year,$dorm_id,$need_people[$dorm_id],$remain_account[$i]);
+                    $remain_account[$i] = $return_array[1];
+                }
+            }
+            # 設置 apply_state 為 未通過
+            for($j=0 ; $j < count($remain_account[$i]) ;$j++){
+                apply_dorm_update_state($conn,$remain_account[$i][$j],$year,3);
             }
         }
-        for($i=0 ; $i < count($remain_account) ;$i++){
-            apply_dorm_update_state($conn,$remain_account[$i],$year,3);
-        }
+            
+    
     }
 
     // 抽border

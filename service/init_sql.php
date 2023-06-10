@@ -156,7 +156,7 @@
         for($i=0;$i<4;$i++){
             # 新增公共設施
             for($q = 0; $q < count($public_equipment); $q++)
-                public_equipment_create($conn,$i,$j , $public_equipment[$q] , $equipment_year[$q]);
+                public_equipment_create($conn,$i, $public_equipment[$q] , $equipment_year[$q]);
         }
     }
 
@@ -187,24 +187,24 @@
     }
 
     function add_entry_and_exit($conn){
-        entry_and_exit_create($conn,"A1095509",0,109);
-        entry_and_exit_create($conn,"A1095509",0,110);
+        // entry_and_exit_create($conn,"A1095509",0,109);
+        // entry_and_exit_create($conn,"A1095509",0,110);
         entry_and_exit_create($conn,"A1095550",0,110);
         
     }
     function add_access_card($conn){
         access_card_create($conn,"A1095550",110);
-        access_card_create($conn,"A1095509",110);
+        // access_card_create($conn,"A1095509",110);
     }
     function add_roll_call($conn){
         roll_call_create($conn,"A1095550",110,0);
-        roll_call_create($conn,"A1095509",110,0);
+        // roll_call_create($conn,"A1095509",110,0);
     }
 
     function add_announcement_and_message($conn){
         
         bill_create($conn,"A1095550","1","電費",200,110);
-        bill_create($conn,"A1095509","1","電費",200,109);
+        // bill_create($conn,"A1095509","1","電費",200,109);
         bill_create($conn,"A1095550","2","水費",200,110);
         bill_create($conn,"A1095550","3","網路費",200,110);
         bill_create($conn,"A1095550","4","修繕費",200,110);
