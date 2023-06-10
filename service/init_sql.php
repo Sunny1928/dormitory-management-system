@@ -3,8 +3,14 @@
     # 新增 table 初始化資料 
     function data_create_init($conn){
         
+        # 學生user 有 A10955 99位 ， A10951 99 位
+
+        # 112 學生 建立10位學生住宿申請 ，均還沒有分配成住宿生 
+        # 110 學生 建立198位學生住宿申請，160位有分配成住宿生，38位沒有分配到住宿
+
+
         # 新增student
-        add_user($conn);
+        add_student($conn);
         # 申請變成住宿生 & 更新狀態
         add_apply_dorm($conn);
         # 新增宿舍
@@ -40,37 +46,54 @@
         
     }
 
-    function add_user($conn){
-        for($i=1;$i<=64;$i++){
+    function add_student($conn){
+
+        for($i=1;$i<=99;$i++){
 
             if($i < 10 ) $i = "0".$i;
             $gender = 0;
             if($i>=31) $gender =1 ;
             
-            student_create($conn,'A10955'.$i,'A10955'.$i,'A10955'.$i.'@mail.nuk.edu.tw','0987654321','A10955'.$i,$gender,3,'csie');
+            student_create($conn,'A10955'.$i,'A10955'.$i,'A10955'.$i.'@mail.nuk.edu.tw','0987654321','A10955'.$i,$gender,3,'CSIE');
+            student_create($conn,'A10951'.$i,'A10951'.$i,'A10951'.$i.'@mail.nuk.edu.tw','0987654321','A10951'.$i,$gender,3,'EE');
     
         }
     }
     
     function add_apply_dorm($conn){
-        for($i=1;$i<=50;$i++){
+
+        # 新增 112 住宿申請
+        for($i=1;$i<=10;$i++){
             if($i < 10 ) {
                 $i = "0".$i;
-                apply_dorm_create($conn , "A10955".$i,110,0,1);
             }
-            else if($i >= 10 && $i < 30) {
+            apply_dorm_create($conn , "A10955".$i,112,0,1);
+        }
+        # 新增 110 住宿申請 (分發測試用)
+        for($i=1;$i<=99;$i++){
+
+            if($i < 10 ) {    
+                $i = "0".$i;
+                apply_dorm_create($conn , "A10955".$i,110,0,1);
+                apply_dorm_create($conn , "A10951".$i,110,0,1);
+            }
+            else if($i >= 10 && $i < 60) {
                 
                 apply_dorm_create($conn , "A10955".$i,110,1,2);
+                apply_dorm_create($conn , "A10951".$i,110,0,1);
             }
-            else if($i >= 30 && $i < 45) {
+            else if($i >= 60 && $i < 90) {
                 
                 apply_dorm_create($conn , "A10955".$i,110,2,3);
+                apply_dorm_create($conn , "A10951".$i,110,0,1);
             }
-            else if($i >= 45 && $i <= 50) {
+            else if($i >= 90 && $i <= 99) {
                 
                 apply_dorm_create($conn , "A10955".$i,110,3,0);
+                apply_dorm_create($conn , "A10951".$i,110,0,1);
             }
         }
+        
         for($i=1;$i<=10;$i++){
             if($i < 10 ) $i = "0".$i;
             apply_dorm_create($conn , "A10955".$i,109,1,0);
