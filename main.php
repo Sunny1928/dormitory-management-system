@@ -17,7 +17,7 @@
   $bill_states = array("未繳費", "已繳費");
   $state_classes = array("text-warning", "text-success", "text-danger");
   $state_classes_defaults = array("","text-warning", "text-success", "text-danger");
-  $default_year = 112;
+  $default_year = 110;
 
 ?>
 

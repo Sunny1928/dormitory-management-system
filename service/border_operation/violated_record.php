@@ -1,12 +1,29 @@
 <?php
 
     //  新增違規紀錄 
-    function violated_record_create($conn , $account , $rule_id, $year){  
+    function violated_record_create($conn , $account , $rule_id, $year , $send_mail = false){  
     
         $sql = "INSERT INTO violated_record (account , rule_id , year) VALUES (? ,? ,?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sii' ,  $account , $rule_id , $year);
-        return $stmt->execute(); 
+        $stmt->execute(); 
+        
+        if($send_mail == True)
+            violated_record_send_mail($conn , $account , $rule_id, $year);
+
+        return;
+    }
+
+    //  寄送違規紀錄mail
+    function violated_record_send_mail($conn , $account , $rule_id, $year){  
+ 
+        $rel = violated_record_read_account_year($conn, $account , $year);
+        $rel = $rel->fetch_assoc();
+        
+        $message = $rel['name'] . "同學您好，您有一筆新的違規紀錄<br>" . "違規項目為 : " . $rel['content'] . "<br>" . "違規點數為 :" . $rel['point'] . "<br>" . 
+                    "請您再去高雄大學宿舍網站確認";
+        send_email($rel['email'] , "高雄大學違規紀錄" , $message);
+
     }
 
     //  根據帳號和年份查詢違規紀錄

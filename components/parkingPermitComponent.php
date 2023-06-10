@@ -20,19 +20,19 @@
     <div class='col-md-6'>
         <div class='card h-100'>
             <div class='card-body'>
-            <h4 class='card-title mx-3'>通行證申請進度</h4>
+            <h4 class='card-title mx-3'>汽車准許證申請進度</h4>
             <div>
                 <ol class='c-stepper px-2'>
                     <li class=<?php if($state == -1){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
                         <div class='c-stepper__content'>
                             <h3 class='c-stepper__title'>步驟一：申請</h3>
-                            <p>提出通行證申請</p>
+                            <p>提出汽車准許證申請</p>
                         </div>
                     </li>
                     <li class=<?php if($state == 0){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
                         <div class='c-stepper__content'>
                             <h3 class='c-stepper__title'>步驟二：審核</h3>
-                            <p>審核是否分配通行證</p>
+                            <p>審核是否分配汽車准許證</p>
                         </div>
                     </li>
                     <li class=<?php if($state == 1 || $state == 2){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
@@ -49,7 +49,7 @@
     <div class='col-md-6 '>
         <div class='card h-100'>
             <div class='card-body'>
-            <h4 class='card-title mb-4'>通行證申請</h4>
+            <h4 class='card-title mb-4'>汽車准許證申請</h4>
             <?php if($state == 0){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
@@ -66,8 +66,8 @@
                             <div class='modal-body'>
                                 <div class='form-outline mb-4'>
                                     <div class='text-center mb-3'>
-                                        <input readonly value=".$_SESSION['year'].'-'.$_SESSION['account']." readonly required type='text' name='year_account' class='form-control' />
-                                        <label class='form-label'>年度-帳號</label>
+                                        <input readonly value="$_SESSION['account']." readonly required type='text' name='account' class='form-control' />
+                                        <label class='form-label'>帳號</label>
                                     </div>
                                 </div>
                             </div>

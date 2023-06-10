@@ -4,8 +4,7 @@
 
 <?php
     //輸出申請住宿資料
-    // $result = apply_dorm_read($conn, $_SESSION['account']);
-    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , 112);
+    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year);
     
     if (mysqli_num_rows($result) > 0) {
         echo "hi";

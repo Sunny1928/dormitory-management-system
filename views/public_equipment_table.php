@@ -39,7 +39,11 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              $result = public_equipment_read_all($conn);
+            if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = public_equipment_read_all($conn);
+            }else{
+              $result = public_equipment_read($conn , $_SESSION['dormitory_id']);
+            }
 
               if (mysqli_num_rows($result) > 0) 
               {

@@ -1,12 +1,31 @@
 <?php
 
     // 新增公告
-    function announcement_create($conn , $account , $title , $content){  
+    function announcement_create($conn , $account , $title , $content , $send_mail = false){  
     
         $sql = "INSERT INTO announcement (account , title , content) VALUES (? , ? , ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sss' ,$account , $title , $content);
-        return $stmt->execute(); 
+        $stmt->execute(); 
+
+        if($send_mail == True)
+            announcement_send_mail($conn , $account , $title , $content);
+
+        return;
+    }
+
+    //  寄送繳費mail
+    function announcement_send_mail($conn , $account , $title , $content){  
+
+        $rel = student_read_all($conn);
+        
+        if($rel->num_rows > 0){
+            while ($student = $rel->fetch_assoc()) {
+                $message = $content;
+                send_email($student['email'] , "高雄大學宿舍公告 : " . $title , $message);
+            }
+        }
+
     }
 
     // 根據account查詢公告

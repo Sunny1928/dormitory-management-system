@@ -2,7 +2,8 @@
     require_once('../service/require_all.php');
 
     if(isset($_POST['create'])){
-        apply_dorm_create($conn, $_POST['account']);
+        // apply_dorm_create($conn , $account , $year , $first_priority_dorm,$second_priority_dorm)
+        apply_dorm_create($conn, $_POST['account'], $_POST['year'], $_POST['first_priority_dorm'], $_POST['second_priority_dorm']);
     } else if(isset($_POST['delete'])){
         apply_dorm_delete($conn, $_POST['apply_dorm_id']);
     } else if(isset($_POST['update'])){

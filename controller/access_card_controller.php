@@ -8,9 +8,9 @@
         access_card_create($conn , $account, $year);
     } else if(isset($_POST['delete'])){
         access_card_delete($conn , $_POST['temporary_access_card_record_id']);
-    } else if(isset($_POST['update'])){
+    } else if(isset($_POST['update'])){ 
         access_card_update($conn , $_POST['temporary_access_card_record_id'] , $_POST['state']);
-    }
+    } 
 
     header("Location: ../main.php#pills-access-card");
 ?>

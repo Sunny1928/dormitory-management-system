@@ -51,8 +51,13 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              
-              $result = bill_read_all($conn);
+              // if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = bill_read_all($conn);
+            // }else if($_SESSION["permission"] == 2){
+            //   $result = bill_read_account($conn , $_SESSION['account']);
+            // }else{
+            //   $result = bill_read_account($conn , $_SESSION['account']);
+            // }
 
               if (mysqli_num_rows($result) > 0) 
               {

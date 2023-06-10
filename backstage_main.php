@@ -10,9 +10,9 @@
               style="max-width: 100px;">
           </div>
           <h4 class="text-center">
-            <span style="white-space: nowrap;">Sunny</span>
+            <span style="white-space: nowrap;"><?php $_SESSION['name']?></span>
           </h4>
-          <p class="text-center">sunny@gmail</p>
+          <p class="text-center"><?php $_SESSION['email']?></p>
         </div>
         <hr class="mb-0">
       </div>
@@ -178,7 +178,7 @@
     <!--room-->
     <div class="tab-pane fade" id="pills-room" role="tabpanel" aria-labelledby="tab-room">
       <?php
-        // require("./views/room_table.php")
+        require("./views/room_table.php")
       ?>
     </div>
 
