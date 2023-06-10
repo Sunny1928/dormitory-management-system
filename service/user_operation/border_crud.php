@@ -110,6 +110,22 @@
         return $stmt->get_result();
     }
 
+    // 查詢宿舍的所有住宿資料
+    function border_read_year_dorm($conn , $year , $dorm_id){
+
+        $sql = "SELECT user.* , border.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM student 
+                JOIN border ON student.account = border.account 
+                JOIN user ON user.account = student.account 
+                LEFT JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
+                WHERE border.dormitory_id = ? AND border.year = ?
+                ORDER BY border.account";        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii', $dorm_id , $year);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
+
     // 查詢所有住宿生
     function border_read_all($conn){
 

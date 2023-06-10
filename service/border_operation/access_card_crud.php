@@ -17,7 +17,8 @@
                     AND temporary_access_card_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE temporary_access_card_record.account = ? AND border.year = ?";
+                WHERE temporary_access_card_record.account = ? AND border.year = ?
+                ORDER BY temporary_access_card_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' ,$account , $year);
@@ -33,13 +34,32 @@
                     AND temporary_access_card_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE border.year = ?";
+                WHERE border.year = ?
+                ORDER BY temporary_access_card_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $year);
         $stmt->execute();
         return $stmt->get_result();
     }
+
+    //  用id查詢暫時出入證
+    function access_card_read_id($conn , $access_card_id){  
+        
+        $sql = "SELECT * FROM temporary_access_card_record 
+                JOIN border ON temporary_access_card_record.account = border.account 
+                    AND temporary_access_card_record.year = border.year 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account
+                WHERE temporary_access_card_record.temporary_access_card_record_id = ?
+                ORDER BY temporary_access_card_record.datetime DESC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' , $access_card_id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
 
     //  查詢全部暫時出入證
     function access_card_read_all($conn){  
@@ -48,7 +68,8 @@
                 JOIN border ON temporary_access_card_record.account = border.account 
                     AND temporary_access_card_record.year = border.year 
                 JOIN student ON student.account = border.account 
-                JOIN user ON user.account = student.account ";
+                JOIN user ON user.account = student.account
+                ORDER BY temporary_access_card_record.datetime DESC";
 
         $result = $conn->query($sql);
         return $result;
@@ -72,5 +93,37 @@
         return $stmt->execute();
     }
     
+    // 生成qrcode data
+    function access_card_qrcode_data($conn , $access_card_id){
+        $rel = access_card_read_id($conn , $access_card_id);
+        if($rel->num_rows == 0)
+            return -1;
+
+        $rel = $rel->fetch_assoc();
+        $message = $rel['account'] . "|" . $rel['year'] . "|" .  $rel['temporary_access_card_record_id'];
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "access_card");
+        return $qrcode_data;
+    }
+    
+    // 驗證qrcode data
+    function access_card_check_qrcode_data($conn , $cipgher){
+        $msg = decrypt_qrcode_data($cipgher);
+        $msg = explode("|" , $msg);
+
+        if( count($msg) < 3)
+            return -1;
+
+        $rel = access_card_read_id($conn , $msg[2]);
+        if($rel->num_rows == 0)
+            return -1;
+
+        $rel = $rel->fetch_assoc();
+
+        if($rel['account'] == $msg[0] && $rel['year'] == $msg[1] && $rel['state'] == 1)
+            return $rel['temporary_access_card_record_id'];
+        else
+            return -1;
+        
+    }
     
 ?>

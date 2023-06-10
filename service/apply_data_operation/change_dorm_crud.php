@@ -77,8 +77,22 @@
         return $stmt->get_result();
     }
 
+    // 修改換宿申請-舍監同意
+    function change_dorm_manager_agree_update($conn , $apply_change_dorm_id, $account, $another_border, $year, $change_dorm_id, $change_room_number){
+
+        change_dorm_update_process($conn , $apply_change_dorm_id , 1, 2, $another_border, $year);
+
+        $rel = border_read_student_year($conn , $account , $year);
+        $rel = $rel->fetch_assoc();
+        $change_dorm_id2 = $rel['dormitory_id'];
+        $change_room_number2 = $rel['room_number'];
+
+        border_update_dorm_room($conn , $account , $change_dorm_id , $change_room_number , $year);
+        border_update_dorm_room($conn , $another_border , $change_dorm_id2 , $change_room_number2 , $year);
+    }
+
     // 更新換宿申請流程
-    function change_dorm_update_process($conn , $apply_change_dorm_id ,$account ,$student_state, $final_state, $new_another_border, $year){  
+    function change_dorm_update_process($conn , $apply_change_dorm_id ,$student_state, $final_state, $new_another_border, $year){  
 
         $rel = border_read_student_year($conn , $new_another_border , $year);
         $rel = $rel->fetch_assoc();
