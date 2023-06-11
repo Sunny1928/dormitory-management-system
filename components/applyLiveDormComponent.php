@@ -59,10 +59,9 @@
                         <form method='post' action='./controller/apply_dorm_controller.php'>
                             <div class='modal-body'>
                                 <div class='form-outline mb-4'>
-                                    <input readonly value=$default_year readonly required type='text' name='year' class='form-control' />
-                                    <div class='text-center mb-3'>
-                                        <input readonly value=".$_SESSION['account']." readonly required type='text' name='account' class='form-control' />
-                                        <label class='form-label'>帳號</label>
+                                <div class='text-center mb-3'>
+                                    <input readonly value=".$_SESSION['year'].'-'.$_SESSION['account']." readonly required type='text' name='year_account' class='form-control' />
+                                    <label class='form-label'>帳號</label>
                                     </div>
                                 </div>
                             </div>

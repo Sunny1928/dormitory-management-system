@@ -25,6 +25,15 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-check pe-3"></i>申請住宿
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-xmark pe-3"></i>申請退宿
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-arrow-right pe-3"></i>申請換宿
+        </a>
 
         border
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roommate" data-mdb-toggle="pill" href="#pills-roommate" role="tab" aria-controls="pills-roommate" aria-selected="false">
@@ -116,6 +125,27 @@
     <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="tab-message">
       <?php
         require("./components/messageComponent.php");
+      ?>
+    </div>
+
+    <!--apply live dorm-->
+    <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm"> 
+      <?php
+        require("./components/applyLiveDormComponent.php");
+      ?>
+    </div>
+
+    <!--apply quit dorm-->
+    <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm"> 
+      <?php
+        require("./components/applyQuitDormComponent.php");
+      ?>
+    </div>
+    
+    <!--apply change dorm-->
+    <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm"> 
+      <?php
+        require("./components/applyChangeDormComponent.php");
       ?>
     </div>
 
@@ -238,7 +268,34 @@
       }
       instance.show();
     }
-  } else if (location.hash === "#pills-violated-record") {
+  } else if (location.hash === "#pills-apply-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-apply-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  }else if (location.hash === "#pills-quit-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-quit-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-change-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-change-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  }else if (location.hash === "#pills-violated-record") {
     const triggerEl = document.querySelector('a[href="#pills-violated-record"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)

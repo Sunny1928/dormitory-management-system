@@ -8,11 +8,13 @@
   $genders = array("男", "女");
   $types = array("系統管理員", "舍監", "家長", "學生");
   $apply_fix_states = array("未申請報修", "申請報修", "通過", "未通過");
-  $apply_dorm_states = array("申請等待核准", "核准通過分發", "分發完成", "沒通過");
+  $apply_dorm_states = array("申請等待核准", "通過", "沒通過");
   $apply_cancel_states = array("未申請", "已申請", "通過", "未通過");
   $access_card_states = array("審核中", "通過","未通過");
   $border_types = array("住宿生", "無效", "學一OA樓長", "學一OB樓長", "學二OE樓長", "學二OF樓長");
   $border_apply_story_manager_states = array("未申請", "已申請");
+  $quit_dorm_states = array("審核中","通過","未通過");
+  $change_dorm_states = array("等待換宿對象審核","等待舍監審核","通過","未通過");
   $bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");
   $bill_states = array("未繳費", "已繳費");
   $state_classes = array("text-warning", "text-success", "text-danger");
@@ -68,7 +70,7 @@
       require('./border_main.php');
 
     } else if($_SESSION['permission'] == 5){
-      require('./student_main.php');
+      require('./border_main.php');
 
     } 
   

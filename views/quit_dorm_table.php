@@ -99,6 +99,7 @@
                           <div class='modal-body'>您確認要刪除此紀錄嗎？</div>
                           <div class='modal-footer'>
                             <input value='$id' required type='hidden' name='apply_quit_dorm_id' class='form-control' />
+                            <input value='$state' required type='hidden' name='state' class='form-control' />
                             <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                             <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
                           </div>
@@ -135,7 +136,7 @@
                 $res = border_read_all($conn);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
-                    echo "<option value=".$info['year'].'-'.$info['account'].">".$info['year'].'-'.$info['account'].''."</option>";
+                    echo "<option value=".$default_year.'-'.$info['account'].">".$default_year.'-'.$info['account'].''."</option>";
                   }
                 }
               ?>
