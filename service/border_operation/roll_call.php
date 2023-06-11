@@ -47,6 +47,23 @@
         return $stmt->get_result();
     }
 
+    //  根據帳號查詢點名
+    function roll_call_read_account($conn , $account){   
+    
+        $sql = "SELECT * FROM roll_call_state_record 
+                JOIN border ON roll_call_state_record.account = border.account 
+                    AND roll_call_state_record.year = border.year 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account 
+                WHERE roll_call_state_record.account = ?
+                ORDER BY roll_call_state_record.datetime DESC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s' ,$account);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     //  根據狀態和年份查詢點名
     function roll_call_read_state_year($conn , $state, $year){   
     

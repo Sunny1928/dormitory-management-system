@@ -26,6 +26,23 @@
         return $stmt->get_result();
     }
 
+    //  根據帳號查詢暫時出入證
+    function access_card_read_account($conn , $account){   
+    
+        $sql = "SELECT * FROM temporary_access_card_record 
+                JOIN border ON temporary_access_card_record.account = border.account 
+                    AND temporary_access_card_record.year = border.year 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account 
+                WHERE temporary_access_card_record.account = ? 
+                ORDER BY temporary_access_card_record.datetime DESC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s' ,$account);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     //  根據年份查詢暫時出入證
     function access_card_read_year($conn , $year){  
         
