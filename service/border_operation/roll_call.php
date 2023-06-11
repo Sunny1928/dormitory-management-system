@@ -184,10 +184,10 @@
     function roll_call_read_by_dormitory_id($conn,$dormitory_id){
         $sql = "SELECT * FROM roll_call_state_record 
                 JOIN border ON roll_call_state_record.account = border.account 
-                -- JOIN student ON student.account = border.account 
-                -- JOIN user ON user.account = student.account 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account 
                 WHERE border.dormitory_id =  ? 
-                -- ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $dormitory_id);

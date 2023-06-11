@@ -78,8 +78,9 @@
 
         $sql = "SELECT * FROM entry_and_exit_dormitory_record 
                 JOIN border ON entry_and_exit_dormitory_record.account = border.account 
-                -- JOIN student ON student.account = border.account 
-                -- JOIN user ON user.account = student.account 
+                    AND entry_and_exit_dormitory_record.year = border.year 
+                JOIN student ON student.account = border.account 
+                JOIN user ON user.account = student.account 
                 WHERE entry_and_exit_dormitory_record.account = ? ";
 
         $stmt = $conn->prepare($sql);

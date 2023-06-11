@@ -197,6 +197,9 @@
         entry_and_exit_create($conn,"A1095509",0,109);
         entry_and_exit_create($conn,"A1095509",1,109);
         entry_and_exit_create($conn,"A1095550",1,109);
+        entry_and_exit_create($conn,"A1095550",1,109);
+        entry_and_exit_create($conn,"A1095550",1,109);
+        entry_and_exit_create($conn,"A1095550",1,109);
         
     }
     function add_access_card($conn){
@@ -206,6 +209,12 @@
     }
     function add_roll_call($conn){
         roll_call_create($conn,"A1095514",109,0);
+        roll_call_create($conn,"A1095550",109,0);
+        roll_call_create($conn,"A1095550",109,1);
+        roll_call_create($conn,"A1095509",109,0);
+        roll_call_create($conn,"A1095509",109,0);
+        roll_call_create($conn,"A1095551",109,1);
+        roll_call_create($conn,"A1095551",109,0);
         roll_call_create($conn,"A1095550",109,0);
         roll_call_create($conn,"A1095550",109,1);
     }
