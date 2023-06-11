@@ -58,10 +58,10 @@
 
         $password = password_hash($password ,PASSWORD_DEFAULT);
 
-        $sql = "UPDATE user SET password = ? WHERE account=?";
+        $sql = "UPDATE user SET password = ? WHERE account = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss', $account , $password);
+        $stmt->bind_param('ss', $password , $account);
         return $stmt->execute();
     }
 
