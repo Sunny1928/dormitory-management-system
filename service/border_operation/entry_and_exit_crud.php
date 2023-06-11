@@ -72,4 +72,20 @@
         $stmt->bind_param('ii' ,$state , $entry_and_exit_id);
         return $stmt->execute();
     }
+
+    # 根據account 搜尋進出資料
+    function entry_and_exit_read_by_account($conn,$account){
+
+        $sql = "SELECT * FROM entry_and_exit_dormitory_record 
+                JOIN border ON entry_and_exit_dormitory_record.account = border.account 
+                -- JOIN student ON student.account = border.account 
+                -- JOIN user ON user.account = student.account 
+                WHERE entry_and_exit_dormitory_record.account = ? ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s' ,$account);
+        $stmt->execute();
+        return $stmt->get_result(); 
+    }
+
 ?>

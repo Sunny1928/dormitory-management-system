@@ -75,9 +75,10 @@
     // 根據student為分宿生 與 刪除 該家長帳號
     function quit_dorm_delete_data($conn , $account, $year){
         border_update_quit($conn,$account,$year);
-        user_delete($conn,$account);
+        $parent_account = parents_read_student($conn,$account)->fetch_array(MYSQLI_NUM)[4];
+        user_delete($conn,$parent_account);
     }
-    
+
     // 根據account與 year找退宿申請的state，判斷是否刪除
     function quit_dorm_state_check($conn,$account,$year){
         
