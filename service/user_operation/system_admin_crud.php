@@ -117,4 +117,100 @@
         
     }
 
+    // 分配學生房間
+    function system_admin_room_allocation($conn, $year , $send_mail){
+
+        // 查詢全部的宿舍id
+        $sql = "SELECT dormitory_id FROM dormitory";
+        $result = $conn->query($sql);
+        $dorm_all = mysqli_fetch_all($result);
+
+        for($dorm_idx = 0; $dorm_idx<sizeof($dorm_all); $dorm_idx++){
+            $dorm_id = $dorm_all[$dorm_idx][0];
+
+            // 查詢這間宿舍房號
+            $sql = "SELECT room_number FROM room WHERE dormitory_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i' , $dorm_id);
+            $stmt->execute();
+            $room_all = $stmt->get_result();
+
+            while ($room_number = mysqli_fetch_assoc($room_all)){
+                $room_num = $room_number['room_number'];
+
+                // 查詢房間可以住的人數，人數/2代表這個房間有幾個系
+                $rel = room_read($conn , $dorm_id , $room_num);
+                $rel = $rel->fetch_assoc();
+                $room_dep_num = $rel['num_of_people']/2;
+
+                // 分配房間每次都隨機選系所
+                $stmt->close();
+                $sql = "SELECT DISTINCT department FROM student 
+                        JOIN border ON student.account = border.account 
+                        WHERE border.dormitory_id = ? AND border.room_number IS NULL
+                        ORDER BY RAND() LIMIT ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('ii' , $dorm_id , $room_dep_num);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $department = mysqli_fetch_all($result);
+
+                for($i=0; $i<$room_dep_num; $i++){
+
+                    system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
+                    system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
+                }            
+            }
+        }
+    }
+
+    // 分配室友、繳費、家長
+    function system_admin_roommate_allocation($conn, $year, $dorm_id, $room_number, $department, $send_mail){
+
+        $sql = "SELECT * FROM border
+                JOIN student ON border.account = student.account
+                WHERE student.department = ? AND border.dormitory_id = ? AND border.room_number IS NULL
+                ORDER BY RAND() LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si' , $department , $dorm_id);
+        $stmt->execute();
+        $rel = $stmt->get_result();
+        $rel = $rel->fetch_assoc();
+
+        // 沒有同系的話就隨機分配
+        if(is_null($rel)){
+
+            $stmt->close();
+
+            $sql = "SELECT * FROM border
+                    WHERE border.dormitory_id = ? AND border.room_number IS NULL
+                    ORDER BY RAND() LIMIT 1";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i' , $dorm_id);
+            $stmt->execute();
+            $rel = $stmt->get_result();
+            $rel = $rel->fetch_assoc();
+        }
+
+        $account = $rel['account'];
+        border_update_dorm_room($conn, $account , $dorm_id , $room_number , $year);
+
+        // 新增繳費
+        $title = $year . '年度住宿費用';
+        bill_create_room_fee($conn , $account , $title , $year , $send_mail);
+
+        // 新增家長
+        $rel = border_read_student_year($conn , $account , $year);
+        $rel = $rel->fetch_assoc();
+        $name = $rel['name'] . '家長';
+        $password = $account;
+        $parent_account = $account . '_parent';
+        parents_create($conn , $name , $password , $rel['email'] , $rel['phone'] , $parent_account , 0 , 2 , $account);
+    }
+
+    function system_admin_dorm_room_allocation_process($conn , $year , $send_mail = false){
+
+        system_admin_choose_all_border($conn, $year);
+        system_admin_room_allocation($conn, $year , $send_mail);
+    }
 ?>
