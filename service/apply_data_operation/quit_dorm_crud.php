@@ -72,27 +72,35 @@
         return $stmt->execute();
     }
     
+
+    // 根據id查詢退宿學生的帳號和學年
+    function quit_dorm_read_account_year_by_id($conn ,$apply_quit_dorm_id){   
+    
+        $sql = "SELECT account,year FROM apply_quit_dorm 
+                WHERE apply_quit_dorm.apply_quit_dorm_id = ? ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i' ,$apply_quit_dorm_id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     // 根據student為分宿生 與 刪除 該家長帳號
-    function quit_dorm_delete_data($conn , $account, $year){
+    function quit_dorm_delete_data($conn ,$apply_quit_dorm_id){
+        quit_dorm_update($conn,$apply_quit_dorm_id,1);
+        $rowData =quit_dorm_read_account_year_by_id($conn,$apply_quit_dorm_id)->fetch_array(MYSQLI_NUM);
+        $account = $rowData[0];
+        $year = $rowData[1];
         border_update_quit($conn,$account,$year);
         $parent_account = parents_read_student($conn,$account)->fetch_array(MYSQLI_NUM)[4];
         user_delete($conn,$parent_account);
     }
 
     // 根據account與 year找退宿申請的state，判斷是否刪除
-    function quit_dorm_state_check($conn,$account,$year){
+    function quit_dorm_state_check_process($conn, $apply_quit_dorm_id , $state){
         
-        
-        $sql = "SELECT apply_quit_dorm.state FROM apply_quit_dorm 
-                WHERE apply_quit_dorm.account = ? AND apply_quit_dorm.year = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si' ,$account,$year);
-        $stmt->execute();
-        $state  = $stmt->get_result() -> fetch_array()[0];
-
-        # 如果state = 1 ，通過才刪除資料
+        # 如果state = 0 ，通過才刪除資料
         if($state){
-            quit_dorm_delete_data($conn,$account,$year);
+            quit_dorm_delete_data($conn,$apply_quit_dorm_id);
         }
     }
     
