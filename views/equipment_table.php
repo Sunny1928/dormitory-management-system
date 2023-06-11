@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">宿舍設備資料</h4>
     <div class="d-flex">
-      <select type="text" id="applyFixStateFilter" onchange="apply_fix_state_filter()" class='form-select-sm'  required>
+      <select type="text" id="applyFixStateFilter" onchange="table_filter('applyFixStateFilter','equipmentTable',4)" class='form-select-sm'  required>
         <option value=''>報修紀錄</option>
         <?php
         for($i = 0; $i<count($apply_fix_states); $i++){
@@ -36,7 +36,10 @@
               <th scope="col">報修紀錄</th>
               <th scope="col">年限</th>
               <th scope="col">購買日期</th>
-              <th scope="col">操作</th>
+              <?php
+              if($_SESSION["permission"] != 2)
+                echo "<th scope='col'>操作</th>";
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -65,14 +68,19 @@
                     "<td>" . $room_number . "</td>".
                     "<td>" . $id . "</td>".
                     "<td>" . $name . "</td>".
-                    "<td class='"."' >" . $apply_fix_states[$apply_fix_state] . "</td>".
+                    "<td class='".$state_classes_defaults[$apply_fix_state]."' >" . $apply_fix_states[$apply_fix_state] . "</td>".
                     "<td>" . $expired_year . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateEquipmentModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteEquipmentModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $datetime . "</td>";
+
+                  if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+                    echo  "<td>
+                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateEquipmentModal$id'><i class='fa fa-pencil'></i></button>
+                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteEquipmentModal$id'><i class='fa fa-trash'></i></button>
+                      </td>";
+                  else if($_SESSION["permission"] != 2){
+                    echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
+                    echo  "class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmEquipmentModal$id'><i class='fa fa-circle-info'></i></button></td>";
+                  }
 
                   // Update Modal
                   echo "
@@ -145,6 +153,32 @@
                       </form>
                     </div>
                   </div>";
+
+                  // Confirm  Modal
+
+                  echo "
+                  <div class='modal fade' id='confirmEquipmentModal$id' tabindex='-1' aria-labelledby='confirmEquipmentModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                      <form method='post' action='./controller/violated_record_controller.php'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <h5 class='modal-title' id='confirmEquipmentModalLabel'>申請宿舍設備報修</h5>
+                          </div>
+                          <div class='modal-body'>您確認要申請此宿舍設備報修嗎？</div>
+                          <div class='modal-footer'>
+                            <input value='$id' required type='hidden' name='equipment_id' class='form-control' />
+                            <input value='$name' required type='hidden' name='name' class='form-control' />
+                            <input value='1' required type='hidden' name='apply_fix_state' class='form-control' />
+                            <input value='$room_number' required type='hidden' name='room_number' class='form-control' />
+                            <input value='$dormitory_id' required type='hidden' name='dormitory_id' class='form-control' />
+                            <input value='$expired_year' required type='hidden' name='expired_year' class='form-control' />
+                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+                            <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>";
                 }
               }
             ?>
@@ -158,7 +192,9 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addEquipmentModal' tabindex='-1' aria-labelledby='addEquipmentModalLabel' aria-hidden='true'>
+<?php 
+if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+echo "<div class='modal fade' id='addEquipmentModal' tabindex='-1' aria-labelledby='addEquipmentModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
@@ -194,26 +230,7 @@
       
     </div>
   </div>
-</div>
-
-<script>
-function apply_fix_state_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("applyFixStateFilter").value;
-  tr = document.getElementById("equipmentTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[4].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
+</div>";
 }
-</script>
+?>
 

@@ -4,14 +4,14 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">違規紀錄資料</h4>
     <div class="d-flex">
-      <select type="text" id="violatedRecordAccountFilter" onchange="violated_record_account_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="violatedRecordAccountFilter" onchange="table_filter('violatedRecordAccountFilter','violatedRecordTable',2)" class='form-select-sm ms-2'  required>
         <option value=''>帳號</option>
         <?php
         for($i = 0; $i<count($border_apply_story_manager_states); $i++){
           echo "<option value=".$border_apply_story_manager_states[$i].">".$border_apply_story_manager_states[$i]."</option>";
         }?>
       </select>
-      <select type="text" id="violatedRecordStateFilter" onchange="violated_record_state_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="violatedRecordStateFilter" onchange="table_filter('violatedRecordStateFilter','violatedRecordTable',4)" class='form-select-sm ms-2'  required>
         <option value=''>申請取消狀態</option>
         <?php
         for($i = 0; $i<count($apply_cancel_states); $i++){
@@ -82,14 +82,9 @@
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateViolatedRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteViolatedRecordModal$id'><i class='fa fa-trash'></i></button>
                     </td>";
-                  } else if($_SESSION["permission"] == 3){
-                    echo "<td>
-                      <button ";
-                    if($apply_cancel != 0){
-                      echo " disabled ";
-                    } 
-                    echo  "class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmViolatedRecordModal$id'><i class='fa fa-square-info'></i></button>
-                    </td>";
+                  } else if($_SESSION["permission"] != 2){
+                    echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
+                    echo  "class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmViolatedRecordModal$id'><i class='fa fa-circle-info'></i></button></td>";
                   }
                   echo  "</tr>";
 
@@ -238,45 +233,3 @@
   </div>
 </div>
 
-<script>
-function violated_record_account_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("violatedRecordAccountFilter").value;
-  tr = document.getElementById("violatedRecordTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2].innerText;
-
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-
-
-function violated_record_state_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("violatedRecordStateFilter").value;
-  tr = document.getElementById("violatedRecordTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[4].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-</script>

@@ -1,7 +1,7 @@
 <?php
   require_once('./service/mainpage_require_all.php');
 	session_start();
-  if (!isset($_SESSION["permission"])){
+  if (!isset($_SESSION["permission"]) || $_SESSION["permission"] == "Error"){
 		Header("Location: ./index.php" , 301);
 		die();
 	}		
@@ -17,6 +17,9 @@
   $bill_states = array("未繳費", "已繳費");
   $state_classes = array("text-warning", "text-success", "text-danger");
   $state_classes_defaults = array("","text-warning", "text-success", "text-danger");
+  $roll_call_states = array("缺席", "出席");
+  $entry_exit_states = array("進", "出");
+  $years = array(110,111,112);
   $default_year = 110;
 
 ?>
@@ -55,7 +58,7 @@
       require('./dorm_manager_main.php');
 
     } else if($_SESSION['permission'] == 2){
-      require('./student_main.php');
+      require('./parent_main.php');
 
     } else if($_SESSION['permission'] == 3){
       require('./student_main.php');
@@ -212,6 +215,29 @@
       background-color: #e0e0e0;
     }
   </style>
+  <script>
+    function table_filter(idFilter, idTable, index) {
+      var filter, tr, td, i;
+      filter = document.getElementById(idFilter).value;
+      tr = document.getElementById(idTable).getElementsByTagName("tr");
+      // console.log(filter)
+      // console.log("jijji")
+      for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[index].innerText;
+      // console.log(td)
+
+        if (td) {
+          if (filter == '') {
+            tr[i].style.display = "";
+          } else if (td == filter) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
 </body>
 
 </html>

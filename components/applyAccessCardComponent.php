@@ -2,6 +2,12 @@
   session_start();
 ?>
 
+<div class="card m-2 px-4 py-3">
+    <div class="d-flex justify-content-between">
+        <h4 class="mb-0">通行證申請</h4>
+    </div>
+</div>
+
 <?php
     //輸出申請住宿資料
     $result = access_card_read_account_year($conn, $_SESSION['account'], $_SESSION['year']);

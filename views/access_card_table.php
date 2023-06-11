@@ -2,8 +2,27 @@
 <!--Title-->
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
-    <h4 class="mb-0">出入卡紀錄</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addAccessCardRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    <h4 class="mb-0">通行證紀錄</h4>
+    <div class="d-flex">
+      <select type="text" id="accessCardYearFilter" onchange="table_filter('accessCardYearFilter','accessCardTable',1)" class='form-select-sm ms-2'  required>
+        <option value=''>年</option>
+        <?php
+        for($i = 0; $i<count($years); $i++){
+          echo "<option value=".$years[$i].">".$years[$i]."</option>";
+        }?>
+      </select>
+      <select type="text" id="accessCardStateFilter" onchange="table_filter('accessCardStateFilter', 'accessCardTable', 3)" class='form-select-sm ms-2'  required>
+        <option value=''>申請狀態</option>
+        <?php
+        for($i = 0; $i<count($access_card_states); $i++){
+          echo "<option value=".$access_card_states[$i].">".$access_card_states[$i]."</option>";
+        }?>
+      </select>
+      <?php 
+        if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+          echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addAccessCardRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
+      ?>
+    </div>
   </div>
 </div>
 
@@ -13,21 +32,29 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="accessCardTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
               <th scope="col">編號</th> 
               <th scope="col">年</th>
               <th scope="col">帳號</th>
-              <th scope="col">進出狀態</th>
+              <th scope="col">申請狀態</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <?php 
+              if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+                echo "<th scope='col'>操作</th>"
+              ?>
             </tr>
           </thead>
-          <tbody class="datatable-body">
+          <tbody id="accessCardTable" class="datatable-body">
             <?php
-    
-              $result = access_card_read_all($conn);
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = access_card_read_all($conn);
+              }else if( $_SESSION["permission"] == 2){ // parents
+                $result = access_card_read_account($conn, $_SESSION['student_account']);
+              }else{ // students
+                $result = access_card_read_account($conn, $_SESSION['account']);
+              }
 
 
               if (mysqli_num_rows($result) > 0) 
@@ -45,12 +72,14 @@
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
                     "<td class='".$state_classes[$state]."'>" . $access_card_states[$state] . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
+                    "<td>" . $datetime . "</td>";
+                  if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                    echo "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAccessCardRecordModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    </td>";
+                  }
+                  echo  "</tr>";
 
                   // Update Modal
                   echo "
@@ -65,7 +94,7 @@
                         <div class='text-center mb-3'>
                           <div class='form-outline mb-4'>
                             <input value='$id' readonly required type='text' name='temporary_access_card_record_id' class='form-control' />
-                            <label class='form-label'>出入卡紀錄編號</label>
+                            <label class='form-label'>通行證紀錄編號</label>
                           </div>
                           <select class='form-select mb-4' name='state' required>
                             <option value=''>申請狀態</option>";
@@ -105,6 +134,8 @@
                     </div>
                   </div>";
                 }
+              }else{
+                echo "<td class='text-center' colspan='100%'>無</td>";
               }
             ?>
           </tbody>
@@ -117,27 +148,28 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addAccessCardRecordModal' tabindex='-1' aria-labelledby='addAccessCardRecordModalLabel' aria-hidden='true'>
+<?php
+if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+echo 
+"<div class='modal fade' id='addAccessCardRecordModal' tabindex='-1' aria-labelledby='addAccessCardRecordModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增出入卡紀錄</h5>
+        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增通行證紀錄</h5>
       </div>
 
       <form method='post' action='./controller/access_card_controller.php'>
         <div class='modal-body'>
           <div class='text-center mb-3'>
             <select class='form-select mb-4' name='year_account' required>
-              <option value=''>年度-帳號</option>
-              <?php
+              <option value=''>年度-帳號</option>";
                 $res = border_read_all($conn);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['year'].'-'.$info['account'].">".$info['year'].'-'.$info['account'].''."</option>";
                   }
                 }
-              ?>
-            </select>
+      echo "</select>
           </div>
         </div>
         
@@ -149,5 +181,6 @@
       
     </div>
   </div>
-</div>
-
+</div>";
+}
+?>

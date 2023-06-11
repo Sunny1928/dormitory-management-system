@@ -81,7 +81,7 @@
             <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 114.4px;"></div><div class="form-notch-trailing"></div></div>
           </div>
             <?php
-              if (isset($_SESSION["permission"]) && $_SESSION["permission"] == "Error"){
+              if (isset($_SESSION['permission']) && $_SESSION["permission"] == "Error"){
               echo "<p class='text-danger ms-1'>帳號或密碼錯誤</p>";
               }
             ?>

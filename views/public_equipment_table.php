@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">宿舍公共設備資料</h4>
     <div class="d-flex">
-      <select type="text" id="applyPublicEquipmentFixStateFilter" onchange="apply_public_equipment_fix_state_filter()" class='form-select-sm'  required>
+      <select type="text" id="applyPublicEquipmentFixStateFilter" onchange="table_filter('applyPublicEquipmentFixStateFilter','publicEquipmentTable',3)" class='form-select-sm'  required>
         <option value=''>報修紀錄</option>
         <?php
         for($i = 0; $i<count($apply_fix_states); $i++){
@@ -61,7 +61,7 @@
                     "<td>" . $dormitory_name . "</td>".
                     "<td>" . $id . "</td>".
                     "<td>" . $name . "</td>".
-                    "<td>" . $apply_fix_states[$apply_fix_state] . "</td>".
+                    "<td class='".$state_classes_defaults[$apply_fix_state]."'>" . $apply_fix_states[$apply_fix_state] . "</td>".
                     "<td>" . $expired_year . "</td>".
                     "<td>" . $datetime . "</td>".
                     "<td>
@@ -194,24 +194,3 @@
     </div>
   </div>
 </div>
-
-<script>
-function apply_public_equipment_fix_state_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("applyPublicEquipmentFixStateFilter").value;
-  tr = document.getElementById("publicEquipmentTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-</script>

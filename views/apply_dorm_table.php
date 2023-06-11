@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">申請宿舍資料</h4>
     <div class="d-flex">
-      <select type="text" id="applyDormStateFilter" onchange="apply_dorm_state_filter()" class='form-select-sm'  required>
+      <select type="text" id="applyDormStateFilter" onchange="table_filter('applyDormStateFilter', 'applyDormTable', 2)" class='form-select-sm'  required>
         <option value=''>申請宿舍狀態</option>
         <?php
         for($i = 0; $i<count($apply_dorm_states); $i++){
@@ -151,26 +151,3 @@
     </div>
   </div>
 </div>
-
-<script>
-
-function apply_dorm_state_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("applyDormStateFilter").value;
-  tr = document.getElementById("applyDormTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-</script>

@@ -1,5 +1,4 @@
 <!-- Sidebar -->
-
 <header>
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
     <div class="sidebar-sticky position-sticky ">
@@ -49,12 +48,13 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
           <i class="fas fa-bed pe-3"></i>宿舍設備
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
-          <i class="fas fa-scroll pe-3"></i>宿舍規範
-        </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
           <i class="fas fa-washing-machine pe-3"></i>公共設施 
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
+          <i class="fas fa-scroll pe-3"></i>宿舍規範
+        </a>
+        
         
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
@@ -69,7 +69,7 @@
           <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
-          <i class="fas fa-address-card pe-3"></i>出入卡紀錄 
+          <i class="fas fa-address-card pe-3"></i>通行證紀錄 
         </a>
         
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
@@ -117,16 +117,16 @@
       </div>
       <div class="card m-2 px-4 py-3">
         <div>
-          <p class="m-1">名稱：<?php echo $_SESSION['name'];?></p>
-          <p class="m-1">帳號：<?php echo $_SESSION['account'];?></p>
-          <p class="m-1">Email：<?php echo $_SESSION['email'];?></p>
-          <p class="m-1">電話：<?php echo $_SESSION['phone'];?></p>
-          <p class="m-1">種類：<?php echo $types[$_SESSION['type']];?></p>
-          <p class="m-1">性別：<?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1">科系：<?php echo $_SESSION['department'];?></p>
-          <p class="m-1">學生帳號：<?php echo $_SESSION['student_account'];?></p>
-          <p class="m-1">宿舍：<?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1">房號：<?php echo $_SESSION['room_number'];?></p>
+          <p class="m-1"><b>名稱：</b><?php echo $_SESSION['name'];?></p>
+          <p class="m-1"><b>帳號：</b><?php echo $_SESSION['account'];?></p>
+          <p class="m-1"><b>Email：</b><?php echo $_SESSION['email'];?></p>
+          <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
+          <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
+          <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
+          <p class="m-1"><b>科系：</b><?php echo $_SESSION['department'];?></p>
+          <p class="m-1"><b>學生帳號：</b><?php echo $_SESSION['student_account'];?></p>
+          <p class="m-1"><b>宿舍：</b><?php echo $_SESSION['dormitory_id'];?></p>
+          <p class="m-1"><b>房號：</b><?php echo $_SESSION['room_number'];?></p>
         </div>
       </div>
     </div>

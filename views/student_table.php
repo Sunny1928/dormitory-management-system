@@ -34,7 +34,9 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              if($_SESSION['permission']==2 || $_SESSION['permission']==4 || $_SESSION['permission']==5){
+              if($_SESSION['permission']==2){
+                $result = border_read_roommate($conn , $_SESSION['student_account'] , $_SESSION['year']);
+              }else if($_SESSION['permission']==4 || $_SESSION['permission']==5){
                 $result = border_read_roommate($conn , $_SESSION['account'] , $_SESSION['year']);
               }else{
                 $result = student_read_all($conn);

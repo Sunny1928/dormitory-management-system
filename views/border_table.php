@@ -5,21 +5,21 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">住宿生資料</h4>
     <div class='d-flex'>
-      <select type="text" id="borderYearFilter" onchange="border_year_filter()" class='form-select-sm'  required>
+      <select type="text" id="borderYearFilter" onchange="table_filter('borderYearFilter','borderTable',0)" class='form-select-sm'  required>
         <option value=''>年度</option>
         <?php
-        for($i = 111; $i<114; $i++){
-          echo "<option value=".$i.">".$i."</option>";
+        for($i = 0; $i<count($years); $i++){
+          echo "<option value=".$years[$i].">".$years[$i]."</option>";
         }?>
       </select>
-      <select type="text" id="borderTypeFilter" onchange="border_type_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="borderTypeFilter" onchange="table_filter('borderTypeFilter','borderTable',2)" class='form-select-sm ms-2'  required>
         <option value=''>住宿生類別</option>
         <?php
         for($i = 0; $i<count($border_types); $i++){
           echo "<option value=".$border_types[$i].">".$border_types[$i]."</option>";
         }?>
       </select>
-      <select type="text" id="borderApplyFilter" onchange="border_apply_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="borderApplyFilter" onchange="table_filter('borderApplyFilter','borderTable',3)" class='form-select-sm ms-2'  required>
         <option value=''>申請樓長狀態</option>
         <?php
         for($i = 0; $i<count($border_apply_story_manager_states); $i++){
@@ -197,62 +197,3 @@
   </div>
 </div>
 
-<script>
-function border_year_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("borderYearFilter").value;
-  tr = document.getElementById("borderTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0].innerText;
-
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-function border_type_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("borderTypeFilter").value;
-  tr = document.getElementById("borderTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-function border_apply_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("borderApplyFilter").value;
-  tr = document.getElementById("borderTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-</script>

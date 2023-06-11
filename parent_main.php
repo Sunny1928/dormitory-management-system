@@ -92,10 +92,10 @@
           <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
           <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
           <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1"><b>科系：</b><?php echo $_SESSION['department'];?></p>
-          <p class="m-1"><b>宿舍：</b><?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1"><b>房號：</b><?php echo $_SESSION['room_number'];?></p>
-          <p class="m-1"><b>年度：</b><?php echo $_SESSION['year'];?></p>
+          <p class="m-1"><b>小孩科系：</b><?php echo $_SESSION['department'];?></p>
+          <p class="m-1"><b>小孩宿舍：</b><?php echo $_SESSION['dormitory_id'];?></p>
+          <p class="m-1"><b>小孩房號：</b><?php echo $_SESSION['room_number'];?></p>
+          <p class="m-1"><b>小孩住宿年度：</b><?php echo $_SESSION['year'];?></p>
         </div>
       </div>
       <!-- <div class="card m-2 px-4 py-3">

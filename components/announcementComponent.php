@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between">
     <h4 class="mb-0">公告</h4>
     <?php 
-        if( $_SESSION["permission"] != 3){
+        if($_SESSION["permission"] == 1 || $_SESSION["permission"] ==0){
             echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addNewsModal'><i class='fa fa-add me-1'></i> 新增</button>";
         }
     ?>

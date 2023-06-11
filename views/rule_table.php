@@ -3,8 +3,11 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">宿舍規範資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addRuleModal'><i class='fa fa-add me-1'></i>新增</button>
-  </div>
+      <?php 
+        if( $_SESSION["permission"] == 0)
+          echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addRuleModal'><i class='fa fa-add me-1'></i>新增</button>";
+      ?>
+    </div>
 </div>
 
 <!-- Table -->
@@ -18,7 +21,11 @@
               <th scope="col">編號</th> 
               <th scope="col">內容</th>
               <th scope="col">點數</th>
-              <th scope="col">操作</th>
+              <?php
+                if( $_SESSION["permission"] == 0){
+                  echo "<th scope='col'>操作</th>";
+                }
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -36,12 +43,14 @@
                   echo "<tr>" .
                     "<td>" . $id . "</td>".
                     "<td>" . $content . "</td>".
-                    "<td>" . $point . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRuleModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRuleModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $point . "</td>";
+                    if( $_SESSION["permission"] == 0){
+                      echo "<td>
+                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal$id'><i class='fa fa-pencil'></i></button>
+                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBillModal$id'><i class='fa fa-trash'></i></button>
+                      </td>";
+                    }
+                  echo "</tr>";
 
                   // Update Modal
                   echo "
@@ -110,7 +119,9 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addRuleModal' tabindex='-1' aria-labelledby='addRuleModalLabel' aria-hidden='true'>
+<?php 
+if( $_SESSION["permission"] == 0){
+echo "<div class='modal fade' id='addRuleModal' tabindex='-1' aria-labelledby='addRuleModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
@@ -137,5 +148,6 @@
       </form>
     </div>
   </div>
-</div>
-
+</div>";
+}
+?>

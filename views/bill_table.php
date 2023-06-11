@@ -4,14 +4,14 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">帳單資料</h4>
     <div class="d-flex">
-      <select type="text" id="billTypeFilter" onchange="bill_type_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="billTypeFilter" onchange="table_filter('billTypeFilter','billTable',4)" class='form-select-sm ms-2'  required>
         <option value=''>帳單類別</option>
         <?php
         for($i = 0; $i<count($bill_types); $i++){
           echo "<option value=".$bill_types[$i].">".$bill_types[$i]."</option>";
         }?>
       </select>
-      <select type="text" id="billStateFilter" onchange="bill_state_filter()" class='form-select-sm ms-2'  required>
+      <select type="text" id="billStateFilter" onchange="table_filter('billStateFilter','billTable',6)" class='form-select-sm ms-2'  required>
         <option value=''>帳單狀態</option>
         <?php
         for($i = 0; $i<count($bill_states); $i++){
@@ -51,13 +51,13 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              // if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                 $result = bill_read_all($conn);
-            // }else if($_SESSION["permission"] == 2){
-            //   $result = bill_read_account($conn , $_SESSION['account']);
-            // }else{
-            //   $result = bill_read_account($conn , $_SESSION['account']);
-            // }
+            }else if($_SESSION["permission"] == 2){
+              $result = bill_read_account($conn , $_SESSION['account']);
+            }else{
+              $result = bill_read_account($conn , $_SESSION['account']);
+            }
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -169,6 +169,8 @@
                     </div>
                   </div>";
                 }
+              }else{
+                echo "<td class='text-center' colspan='100%'>無</td>";
               }
             ?>
           </tbody>
@@ -228,43 +230,3 @@
     </div>
   </div>
 </div>
-
-<script>
-function bill_type_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("billTypeFilter").value;
-  tr = document.getElementById("billTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[4].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
-function bill_state_filter() {
-  var filter, tr, td, i;
-  filter = document.getElementById("billStateFilter").value;
-  tr = document.getElementById("billTable").getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6].innerText;
-    if (td) {
-      if (filter == '') {
-        tr[i].style.display = "";
-      } else if (td == filter) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-</script>

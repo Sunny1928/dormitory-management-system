@@ -3,7 +3,27 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">點名紀錄</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addRollCallRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="rollCallYearFilter" onchange="table_filter('rollCallYearFilter','rollCallTable',1)" class='form-select-sm ms-2'  required>
+        <option value=''>年</option>
+        <?php
+        for($i = 0; $i<count($years); $i++){
+          echo "<option value=".$years[$i].">".$years[$i]."</option>";
+        }?>
+      </select>
+      <select type="text" id="rollCallStateFilter" onchange="table_filter('rollCallStateFilter', 'rollCallTable', 3)" class='form-select-sm ms-2'  required>
+        <option value=''>點名狀態</option>
+        <?php
+        for($i = 0; $i<count($roll_call_states); $i++){
+          echo "<option value=".$roll_call_states[$i].">".$roll_call_states[$i]."</option>";
+        }?>
+      </select>
+      <?php 
+        if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year']))
+          echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addRollCallRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
+      ?>
+    </div>
+      
   </div>
 </div>
 
@@ -13,7 +33,7 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="rollCallTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
               <th scope="col">編號</th> 
@@ -21,21 +41,29 @@
               <th scope="col">帳號</th>
               <th scope="col">點名狀態</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <?php 
+                if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year']))
+                  echo "<th scope='col'>操作</th>";
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
-    
-              $result = roll_call_read_all($conn);
-              $roll_call_states = array("缺席", "出席");
-
+              if( $_SESSION["permission"] == 0 ){
+                $result = roll_call_read_all($conn);
+              }else if (story_manager_check($conn, $_SESSION['account'], $_SESSION['year'])){ // story manager
+                $result = roll_call_read_all($conn);
+              }else if( $_SESSION["permission"] == 2){ // parents
+                $result = roll_call_read_account($conn, $_SESSION['student_account']);
+              }else{ // students
+                $result = roll_call_read_account($conn, $_SESSION['account']);
+              }
 
               if (mysqli_num_rows($result) > 0) 
               {
                 while ($info = mysqli_fetch_assoc($result)) 
                 {
-                  $id = $info['roll_call_state_record_id']; // 不要改
+                  $id = $info['roll_call_state_record_id']; 
                   $year = $info['year'];
                   $account = $info['account'];
                   $state = $info['state'];
@@ -46,12 +74,14 @@
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
                     "<td class='".$state_classes[$state]."'>" . $roll_call_states[$state] . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
+                    "<td>" . $datetime . "</td>";
+                  if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year'])){
+                    echo "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRollCallRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRollCallRecordModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    </td>";
+                  }  
+                  echo "</tr>";
 
                   // Update Modal
                   echo "
@@ -106,6 +136,8 @@
                     </div>
                   </div>";
                 }
+              }else{
+                echo "<td class='text-center' colspan='100%'>無</td>";
               }
             ?>
           </tbody>
@@ -118,7 +150,11 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addRollCallRecordModal' tabindex='-1' aria-labelledby='addRollCallRecordModalLabel' aria-hidden='true'>
+<?php
+
+if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year'])){
+
+echo "<div class='modal fade' id='addRollCallRecordModal' tabindex='-1' aria-labelledby='addRollCallRecordModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
@@ -129,24 +165,20 @@
         <div class='modal-body'>
           <div class='text-center mb-3'>
           <select class='form-select mb-4' name='year_account' required>
-              <option value=''>年度-帳號</option>
-              <?php
+              <option value=''>年度-帳號</option>";
                 $res = border_read_all($conn);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['year'].'-'.$info['account'].">".$info['year'].'-'.$info['account'].''."</option>";
                   }
                 }
-              ?>
-            </select>
+            echo "</select>
             <select class='form-select mb-4' name='state' required>
-              <option value=''>狀態</option>
-              <?php
+              <option value=''>狀態</option>";
               for($i = 0; $i<2; $i++){
                 echo "<option value=$i>".$roll_call_states[$i]."</option>";
               }
-              ?>
-            </select>
+            echo "</select>
           </div>
         </div>
         
@@ -158,5 +190,6 @@
       
     </div>
   </div>
-</div>
-
+</div>";
+}
+?>

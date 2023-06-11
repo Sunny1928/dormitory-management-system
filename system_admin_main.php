@@ -1,4 +1,3 @@
-<?php ob_start();?>
 <!-- Sidebar -->
 <header>
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
@@ -72,12 +71,12 @@
       $record_name=$info['name'];
       if($iiid==-1){
         echo "<div class='alert alert-dismissible fade show alert-danger' role='alert' data-mdb-color='danger'>
-        <strong>出入卡驗證失敗</strong> 
+        <strong>通行證驗證失敗</strong> 
         <button type='button' class='btn-close' data-mdb-dismiss='alert' aria-label='Close'></button>
       </div>";
       }else{
       echo "<div class='alert alert-dismissible fade show alert-success' role='alert' data-mdb-color='success'>
-      <strong>$record_name 出入卡驗證成功</strong> 
+      <strong>$record_name 通行證驗證成功</strong> 
       <button type='button' class='btn-close' data-mdb-dismiss='alert' aria-label='Close'></button>
     </div>";
       }
@@ -92,12 +91,12 @@
       </div>
       <div class="card m-2 px-4 py-3">
         <div>
-          <p class="m-1">名稱：<?php echo $_SESSION['name'];?></p>
-          <p class="m-1">帳號：<?php echo $_SESSION['account'];?></p>
-          <p class="m-1">Email：<?php echo $_SESSION['email'];?></p>
-          <p class="m-1">電話：<?php echo $_SESSION['phone'];?></p>
-          <p class="m-1">種類：<?php echo $types[$_SESSION['type']];?></p>
-          <p class="m-1">性別：<?php echo $genders[$_SESSION['gender']];?></p>
+          <p class="m-1"><b>名稱：</b><?php echo $_SESSION['name'];?></p>
+          <p class="m-1"><b>帳號：</b><?php echo $_SESSION['account'];?></p>
+          <p class="m-1"><b>Email：</b><?php echo $_SESSION['email'];?></p>
+          <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
+          <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
+          <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
         </div>
       </div>
     </div>
@@ -262,4 +261,3 @@
 </script>
 
 
-<?php ob_end_flush();?>
