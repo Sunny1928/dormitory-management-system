@@ -34,7 +34,7 @@
                     <h5>$title</h5>
                     <p>$content</p>";
                     # 判斷是不是本人和身分是否為學生 , 都符合的人不能編輯其他使用者的公告
-                    if( $_SESSION["permission"] != 3){
+                    if($_SESSION["permission"] == 1 || $_SESSION["permission"] ==0){
                         echo "<div class='d-flex'>
                                 <button type='button' class='btn btn-tertiary me-2' data-mdb-ripple-color='light' data-mdb-toggle='modal' data-mdb-target='#updateNewsModal$id'>編輯</button>
                                 <button type='button' class='btn btn-tertiary' data-mdb-ripple-color='light' data-mdb-toggle='modal' data-mdb-target='#deleteNewsModal$id'>刪除</button>

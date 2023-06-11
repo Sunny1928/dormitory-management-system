@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <header>
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
-    <div class="position-sticky">
+    <div class="sidebar-sticky position-sticky">
       <div class="mt-4">
         <div id="header-content" class="w-auto">
           <div class="d-flex justify-content-center">
@@ -100,25 +100,6 @@
           <p class="m-1"><b>小孩住宿年度：</b><?php echo $_SESSION['year'];?></p>
         </div>
       </div>
-      <!-- <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">宿舍申請</h4>
-        </div>
-      </div> -->
-      <?php
-        // require("./components/applyDormComponent.php");
-      ?>
-
-      
-
-      <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">樓長申請</h4>
-        </div>
-      </div>
-      <?php
-        require("./components/applyStoryManagerComponent.php");
-      ?>
 
     </div>
   

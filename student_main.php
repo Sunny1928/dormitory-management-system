@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <header>
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white p-0">
-    <div class="position-sticky">
+    <div class="sidebar-sticky position-sticky">
       <div class="mt-4">
         <div id="header-content" class="w-auto">
           <div class="d-flex justify-content-center">

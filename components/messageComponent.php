@@ -29,7 +29,7 @@
                 
                 # 判斷是不是本人和身分是否為學生 , 都符合的人不能編輯其他使用者的留言
                 if($account != $_SESSION["account"] ){
-                    if ($_SESSION["permission"]==3){
+                    if ($_SESSION["permission"]!=1 && $_SESSION["permission"]!=0){
                     echo "
                     <div class='d-flex flex-row justify-content-start'>
                         <img src='./image/user.png' alt='avatar' class='rounded-circle' style='width: 45px; height: 100%;'>
