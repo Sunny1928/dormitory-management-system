@@ -134,35 +134,35 @@
     <!--system admin-->
     <div class="tab-pane fade" id="pills-system-admin" role="tabpanel" aria-labelledby="tab-system-admin">
       <?php
-        require("./views/system_admin_table.php") 
+        //require("./views/system_admin_table.php") 
       ?>
     </div>
 
     <!--dorm manager-->
     <div class="tab-pane fade" id="pills-dorm-manager" role="tabpanel" aria-labelledby="tab-dorm-manager">
       <?php
-        require("./views/dorm_manager_table.php") 
+        //require("./views/dorm_manager_table.php") 
       ?>
     </div>
 
     <!--parents-->
     <div class="tab-pane fade" id="pills-parents" role="tabpanel" aria-labelledby="tab-parents">
       <?php
-        require("./views/parents_table.php") 
+        //require("./views/parents_table.php") 
       ?>
     </div>
 
     <!--student-->
     <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
       <?php
-        require("./views/student_table.php") 
+        //require("./views/student_table.php") 
       ?>
     </div>
 
     <!--border-->
     <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
       <?php
-        require("./views/border_table.php") 
+        //require("./views/border_table.php") 
       ?>
     </div>
 
@@ -171,14 +171,14 @@
     <!--dormitory-->
     <div class="tab-pane fade" id="pills-dormitory" role="tabpanel" aria-labelledby="tab-dormitory">
       <?php
-        require("./views/dormitory_table.php")
+        //require("./views/dormitory_table.php")
       ?>
     </div>
 
     <!--room-->
     <div class="tab-pane fade" id="pills-room" role="tabpanel" aria-labelledby="tab-room">
       <?php
-        require("./views/room_table.php")
+        //require("./views/room_table.php")
       ?>
     </div>
 
@@ -192,7 +192,7 @@
     <!--rule-->
     <div class="tab-pane fade" id="pills-rule" role="tabpanel" aria-labelledby="tab-rule">
       <?php
-        require("./views/rule_table.php")
+        //require("./views/rule_table.php")
       ?>
     </div>
 
@@ -269,7 +269,7 @@
     <!--change dorm-->
     <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm">
       <?php
-        // require("./views/change_dorm_table.php")
+        require("./views/change_dorm_table.php")
       ?>
     </div>
 
