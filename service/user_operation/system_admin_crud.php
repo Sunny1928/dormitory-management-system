@@ -157,8 +157,13 @@
 
                 for($i=0; $i<$room_dep_num; $i++){
 
-                    system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
-                    system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
+                    if($i >= sizeof($department)){
+                        system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, "", $send_mail);
+                        system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, "", $send_mail);
+                    }else{
+                        system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
+                        system_admin_roommate_allocation($conn, $year, $dorm_id, $room_num, $department[$i][0], $send_mail);
+                    }
                 }            
             }
         }

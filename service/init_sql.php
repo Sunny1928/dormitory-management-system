@@ -26,7 +26,7 @@
         # 建立家長帳號
         add_parent($conn);
         # 申請停車證 & 更新狀態
-        add_parking_permit($conn);
+        // add_parking_permit($conn);
         # 新增舍監
         add_dorm_manager($conn);
         # 建立樓長
