@@ -33,7 +33,7 @@
                     AND apply_quit_dorm.year = border.year
                 JOIN student ON apply_quit_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                WHERE apply_quit_dorm.account =";
+                WHERE apply_quit_dorm.account = ? ";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
