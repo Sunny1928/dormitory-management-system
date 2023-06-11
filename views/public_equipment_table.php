@@ -34,13 +34,16 @@
               <th scope="col">報修紀錄</th>
               <th scope="col">過期年限</th>
               <th scope="col">購買日期</th>
-              <th scope="col">操作</th>
+              <?php
+              if($_SESSION["permission"] != 2)
+                echo "<th scope='col'>操作</th>";
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
             if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
-                $result = public_equipment_read_all($conn);
+              $result = public_equipment_read_all($conn);
             }else{
               $result = public_equipment_read($conn , $_SESSION['dormitory_id']);
             }
@@ -63,12 +66,17 @@
                     "<td>" . $name . "</td>".
                     "<td class='".$state_classes_defaults[$apply_fix_state]."'>" . $apply_fix_states[$apply_fix_state] . "</td>".
                     "<td>" . $expired_year . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updatePublicEquipmentModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deletePublicEquipmentModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $datetime . "</td>";
+                  if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+                    echo  "<td>
+                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updatePublicEquipmentModal$id'><i class='fa fa-pencil'></i></button>
+                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deletePublicEquipmentModal$id'><i class='fa fa-trash'></i></button>
+                      </td>";
+                  else if($_SESSION["permission"] != 2){
+                    echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
+                    echo  "class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmPublicEquipmentModal$id'><i class='fa fa-circle-info'></i></button></td>";
+                  }
+                  echo  "</tr>";
                     
                   // Update Modal
                   echo "
@@ -136,6 +144,30 @@
                             <input value='$id' required type='hidden' name='public_equipment_id' class='form-control' />
                             <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                             <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>";
+
+                  // Confirm  Modal
+                  echo "
+                  <div class='modal fade' id='confirmPublicEquipmentModal$id' tabindex='-1' aria-labelledby='confirmPublicEquipmentModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                      <form method='post' action='./controller/public_equipment_controller.php'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <h5 class='modal-title' id='confirmPublicEquipmentModalLabel'>申請宿舍設備報修</h5>
+                          </div>
+                          <div class='modal-body'>您確認要申請此宿舍設備報修嗎？</div>
+                          <div class='modal-footer'>
+                            <input value='$id' required type='hidden' name='public_equipment_id' class='form-control' />
+                            <input value='$name' required type='hidden' name='name' class='form-control' />
+                            <input value='1' required type='hidden' name='apply_fix_state' class='form-control' />
+                            <input value='$dormitory_id' required type='hidden' name='dormitory_id' class='form-control' />
+                            <input value='$expired_year' required type='hidden' name='expired_year' class='form-control' />
+                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+                            <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
                           </div>
                         </div>
                       </form>

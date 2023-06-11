@@ -47,7 +47,7 @@
                   echo "<tr>" .
                     "<td>" . $id . "</td>".
                     "<td>" . $account . "</td>".
-                    "<td>" . $apply_dorm_states[$state] . "</td>".
+                    "<td class='".$state_classes[$state]."'>" . $apply_dorm_states[$state] . "</td>".
                     "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateApplyDormModal$id'><i class='fa fa-pencil'></i></button>

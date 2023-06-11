@@ -4,7 +4,19 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">申請停車資料</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addParkingPermitModal'><i class='fa fa-add me-1'></i>新增</button>
+    <div class="d-flex">
+      <select type="text" id="parkingPermitStateFilter" onchange="table_filter('parkingPermitStateFilter', 'parkingPermitTable', 2)" class='form-select-sm ms-2'  required>
+        <option value=''>申請狀態</option>
+        <?php
+        for($i = 0; $i<count($parking_permit_states); $i++){
+          echo "<option value=".$parking_permit_states[$i].">".$parking_permit_states[$i]."</option>";
+        }?>
+      </select>
+      <?php 
+        if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+          echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addParkingPermitModal'><i class='fa fa-add me-1'></i>新增</button>";
+      ?>
+    </div>
   </div>
 </div>
 
@@ -13,20 +25,26 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="parkingPermitTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
               <th scope="col">編號</th> 
               <th scope="col">帳號</th>
               <th scope="col">狀態</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <?php 
+              if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1)
+                echo "<th scope='col'>操作</th>"
+              ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
+            if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
               $result = parking_permit_read_all($conn);
-              $parking_permit_states = array("審核中", "通過", "未通過");
+            }else if( $_SESSION["permission"] == 2){ // parents
+              $result = parking_permit_read($conn, $_SESSION['account']);
+            }
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -41,12 +59,14 @@
                     "<td>" . $id . "</td>".
                     "<td>" . $account . "</td>".
                     "<td class='".$state_classes[$state]."'>" . $parking_permit_states[$state] . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateParkingPermitModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteParkingPermitModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $datetime . "</td>";
+                    if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                      echo "<td>
+                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal$id'><i class='fa fa-pencil'></i></button>
+                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAccessCardRecordModal$id'><i class='fa fa-trash'></i></button>
+                      </td>";
+                    }
+                  echo  "</tr>";
 
                   // Update Modal
                   echo "
@@ -113,35 +133,35 @@
 
 
 <!-- Add Modal -->
-<div class='modal fade' id='addParkingPermitModal' tabindex='-1' aria-labelledby='addParkingPermitModalLabel' aria-hidden='true'>
-  <div class='modal-dialog modal-dialog-centered'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <h5 class='modal-title'>新增申請停車</h5>
-      </div>
-      <form method='post' action='./controller/parking_permit_controller.php'>
-        <div class='modal-body'>
-          <div class='text-center mb-3'>
-            <select class='form-select mb-4' name='account' required>
-              <option value=''>帳號</option>
-              <?php
-                $res = parents_read_all($conn);
-                if (mysqli_num_rows($res) > 0) {
-                  while ($info = mysqli_fetch_assoc($res)){
-                    echo "<option value=".$info['account'].">".$info['account']."</option>";
+<?php
+if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+  echo "<div class='modal fade' id='addParkingPermitModal' tabindex='-1' aria-labelledby='addParkingPermitModalLabel' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title'>新增申請停車</h5>
+        </div>
+        <form method='post' action='./controller/parking_permit_controller.php'>
+          <div class='modal-body'>
+            <div class='text-center mb-3'>
+              <select class='form-select mb-4' name='account' required>
+                <option value=''>帳號</option>";
+                  $res = parents_read_all($conn);
+                  if (mysqli_num_rows($res) > 0) {
+                    while ($info = mysqli_fetch_assoc($res)){
+                      echo "<option value=".$info['account'].">".$info['account']."</option>";
+                    }
                   }
-                }
-              ?>
-            </select>
+              echo "</select>
+            </div>
           </div>
-        </div>
-        
-        <div class='modal-footer'>
-          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-          <button type='submit' class='btn btn-primary' name='create' value='create'>確認</button>
-        </div>
-      </form>
+          <div class='modal-footer'>
+            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+            <button type='submit' class='btn btn-primary' name='create' value='create'>確認</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
-
+  </div>";
+  }
+?>

@@ -19,6 +19,7 @@
   $state_classes_defaults = array("","text-warning", "text-success", "text-danger");
   $roll_call_states = array("缺席", "出席");
   $entry_exit_states = array("進", "出");
+  $parking_permit_states = array("審核中", "通過", "未通過");
   $years = array(110,111,112);
   $default_year = 110;
 

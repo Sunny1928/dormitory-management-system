@@ -25,7 +25,9 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
+          <i class="fas fa-car pe-3"></i>停車許可
+        </a>
         border
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roommate" data-mdb-toggle="pill" href="#pills-roommate" role="tab" aria-controls="pills-roommate" aria-selected="false">
           <i class="fas fa-door-open pe-3"></i>室友
@@ -134,6 +136,14 @@
       ?>
     </div>
 
+    <!--parking permit-->
+    <div class="tab-pane fade" id="pills-parking-permit" role="tabpanel" aria-labelledby="tab-parking-permit">
+      <?php
+        require("./components/applyParkingPermitComponent.php");
+        require("./views/parking_permit_table.php");
+      ?>
+    </div> 
+
     <!-- roommate -->
     <div class="tab-pane fade" id="pills-roommate" role="tabpanel" aria-labelledby="tab-roommate">
       <?php
@@ -192,10 +202,6 @@
 
     <!--access card-->
     <div class="tab-pane fade" id="pills-access-card" role="tabpanel" aria-labelledby="tab-access-card">
-      
-      <?php
-        require("./components/applyAccessCardComponent.php");
-      ?>
       <?php
         require("./views/access_card_table.php")
       ?>
@@ -207,6 +213,8 @@
         require("./views/announcement_table.php")
       ?>
     </div>
+
+    
 
     <!--help-->
     <div class="tab-pane fade" id="pills-help" role="tabpanel" aria-labelledby="tab-help">
@@ -336,6 +344,15 @@
     }
   } else if (location.hash === "#pills-access-card") {
     const triggerEl = document.querySelector('a[href="#pills-access-card"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-parking-permit") {
+    const triggerEl = document.querySelector('a[href="#pills-parking-permit"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {

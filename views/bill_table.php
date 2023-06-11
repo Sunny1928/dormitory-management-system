@@ -54,7 +54,7 @@
               if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                 $result = bill_read_all($conn);
             }else if($_SESSION["permission"] == 2){
-              $result = bill_read_account($conn , $_SESSION['account']);
+              $result = bill_read_account($conn , $_SESSION['student_account']);
             }else{
               $result = bill_read_account($conn , $_SESSION['account']);
             }

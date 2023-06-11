@@ -155,11 +155,10 @@
                   </div>";
 
                   // Confirm  Modal
-
                   echo "
                   <div class='modal fade' id='confirmEquipmentModal$id' tabindex='-1' aria-labelledby='confirmEquipmentModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
-                      <form method='post' action='./controller/violated_record_controller.php'>
+                      <form method='post' action='./controller/equipment_controller.php'>
                         <div class='modal-content'>
                           <div class='modal-header'>
                             <h5 class='modal-title' id='confirmEquipmentModalLabel'>申請宿舍設備報修</h5>
@@ -169,8 +168,7 @@
                             <input value='$id' required type='hidden' name='equipment_id' class='form-control' />
                             <input value='$name' required type='hidden' name='name' class='form-control' />
                             <input value='1' required type='hidden' name='apply_fix_state' class='form-control' />
-                            <input value='$room_number' required type='hidden' name='room_number' class='form-control' />
-                            <input value='$dormitory_id' required type='hidden' name='dormitory_id' class='form-control' />
+                            <input value='$dormitory_id-$room_number' required type='hidden' name='dormitory_room' class='form-control' />
                             <input value='$expired_year' required type='hidden' name='expired_year' class='form-control' />
                             <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
                             <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>

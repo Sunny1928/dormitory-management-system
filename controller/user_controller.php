@@ -28,9 +28,16 @@
 
     } else if(isset($_POST['user_login'])){
         $_SESSION['error'] = user_login($conn , $_POST['account'], $_POST['password'], 110);
+    
+    } else if(isset($_POST['edit_password'])){
+        echo $_POST['account'].' ';
+    echo $_POST['password'];
+        user_update_password($conn , $_POST['account'] , $_POST['password']);
 
     }
-
+    // echo $_POST['account'];
+    // echo $_POST['password'];
+    // echo $_POST['type'];
     // echo "hi";
     // echo $_SESSION['account'].' ';
     // echo $_SESSION['permission'].' ';
@@ -38,6 +45,8 @@
     // echo $_SESSION['phone'].' ';
     // echo $_SESSION['gender'].' ';
     // echo $_SESSION['department'].' ';
+    // header("Location: ../main.php");
+
 
     if($_POST['type']==0){
         header("Location: ../main.php#pills-system-admin");

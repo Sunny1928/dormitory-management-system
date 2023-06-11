@@ -79,25 +79,10 @@
 
     <!--main-->
     <div class="tab-pane fade show active" id="pills-main" role="tabpanel" aria-labelledby="tab-main">
-      <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">個人資料</h4>
-        </div>
-      </div>
-      <div class="card m-2 px-4 py-3">
-        <div>
-          <p class="m-1"><b>名稱：</b><?php echo $_SESSION['name'];?></p>
-          <p class="m-1"><b>帳號：</b><?php echo $_SESSION['account'];?></p>
-          <p class="m-1"><b>Email：</b><?php echo $_SESSION['email'];?></p>
-          <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
-          <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
-          <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1"><b>科系：</b><?php echo $_SESSION['department'];?></p>
-          <p class="m-1"><b>宿舍：</b><?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1"><b>房號：</b><?php echo $_SESSION['room_number'];?></p>
-          <p class="m-1"><b>年度：</b><?php echo $_SESSION['year'];?></p>
-        </div>
-      </div>
+      <?php
+        require("./components/infoComponent.php");
+      ?>
+      
       <!-- <div class="card m-2 px-4 py-3">
         <div class="d-flex justify-content-between">
             <h4 class="mb-0">宿舍申請</h4>

@@ -4,18 +4,19 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">違規紀錄資料</h4>
     <div class="d-flex">
-      <select type="text" id="violatedRecordAccountFilter" onchange="table_filter('violatedRecordAccountFilter','violatedRecordTable',2)" class='form-select-sm ms-2'  required>
-        <option value=''>帳號</option>
-        <?php
-        for($i = 0; $i<count($border_apply_story_manager_states); $i++){
-          echo "<option value=".$border_apply_story_manager_states[$i].">".$border_apply_story_manager_states[$i]."</option>";
-        }?>
-      </select>
-      <select type="text" id="violatedRecordStateFilter" onchange="table_filter('violatedRecordStateFilter','violatedRecordTable',4)" class='form-select-sm ms-2'  required>
+      <?php
+      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+        echo "<select type='text' id='violatedRecordAccountFilter' onchange='table_filter('violatedRecordAccountFilter','violatedRecordTable',2)' class='form-select-sm ms-2'  required>
+          <option value=''>帳號</option>";
+          for($i = 0; $i<count($border_apply_story_manager_states); $i++)
+            echo '<option value='.$border_apply_story_manager_states[$i].'>'.$border_apply_story_manager_states[$i].'</option>';
+        echo "</select>";
+      }?>
+      <select type='text' id='violatedRecordStateFilter' onchange="table_filter('violatedRecordStateFilter','violatedRecordTable',4)" class='form-select-sm ms-2'  required>
         <option value=''>申請取消狀態</option>
         <?php
         for($i = 0; $i<count($apply_cancel_states); $i++){
-          echo "<option value=".$apply_cancel_states[$i].">".$apply_cancel_states[$i]."</option>";
+          echo '<option value='.$apply_cancel_states[$i].'>'.$apply_cancel_states[$i].'</option>';
         }?>
       </select>
       <?php 
@@ -75,7 +76,7 @@
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
                     "<td>" . $content . "</td>".
-                    "<td>" . $apply_cancel_states[$apply_cancel] . "</td>".
+                    "<td class='".$state_classes_defaults[$apply_cancel]."'>".$apply_cancel_states[$apply_cancel] . "</td>".
                     "<td>" . $datetime . "</td>";
                   if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                     echo "<td>
