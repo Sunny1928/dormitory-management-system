@@ -131,8 +131,10 @@
     // user登入
     function user_login($conn , $account, $password , $year=112){
 
-        if(! user_login_verify($conn , $account , $password))
+        if(! user_login_verify($conn , $account , $password)){
+            $_SESSION['permission'] = "Error";
             return False;
+        }
 
         user_session_load($conn , $account);
         
