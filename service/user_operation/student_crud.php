@@ -56,4 +56,17 @@
         student_update_department($conn , $account , $department);
         user_update($conn , $name, $email , $phone , $account , $gender);
     }
+
+    function student_read_not_border($conn , $year){
+        $sql = "SELECT * FROM user 
+                JOIN student ON user.account = student.account 
+                WHERE user.account NOT IN (
+                    SELECT account FROM border 
+                    WHERE year = ?
+                )";   
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s' , $year);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 ?>
