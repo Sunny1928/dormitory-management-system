@@ -24,7 +24,7 @@
         # 申請住宿 抽籤 -> 分配房間 -> 新增住宿帳單 -> 新增家長帳號
         system_admin_dorm_room_allocation_process($conn , 110);
         # 申請停車證 & 更新狀態
-        add_parking_permit($conn);
+        // add_parking_permit($conn);
         # 新增舍監
         add_dorm_manager($conn);
         # 建立樓長
