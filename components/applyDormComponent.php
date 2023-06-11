@@ -7,7 +7,6 @@
     $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year);
     
     if (mysqli_num_rows($result) > 0) {
-        echo "hi";
         $result=mysqli_fetch_array($result);
         $id = $result['apply_dorm_id'];
         $account = $result['account'];
@@ -60,6 +59,7 @@
                         <form method='post' action='./controller/apply_dorm_controller.php'>
                             <div class='modal-body'>
                                 <div class='form-outline mb-4'>
+                                    <input readonly value=$default_year readonly required type='text' name='year' class='form-control' />
                                     <div class='text-center mb-3'>
                                         <input readonly value=".$_SESSION['account']." readonly required type='text' name='account' class='form-control' />
                                         <label class='form-label'>帳號</label>

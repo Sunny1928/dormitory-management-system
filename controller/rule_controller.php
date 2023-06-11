@@ -1,7 +1,6 @@
 <?php
     require_once('../service/require_all.php');
 
-    echo "hihi";
     echo $_POST['rule_id'];
 
     if(isset($_POST['create'])){

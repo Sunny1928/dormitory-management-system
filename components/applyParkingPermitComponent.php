@@ -58,7 +58,7 @@
             <?php if($state == 0){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
-                        <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$apply_dorm_states[$state]."</span></p>
+                        <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$parking_permit_states[$state]."</span></p>
                     </div>
                     <form method='post' action='./controller/parking_permit_controller.php'>
                         <input value='$id' required type='hidden' name='parking_permit_record_id' class='form-control' />
