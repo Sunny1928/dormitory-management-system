@@ -23,8 +23,10 @@
         add_room_and_equipment_and_public_equipment($conn);
         # 申請住宿 抽籤 -> 分配房間 -> 新增住宿帳單 -> 新增家長帳號
         system_admin_dorm_room_allocation_process($conn , 110);
+        # 加家長
+        add_parent($conn);
         # 申請停車證 & 更新狀態
-        //add_parking_permit($conn);
+        add_parking_permit($conn);
         # 新增舍監
         add_dorm_manager($conn);
         # 建立樓長
@@ -38,7 +40,7 @@
         # 新增帳單、公告、留言
         add_announcement_and_message($conn);
         # 建立退宿申請
-        quit_dorm_create($conn,"A1095551",110);
+        quit_dorm_create($conn,"A1095551",109);
         
         
         
@@ -115,9 +117,12 @@
         # 測試用 109學生變成住宿生
         border_create($conn , 'A1095509' , 109);
         border_create($conn , 'A1095514' , 109);
+        border_create($conn , 'A1095546' , 109);
         border_create($conn , 'A1095550' , 109);
         border_create($conn , 'A1095551' , 109);
-        
+        border_create($conn , 'A1095562' , 109);
+        border_create($conn , 'A1095564' , 109);
+    
     }
     
     function add_dorm($conn){
@@ -171,13 +176,13 @@
     }
 
     function add_parent($conn){
-        parents_create($conn , "李一郎" , "father1" , "a1095509@mail.nuk.edu.tw" , "0987654321" , "father1" , 0 , 2 , "A1095551");
-        parents_create($conn , "朱二郎" , "father2" , "a1095514@mail.nuk.edu.tw" , "0987654321" , "father2" , 0 , 2 , "A1095552");
-        parents_create($conn , "胡三郎" , "father3" , "a1095546@mail.nuk.edu.tw" , "0987654321" , "father3" , 0 , 2 , "A1095553");
-        parents_create($conn , "莊四郎" , "father4" , "a1095550@mail.nuk.edu.tw" , "0987654321" , "father4" , 0 , 2 , "A1095554");
-        parents_create($conn , "廖五郎" , "father5" , "a1095551@mail.nuk.edu.tw" , "0987654321" , "father5" , 0 , 2 , "A1095555");
-        parents_create($conn , "鄭六郎" , "father6" , "a1095562@mail.nuk.edu.tw" , "0987654321" , "father6" , 0 , 2 , "A1095556");
-        parents_create($conn , "富七郎" , "father7" , "a1095564@mail.nuk.edu.tw" , "0987654321" , "father7" , 0 , 2 , "A1095557");
+        parents_create($conn , "李一郎" , "father1" , "a1095509@mail.nuk.edu.tw" , "0987654321" , "father1" , 0 , 2 , "A1095509");
+        parents_create($conn , "朱二郎" , "father2" , "a1095514@mail.nuk.edu.tw" , "0987654321" , "father2" , 0 , 2 , "A1095514");
+        parents_create($conn , "胡三郎" , "father3" , "a1095546@mail.nuk.edu.tw" , "0987654321" , "father3" , 0 , 2 , "A1095550");
+        parents_create($conn , "莊四郎" , "father4" , "a1095550@mail.nuk.edu.tw" , "0987654321" , "father4" , 0 , 2 , "A1095551");
+        parents_create($conn , "廖五郎" , "father5" , "a1095551@mail.nuk.edu.tw" , "0987654321" , "father5" , 0 , 2 , "A1095546");
+        parents_create($conn , "鄭六郎" , "father6" , "a1095562@mail.nuk.edu.tw" , "0987654321" , "father6" , 0 , 2 , "A1095562");
+        parents_create($conn , "富七郎" , "father7" , "a1095564@mail.nuk.edu.tw" , "0987654321" , "father7" , 0 , 2 , "A1095564");
     }
 
     function add_parking_permit($conn){

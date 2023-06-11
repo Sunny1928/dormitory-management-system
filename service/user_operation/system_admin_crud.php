@@ -108,7 +108,7 @@
 
     function system_admin_get_room_number($conn,$dorm_id){
 
-        $sql = "SELECT COUNT(room_number) * room.num_of_people FROM room
+        $sql = "SELECT SUM(room.num_of_people) FROM room
                 WHERE room.dormitory_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $dorm_id);
