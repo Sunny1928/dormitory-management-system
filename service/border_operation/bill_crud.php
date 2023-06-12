@@ -47,7 +47,7 @@
     //  根據帳號和年份查詢繳費
     function bill_read_account($conn , $account){   
         
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
@@ -63,7 +63,7 @@
     //  根據帳號和年份查詢繳費
     function bill_read_account_year($conn , $account , $year){   
                
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
@@ -79,7 +79,7 @@
     //  根據帳號、年份和是否繳費查詢繳費
     function bill_read_account_year_state($conn , $account , $year , $state){   
                
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
@@ -95,7 +95,7 @@
     //  根據年份和是否繳費查詢繳費
     function bill_read_year_state($conn , $year , $state){  
         
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
@@ -111,7 +111,7 @@
     //  根據年份查詢繳費
     function bill_read_year($conn , $year){  
         
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
@@ -127,7 +127,7 @@
     //  查詢全部繳費
     function bill_read_all($conn){  
         
-        $sql = "SELECT * FROM bill
+        $sql = "SELECT user.* , border.* , bill.* FROM bill
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
