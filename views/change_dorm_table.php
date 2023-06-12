@@ -21,7 +21,7 @@
               <th scope="col">帳號</th>
               <th scope="col">大樓ID</th>
               <th scope="col">房間號碼</th>
-              <th scope="col">另一方學生之帳號</th>
+              <th scope="col">換宿對象</th>
               <th scope="col">學生同意狀態</th>
               <th scope="col">最終審核狀態</th>
               <th scope="col">時間</th>
@@ -58,7 +58,7 @@
                     "<td>" . $change_room_number . "</td>".
                     "<td>" . $another_border . "</td>".
                     "<td class='".$state_classes[$student_state]."'>" . $student_states[$student_state] . "</td>".
-                    "<td class='".$state_classes[$final_state]."'>" . $final_states[$final_state] . "</td>".
+                    "<td class='".$state_classes_defaults[$final_state]."'>" . $final_states[$final_state] . "</td>".
                     "<td>" . $datetime . "</td>".
                     "<td>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateChangeDormRecordModal$id'><i class='fa fa-pencil'></i></button>
@@ -100,7 +100,7 @@
                             }
                           echo "</select>
                           <select class='form-select mb-4' name='another_border' required>
-                          <option value=''>另一方學生之帳號</option>";
+                          <option value=''>換宿對象</option>";
                               $res = border_read_year($conn, $year);
                               if (mysqli_num_rows($res) > 0) {
                                         while ($info = mysqli_fetch_assoc($res)){
@@ -178,7 +178,7 @@
           </select>
 
           <select class='form-select mb-4' name='another_border' required>
-              <option value=''>另一方學生之帳號</option>
+              <option value=''>換宿對象</option>
               <?php
                 $res = border_read_all($conn);
                 if (mysqli_num_rows($res) > 0) {

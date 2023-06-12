@@ -114,7 +114,7 @@
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增宿舍</h5>
+        <h5 class='modal-title' id='addSystemManagerModalLabel'>新增帳單</h5>
       </div>
       <form method='post' action='./controller/bill_controller.php'>
         <div class='modal-body'>
@@ -122,7 +122,7 @@
             <select class='form-select mb-4' name='year_account' required>
               <option value=''>年度-帳號</option>
               <?php
-                $res = border_read_all($conn);
+                $res = border_read_year($conn, $default_year);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['year'].'-'.$info['account'].">".$info['year'].'-'.$info['account'].''."</option>";
@@ -166,7 +166,7 @@ echo "
   <div class='modal-content'>
   <form method='post' action='./controller/bill_controller.php'>
     <div class='modal-header'>
-      <h5 class='modal-title' id='updateBillModalLabel'>修改宿舍</h5>
+      <h5 class='modal-title' id='updateBillModalLabel'>修改帳單</h5>
     </div>
     <div class='modal-body'>
       <div class='text-center mb-3'>
@@ -224,9 +224,9 @@ echo "
     <div class='modal-content'>
       <form method='post' action='./controller/bill_controller.php'>
         <div class='modal-header'>
-          <h5 class='modal-title' id='deleteBillModalLabel'>刪除宿舍</h5>
+          <h5 class='modal-title' id='deleteBillModalLabel'>刪除帳單</h5>
         </div>
-        <div class='modal-body'>您確認要刪除此宿舍嗎？</div>
+        <div class='modal-body'>您確認要刪除此帳單嗎？</div>
         <div class='modal-footer'>
           <input id='id' required type='hidden' name='bill_id' class='form-control' />
           <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>

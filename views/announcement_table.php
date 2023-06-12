@@ -128,7 +128,7 @@
             <select class='form-select mb-4' name='account' required>
               <option value=''>帳號</option>
               <?php
-                $res = user_read_all($conn);
+                $res = system_admin_read_all($conn);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['account'].">".$info['account']."</option>";

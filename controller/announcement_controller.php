@@ -4,7 +4,7 @@
     require_once('../service/require_all.php');
 
     if(isset($_POST['create'])){
-        announcement_create($conn, $_POST['account'], $_POST['title'], $_POST['content']);
+        announcement_create($conn, $_POST['account'], $_POST['title'], $_POST['content'], true);
     } else if(isset($_POST['delete'])){
         announcement_delete($conn, $_POST['announcement_id']);
     } else if(isset($_POST['update'])){

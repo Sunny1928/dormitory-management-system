@@ -163,7 +163,7 @@ echo
           <div class='text-center mb-3'>
             <select class='form-select mb-4' name='year_account' required>
               <option value=''>年度-帳號</option>";
-                $res = border_read_all($conn);
+                $res = border_read_year($conn, $default_year);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['year'].'-'.$info['account'].">".$info['year'].'-'.$info['account'].''."</option>";

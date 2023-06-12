@@ -11,11 +11,11 @@
 <?php
     //輸出換宿資料
 
-    $result = change_dorm_read_account($conn , $_SESSION['account']);
+    $result = change_dorm_read_self_account_year($conn , $_SESSION['account'], $_SESSION['year']);
 
     if (mysqli_num_rows($result) > 0) {
         $info=mysqli_fetch_array($result);
-        $id = $info['apply_change_dorm_id']; // 不要改
+        $id = $info['apply_change_dorm_id']; 
         $year = $info['year'];
         $account = $info['account'];
         $change_dorm_id	= $info['change_dorm_id'];
@@ -69,26 +69,41 @@
             <div class='card-body'>
             <h4 class='card-title mb-4'>換宿申請</h4>
             <?php if($final_state == 1){
-                echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
-                        <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
-                        <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$change_dorm_states[$final_state]."</span></p>
-                    </div>
-                    <form method='post' action='./controller/change_dorm_controller.php'>
-                        <input value='$id' required type='hidden' name='apply_change_dorm_id' class='form-control' />
-                        <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
-                    </form>";
-            }else if($final_state == 0){
+                    echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
+                            <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                            <p class='fs-5 my-2'><strong>申請年度：</strong><span class='font-monospace'>$year</span></p>
+                            <p class='fs-5 my-2'><strong>換宿對象：</strong><span class='font-monospace'>$another_border</span></p>
+                            <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$change_dorm_states[$final_state]."</span></p>
+                        </div>
+                        <form method='post' action='./controller/change_dorm_controller.php'>
+                            <input value='$id' required type='hidden' name='apply_change_dorm_id' class='form-control' />
+                            <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
+                        </form>";
                 
+            }else if($final_state == 0){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                        <p class='fs-5 my-2'><strong>申請年度：</strong><span class='font-monospace'>$year</span></p>
+                        <p class='fs-5 my-2'><strong>換宿對象：</strong><span class='font-monospace'>$another_border</span></p>
                         <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$change_dorm_states[$final_state]."</span></p>
-                    </div>
-                    <form method='post' action='./controller/change_dorm_controller.php'>
-                        <input value='$account' required type='hidden' name='account' class='form-control' />
-                        <input value='$year' required type='hidden' name='year' class='form-control' />
-                        <input value='$another_border' required type='hidden' name='another_border' class='form-control' />
-                        <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
-                    </form>";
+                    </div>";
+          if($student_state ==0) 
+                echo "
+                <form method='post' action='./controller/change_dorm_controller.php'>
+                    <input value='$id' required type='hidden' name='apply_change_dorm_id' class='form-control' />
+                    <input value='1' required type='hidden' name='student_state' class='form-control' />
+                    <input value='$another_border' required type='hidden' name='another_border' class='form-control' />
+                    <input value='$year' required type='hidden' name='year' class='form-control' />
+                    <input value='1' required type='hidden' name='final_state' class='form-control' />
+                    <button type='submit' class='mb-2 btn btn-primary btn-block' name='update' value='update'>同意</button>
+                </form>";
+
+                echo "<form method='post' action='./controller/change_dorm_controller.php'>
+                    <input value=".$_SESSION['account']." required type='hidden' name='account' class='form-control' />
+                    <input value='$year' required type='hidden' name='year' class='form-control' />
+                    <input value='$another_border' required type='hidden' name='another_border' class='form-control' />
+                    <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
+                </form>";
             }else if($final_state == -1){
                 echo "
                     <div class='m-2'>
@@ -105,7 +120,7 @@
                                         $res = border_read_year($conn, $year);
                                         if (mysqli_num_rows($res) > 0) {
                                             while ($info = mysqli_fetch_assoc($res)){
-                                            echo "<option value=".$info['account']; if($another_border ==$info['account']) echo " selected"; echo ">".$info['account'].''."</option>";
+                                            echo "<option value=".$info['account'].">".$info['account'].''."</option>";
                                             }
                                         }
                                 echo "</select>
@@ -118,10 +133,11 @@
                     </div> ";
             }else{
 
-                /*這裡還沒寫好!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/ 
-                echo "
-                <div class='p-3 mb-2 ' style='border-radius:10px; background:#eee'>
-                    </div>
+                echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
+                    <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                    <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'>$year</span></p>
+                    <p class='fs-5 my-2'><strong>換宿對象：</strong><span class='font-monospace'>$another_border</span></p>
+                    <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace ".$state_classes_defaults[$final_state]."'>".$change_dorm_states[$final_state]."</span></p>
                 </div>";
             }
             ?>

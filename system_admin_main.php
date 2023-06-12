@@ -25,9 +25,17 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
+
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-xmark pe-3"></i>申請退宿 
+        </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
+          <i class="fas fa-building-circle-arrow-right pe-3"></i>申請換宿 
+        </a>
+
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="false">
           <i class="fas fa-person-shelter pe-3"></i>住宿生
         </a>
@@ -91,7 +99,21 @@
       <?php
         require("./views/apply_dorm_table.php")
       ?>
-    </div> 
+    </div>
+    
+    <!--quit dorm-->
+    <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm">
+      <?php
+        require("./views/quit_dorm_table.php")
+      ?>
+    </div>
+
+    <!--change dorm-->
+    <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm">
+      <?php
+        require("./views/change_dorm_table.php")
+      ?>
+    </div>
 
     <!--border-->
     <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
@@ -210,7 +232,25 @@
       }
       instance.show();
     }
-  }
+  } else if (location.hash === "#pills-quit-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-quit-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-change-dorm") {
+    const triggerEl = document.querySelector('a[href="#pills-change-dorm"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } 
 </script>
 
 

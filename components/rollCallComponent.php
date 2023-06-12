@@ -31,7 +31,7 @@
                 <p class="m-1"><b>編號：</b><?php echo $id;?></p>
                 <p class="m-1"><b>年度：</b><?php echo $year;?></p>
                 <p class="m-1"><b>帳號：</b><?php echo $account;?></p>
-                <p class="m-1"><b>狀態：</b><?php echo $roll_call_states[$state];?></p>
+                <p class="m-1"><b>狀態：</b><span class="<?php echo $state_classes[$state];?>"><?php echo $roll_call_states[$state];?></span></p>
                 <p class="m-1"><b>時間：</b><?php echo $datetime;?></p>
             </div>
         </div>

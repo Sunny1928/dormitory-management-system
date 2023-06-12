@@ -80,7 +80,7 @@
                       </td>";
                   else if($_SESSION["permission"] != 2){
                     echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
-                    echo  "class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmEquipmentModal$id'><i class='fa fa-circle-info'></i></button></td>";
+                    echo  "onclick=\"put_equipment('$id','$dormitory_id-$room_number','$name','1','$expired_year')\" class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmEquipmentModal'><i class='fa fa-circle-info'></i></button></td>";
                   }
                 }
               }
@@ -211,23 +211,23 @@ echo "
 
 <div class='modal fade' id='confirmEquipmentModal' tabindex='-1' aria-labelledby='confirmEquipmentModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
-    <form method='post' action='./controller/equipment_controller.php'>
       <div class='modal-content'>
+    <form method='post' action='./controller/equipment_controller.php'>
         <div class='modal-header'>
           <h5 class='modal-title' id='confirmEquipmentModalLabel'>申請宿舍設備報修</h5>
         </div>
         <div class='modal-body'>您確認要申請此宿舍設備報修嗎？</div>
         <div class='modal-footer'>
-          <input value='$id' required type='hidden' name='equipment_id' class='form-control' />
-          <input value='$name' required type='hidden' name='name' class='form-control' />
-          <input value='1' required type='hidden' name='apply_fix_state' class='form-control' />
-          <input value='$dormitory_id-$room_number' required type='hidden' name='dormitory_room' class='form-control' />
-          <input value='$expired_year' required type='hidden' name='expired_year' class='form-control' />
+          <input id='id' required type='hidden' name='equipment_id' class='form-control' />
+          <input id='name' required type='hidden' name='name' class='form-control' />
+          <input id='apply_fix_state' required type='hidden' name='apply_fix_state' class='form-control' />
+          <input id='dormitory_room' required type='hidden' name='dormitory_room' class='form-control' />
+          <input id='expired_year' required type='hidden' name='expired_year' class='form-control' />
           <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
           <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
         </div>
-      </div>
     </form>
+      </div>
   </div>
 </div>
 

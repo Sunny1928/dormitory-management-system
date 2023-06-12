@@ -83,7 +83,7 @@
         </a>
       </div>
       <div class=" text-center text-reset mt-5">
-        <em><small>Copyright © 2023 - PYSY</small></em>
+        <em><small>Copyright © 2023 </small></em>
       </div>
   </nav>
 </header>

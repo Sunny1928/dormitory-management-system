@@ -5,7 +5,7 @@
         $output = explode("-", $_POST['year_account']);
         $year = $output[0];
         $account = $output[1];
-        bill_create($conn, $account, $_POST['type'], $_POST['title'], $_POST['fee'], $year);
+        bill_create($conn, $account, $_POST['type'], $_POST['title'], $_POST['fee'], $year, true);
     } else if(isset($_POST['delete'])){
         bill_delete($conn, $_POST['bill_id']);
     } else if(isset($_POST['update'])){

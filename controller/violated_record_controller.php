@@ -5,7 +5,7 @@
         $output = explode("-", $_POST['year_account']);
         $year = $output[0];
         $account = $output[1];
-        violated_record_create($conn, $account, $_POST['rule_id'], $year);
+        violated_record_create($conn, $account, $_POST['rule_id'], $year, true);
     } else if(isset($_POST['delete'])){
         violated_record_delete($conn, $_POST['violated_record_id']);
     } else if(isset($_POST['update'])){
