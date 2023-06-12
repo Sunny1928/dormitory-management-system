@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+
 
 <div class="card m-2 px-4 py-3">
     <div class="d-flex justify-content-between">

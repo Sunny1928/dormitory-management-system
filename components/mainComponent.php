@@ -1,8 +1,3 @@
-<?php
-  session_start();
-?>
-
-
 <!--News-->
 <!--Title-->
 <div class="card m-2 px-4 py-3">

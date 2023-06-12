@@ -1,8 +1,4 @@
 <?php
-  session_start();
-?>
-
-<?php
     //輸出申請住宿資料
     $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year+1);
     

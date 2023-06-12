@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+
 
 <?php
     //輸出申請住宿資料

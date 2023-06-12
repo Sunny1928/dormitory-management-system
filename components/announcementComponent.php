@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+
 
 <!--Title-->
 <div class="card m-2 px-4 py-3">

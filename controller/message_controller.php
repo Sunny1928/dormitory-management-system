@@ -13,16 +13,4 @@
 
     header("Location: ../main.php#pills-message");
 
-
-    // -0 system_admin 
-    // -1 dorm_manager 
-    // -2 parent 
-    // -3 student 
-    // -4 border 
-    // -5 story_manager 
-    // -6 root
-    
-    // header("Location: ../backstage_main.php#pills-message");
-
-
 ?>
