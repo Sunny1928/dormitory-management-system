@@ -62,64 +62,11 @@
                     "<td>" . $datetime . "</td>";
                     if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                       echo "<td>
-                        <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal$id'><i class='fa fa-pencil'></i></button>
-                        <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAccessCardRecordModal$id'><i class='fa fa-trash'></i></button>
+                        <button onclick=\"put_parking_permit('$id','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateParkingPermitModal'><i class='fa fa-pencil'></i></button>
+                        <button onclick=\"put_parking_permit('$id','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteParkingPermitModal'><i class='fa fa-trash'></i></button>
                       </td>";
                     }
                   echo  "</tr>";
-
-                  // Update Modal
-                  echo "
-                  <div class='modal fade' id='updateParkingPermitModal$id' tabindex='-1' aria-labelledby='updateParkingPermitModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                    <form method='post' action='./controller/parking_permit_controller.php'>
-                    <div class='modal-content'>
-                      <div class='modal-header'>
-                        <h5 class='modal-title' id='updateParkingPermitModalLabel'>修改申請停車</h5>
-                      </div>
-                      <div class='modal-body'>
-                        <div class='text-center mb-3'>
-                          <div class='form-outline mb-4'>
-                            <input value='$id' readonly required type='text' name='parking_permit_record_id' class='form-control' />
-                            <label class='form-label'>申請停車編號</label>
-                          </div>
-                          <select class='form-select mb-4' name='state' required>
-                            <option value=''>狀態</option>";
-                            for($i = 0; $i<3; $i++){
-                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$parking_permit_states[$i]."</option>";
-                            }
-                          echo "</select>
-                        </div>
-                      </div>
-                      <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
-                      </div>
-                    </div>
-                    </form>
-                    </div>
-                  </div>";
-                  
-
-                  // Delete  Modal
-                  echo "
-                  <div class='modal fade' id='deleteParkingPermitModal$id' tabindex='-1' aria-labelledby='deleteParkingPermitModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <form method='post' action='./controller/parking_permit_controller.php'>
-                        <div class='modal-content'>
-                          <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteParkingPermitModalLabel'>刪除申請停車</h5>
-                          </div>
-                          <div class='modal-body'>您確認要刪除此申請停車嗎？</div>
-                          <div class='modal-footer'>
-                            <input value='$id' required type='hidden' name='parking_permit_record_id' class='form-control' />
-                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                            <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>";
                 }
               }
             ?>
@@ -164,4 +111,67 @@ if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
     </div>
   </div>";
   }
+
+  // Update Modal
+  echo "
+  <div class='modal fade' id='updateParkingPermitModal' tabindex='-1' aria-labelledby='updateParkingPermitModalLabel' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+    <form method='post' action='./controller/parking_permit_controller.php'>
+    <div class='modal-header'>
+        <h5 class='modal-title' id='updateParkingPermitModalLabel'>修改申請停車</h5>
+      </div>
+      <div class='modal-body'>
+        <div class='text-center mb-3'>
+          <div class='form-outline mb-4'>
+            <input id='id' readonly required type='text' name='parking_permit_record_id' class='form-control' />
+            <label class='form-label'>申請停車編號</label>
+          </div>
+          <select id='state' class='form-select mb-4' name='state' required>
+            <option value=''>狀態</option>";
+            for($i = 0; $i<3; $i++){
+              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$parking_permit_states[$i]."</option>";
+            }
+          echo "</select>
+        </div>
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
+      </div>
+    </form>
+    </div>
+    </div>
+  </div>";
 ?>
+
+<div class='modal fade' id='deleteParkingPermitModal' tabindex='-1' aria-labelledby='deleteParkingPermitModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+    <form method='post' action='./controller/parking_permit_controller.php'>
+    <div class='modal-header'>
+          <h5 class='modal-title' id='deleteParkingPermitModalLabel'>刪除申請停車</h5>
+        </div>
+        <div class='modal-body'>您確認要刪除此申請停車嗎？</div>
+        <div class='modal-footer'>
+          <input id='id' required type='hidden' name='parking_permit_record_id' class='form-control' />
+          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+          <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function put_parking_permit(a, b){
+  var elms = document.querySelectorAll("[id='id']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=a
+
+  var elms = document.querySelectorAll("[id='state']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=b
+  
+}
+</script>

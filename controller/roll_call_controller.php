@@ -10,6 +10,8 @@
         roll_call_delete($conn , $_POST['roll_call_state_record_id']);
     } else if(isset($_POST['update'])){
         roll_call_update($conn , $_POST['roll_call_state_record_id'] , $_POST['state']);
+    } else if(isset($_POST['create-roll-call'])){
+        story_manager_create_roll_call($conn , $_POST['type'] , $_POST['year']);
     }
 
     header("Location: ../main.php#pills-roll-call");

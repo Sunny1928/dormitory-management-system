@@ -50,8 +50,10 @@
           </thead>
           <tbody class="datatable-body">
             <?php
-              
-              $result = border_read_all($conn);
+              if($_SESSION['account'] == 'root')
+                $result = border_read_all($conn);
+              else if($_SESSION['permission'] == 0 || $_SESSION['permission'] == 1)
+                $result = border_read_year($conn, $default_year);
 
               if (mysqli_num_rows($result) > 0) 
               {
@@ -74,85 +76,12 @@
                     "<td>" . $dormitory_name . "</td>".
                     "<td>" . $room_number . "</td>".
                     "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBorderModal$year-$account'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBorderModal$year-$account'><i class='fa fa-trash'></i></button>
+                      <button onclick=\"put_border('$account','$year','$type','$state','$dormitory_id-$room_number')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBorderModal' ><i class='fa fa-pencil'></i></button>
+                      <button onclick=\"put_border('$account','$year','$type','$state','$dormitory_id-$room_number')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBorderModal'><i class='fa fa-trash'></i></button>
                     </td>".
                     "</tr>";
 
-                  // Update Modal
-                  echo "
-                  <div class='modal fade' id='updateBorderModal$year-$account' tabindex='-1' aria-labelledby='updateBorderModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                    <form method='post' action='./controller/border_controller.php'>
-                    <div class='modal-content'>
-                      <div class='modal-header'>
-                        <h5 class='modal-title' id='updateBorderModalLabel'>修改住宿生</h5>
-                      </div>
-                      <div class='modal-body'>
-                        <div class='text-center mb-3'>
-                          <div class='form-outline mb-4'>
-                            <input value='$account' required readonly type='text' name='account' class='form-control' />
-                            <label class='form-label'>住宿生編號</label>
-                          </div>
-                          <div class='form-outline mb-4'>
-                            <input value='$year' required readonly type='text' name='year' class='form-control' />
-                            <label class='form-label'>年</label>
-                          </div>
-                          <select class='form-select mb-4' name='type' required>
-                            <option value=''>類別</option>";
-                            for($i = 0; $i<6; $i++){
-                              echo "<option value=$i"; 
-                              if($type == $i) echo " selected"; 
-                              echo ">".$border_types[$i]."</option>";
-                            }
-                          echo "</select>
-                          <select class='form-select mb-4' name='apply_story_manager_state' required>
-                            <option value=''>狀態</option>";
-                            for($i = 0; $i<2; $i++){
-                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$border_apply_story_manager_states[$i]."</option>";
-                            }
-                          echo "</select>
-                          <select class='form-select mb-4' name='dorm_room' required>
-                            <option value=''>宿社-房號</option>";
-                              $res = room_read_all($conn);
-                              if (mysqli_num_rows($res) > 0) {
-                                while ($info = mysqli_fetch_assoc($res)){
-                                  echo "<option value=".$info['dormitory_id'].'-'.$info['room_number'].">".$info['name'].'-'.$info['room_number'].''."</option>";
-                                }
-                              }
-                          echo "</select>
-                        </div>
-                      </div>
-                      <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
-                      </div>
-                    </div>
-                    </form>
-                    </div>
-                  </div>";
                   
-
-                  // Delete  Modal
-                  echo "
-                  <div class='modal fade' id='deleteBorderModal$year-$account' tabindex='-1' aria-labelledby='deleteBorderModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <form method='post' action='./controller/border_controller.php'>
-                        <div class='modal-content'>
-                          <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteBorderModalLabel'>刪除住宿生</h5>
-                          </div>
-                          <div class='modal-body'>您確認要刪除此住宿生嗎？</div>
-                          <div class='modal-footer'>
-                            <input value='$account' required type='hidden' name='account' class='form-control' />
-                            <input value='$year' required type='hidden' name='year' class='form-control' />
-                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                            <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>";
                 }
               }
             ?>
@@ -176,7 +105,7 @@
             <select class='form-select mb-4' name='account' required>
               <option value=''>帳號</option>
               <?php
-                $res = student_read_all($conn);
+                $res = student_read_not_border($conn, $default_year);
                 if (mysqli_num_rows($res) > 0) {
                   while ($info = mysqli_fetch_assoc($res)){
                     echo "<option value=".$info['account'].">".$info['account']."</option>";
@@ -197,3 +126,106 @@
   </div>
 </div>
 
+<?php
+// Update Modal
+echo "
+<div class='modal fade' id='updateBorderModal' tabindex='-1' aria-labelledby='updateBorderModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+  <div class='modal-content'>
+  <form method='post' action='./controller/border_controller.php'>
+    <div class='modal-header'>
+      <h5 class='modal-title' id='updateBorderModalLabel'>修改住宿生</h5>
+    </div>
+    <div class='modal-body'>
+      <div class='text-center mb-3'>
+        <div class='form-outline mb-4'>
+          <input id='account' required readonly type='text' name='account' class='form-control' />
+          <label class='form-label'>住宿生編號</label>
+        </div>
+        <div class='form-outline mb-4'>
+          <input id='year' required readonly type='text' name='year' class='form-control' />
+          <label class='form-label'>年</label>
+        </div> 
+        <select id='type' class='form-select mb-4' name='type' required>
+          <option value=''>類別</option>";
+          for($i = 0; $i<6; $i++){
+            echo "<option value=$i"; 
+            if($type == $i) echo " selected"; 
+            echo ">".$border_types[$i]."</option>";
+          }
+        echo "</select>
+        <select id='apply_story_manager_state' class='form-select mb-4' name='apply_story_manager_state' required>
+          <option value=''>狀態</option>";
+          for($i = 0; $i<2; $i++){
+            echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$border_apply_story_manager_states[$i]."</option>";
+          }
+        echo "</select>
+        <select id='dorm_room' class='form-select mb-4' name='dorm_room' required>
+          <option value=''>宿社-房號</option>";
+            $res = room_read_all($conn);
+            if (mysqli_num_rows($res) > 0) {
+              while ($info = mysqli_fetch_assoc($res)){
+                echo "<option value=".$info['dormitory_id'].'-'.$info['room_number'];
+                if($dormitory_id == $info['dormitory_id'] && $room_number == $info['room_number']) echo " selected";
+                echo ">".$info['name'].'-'.$info['room_number'].''."</option>";
+              }
+            }
+        echo "</select>
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+      <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
+    </div>
+  </form>
+  </div>
+  </div>
+</div>";
+?>
+
+<div class='modal fade' id='deleteBorderModal' tabindex='-1' aria-labelledby='deleteBorderModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <form method='post' action='./controller/border_controller.php'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='deleteBorderModalLabel'>刪除住宿生</h5>
+        </div>
+        <div class='modal-body'>您確認要刪除此住宿生嗎？</div>
+        <div class='modal-footer'>
+          <input id='account' required type='hidden' name='account' class='form-control' />
+          <input id='year' required type='hidden' name='year' class='form-control' />
+          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+          <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function put_border(a, b, c, d, e){ 
+  var elms = document.querySelectorAll("[id='account']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=a
+
+  var elms = document.querySelectorAll("[id='year']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=b
+
+  var elms = document.querySelectorAll("[id='type']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=c
+
+  var elms = document.querySelectorAll("[id='apply_story_manager_state']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=d
+
+  var elms = document.querySelectorAll("[id='dorm_room']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=e
+
+}
+
+
+</script>

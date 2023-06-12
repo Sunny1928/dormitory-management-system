@@ -4,6 +4,13 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">違規紀錄資料</h4>
     <div class="d-flex">
+      <select type="text" id="vrYearFilter" onchange="table_filter('vrYearFilter','violatedRecordTable',1)" class='form-select-sm ms-2'  required>
+        <option value=''>年</option>
+        <?php
+        for($i = 0; $i<count($years); $i++){
+          echo "<option value=".$years[$i].">".$years[$i]."</option>";
+        }?>
+      </select>
       <?php
       if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
         echo "<select type='text' id='violatedRecordAccountFilter' onchange='table_filter('violatedRecordAccountFilter','violatedRecordTable',2)' class='form-select-sm ms-2'  required>

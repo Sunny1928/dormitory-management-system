@@ -93,7 +93,7 @@
         </a>
       </div>
       <div class="list-group list-group-flush mx-3">
-        <a href="./backstage_index.php" class="list-group-item py-2 ripple pb-2">
+      <a href="./index.php" class="list-group-item py-2 ripple pb-2">
           <i class="fas fa-right-from-bracket pe-3"></i>登出
         </a>
       </div>
@@ -110,59 +110,43 @@
 
     <!--main-->
     <div class="tab-pane fade show active" id="pills-main" role="tabpanel" aria-labelledby="tab-main">
-      <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">個人資料</h4>
-        </div>
-      </div>
-      <div class="card m-2 px-4 py-3">
-        <div>
-          <p class="m-1"><b>名稱：</b><?php echo $_SESSION['name'];?></p>
-          <p class="m-1"><b>帳號：</b><?php echo $_SESSION['account'];?></p>
-          <p class="m-1"><b>Email：</b><?php echo $_SESSION['email'];?></p>
-          <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
-          <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
-          <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
-          <p class="m-1"><b>科系：</b><?php echo $_SESSION['department'];?></p>
-          <p class="m-1"><b>學生帳號：</b><?php echo $_SESSION['student_account'];?></p>
-          <p class="m-1"><b>宿舍：</b><?php echo $_SESSION['dormitory_id'];?></p>
-          <p class="m-1"><b>房號：</b><?php echo $_SESSION['room_number'];?></p>
-        </div>
-      </div>
+      <?php
+        require("./components/infoComponent.php")
+      ?>
     </div>
 
     <!--system admin-->
     <div class="tab-pane fade" id="pills-system-admin" role="tabpanel" aria-labelledby="tab-system-admin">
       <?php
-        // require("./views/system_admin_table.php") 
+        require("./views/system_admin_table.php") 
       ?>
     </div>
 
     <!--dorm manager-->
     <div class="tab-pane fade" id="pills-dorm-manager" role="tabpanel" aria-labelledby="tab-dorm-manager">
       <?php
-        // require("./views/dorm_manager_table.php") 
+        require("./views/dorm_manager_table.php") 
       ?>
     </div>
 
     <!--parents-->
     <div class="tab-pane fade" id="pills-parents" role="tabpanel" aria-labelledby="tab-parents">
       <?php
-        // require("./views/parents_table.php") 
+        require("./views/parents_table.php") 
       ?>
     </div>
 
     <!--student-->
     <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
       <?php
-        // require("./views/student_table.php") 
+        require("./views/student_table.php") 
       ?>
     </div>
 
     <!--border-->
     <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
       <?php
-        // require("./views/border_table.php") 
+        require("./views/border_table.php") 
       ?>
     </div>
 
@@ -170,28 +154,28 @@
     <!--dormitory-->
     <div class="tab-pane fade" id="pills-dormitory" role="tabpanel" aria-labelledby="tab-dormitory">
       <?php
-        // require("./views/dormitory_table.php")
+        require("./views/dormitory_table.php")
       ?>
     </div>
 
     <!--room-->
     <div class="tab-pane fade" id="pills-room" role="tabpanel" aria-labelledby="tab-room">
       <?php
-        // require("./views/room_table.php")
+        require("./views/room_table.php")
       ?>
     </div>
 
     <!--equipment-->
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
-        // require("./views/equipment_table.php")
+        require("./views/equipment_table.php")
       ?>
     </div>
 
     <!--rule-->
     <div class="tab-pane fade" id="pills-rule" role="tabpanel" aria-labelledby="tab-rule">
       <?php
-        // require("./views/rule_table.php")
+        require("./views/rule_table.php")
       ?>
     </div>
 

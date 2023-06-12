@@ -4,6 +4,13 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">帳單資料</h4>
     <div class="d-flex">
+      <select type="text" id="billYearFilter" onchange="table_filter('billYearFilter','billTable',1)" class='form-select-sm ms-2'  required>
+        <option value=''>年</option>
+        <?php
+        for($i = 0; $i<count($years); $i++){
+          echo "<option value=".$years[$i].">".$years[$i]."</option>";
+        }?>
+      </select>
       <select type="text" id="billTypeFilter" onchange="table_filter('billTypeFilter','billTable',4)" class='form-select-sm ms-2'  required>
         <option value=''>帳單類別</option>
         <?php
@@ -81,93 +88,13 @@
                     "<td class='".$state_classes[$state]."'>" . $bill_states[$state] . "</td>";
                   if( $_SESSION["permission"] == 0){
                     echo "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBillModal$id'><i class='fa fa-trash'></i></button>
+                      <button onclick=\"put_bill('$id','$year','$account','$type','$title','$fee','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateBillModal'><i class='fa fa-pencil'></i></button>
+                      <button onclick=\"put_bill('$id','$year','$account','$type','$title','$fee','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteBillModal'><i class='fa fa-trash'></i></button>
                     </td>";
                   }
                   echo  "</tr>";
 
-                  // Update Modal
-                  echo "
-                  <div class='modal fade' id='updateBillModal$id' tabindex='-1' aria-labelledby='updateBillModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                    <form method='post' action='./controller/bill_controller.php'>
-                    <div class='modal-content'>
-                      <div class='modal-header'>
-                        <h5 class='modal-title' id='updateBillModalLabel'>修改宿舍</h5>
-                      </div>
-                      <div class='modal-body'>
-                        <div class='text-center mb-3'>
-                          <div class='form-outline mb-4'>
-                            <input value='$id' required readonly type='text' name='bill_id' class='form-control' />
-                            <label class='form-label'>帳單編號</label>
-                          </div>
-                          <div class='form-outline mb-4'>
-                            <input value='$year' required readonly type='text' name='year' class='form-control' />
-                            <label class='form-label'>年</label>
-                          </div>
-                          <div class='form-outline mb-4'>
-                            <input value='$account' required readonly type='text' name='account' class='form-control' />
-                            <label class='form-label'>帳號</label>
-                          </div>
-                          
-                          <select class='form-select mb-4' name='type' required>
-                            <option value=''>類別</option>";
-
-                            for($i = 0; $i<5; $i++){
-
-                              echo "<option value=$i"; 
-                              if($type == $i) echo " selected"; 
-                              echo ">".$bill_types[$i]."</option>";
-                            }
-                          echo "</select>
-                          <div class='form-outline mb-4'>
-                            <input value='$title' required type='text' name='title'' class='form-control' />
-                            <label class='form-label'>名稱</label>
-                          </div>
-                          <div class='form-outline mb-4'>
-                            <input value='$fee' required type='text' name='fee' class='form-control' />
-                            <label class='form-label' >費用</label>
-                          </div>
-                          <select class='form-select mb-4' name='state' required>
-                            <option value=''>狀態</option>";
-                            for($i = 0; $i<2; $i++){
-                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$bill_states[$i]."</option>";
-                            }
-                          echo "</select>
-                          
-                        </div>
-                      </div>
-                      <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
-                      </div>
-                    </div>
-                    </form>
-                    </div>
-                  </div>";
                   
-
-                  // Delete  Modal
-                  echo "
-                  <div class='modal fade' id='deleteBillModal$id' tabindex='-1' aria-labelledby='deleteBillModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <form method='post' action='./controller/bill_controller.php'>
-                        <div class='modal-content'>
-                          <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteBillModalLabel'>刪除宿舍</h5>
-                          </div>
-                          <div class='modal-body'>您確認要刪除此宿舍嗎？</div>
-                          <div class='modal-footer'>
-                            <input value='$id' required type='hidden' name='bill_id' class='form-control' />
-                            <input value='$dormitory_id' required type='hidden' name='dormitory_id' class='form-control' />
-                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                            <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>";
                 }
               }else{
                 echo "<td class='text-center' colspan='100%'>無</td>";
@@ -230,3 +157,118 @@
     </div>
   </div>
 </div>
+
+<?php
+// Update Modal
+echo "
+<div class='modal fade' id='updateBillModal' tabindex='-1' aria-labelledby='updateBillModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+  <div class='modal-content'>
+  <form method='post' action='./controller/bill_controller.php'>
+    <div class='modal-header'>
+      <h5 class='modal-title' id='updateBillModalLabel'>修改宿舍</h5>
+    </div>
+    <div class='modal-body'>
+      <div class='text-center mb-3'>
+        <div class='form-outline mb-4'>
+          <input id='id' required readonly type='text' name='bill_id' class='form-control' />
+          <label class='form-label'>帳單編號</label>
+        </div>
+        <div class='form-outline mb-4'>
+          <input id='year' required readonly type='text' name='year' class='form-control' />
+          <label class='form-label'>年</label>
+        </div>
+        <div class='form-outline mb-4'>
+          <input id='account' required readonly type='text' name='account' class='form-control' />
+          <label class='form-label'>帳號</label>
+        </div>
+        
+        <select id='type' class='form-select mb-4' name='type' required>
+          <option value=''>類別</option>";
+          for($i = 0; $i<5; $i++){
+            echo "<option value=$i"; 
+            if($type == $i) echo " selected"; 
+            echo ">".$bill_types[$i]."</option>";
+          }
+        echo "</select>
+        <div class='form-outline mb-4'>
+          <input id='title' required type='text' name='title'' class='form-control' />
+          <label class='form-label'>名稱</label>
+        </div>
+        <div class='form-outline mb-4'>
+          <input id='fee' required type='text' name='fee' class='form-control' />
+          <label class='form-label' >費用</label>
+        </div>
+        <select id='state' class='form-select mb-4' name='state' required>
+          <option value=''>狀態</option>";
+          for($i = 0; $i<2; $i++){
+            echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$bill_states[$i]."</option>";
+          }
+        echo "</select>
+        
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+      <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
+    </div>
+  </form>
+  </div>
+  </div>
+</div>";
+?>
+
+<!--Delete  Modal -->
+<div class='modal fade' id='deleteBillModal' tabindex='-1' aria-labelledby='deleteBillModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <form method='post' action='./controller/bill_controller.php'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='deleteBillModalLabel'>刪除宿舍</h5>
+        </div>
+        <div class='modal-body'>您確認要刪除此宿舍嗎？</div>
+        <div class='modal-footer'>
+          <input id='id' required type='hidden' name='bill_id' class='form-control' />
+          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+          <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function put_bill(a, b, c, d, e, f, g){ 
+  var elms = document.querySelectorAll("[id='id']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=a
+
+  var elms = document.querySelectorAll("[id='year']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=b
+
+  var elms = document.querySelectorAll("[id='account']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=c
+
+  var elms = document.querySelectorAll("[id='type']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=d
+
+  var elms = document.querySelectorAll("[id='title']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=e
+
+  var elms = document.querySelectorAll("[id='fee']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=f
+
+  var elms = document.querySelectorAll("[id='state']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=g
+
+}
+
+
+</script>

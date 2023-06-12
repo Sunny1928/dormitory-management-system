@@ -78,12 +78,15 @@
                         <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
                     </form>";
             }else if($final_state == 0){
+                
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
                         <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$change_dorm_states[$final_state]."</span></p>
                     </div>
                     <form method='post' action='./controller/change_dorm_controller.php'>
-                        <input value='$id' required type='hidden' name='apply_change_dorm_id' class='form-control' />
+                        <input value='$account' required type='hidden' name='account' class='form-control' />
+                        <input value='$year' required type='hidden' name='year' class='form-control' />
+                        <input value='$another_border' required type='hidden' name='another_border' class='form-control' />
                         <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
                     </form>";
             }else if($final_state == -1){
@@ -95,11 +98,17 @@
                                     <div class='text-center mb-3'>
                                         <input readonly value=".$_SESSION['year'].'-'.$_SESSION['account']." readonly required type='text' name='year_account' class='form-control' />
                                         <label class='form-label'>年度-帳號</label>
-
-                                        <input value='".$_SESSION['another_border']."' required type='text' name='another_border' class='form-control' />
-                                        <input value='".$_SESSION['student_state']."' required type='hidden' name='student_state' class='form-control' />
                                     </div>
                                 </div>
+                                <select class='form-select mb-4' name='another_border' required>
+                                    <option value=''>另一方學生之帳號</option>";
+                                        $res = border_read_year($conn, $year);
+                                        if (mysqli_num_rows($res) > 0) {
+                                            while ($info = mysqli_fetch_assoc($res)){
+                                            echo "<option value=".$info['account']; if($another_border ==$info['account']) echo " selected"; echo ">".$info['account'].''."</option>";
+                                            }
+                                        }
+                                echo "</select>
                             </div>
         
                             <div class='modal-footer'>

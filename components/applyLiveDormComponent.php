@@ -4,13 +4,15 @@
 
 <?php
     //輸出申請住宿資料
-    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year);
+    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year+1);
     
     if (mysqli_num_rows($result) > 0) {
         $result=mysqli_fetch_array($result);
         $id = $result['apply_dorm_id'];
         $account = $result['account'];
         $state = $result['state'];  // 1
+        $year = $result['year']; 
+        $datetime = $result['datetime'];  
     } else{
         $state = -1;
     }
@@ -30,8 +32,14 @@
                     </li>
                     <li class=<?php if($state == 0){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
                         <div class='c-stepper__content'>
-                            <h3 class='c-stepper__title'>步驟二：審核並分發</h3>
+                            <h3 class='c-stepper__title'>步驟二：審核</h3>
                             <p>會依照你的違規紀錄，分配宿舍，若你扣分的幾點越多，越難抽到</p>
+                        </div>
+                    </li>
+                    <li class=<?php if($state == 1 || $state == 2){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
+                        <div class='c-stepper__content'>
+                            <h3 class='c-stepper__title'>步驟三：分發</h3>
+                            <p>公布抽到宿舍名單</p>
                         </div>
                     </li>
                 </ol>
@@ -45,25 +53,51 @@
             <h4 class='card-title mb-4'>宿舍申請</h4>
             <?php if($state == 0){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
-                        <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'> 111</span></p>
-                        <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'> 111</span></p>
+                        <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                        <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'>$year</span></p>
                         <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$apply_dorm_states[$state]."</span></p>
                     </div>
                     <form method='post' action='./controller/apply_dorm_controller.php'>
                         <input value='$id' required type='hidden' name='apply_dorm_id' class='form-control' />
                         <button type='submit' class='btn btn-secondary btn-block' name='delete' value='delete'>刪除</button>
                     </form>";
-            }else{
+            }else if($state == -1){
                 echo "
                     <div class='m-2'>
                         <form method='post' action='./controller/apply_dorm_controller.php'>
                             <div class='modal-body'>
                                 <div class='form-outline mb-4'>
-                                <div class='text-center mb-3'>
-                                    <input readonly value=".$_SESSION['year'].'-'.$_SESSION['account']." readonly required type='text' name='year_account' class='form-control' />
+                                    <div class='text-center mb-3'>
+                                    <input readonly value=".($default_year+1)." readonly required type='text' name='year' class='form-control' />
+                                    <label class='form-label'>年度</label>
+                                    </div>
+                                </div>
+                                <div class='form-outline mb-4'>
+                                    <div class='text-center mb-3'>
+                                    <input readonly value=".$_SESSION['account']." readonly required type='text' name='account' class='form-control' />
                                     <label class='form-label'>帳號</label>
                                     </div>
                                 </div>
+                                <select class='form-select mb-4' name='first_priority_dorm' required>
+                                    <option value=''>宿舍第一選擇</option>";
+                                    if($_SESSION['gender']==0){
+                                        echo "<option value=0>學一男</option>";
+                                        echo "<option value=2>學二男</option>";
+                                    }else{
+                                        echo "<option value=1>學一女</option>";
+                                        echo "<option value=3>學二女</option>";
+                                    }
+                                echo "</select>
+                                <select class='form-select mb-4' name='second_priority_dorm' required>
+                                    <option value=''>宿舍第二選擇</option>";
+                                    if($_SESSION['gender']==0){
+                                        echo "<option value=0>學一男</option>";
+                                        echo "<option value=2>學二男</option>";
+                                    }else{
+                                        echo "<option value=1>學一女</option>";
+                                        echo "<option value=3>學二女</option>";
+                                    }
+                                echo "</select>
                             </div>
         
                             <div class='modal-footer'>
@@ -71,7 +105,13 @@
                             </div>
                         </form>
                     </div> ";
-            }
+            }else if($state == 1 || $state == 2){
+                echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
+                        <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                        <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'>$year</span></p>
+                        <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace ".$state_classes[$state]."'>".$apply_dorm_states[$state]."</span></p>
+                    </div>";
+                }
             ?>
 
             </div>

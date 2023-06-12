@@ -6,7 +6,7 @@
 <!--Title-->
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
-    <h4 class="mb-0">學生資料</h4>
+    <h4 class="mb-0">使用者資料</h4>
     <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addStudentModal'><i class='fa fa-add me-1'></i>新增</button>
   </div>
 </div>
@@ -139,22 +139,7 @@
                     </div>
                   </div>";
 
-                  // Delete  Modal
-                  echo "
-                  <div class='modal fade' id='deleteStudentModal$account' tabindex='-1' aria-labelledby='deleteStudentModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <div class='modal-content'>
-                        <div class='modal-header'>
-                          <h5 class='modal-title' id='deleteStudentModalLabel'>刪除使用者</h5>
-                        </div>
-                        <div class='modal-body'>您確認要刪除此使用者嗎？</div>
-                        <div class='modal-footer'>
-                          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                          <button type='button' class='btn btn-primary' onclick='location.href=\"./service/student_delete.php?account=$account\"'>確認</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>";
+                  
                 }
               }
             ?>
@@ -201,6 +186,21 @@
             <button type="submit" class="btn btn-primary">確認</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='modal fade' id='deleteStudentModal' tabindex='-1' aria-labelledby='deleteStudentModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='deleteStudentModalLabel'>刪除使用者</h5>
+      </div>
+      <div class='modal-body'>您確認要刪除此使用者嗎？</div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+        <button type='button' class='btn btn-primary' onclick='location.href=\"./service/student_delete.php?account=$account\"'>確認</button>
       </div>
     </div>
   </div>

@@ -31,10 +31,10 @@
     
     } else if(isset($_POST['edit_password'])){
         echo $_POST['account'].' ';
-    echo $_POST['password'];
+        echo $_POST['password'];
         user_update_password($conn , $_POST['account'] , $_POST['password']);
 
-    }
+    } 
     // echo $_POST['account'];
     // echo $_POST['password'];
     // echo $_POST['type'];

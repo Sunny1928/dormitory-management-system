@@ -13,6 +13,7 @@
         <p class="m-1"><b>電話：</b><?php echo $_SESSION['phone'];?></p>
         <p class="m-1"><b>種類：</b><?php echo $types[$_SESSION['type']];?></p>
         <p class="m-1"><b>性別：</b><?php echo $genders[$_SESSION['gender']];?></p>
+        
         <?php
         if($_SESSION['permission']!=1 && $_SESSION['permission']!=0 && $_SESSION['permission']!=2){
           echo "<p class='m-1'><b>科系：</b>".$_SESSION['department']."</p>";
@@ -20,6 +21,8 @@
           echo "<p class='m-1'><b>年度：</b>".$_SESSION['year']."</p>".
           "<p class='m-1'><b>宿舍：</b>".$_SESSION['dormitory_id']."</p>".
           "<p class='m-1'><b>房號：</b>".$_SESSION['room_number']."</p>";
+          if($_SESSION['permission']!=3)
+            echo "<p class='m-1'><b>住宿生種類：</b>".$_SESSION['border_type']."</p>";
         }
         ?>
         

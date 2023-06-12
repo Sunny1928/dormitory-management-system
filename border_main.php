@@ -28,25 +28,33 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
-          <i class="fas fa-building-circle-xmark pe-3"></i>申請退宿
-        </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
-          <i class="fas fa-building-circle-arrow-right pe-3"></i>申請換宿
-        </a>
+        <?php
+          // border
+          if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
+            echo "
+            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-quit-dorm' data-mdb-toggle='pill' href='#pills-quit-dorm' role='tab' aria-controls='pills-quit-dorm' aria-selected='false'>
+              <i class='fas fa-building-circle-xmark pe-3'></i>申請退宿
+            </a>
+            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-change-dorm' data-mdb-toggle='pill' href='#pills-change-dorm' role='tab' aria-controls='pills-change-dorm' aria-selected='false'>
+              <i class='fas fa-building-circle-arrow-right pe-3'></i>申請換宿
+            </a>
+            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-roommate' data-mdb-toggle='pill' href='#pills-roommate' role='tab' aria-controls='pills-roommate' aria-selected='false'>
+              <i class='fas fa-door-open pe-3'></i>室友
+            </a>
+            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-equipment' data-mdb-toggle='pill' href='#pills-equipment' role='tab' aria-controls='pills-equipment' aria-selected='false'>
+              <i class='fas fa-bed pe-3'></i>宿舍設備
+            </a>
+            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-public-equipment' data-mdb-toggle='pill' href='#pills-public-equipment' role='tab' aria-controls='pills-public-equipment' aria-selected='false'>
+              <i class='fas fa-washing-machine pe-3'></i>公共設施 
+            </a>
+            ";
+          }
+        ?>
+        
 
-        border
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roommate" data-mdb-toggle="pill" href="#pills-roommate" role="tab" aria-controls="pills-roommate" aria-selected="false">
-          <i class="fas fa-door-open pe-3"></i>室友
-        </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
-          <i class="fas fa-bed pe-3"></i>宿舍設備
-        </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
-          <i class="fas fa-washing-machine pe-3"></i>公共設施 
-        </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
-          <i class="fas fa-scroll pe-3"></i>宿舍規範
+        
+        <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-rule' data-mdb-toggle='pill' href='#pills-rule' role='tab' aria-controls='pills-rule' aria-selected='false'>
+          <i class='fas fa-scroll pe-3'></i>宿舍規範
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
@@ -84,32 +92,25 @@
 <main>
 
   <div class="tab-content" style="max-height: 100vh;">
-    
+
+    <?php
+    if($_SESSION['permission']== 5){
+      require("./components/checkRollCallQRCode.php");
+    }
+    ?>
+
+
 
     <!--main-->
     <div class="tab-pane fade show active" id="pills-main" role="tabpanel" aria-labelledby="tab-main">
       <?php
         require("./components/infoComponent.php");
-      ?>
-      
-      <!-- <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">宿舍申請</h4>
-        </div>
-      </div> -->
-      <?php
-        // require("./components/applyDormComponent.php");
-      ?>
-
       
 
-      <div class="card m-2 px-4 py-3">
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-0">樓長申請</h4>
-        </div>
-      </div>
-      <?php
+      if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
+        require("./components/rollCallComponent.php");
         require("./components/applyStoryManagerComponent.php");
+      }
       ?>
 
     </div>
@@ -132,6 +133,7 @@
     <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm"> 
       <?php
         require("./components/applyLiveDormComponent.php");
+        // require("./views/apply_dorm_table.php");
       ?>
     </div>
 
@@ -209,17 +211,16 @@
     <div class="tab-pane fade" id="pills-access-card" role="tabpanel" aria-labelledby="tab-access-card">
       
       <?php
-        require("./components/applyAccessCardComponent.php");
-      ?>
-      <?php
-        require("./views/access_card_table.php")
+        if($_SESSION['permission']== 4 || $_SESSION['permission']== 5)
+          require("./components/applyAccessCardComponent.php");
+        require("./views/access_card_table.php");
       ?>
     </div>
 
      <!--announcement-->
      <div class="tab-pane fade" id="pills-announcement" role="tabpanel" aria-labelledby="tab-announcement">
       <?php
-        require("./views/announcement_table.php")
+        require("./views/announcement_table.php");
       ?>
     </div>
 
@@ -227,9 +228,8 @@
     <div class="tab-pane fade" id="pills-help" role="tabpanel" aria-labelledby="tab-help">
       <?php
         require("./components/helpComponent.php");
-      ?>
-      <?php
-        require("./components/storyManagerComponent.php");
+        if($_SESSION['permission']== 4 || $_SESSION['permission']== 5)
+          require("./components/storyManagerComponent.php");
       ?>
     </div>
 
@@ -385,7 +385,7 @@
       }
       instance.show();
     }
-  }
+  } 
 </script>
 
 

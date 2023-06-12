@@ -34,6 +34,9 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-entry-and-exit" data-mdb-toggle="pill" href="#pills-entry-and-exit" role="tab" aria-controls="pills-entry-and-exit" aria-selected="false">
           <i class="fas fa-note pe-3"></i>進出紀錄
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-room" data-mdb-toggle="pill" href="#pills-room" role="tab" aria-controls="pills-room" aria-selected="false">
+          <i class="fas fa-door-open pe-3"></i>宿舍房間
+        </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
           <i class="fas fa-bed pe-3"></i>宿舍設備
         </a>
@@ -109,10 +112,17 @@
       ?>
     </div>
 
+    <!-- room -->
+    <div class="tab-pane fade" id="pills-room" role="tabpanel" aria-labelledby="tab-room">
+      <?php
+        require("./views/room_table.php")
+      ?>
+    </div>
+
     <!--equipment-->
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
-        // require("./views/equipment_table.php")
+        require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -196,6 +206,15 @@
     }
   } else if (location.hash === "#pills-public-equipment") {
     const triggerEl = document.querySelector('a[href="#pills-public-equipment"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
+  } else if (location.hash === "#pills-room") {
+    const triggerEl = document.querySelector('a[href="#pills-room"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {

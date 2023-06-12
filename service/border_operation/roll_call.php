@@ -155,7 +155,7 @@
         $rel = $rel->fetch_assoc();
 
         $message = $rel['account'] . "|" . $rel['year'] . "|" .  $rel['roll_call_state_record_id'];
-        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "roll_call");
+        $qrcode_data = encrypt_qrcode_data($GLOBALS['url'] , $message , "main.php");
         return $qrcode_data;
     }
     

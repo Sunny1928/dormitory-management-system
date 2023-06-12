@@ -19,10 +19,12 @@
   $bill_states = array("未繳費", "已繳費");
   $state_classes = array("text-warning", "text-success", "text-danger");
   $state_classes_defaults = array("","text-warning", "text-success", "text-danger");
+  $state_classes_clean = array("text-danger", "text-success");
   $roll_call_states = array("缺席", "出席");
   $entry_exit_states = array("進", "出");
   $parking_permit_states = array("審核中", "通過", "未通過");
-  $years = array(110,111,112);
+  $clean_states = array("未整理", "整理完");
+  $years = array(109,110,111,112);
   $default_year = 110;
 
 ?>
@@ -64,7 +66,7 @@
       require('./parent_main.php');
 
     } else if($_SESSION['permission'] == 3){
-      require('./student_main.php');
+      require('./border_main.php');
 
     } else if($_SESSION['permission'] == 4){
       require('./border_main.php');

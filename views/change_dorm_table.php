@@ -101,9 +101,7 @@
                           echo "</select>
                           <select class='form-select mb-4' name='another_border' required>
                           <option value=''>另一方學生之帳號</option>";
-                          
                               $res = border_read_year($conn, $year);
-                              echo mysqli_num_rows($res);
                               if (mysqli_num_rows($res) > 0) {
                                         while ($info = mysqli_fetch_assoc($res)){
                                           echo "<option value=".$info['account']; if($another_border ==$info['account']) echo " selected"; echo ">".$info['account'].''."</option>";

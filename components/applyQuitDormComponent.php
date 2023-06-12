@@ -61,6 +61,7 @@
             <?php if($state == 0){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                        <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'>$year</span></p>
                         <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$quit_dorm_states[$state]."</span></p>
                     </div>
                     <form method='post' action='./controller/quit_dorm_controller.php'>
@@ -86,12 +87,11 @@
                         </form>
                     </div> ";
             }else{
-                
-                /*這裡還沒寫!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-                echo "
-                <div class='p-3 mb-2 ' style='border-radius:10px; background:#eee'>
-                    </div>
-                </div>";
+                echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
+                        <p class='fs-5 my-2'><strong>申請日期：</strong><span class='font-monospace'>$datetime</span></p>
+                        <p class='fs-5 my-2'><strong>學年：</strong><span class='font-monospace'>$year</span></p>
+                        <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace ".$state_classes[$state]."'>".$apply_dorm_states[$state]."</span></p>
+                    </div>";
             }
             ?>
 

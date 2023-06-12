@@ -25,9 +25,6 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="false">
-          <i class="fas fa-user-graduate pe-3"></i>學生
-        </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
@@ -87,12 +84,7 @@
       ?>
     </div>
 
-    <!--student-->
-    <div class="tab-pane fade" id="pills-student" role="tabpanel" aria-labelledby="tab-student">
-      <?php
-        // require("./views/student_table.php") 
-      ?>
-    </div>
+
 
     <!--apply dorm-->
     <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm">
@@ -103,10 +95,8 @@
 
     <!--border-->
     <div class="tab-pane fade" id="pills-border" role="tabpanel" aria-labelledby="tab-border">
-      <p>分配住宿生房間</p>
-      
       <?php
-        // require("./views/border_table.php") 
+        require("./views/border_table.php") 
       ?>
     </div>
 
@@ -120,7 +110,7 @@
     <!--equipment-->
     <div class="tab-pane fade" id="pills-equipment" role="tabpanel" aria-labelledby="tab-equipment">
       <?php
-        // require("./views/equipment_table.php")
+        require("./views/equipment_table.php")
       ?>
     </div>
 
@@ -168,15 +158,6 @@
     }
   } else if (location.hash === "#pills-equipment") {
     const triggerEl = document.querySelector('a[href="#pills-equipment"]');
-    if (triggerEl) {
-      let instance = mdb.Tab.getInstance(triggerEl)
-      if (!instance) {
-        instance = new mdb.Tab(triggerEl);
-      }
-      instance.show();
-    }
-  } else if (location.hash === "#pills-student") {
-    const triggerEl = document.querySelector('a[href="#pills-student"]');
     if (triggerEl) {
       let instance = mdb.Tab.getInstance(triggerEl)
       if (!instance) {
