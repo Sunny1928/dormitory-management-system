@@ -73,7 +73,7 @@
                         <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deletePublicEquipmentModal' onclick=\"put_public_equipment('$id','$name','$apply_fix_state','$dormitory_id','$expired_year')\"><i class='fa fa-trash'></i></button>
                       </td>";
                   else if($_SESSION["permission"] != 2){
-                    echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
+                    echo "<td> <button "; if($apply_fix_state != 0) echo " disabled ";
                     echo  "class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmPublicEquipmentModal' onclick=\"put_public_equipment('$id','$name',1,'$dormitory_id','$expired_year')\"><i class='fa fa-circle-info'></i></button></td>";
                   }
                   echo  "</tr>";

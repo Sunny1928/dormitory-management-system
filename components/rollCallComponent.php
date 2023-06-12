@@ -26,11 +26,19 @@
         <div class='card h-100'>
             <div class='card-body'>
                 <h4 class='card-title mb-4'>點名編號</h4>
-                <p class="m-1"><b>編號：</b><?php echo $id;?></p>
-                <p class="m-1"><b>年度：</b><?php echo $year;?></p>
-                <p class="m-1"><b>帳號：</b><?php echo $account;?></p>
-                <p class="m-1"><b>狀態：</b><span class="<?php echo $state_classes[$state];?>"><?php echo $roll_call_states[$state];?></span></p>
-                <p class="m-1"><b>時間：</b><?php echo $datetime;?></p>
+                <?php 
+                if($state == -1){
+                    echo " <p class='m-1'>尚未點名</p>";
+                }else{
+                    echo "
+                    <p class='m-1'><b>編號：</b>$id</p>
+                <p class='m-1'><b>年度：</b>$year</p>
+                <p class='m-1'><b>帳號：</b>$account</p>
+                <p class='m-1'><b>狀態：</b><span class='".$state_classes[$state]."'>".$roll_call_states[$state]."</span></p>
+                <p class='m-1'><b>時間：</b>$datetime</p>
+                    ";
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -39,6 +47,9 @@
             <div class='card-body'>
             <h4 class='card-title mb-4'>點名 QR Code</h4>
             <?php 
+             if($state == -1){
+                echo " <p class='m-1'>尚未點名</p>";
+            }else{
                 $cipgher = roll_call_gen_qrcode_data($conn , $id);
                 $access_card_url = "https://chart.googleapis.com/chart?cht=qr&chs=512x512&chl=".$cipgher;
                 
@@ -51,6 +62,7 @@
                         </a>
                     </div>
                 </div>";
+                }
             ?>
             </div>
         </div>

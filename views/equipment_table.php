@@ -79,7 +79,7 @@
                         <button onclick=\"put_equipment('$id','$dormitory_id-$room_number','$name','$apply_fix_state','$expired_year')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteEquipmentModal'><i class='fa fa-trash'></i></button>
                       </td>";
                   else if($_SESSION["permission"] != 2){
-                    echo "<td> <button "; if($apply_cancel != 0) echo " disabled ";
+                    echo "<td> <button "; if($apply_fix_state != 0) echo " disabled ";
                     echo  "onclick=\"put_equipment('$id','$dormitory_id-$room_number','$name','1','$expired_year')\" class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmEquipmentModal'><i class='fa fa-circle-info'></i></button></td>";
                   }
                 }

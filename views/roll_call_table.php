@@ -19,7 +19,7 @@
         }?>
       </select>
       <?php 
-        if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year'])){
+        if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $default_year)){
           echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addRollCallRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
           echo "<button class='message-btn btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#createAllRollCallRecordModal'><i class='fa fa-add me-1'></i>開始點名</button>";
         }
@@ -44,7 +44,7 @@
               <th scope="col">點名狀態</th>
               <th scope="col">時間</th>
               <?php 
-                if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year']))
+                if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $default_year))
                   echo "<th scope='col'>操作</th>";
               ?>
             </tr>
@@ -53,7 +53,7 @@
             <?php
               if( $_SESSION["permission"] == 0 ){
                 $result = roll_call_read_all($conn);
-              }else if (story_manager_check($conn, $_SESSION['account'], $_SESSION['year'])){ // story manager
+              }else if (story_manager_check($conn, $_SESSION['account'], $default_year)){ // story manager
                 $result = roll_call_read_by_dormitory_id($conn,$_SESSION['border_type']-2);
               }else if( $_SESSION["permission"] == 2){ // parents
                 $result = roll_call_read_account($conn, $_SESSION["account"]);
@@ -82,7 +82,7 @@
                       <button onclick=\"put_roll_call('$id','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateRollCallRecordModal'><i class='fa fa-pencil'></i></button>
                       <button onclick=\"put_roll_call('$id','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteRollCallRecordModal'><i class='fa fa-trash'></i></button>
                     </td>";
-                  } else if(story_manager_check($conn , $_SESSION['account'] , $_SESSION['year'])){
+                  } else if(story_manager_check($conn , $_SESSION['account'] , $default_year)){
                     echo "<td> <button "; if($state != 0) echo " disabled ";
                     echo  "onclick=\"put_roll_call('$id','1')\" class='message-btn btn ms-2 btn-outline-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#confirmRollCallModal'><i class='fa fa-circle-info'></i></button></td>";
                   } 
@@ -106,7 +106,7 @@
 <!-- Add Modal -->
 <?php
 
-if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $_SESSION['year'])){
+if( $_SESSION["permission"] == 0 || story_manager_check($conn , $_SESSION['account'] , $default_year)){
 
 echo "<div class='modal fade' id='addRollCallRecordModal' tabindex='-1' aria-labelledby='addRollCallRecordModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
@@ -146,7 +146,7 @@ echo "<div class='modal fade' id='addRollCallRecordModal' tabindex='-1' aria-lab
   </div>
 </div>";
 
-
+if(isset($_SESSION['border_type'])){
 echo "<div class='modal fade' id='createAllRollCallRecordModal' tabindex='-1' aria-labelledby='createAllRollCallRecordModalLabel' aria-hidden='true'>
   <div class='modal-dialog modal-dialog-centered'>
     <div class='modal-content'>
@@ -157,7 +157,7 @@ echo "<div class='modal fade' id='createAllRollCallRecordModal' tabindex='-1' ar
         <div class='modal-body'>您確認要開始點名嗎？</div>
         <div class='modal-footer'>
           <input value=".$_SESSION['border_type']." required type='hidden' name='type' class='form-control' />
-          <input value=".$_SESSION['year']." required type='hidden' name='year' class='form-control' />
+          <input value=".$default_year." required type='hidden' name='year' class='form-control' />
           <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
           <button type='submit' class='btn btn-primary' name='create-roll-call' value='create-roll-call'>確認</button>
         </div>
@@ -165,7 +165,7 @@ echo "<div class='modal fade' id='createAllRollCallRecordModal' tabindex='-1' ar
     </div>
   </div>
 </div>";
-
+}
 // Update Modal
 echo "
 <div class='modal fade' id='updateRollCallRecordModal' tabindex='-1' aria-labelledby='updateRollCallRecordModalLabel' aria-hidden='true'>
