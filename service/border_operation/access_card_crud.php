@@ -136,8 +136,11 @@
 
         $rel = $rel->fetch_assoc();
 
-        if($rel['account'] == $msg[0] && $rel['year'] == $msg[1] && $rel['state'] == 1)
+        if($rel['account'] == $msg[0] && $rel['year'] == $msg[1] && $rel['state'] == 1){
+            entry_and_exit_create($conn , $rel['account'], 0 , $rel['year']);
             return $rel['temporary_access_card_record_id'];
+        }
+
             
         else
             return -1;
