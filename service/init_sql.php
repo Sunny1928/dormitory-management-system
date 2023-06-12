@@ -23,7 +23,7 @@
         # 新增房間、設備、公告設備
         add_room_and_equipment_and_public_equipment($conn);
         # 申請住宿 抽籤 -> 分配房間 -> 新增住宿帳單 -> 新增家長帳號
-        system_admin_dorm_room_allocation_process($conn , 110);
+        // system_admin_dorm_room_allocation_process($conn , 110);
         # 加家長
         add_parent($conn);
         # 申請停車證 & 更新狀態
