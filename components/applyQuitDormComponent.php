@@ -12,6 +12,7 @@
     //輸出退宿資料
 
     $result = quit_dorm_read_account($conn , $_SESSION['account']);
+    
 
     if (mysqli_num_rows($result) > 0) {
         $info=mysqli_fetch_array($result);
@@ -20,6 +21,9 @@
         $account = $info['account'];
         $state = $info['state'];
         $datetime= $info['datetime'];
+        if($info['room_number']==''){
+            $_SESSION['permission'] = 3;
+        }
     } else{
         $state = -1;
     }
