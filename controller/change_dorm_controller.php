@@ -15,5 +15,5 @@
     } else if(isset($_POST['update'])){
         change_dorm_update_process($conn , $_POST['apply_change_dorm_id'],$_POST['student_state'], $_POST['final_state'], $_POST['another_border'], $_POST['year']);
     }
-    header("Location: ../main.php#pills-change-dorm");
+    header("Location: ../main.php?status=success#pills-change-dorm");
 ?>

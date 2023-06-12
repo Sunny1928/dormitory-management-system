@@ -149,7 +149,7 @@ echo "
         </div>
         <select id='state' class='form-select mb-4' name='state' required>
           <option value=''>狀態</option>";
-          for($i = 0; $i<4; $i++){
+          for($i = 0; $i<3; $i++){
             echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$apply_dorm_states[$i]."</option>";
           }
         echo "</select>

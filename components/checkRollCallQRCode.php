@@ -1,7 +1,7 @@
 <!-- check roll call -->
 <?php
 $cipgher = $_SERVER["QUERY_STRING"];
-if ($cipgher!=''){
+if ($cipgher!='' && $cipgher!='status=success'){
   $iiid = roll_call_check_qrcode_data($conn , $cipgher);
   $info = roll_call_read_id($conn , $iiid);
   

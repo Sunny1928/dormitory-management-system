@@ -20,7 +20,7 @@
               <th scope="col">內容</th>
               <th scope="col">帳號</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <th scope="col" width="14%">操作</th>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -43,7 +43,7 @@
                     "<td>" . $content . "</td>".
                     "<td>" . $account . "</td>".
                     "<td>" . $datetime . "</td>".
-                    "<td>
+                    "<td width='14%'>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAnnouncementModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAnnouncementModal$id'><i class='fa fa-trash'></i></button>
                     </td>".

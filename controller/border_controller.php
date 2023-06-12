@@ -22,5 +22,5 @@
 
     }
     
-    header("Location: ../main.php#pills-border");
+    header("Location: ../main.php?status=success#pills-border");
 ?>

@@ -14,5 +14,5 @@
         story_manager_create_roll_call($conn , $_POST['type'] , $_POST['year']);
     }
 
-    header("Location: ../main.php#pills-roll-call");
+    header("Location: ../main.php?status=success#pills-roll-call");
 ?>

@@ -68,7 +68,7 @@
     <div class="tab-content">
       <!-- login -->
       <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        <form action="./controller/user_controller.php" method="post">
+        <form action="./controller/login_controller.php" method="post">
           <div class="form-outline mb-4">
             <input required name="account" type="text" id="loginName" class="form-control" />
             <label class="form-label" for="loginName">帳號</label>
@@ -153,7 +153,7 @@
   right: 0;
   z-index: -1;
   display: block;
-  background-image: url('./image/background.jpg');
+  background-image: url('./image/SchoolGate.png');
   background-size: cover;
   width: 100%;
   height: 100vh;

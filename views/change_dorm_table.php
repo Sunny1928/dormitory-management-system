@@ -25,7 +25,7 @@
               <th scope="col">學生同意狀態</th>
               <th scope="col">最終審核狀態</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <th scope="col" width='15%'>操作</th>
             </tr>
           </thead>
           <tbody class="datatable-body">
@@ -60,7 +60,7 @@
                     "<td class='".$state_classes[$student_state]."'>" . $student_states[$student_state] . "</td>".
                     "<td class='".$state_classes_defaults[$final_state]."'>" . $final_states[$final_state] . "</td>".
                     "<td>" . $datetime . "</td>".
-                    "<td>
+                    "<td width='15%'>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateChangeDormRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteChangeDormRecordModal$id'><i class='fa fa-trash'></i></button>
                     </td>".

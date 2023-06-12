@@ -29,10 +29,12 @@
                     if ($_SESSION["permission"]!=1 && $_SESSION["permission"]!=0){
                     echo "
                     <div class='d-flex flex-row justify-content-start'>
-                        <img src='./image/user.png' alt='avatar' class='rounded-circle' style='width: 45px; height: 100%;'>
+                        <img src='./image/user.png' alt='avatar' class='mt-4 rounded-circle' style='width: 45px; height: 100%;'>
                         <div>
+                        <p class='small ms-2 mb-0 rounded-3 text-muted'>$account</p>
                         <p class='small p-2 ms-3 mb-1 rounded-3' style='background-color: #f5f6f7; max-width:950px;'>$content</p>
-                        <p class='small ms-3 mb-2 rounded-3 text-muted'>$time[0]:$time[1]</p>
+                        <p class='small ms-3  rounded-3 text-muted'>$time[0]:$time[1]</p>
+                        
                         </div>
                     </div>
                     ";
@@ -42,6 +44,7 @@
                     <div class='d-flex flex-row justify-content-start'>
                         <img src='./image/user.png' alt='avatar' class='rounded-circle' style='width: 45px; height: 100%;'>
                         <div>
+                        <p class='small ms-2 mb-0 rounded-3 text-muted'>$account</p>
                         <p class='small p-2 ms-3 mb-1 rounded-3' style='background-color: #f5f6f7; max-width:950px;'>$content</p>
                         <div class='small mb-2 text-muted d-flex'>
                             <p class='ms-1 rounded-3 text-muted'>$time[0]:$time[1]</p>
@@ -59,7 +62,7 @@
                     <div class='d-flex flex-row justify-content-end pt-1'>
                     <div>
                         <div class='align-item-end d-flex flex-row-reverse'>
-                        <p class='small p-2 me-3 mb-1 text-white rounded-3 bg-primary' style='max-width:950px;'>$content</p>
+                            <p class='small p-2 me-3 mb-1 text-white rounded-3 bg-primary' style='max-width:950px;'>$content</p>
                         </div>
                         <div class='align-item-end d-flex flex-row-reverse'>
                             <div class='small mb-2 text-muted d-flex'>

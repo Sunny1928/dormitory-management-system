@@ -9,5 +9,5 @@
         parking_permit_update($conn, $_POST['parking_permit_record_id'], $_POST['state']);
     }
 
-    header("Location: ../main.php#pills-parking-permit");
+    header("Location: ../main.php?status=success#pills-parking-permit");
 ?>

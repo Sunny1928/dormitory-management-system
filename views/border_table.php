@@ -43,7 +43,7 @@
               <th scope="col">帳號</th>
               <th scope="col">類別</th>
               <th scope="col">申請樓長</th>
-              <th scope="col">宿社</th>
+              <th scope="col">宿舍</th>
               <th scope="col">房號</th>
               <th scope="col">操作</th>
             </tr>
@@ -161,7 +161,7 @@ echo "
           }
         echo "</select>
         <select id='dorm_room' class='form-select mb-4' name='dorm_room' required>
-          <option value=''>宿社-房號</option>";
+          <option value=''>宿舍-房號</option>";
             $res = room_read_all($conn);
             if (mysqli_num_rows($res) > 0) {
               while ($info = mysqli_fetch_assoc($res)){

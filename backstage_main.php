@@ -93,7 +93,7 @@
         </a>
       </div>
       <div class="list-group list-group-flush mx-3">
-      <a href="./index.php" class="list-group-item py-2 ripple pb-2">
+      <a href="./login.php" class="list-group-item py-2 ripple pb-2">
           <i class="fas fa-right-from-bracket pe-3"></i>登出
         </a>
       </div>
@@ -107,6 +107,9 @@
 
 <main>
   <div class="tab-content h-100">
+    <?php
+      require("./components/successful.php");
+    ?>
 
     <!--main-->
     <div class="tab-pane fade show active" id="pills-main" role="tabpanel" aria-labelledby="tab-main">

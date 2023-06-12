@@ -2,7 +2,7 @@
 
 <?php
     $cipgher = $_SERVER["QUERY_STRING"];
-    if ($cipgher!=''){
+    if ($cipgher!='' && $cipgher!='status=success'){
     $iiid = parking_permit_check_qrcode_data($conn , $cipgher);
     $info = parking_permit_read_id($conn , $iiid);
     
