@@ -11,7 +11,7 @@
     } else if(isset($_POST['update'])){
         apply_dorm_update($conn, $_POST['apply_dorm_id'], $_POST['state']);
     } else if(isset($_POST['allocation-room'])){
-        system_admin_dorm_room_allocation_process($conn , $_POST['year']);
+        system_admin_dorm_room_allocation_process($conn , $_POST['year'],true);
     }
 
     header("Location: ../main.php#pills-apply-dorm");
