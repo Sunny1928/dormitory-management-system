@@ -65,8 +65,6 @@
                       </div>
                       <div class='modal-body'>
                         <div class='text-center mb-3'>
-                        <input value='".$account."' readonly required type='text' name='account' class='form-control' />
-                        <input value='".$default_year."' readonly required type='text' name='year' class='form-control' />
                           <div class='form-outline mb-4'>
                             <input value='$id' readonly required type='text' name='apply_quit_dorm_id' class='form-control' />
                             <label class='form-label'>申請退宿編號</label>

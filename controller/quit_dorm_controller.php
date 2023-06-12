@@ -15,8 +15,8 @@
           echo $_POST['account'];
           
           echo $_POST['year'];
-        quit_dorm_update($conn , $_POST['apply_quit_dorm_id'] , $_POST['state'] ,$_POST['account'] ,$_POST['year']);
+          quit_dorm_delete_data($conn , $_POST['apply_quit_dorm_id'] , $_POST['state']);
     }
 
-    // header("Location: ../main.php?status=success#pills-quit-dorm");
+    header("Location: ../main.php?status=success#pills-quit-dorm");
 ?>
