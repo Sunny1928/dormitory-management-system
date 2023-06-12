@@ -14,5 +14,5 @@
         system_admin_dorm_room_allocation_process($conn , $_POST['year'],true);
     }
 
-    header("Location: ../main.php#pills-apply-dorm");
+    header("Location: ../main.php?status=success#pills-apply-dorm");
 ?>

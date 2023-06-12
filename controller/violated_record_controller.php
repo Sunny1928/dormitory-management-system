@@ -12,5 +12,5 @@
         violated_record_update($conn, $_POST['violated_record_id'], $_POST['apply_cancel'], $_POST['rule_id']);
     }
 
-    header("Location: ../main.php#pills-violated-record");
+    header("Location: ../main.php?status=success#pills-violated-record");
 ?>

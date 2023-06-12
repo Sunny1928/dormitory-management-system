@@ -1,7 +1,7 @@
 <!-- check access card -->
 <?php
   $cipgher = $_SERVER["QUERY_STRING"];
-  if ($cipgher!=''){
+  if ($cipgher!='' && $cipgher!='status=success'){
     $iiid = access_card_check_qrcode_data($conn , $cipgher);
     $info = access_card_read_id($conn , $iiid);
     

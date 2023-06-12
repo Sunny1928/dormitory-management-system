@@ -2,7 +2,7 @@
   require_once('./service/mainpage_require_all.php');
 	session_start();
   if (!isset($_SESSION["permission"]) || $_SESSION["permission"] == "Error"){
-		Header("Location: ./index.php" , 301);
+		Header("Location: ./login.php" , 301);
 		die();
 	}		
   $genders = array("男", "女");
@@ -26,6 +26,7 @@
   $clean_states = array("未整理", "整理完");
   $years = array(109,110,111,112);
   $default_year = 110;
+
 
 ?>
 
@@ -52,7 +53,8 @@
 </head>
 
 <body>
-  <?php 
+  <?php
+
     if($_SESSION['account'] == 'root'){
       require('./backstage_main.php');
 

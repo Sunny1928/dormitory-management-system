@@ -26,9 +26,6 @@
     } else if(isset($_POST['student_update'])){
         student_update($conn , $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['account'], $_POST['gender'], $_POST['department']);
 
-    } else if(isset($_POST['user_login'])){
-        $_SESSION['error'] = user_login($conn , $_POST['account'], $_POST['password'], 110);
-    
     } else if(isset($_POST['edit_password'])){
         echo $_POST['account'].' ';
         echo $_POST['password'];
@@ -49,16 +46,16 @@
 
 
     if($_POST['type']==0){
-        header("Location: ../main.php#pills-system-admin");
+        header("Location: ../main.php?status=success#pills-system-admin");
     
     } else if($_POST['type']==1){
-        header("Location: ../main.php#pills-dorm-manager");
+        header("Location: ../main.php?status=success#pills-dorm-manager");
     
     } else if($_POST['type']==2){
-        header("Location: ../main.php#pills-parents");
+        header("Location: ../main.php?status=success#pills-parents");
 
     } else if($_POST['type']==3){
-        header("Location: ../main.php#pills-student");
+        header("Location: ../main.php?status=success#pills-student");
     }
 
 ?>

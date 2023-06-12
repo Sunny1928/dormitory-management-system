@@ -3,6 +3,10 @@
     
     require_once('../service/require_all.php');
 
+    echo $_POST['account'].' ';
+    echo $_POST['title'].' ';
+    echo $_POST['content'].' ';
+
     if(isset($_POST['create'])){
         announcement_create($conn, $_POST['account'], $_POST['title'], $_POST['content'], true);
     } else if(isset($_POST['delete'])){
@@ -11,7 +15,5 @@
         announcement_update($conn, $_POST['announcement_id'], $_POST['title'], $_POST['content']);
     }
 
-    header("Location: ../main.php#pills-announcement");
-
-    // header("Location: ../backstage_main.php#pills-announcement");
+    header("Location: ../main.php?status=success#pills-announcement");
 ?>

@@ -9,5 +9,5 @@
         dormitory_update($conn , $_POST['dormitory_id'] , $_POST['name']);
     }
 
-    header("Location: ../main.php#pills-dormitory");
+    header("Location: ../main.php?status=success#pills-dormitory");
 ?>
