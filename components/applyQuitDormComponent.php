@@ -17,9 +17,6 @@
         $account = $info['account'];
         $state = $info['state'];
         $datetime= $info['datetime'];
-        if($info['room_number']==''){
-            $_SESSION['permission'] = 3;
-        }
     } else{
         $state = -1;
     }

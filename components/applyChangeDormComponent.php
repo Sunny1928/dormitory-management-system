@@ -20,8 +20,6 @@
         $student_state = $info['student_state'];
         $final_state = $info['final_state'];
         $datetime= $info['datetime'];
-        $_SESSION['dormitory_id'] = $info['dormitory_id'];
-        $_SESSION['room_number'] = $info['room_number'];
     } else{
         $final_state = -1;
     }

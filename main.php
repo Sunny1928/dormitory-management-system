@@ -27,6 +27,7 @@
   $years = array(108,107,109,110,111,112);
   $default_year = 110;
 
+  user_reload_session($conn , $_SESSION['account'], $default_year);
 
 ?>
 
@@ -49,6 +50,10 @@
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
   <title>Database Final Project</title>
 </head>
 
@@ -249,6 +254,21 @@
           }
         }       
       }
+    }
+
+    var idleTime;
+    $(document).ready(function () {
+            reloadPage();
+            $('html').bind('mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick', function () {
+                clearTimeout(idleTime);
+                reloadPage();
+            });
+    });
+    function reloadPage() {
+        clearTimeout(idleTime);
+        idleTime = setTimeout(function () {
+            location.reload();
+        }, 10000);
     }
   </script>
 </body>
