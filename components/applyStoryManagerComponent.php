@@ -48,7 +48,12 @@
         <div class='card h-100'>
             <div class='card-body'>
             <h4 class='card-title mb-4'>樓長申請</h4>
-            <?php if($state == 1){
+            <?php if($type >= 2){
+                echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
+                <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>"."分發為樓長"."</span></p>
+                </div>";
+            }
+            else if($state == 1){
                 echo "<div class='p-3 mb-2' style='border-radius:10px; background:#eee'>
                         <p class='fs-5 my-2'><strong>申請狀態：</strong><span class='font-monospace'>".$border_apply_story_manager_states[$state]."</span></p>
                     </div>
