@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">申請宿舍資料</h4>
     <div class="d-flex">
-
+      
       <select type="text" id="applyDormYearFilter" onchange="table_filter('applyDormYearFilter', 'applyDormTable', 1)" class='form-select-sm ms-2'  required>
         <option value=''>申請年度</option>
         <?php
@@ -21,8 +21,10 @@
       </select>
       <?php
       if($_SESSION["account"] == 'root'){
-       echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addApplyDormModal'><i class='fa fa-add me-1'></i>新增</button>
-      <button class='message-btn btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#allocationModal'><i class='fa fa-add me-1'></i>開始分配房間</button>";
+       echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addApplyDormModal'><i class='fa fa-add me-1'></i>新增</button>";
+      }
+      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+        echo "<button class='message-btn btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#allocationModal'><i class='fa fa-add me-1'></i>開始分配房間</button>";
       }
     ?>
     </div>
