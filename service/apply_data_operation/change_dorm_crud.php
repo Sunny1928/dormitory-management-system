@@ -135,4 +135,13 @@
         change_dorm_delete_account_year($conn , $account , $another_border , $year);
         change_dorm_delete_account_year($conn , $another_border , $account , $year);
     }
+
+    // 將不是當年的資料 更新state
+    function change_dorm_set_state($conn ,$student_state, $final_state,$year){  
+
+        $sql = "UPDATE apply_change_dorm SET student_state = ? ,final_state = ? WHERE year != ? ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('iii' ,$student_state, $final_state,$year );
+        return $stmt->execute();
+    }
 ?>

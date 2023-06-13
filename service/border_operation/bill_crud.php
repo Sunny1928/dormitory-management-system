@@ -152,6 +152,15 @@
         return $stmt->execute();
     }
 
+    // 將不是year的資料 更新state
+    function bill_set_state($conn ,$state,$year){  
+
+        $sql = "UPDATE bill SET state = ? WHERE year != ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii' ,$state,$year);
+        return $stmt->execute();
+    }
+
     //  根據id刪除繳費
     function bill_delete($conn , $bill_id){     
 

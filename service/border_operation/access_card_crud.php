@@ -100,6 +100,14 @@
         $stmt->bind_param('ii' , $state , $access_card_id);
         return $stmt->execute();
     }
+    // 將不是當年的資料 更新state
+    function access_card_set_state($conn , $state,$year){  
+
+        $sql = "UPDATE temporary_access_card_record SET state = ? WHERE year != ? ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii' , $state,$year );
+        return $stmt->execute();
+    }
 
     //  根據id刪除暫時出入證
     function access_card_delete($conn , $access_card_id){     

@@ -66,6 +66,15 @@
         return $stmt->execute();
     }
 
+    // 將不是當年的資料 更新state
+    function quit_dorm_set_state($conn,$state,$year){
+        $sql =  "UPDATE apply_quit_dorm 
+                SET state = ? WHERE year != ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii' , $state,$year);
+        return $stmt->execute();
+    }
+
     // 根據id刪除退宿申請
     function quit_dorm_delete($conn , $apply_quit_dorm_id){     
 

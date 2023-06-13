@@ -126,6 +126,7 @@
             }
             border_update_dorm_room($conn , $using_arr_girl[1] , 3 , 101 , $year);
         }
+        apply_dorm_set_state($conn,1,110);
     }
 
     function add_change_dorm($conn){  
@@ -139,6 +140,7 @@
             }
             change_dorm_create_process($conn , $using_arr_girl[0], $year, $using_arr_girl[1]);
         }
+        change_dorm_set_state($conn,1,2,110);
     }
 
     function add_quit_dorm($conn){  
@@ -149,7 +151,7 @@
                 quit_dorm_create($conn,$using_arr[$i],$year);
             }
         }
-
+        quit_dorm_set_state($conn,1,110);
     }
     
     function add_dorm($conn){
@@ -263,6 +265,7 @@
                 access_card_create($conn,$using_arr[$i],$year);
             }
         }
+        access_card_set_state($conn,1,110);
     }
 
     function add_roll_call($conn){
@@ -289,6 +292,7 @@
                 bill_create($conn,$using_arr[$i],"4","修繕費",200,$year);
             }
         }
+        bill_set_state($conn,1,110);
 
         announcement_create($conn,"root","停電通知","6/13凌晨 0200 ~ 0500 因學校高壓電維修檢測，將會暫時停電，請學生多加留意，謝謝");
         announcement_create($conn,"admin1","宿舍分發結果", "宿舍已全數分發完畢，有抽取宿舍的同學請上宿舍網站查詢最終結果，謝謝");

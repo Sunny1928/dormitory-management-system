@@ -130,6 +130,15 @@
         return $stmt->execute();
     }
 
+    // 將不是當年的資料 更新state
+    function apply_dorm_set_state($conn , $state ,$year){  
+
+        $sql = "UPDATE apply_dorm SET state = ? WHERE year != ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii' ,$state ,$year);
+        return $stmt->execute();
+    }
+
     // 根據id刪除申請住宿
     function apply_dorm_delete($conn , $apply_dorm_id){     
 
