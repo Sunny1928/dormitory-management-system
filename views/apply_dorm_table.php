@@ -86,6 +86,9 @@
 
                 }
               }
+              else{
+                echo "<td class='text-center' colspan='100%'>無</td>";
+              }
             ?>
           </tbody>
         </table>
