@@ -56,7 +56,7 @@
             if($i < 10 ) $i = "0".$i;
             
             
-            $gender = ($i+1) % 2;
+            $gender = $i % 2;
 
             student_create($conn,$name[3*($i-1)]  ,'A10955'.$i,'A10955'.$i.'@asdasdasda','0987654321','A10955'.$i,$gender,3,'資工');
             student_create($conn,$name[3*($i-1)+1],'A10951'.$i,'A10951'.$i.'@fdfdsfasad','0987654321','A10951'.$i,$gender,3,'電機');
