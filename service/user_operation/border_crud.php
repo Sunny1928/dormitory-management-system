@@ -159,6 +159,25 @@
         return $stmt->get_result();
     }
 
+    // 查詢非住宿生的室友
+    function border_read_not_roommate($conn , $account , $year , $gender){
+
+        $sql = "SELECT user.* , border.* , student.* , dormitory.dormitory_id  , dormitory.name as dormitory_name FROM border
+                JOIN student ON border.account = student.account
+                JOIN user ON user.account = student.account
+                JOIN dormitory ON dormitory.dormitory_id = border.dormitory_id
+                WHERE (border.dormitory_id, border.room_number) NOT IN  (
+                    SELECT dormitory_id , room_number FROM border
+                    WHERE account = ? AND year = ?
+                ) AND year = ? AND user.gender = ?
+                ORDER BY student.account" ;        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('siii' ,$account, $year , $year , $gender);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
+
 
     function border_update($conn , $account , $year , $type, $apply_story_manager_state, $room_number ,$dormitory_id){
 
