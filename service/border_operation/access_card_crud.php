@@ -133,6 +133,9 @@
     // 驗證qrcode data
     function access_card_check_qrcode_data($conn , $cipgher){
         $msg = decrypt_qrcode_data($cipgher);
+        if($msg == -1)
+            return -1;
+            
         $msg = explode("|" , $msg);
 
         if( count($msg) < 3)

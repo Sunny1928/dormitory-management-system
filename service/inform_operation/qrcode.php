@@ -37,6 +37,15 @@
 
         $message = explode("!" , $decrypted_string)[0];
         
+        $current = date("Y-m-d H:i:s");
+        if(count(explode("!" , $decrypted_string)) == 1) 
+            return -1;
+
+        $qrcode_time =  explode("!" , $decrypted_string)[1];
+
+        if(strtotime($current) - strtotime($qrcode_time) > 60)
+            $message = -1;
+
         return $message;
     }
 
