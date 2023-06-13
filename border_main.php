@@ -16,28 +16,28 @@
         <hr class="mb-0">
       </div>
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a onclick='modifyState()' class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
+        <a onclick="modifyState('pills-main')" class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
           <i class="fas fa-house pe-3"></i>主畫面
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
+        <a onclick="modifyState('pills-announcement')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
           <i class="fas fa-envelope pe-3"></i>公告
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
+        <a onclick="modifyState('pills-message')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿
         </a>
+        <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-quit-dorm' data-mdb-toggle='pill' href='#pills-quit-dorm' role='tab' aria-controls='pills-quit-dorm' aria-selected='false'>
+          <i class='fas fa-building-circle-xmark pe-3'></i>申請退宿
+        </a>
+        <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-change-dorm' data-mdb-toggle='pill' href='#pills-change-dorm' role='tab' aria-controls='pills-change-dorm' aria-selected='false'>
+          <i class='fas fa-building-circle-arrow-right pe-3'></i>申請換宿
+        </a>
         <?php
           // border
           if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
             echo "
-            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-quit-dorm' data-mdb-toggle='pill' href='#pills-quit-dorm' role='tab' aria-controls='pills-quit-dorm' aria-selected='false'>
-              <i class='fas fa-building-circle-xmark pe-3'></i>申請退宿
-            </a>
-            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-change-dorm' data-mdb-toggle='pill' href='#pills-change-dorm' role='tab' aria-controls='pills-change-dorm' aria-selected='false'>
-              <i class='fas fa-building-circle-arrow-right pe-3'></i>申請換宿
-            </a>
             <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-roommate' data-mdb-toggle='pill' href='#pills-roommate' role='tab' aria-controls='pills-roommate' aria-selected='false'>
               <i class='fas fa-door-open pe-3'></i>室友
             </a>
@@ -50,8 +50,6 @@
             ";
           }
         ?>
-        
-
         
         <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-rule' data-mdb-toggle='pill' href='#pills-rule' role='tab' aria-controls='pills-rule' aria-selected='false'>
           <i class='fas fa-scroll pe-3'></i>宿舍規範
@@ -144,7 +142,9 @@
     <!--apply quit dorm-->
     <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm"> 
       <?php
+      if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
         require("./components/applyQuitDormComponent.php");
+      }
         require("./views/quit_dorm_table.php");
 
       ?>
@@ -153,7 +153,9 @@
     <!--apply change dorm-->
     <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm"> 
       <?php
+      if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
         require("./components/applyChangeDormComponent.php");
+      }
         require("./views/change_dorm_table.php");
 
       ?>
@@ -245,10 +247,7 @@
 </main>
 
 <script>
-  // function modifyState(where) {
-  //     let stateObj = { id: "100" };
-  //     window.history.pushState(stateObj,where, window.location+'#'+where);
-  // }
+  
 
   document.querySelectorAll('.form-outline').forEach((formOutline) => {
     new mdb.Input(formOutline).init();

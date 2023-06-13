@@ -223,6 +223,10 @@
     }
   </style>
   <script>
+    function modifyState(where) {
+      stateObj={}
+      window.history.pushState(stateObj,where, window.location+'#'+where);
+    }
     function table_filter(idFilter, idTable, index) {
       var filter, tr, td, i;
       filter = document.getElementById(idFilter).value;

@@ -56,6 +56,8 @@
               {
                 while ($info = mysqli_fetch_assoc($result)) 
                 {
+
+                  
                   $id = $info['apply_change_dorm_id'];
                   $year = $info['year'];
                   $account = $info['account'];
