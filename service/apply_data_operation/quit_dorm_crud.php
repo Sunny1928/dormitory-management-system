@@ -18,7 +18,8 @@
                     AND apply_quit_dorm.year = border.year
                 JOIN student ON apply_quit_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                WHERE apply_quit_dorm.account = ? AND border.year = ?";
+                WHERE apply_quit_dorm.account = ? AND border.year = ?
+                ORDER BY apply_quit_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' ,$account ,$year);
         $stmt->execute();
@@ -33,7 +34,8 @@
                     AND apply_quit_dorm.year = border.year
                 JOIN student ON apply_quit_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                WHERE apply_quit_dorm.account = ?";
+                WHERE apply_quit_dorm.account = ?
+                ORDER BY apply_quit_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
@@ -47,7 +49,8 @@
                 JOIN border ON apply_quit_dorm.account = border.account 
                     AND apply_quit_dorm.year = border.year
                 JOIN student ON apply_quit_dorm.account = student.account
-                JOIN user ON user.account = student.account";
+                JOIN user ON user.account = student.account
+                ORDER BY apply_quit_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
@@ -77,7 +80,8 @@
     function quit_dorm_read_account_year_by_id($conn ,$apply_quit_dorm_id){   
     
         $sql = "SELECT account,year FROM apply_quit_dorm 
-                WHERE apply_quit_dorm.apply_quit_dorm_id = ? ";
+                WHERE apply_quit_dorm.apply_quit_dorm_id = ?
+                ORDER BY apply_quit_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$apply_quit_dorm_id);
         $stmt->execute();

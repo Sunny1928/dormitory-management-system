@@ -52,7 +52,8 @@
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE bill.account = ?";
+                WHERE bill.account = ?
+                ORDER BY bill.year DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' , $account);
@@ -68,7 +69,8 @@
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE bill.account = ? AND border.year = ?";
+                WHERE bill.account = ? AND border.year = ?
+                ORDER BY bill.year DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' , $account , $year);
@@ -84,7 +86,8 @@
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE bill.account = ? AND border.year = ? AND bill.state = ?";
+                WHERE bill.account = ? AND border.year = ? AND bill.state = ?
+                ORDER BY bill.year DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sii' , $account , $year , $state);
@@ -100,7 +103,8 @@
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account
-                WHERE border.year = ? AND bill.state = ?";
+                WHERE border.year = ? AND bill.state = ?
+                ORDER BY bill.year DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ii' , $year , $state);
@@ -116,7 +120,8 @@
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account
-                WHERE border.year = ?";
+                WHERE border.year = ?
+                ORDER BY bill.year DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $year);
@@ -131,7 +136,8 @@
                 JOIN border ON bill.account = border.account 
                     AND bill.year = border.year 
                 JOIN student ON student.account = border.account 
-                JOIN user ON user.account = student.account";
+                JOIN user ON user.account = student.account
+                ORDER BY bill.year DESC";
 
         $result = $conn->query($sql);
         return $result;

@@ -33,7 +33,8 @@
                
         $sql = "SELECT * FROM announcement 
                 JOIN user ON user.account = announcement.account 
-                WHERE user.account = ?";
+                WHERE user.account = ?
+                ORDER BY announcement.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
@@ -44,7 +45,8 @@
     function announcement_read_all($conn){  
         
         $sql = "SELECT * FROM announcement 
-                JOIN user ON user.account = announcement.account";
+                JOIN user ON user.account = announcement.account
+                ORDER BY announcement.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();

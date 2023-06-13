@@ -14,7 +14,8 @@
     # 根據year找出申請學生(Account)
     function apply_dorm_read_year_number($conn ,$year){
         $sql = "SELECT apply_dorm.account FROM apply_dorm
-                WHERE apply_dorm.year = ?";
+                WHERE apply_dorm.year = ?
+                ORDER BY apply_dorm.datetime DESC";
         
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$year);
@@ -32,7 +33,8 @@
         
         # 得到目前apply的 state
         $sql = "UPDATE apply_dorm SET state = ?  
-                WHERE apply_dorm.account = ? AND apply_dorm.year = ?";
+                WHERE apply_dorm.account = ? AND apply_dorm.year = ?
+                ORDER BY apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('isi' ,$state,$account,$year);
         return $stmt->execute();
@@ -69,7 +71,8 @@
         $sql = "SELECT * FROM apply_dorm
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON apply_dorm.account = user.account
-                WHERE apply_dorm.account = ? AND apply_dorm.year = ?";
+                WHERE apply_dorm.account = ? AND apply_dorm.year = ?
+                ORDER BY apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt-> bind_param('si' ,$account, $year);
         $stmt-> execute();
@@ -83,7 +86,8 @@
         $sql = "SELECT * FROM apply_dorm 
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                WHERE user.account = ?";
+                WHERE user.account = ?
+                ORDER BY apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
@@ -97,7 +101,8 @@
         $sql = "SELECT * FROM apply_dorm 
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                WHERE apply_dorm.state = ?";
+                WHERE apply_dorm.state = ?
+                ORDER BY apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$state);
         $stmt->execute();
@@ -109,7 +114,8 @@
         
         $sql = "SELECT * FROM apply_dorm
                 JOIN student ON apply_dorm.account = student.account
-                JOIN user ON user.account = student.account";
+                JOIN user ON user.account = student.account
+                ORDER BY apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();

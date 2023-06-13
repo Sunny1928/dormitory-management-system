@@ -18,7 +18,8 @@
                     AND entry_and_exit_dormitory_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE entry_and_exit_dormitory_record.account = ? AND border.year = ?";
+                WHERE entry_and_exit_dormitory_record.account = ? AND border.year = ?
+                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' ,$account, $year);
@@ -34,7 +35,8 @@
                     AND entry_and_exit_dormitory_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE border.year = ?";
+                WHERE border.year = ?
+                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $year);
@@ -49,7 +51,8 @@
                 JOIN border ON entry_and_exit_dormitory_record.account = border.account 
                     AND entry_and_exit_dormitory_record.year = border.year 
                 JOIN student ON student.account = border.account 
-                JOIN user ON user.account = student.account";
+                JOIN user ON user.account = student.account
+                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
                 
         $result = $conn->query($sql);
         return $result;
@@ -81,7 +84,8 @@
                     AND entry_and_exit_dormitory_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                WHERE entry_and_exit_dormitory_record.account = ? ";
+                WHERE entry_and_exit_dormitory_record.account = ?
+                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);

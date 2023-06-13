@@ -29,7 +29,8 @@
                 JOIN student ON apply_change_dorm.account = student.account
                 JOIN user ON user.account = student.account
                 JOIN border ON apply_change_dorm.another_border = border.account AND border.year = apply_change_dorm.year
-                WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ? AND border.year = ?";
+                WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ? AND border.year = ?
+                ORDER BY apply_change_dorm.datetime	DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ssi' ,$account ,$account ,$year);
         $stmt->execute();
@@ -43,7 +44,8 @@
                 JOIN student ON apply_change_dorm.account = student.account
                 JOIN user ON user.account = student.account
                 JOIN border ON apply_change_dorm.another_border = border.account AND border.year = apply_change_dorm.year
-                WHERE apply_change_dorm.account = ? AND border.year = ?";
+                WHERE apply_change_dorm.account = ? AND border.year = ?
+                ORDER BY apply_change_dorm.datetime	DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si' ,$account ,$year);
         $stmt->execute();
@@ -57,7 +59,8 @@
                 JOIN student ON apply_change_dorm.account = student.account
                 JOIN user ON user.account = student.account
                 JOIN border ON apply_change_dorm.another_border = border.account AND border.year = apply_change_dorm.year
-                WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ?";
+                WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ?
+                ORDER BY apply_change_dorm.datetime	DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ss' ,$account ,$account);
         $stmt->execute();
@@ -71,7 +74,8 @@
                 JOIN border ON apply_change_dorm.another_border = border.account 
                     AND border.year = apply_change_dorm.year
                 JOIN student ON apply_change_dorm.account = student.account
-                JOIN user ON user.account = student.account";
+                JOIN user ON user.account = student.account
+                ORDER BY apply_change_dorm.datetime	DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();

@@ -14,7 +14,8 @@
                
         $sql = "SELECT * FROM message 
                 JOIN user ON message.account = user.account 
-                WHERE user.account = ?";
+                WHERE user.account = ?
+                ORDER BY message.datetime ASC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
@@ -25,7 +26,8 @@
     function message_read_all($conn){  
         
         $sql = "SELECT * FROM message
-                JOIN user ON message.account = user.account";
+                JOIN user ON message.account = user.account
+                ORDER BY message.datetime ASC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
