@@ -86,7 +86,7 @@
                             </div>
         
                             <div class='modal-footer'>
-                                <button type='submit' class='btn btn-primary btn-block mb-4' name='update' value='update'>申請</button>
+                                <button type='submit' class='btn btn-primary btn-block mb-4' name='update' value='apply'>申請</button>
                             </div>
                         </form>
                     </div> ";
