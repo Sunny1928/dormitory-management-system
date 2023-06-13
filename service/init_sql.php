@@ -104,7 +104,7 @@
         $using_arr = array('A1095546','A1095550','A1095551','A1095564','A1095562');
         for ($i=0 ; $i < count($using_arr); $i++){
             if($i<=2){
-                apply_dorm_create($conn , $using_arr[$i],110, $i % 4 ,($i+2) % 4);
+                apply_dorm_create($conn , $using_arr[$i],110, $i%2 ,($i+2) % 2);
             }
         }
 
