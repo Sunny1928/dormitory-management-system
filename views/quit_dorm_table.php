@@ -3,7 +3,11 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">退宿申請紀錄</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addQuitDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    <?php
+      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+       echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addQuitDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
+      }
+    ?>
   </div>
 </div>
 
@@ -21,14 +25,26 @@
               <th scope="col">帳號</th>
               <th scope="col">申請狀態</th>
               <th scope="col">時間</th>
-              <th scope="col">操作</th>
+              <?php
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+              echo " <th scope='col'>操作</th>";
+              }
+            ?>
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
     
-              $result = quit_dorm_read_all($conn);
+              //$result = quit_dorm_read_all($conn);
               $quit_dorm_states = array("審核中", "通過","未通過");
+
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = quit_dorm_read_all($conn);
+              }else if($_SESSION["permission"] == 2){
+                $result = quit_dorm_read_account($conn , $_SESSION['student_account']);
+              }else{
+                $result = quit_dorm_read_account($conn , $_SESSION['account']);
+              }
 
 
               if (mysqli_num_rows($result) > 0) 
@@ -47,12 +63,15 @@
                     "<td>" . $year . "</td>".
                     "<td>" . $account . "</td>".
                     "<td class='".$state_classes[$state]."'>" . $quit_dorm_states[$state] . "</td>".
-                    "<td>" . $datetime . "</td>".
-                    "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateQuitDormRecordModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteQuitDormRecordModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    "<td>" . $datetime . "</td>";
+                  if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                    echo  "<td>
+                    <button onclick=\"put_apply_dorm('$id','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateQuitDormModal'><i class='fa fa-pencil'></i></button>
+                    <button onclick=\"put_apply_dorm('$id','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteQuitDormModal'><i class='fa fa-trash'></i></button>
+                  </td>";
+                     }  
+                  
+                  echo   "</tr>";
 
                   // Update Modal 
                   echo "

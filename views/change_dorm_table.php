@@ -3,7 +3,11 @@
 <div class="card m-2 px-4 py-3">
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">換宿申請紀錄</h4>
-    <button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addChangeDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>
+    <?php
+      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+       echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addChangeDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
+      }
+    ?>
   </div>
 </div>
 
@@ -25,16 +29,29 @@
               <th scope="col">學生同意狀態</th>
               <th scope="col">最終審核狀態</th>
               <th scope="col">時間</th>
-              <th scope="col" width='15%'>操作</th>
+              <?php
+      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+       echo "<th scope='col' width='15%'>操作</th>";
+      }
+    ?>
+              
             </tr>
           </thead>
           <tbody class="datatable-body">
             <?php
     
-              $result = change_dorm_read_all($conn);
+              //$result = change_dorm_read_all($conn);
               $student_states = array("學生未同意", "學生同意");
               $final_states  = array("等待同意", "兩位學生同意","系統管理員通過","未通過");
-              	
+
+              if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+                $result = achange_dorm_read_all($conn);
+              }else if($_SESSION["permission"] == 2){
+                $result = change_dorm_read_account($conn , $_SESSION['student_account']);
+              }else{
+                $result = change_dorm_read_account($conn , $_SESSION['account']);
+              }
+
               if (mysqli_num_rows($result) > 0) 
               {
                 while ($info = mysqli_fetch_assoc($result)) 
@@ -59,12 +76,16 @@
                     "<td>" . $another_border . "</td>".
                     "<td class='".$state_classes[$student_state]."'>" . $student_states[$student_state] . "</td>".
                     "<td class='".$state_classes_defaults[$final_state]."'>" . $final_states[$final_state] . "</td>".
-                    "<td>" . $datetime . "</td>".
+                    "<td>" . $datetime . "</td>";
+                  if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                     "<td width='15%'>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateChangeDormRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteChangeDormRecordModal$id'><i class='fa fa-trash'></i></button>
-                    </td>".
-                    "</tr>";
+                    </td>";
+                    }  
+                  
+                  echo   "</tr>";
+                    
 
                   // Update Modal 
                   echo "
