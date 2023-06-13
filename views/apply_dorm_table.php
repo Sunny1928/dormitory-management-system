@@ -4,7 +4,13 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">申請宿舍資料</h4>
     <div class="d-flex">
-      
+      <?php
+      if($_SESSION['permission'] == 0 || $_SESSION['permission'] == 1){
+        echo "<div class='form-outline w-auto'>
+          <input type='text' class='form-control form-control-sm' id='applyDormInput' onkeyup=\"searchFunction('applyDormInput', 'applyDormTable', 2)\" />
+          <label class='form-label'>搜尋帳號</label>
+        </div>";
+      }?>
       <select type="text" id="applyDormYearFilter" onchange="table_filter('applyDormYearFilter', 'applyDormTable', 1)" class='form-select-sm ms-2'  required>
         <option value=''>申請年度</option>
         <?php
@@ -112,6 +118,7 @@
       <form method='post' action='./controller/apply_dorm_controller.php'>
         <div class='modal-body'>
           <div class='text-center mb-3'>
+            
             <select class='form-select mb-4' name='account' required>
               <option value=''>帳號</option>
               <?php

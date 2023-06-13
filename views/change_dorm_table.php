@@ -4,6 +4,12 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">換宿申請紀錄</h4>
     <?php
+      if($_SESSION['permission'] == 0 || $_SESSION['permission'] == 1){
+        echo "<div class='form-outline w-auto'>
+          <input type='text' class='form-control form-control-sm' id='changeDormInput' onkeyup=\"searchFunction('changeDormInput', 'changeDormTable', 2)\" />
+          <label class='form-label'>搜尋帳號</label>
+        </div>";
+      }
       if($_SESSION["account"] == 'root'){
        echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addChangeDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
       }
@@ -17,7 +23,7 @@
   <section class="border p-4">
     <div data-mdb-hover="true" class="datatable datatable-hover">
       <div class="datatable-inner table-responsive ps" style="overflow: auto; position: relative;">
-        <table class="table datatable-table">
+        <table id="changeDormTable" class="table datatable-table">
           <thead class="datatable-header">
             <tr>
               <th scope="col">編號</th> 

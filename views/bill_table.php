@@ -4,6 +4,13 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">帳單資料</h4>
     <div class="d-flex">
+      <?php
+      if($_SESSION['permission'] == 0 || $_SESSION['permission'] == 1){
+        echo "<div class='form-outline w-auto'>
+          <input type='text' class='form-control form-control-sm' id='billInput' onkeyup=\"searchFunction('billInput', 'billTable', 2)\" />
+          <label class='form-label'>搜尋帳號</label>
+        </div>";
+      }?>
       <select type="text" id="billYearFilter" onchange="table_filter('billYearFilter','billTable',1)" class='form-select-sm ms-2'  required>
         <option value=''>年</option>
         <?php
