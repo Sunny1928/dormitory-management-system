@@ -76,13 +76,13 @@
     
     function add_apply_dorm($conn , $department_student_num){
 
-        # 新增 112 住宿申請
-        for($i=1;$i<=10;$i++){
-            if($i < 10 ) {
-                $i = "0".$i;
-            }
-            apply_dorm_create($conn , "A10955".$i,112,0,1);
-        }
+        // # 新增 112 住宿申請
+        // for($i=1;$i<=10;$i++){
+        //     if($i < 10 ) {
+        //         $i = "0".$i;
+        //     }
+        //     apply_dorm_create($conn , "A10955".$i,112,0,1);
+        // }
         # 新增 110 住宿申請 (分發測試用)
         for($i=1;$i<=$department_student_num;$i++){
 
