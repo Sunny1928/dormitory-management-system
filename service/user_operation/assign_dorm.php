@@ -116,7 +116,7 @@ function assign_dorm($conn, $year)
                                 AND student.department = ? 
                                 LIMIT 1";
         //從border與student找帳戶相同，且房號、樓號為空，student 系所相同者
-        //這裡第二個AND語法我不太確定，但是目前沒有報錯
+
         $pair_result = $conn->prepare($sql_pair_roommate);
 
         $pair_result->bind_param('s', $pair_department);
