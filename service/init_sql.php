@@ -68,10 +68,11 @@
         }
         # 建立實際需要用的
         $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_gender = array(1,0,0,1,0,1,0);
         $using_name = array('李品妤','朱祐誼','胡哲研','莊郁誼','廖怡誠','鄭詠柔','富宇璽');
         for($i=0; $i<7; $i++){
             user_delete($conn,$using_arr[$i]);
-            student_create($conn,$using_name[$i],$using_arr[$i],$using_arr[$i].'@mail.nuk.edu.tw','0987654321',$using_arr[$i],$gender,3,'資工');
+            student_create($conn,$using_name[$i],$using_arr[$i],$using_arr[$i].'@mail.nuk.edu.tw','0987654321',$using_arr[$i],$using_gender[$i],3,'資工');
         }
 
         // demo用的
