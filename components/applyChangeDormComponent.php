@@ -47,8 +47,8 @@
                     </li>
                     <li class=<?php if($final_state==1){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>
                         <div class='c-stepper__content'>
-                            <h3 class='c-stepper__title'>步驟三：等待舍監審核</h3>
-                            <p>舍監是否同意換宿</p>
+                            <h3 class='c-stepper__title'>步驟三：等待系統管理員審核</h3>
+                            <p>系統管理員是否同意換宿</p>
                         </div>
                     </li>
                     <li class=<?php if($final_state==2 || $final_state==3){echo "c-stepper__item_a";} else{echo "c-stepper__item";} ;?>>

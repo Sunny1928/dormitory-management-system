@@ -49,6 +49,10 @@
           <i class="fas fa-washing-machine pe-3"></i>公共設施 
         </a>
 
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
+          <i class="fas fa-address-card pe-3"></i>通行證紀錄 
+        </a>
+
       </div>
       <div class="list-group list-group-flush mx-3">
         <a href="./login.php" class="list-group-item py-2 ripple pb-2">
@@ -144,6 +148,13 @@
     <div class="tab-pane fade" id="pills-public-equipment" role="tabpanel" aria-labelledby="tab-public-equipment">
       <?php
         require("./views/public_equipment_table.php")
+      ?>
+    </div>
+
+    <!--access card-->
+    <div class="tab-pane fade" id="pills-access-card" role="tabpanel" aria-labelledby="tab-access-card">
+      <?php
+        require("./views/access_card_table.php")
       ?>
     </div>
   

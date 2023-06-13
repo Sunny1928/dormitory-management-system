@@ -33,7 +33,7 @@
     
               $result = change_dorm_read_all($conn);
               $student_states = array("學生未同意", "學生同意");
-              $final_states  = array("等待同意", "兩位學生同意","舍監通過","未通過");
+              $final_states  = array("等待同意", "兩位學生同意","系統管理員通過","未通過");
               	
               if (mysqli_num_rows($result) > 0) 
               {

@@ -43,6 +43,9 @@
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
           <i class="fas fa-washing-machine pe-3"></i>公共設施 
         </a>
+        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
+          <i class="fas fa-car pe-3"></i>停車許可
+        </a>
 
       </div>
       <div class="list-group list-group-flush mx-3">
@@ -132,6 +135,13 @@
         require("./views/public_equipment_table.php")
       ?>
     </div>
+
+    <!--parking permit-->
+    <div class="tab-pane fade" id="pills-parking-permit" role="tabpanel" aria-labelledby="tab-parking-permit">
+      <?php
+        require("./views/parking_permit_table.php")
+      ?>
+    </div> 
 
   </div>
 </main>
