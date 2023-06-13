@@ -16,7 +16,7 @@
         <hr class="mb-0">
       </div>
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
+        <a onclick='modifyState()' class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
           <i class="fas fa-house pe-3"></i>主畫面
         </a>
         <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
@@ -245,6 +245,11 @@
 </main>
 
 <script>
+  // function modifyState(where) {
+  //     let stateObj = { id: "100" };
+  //     window.history.pushState(stateObj,where, window.location+'#'+where);
+  // }
+
   document.querySelectorAll('.form-outline').forEach((formOutline) => {
     new mdb.Input(formOutline).init();
   });

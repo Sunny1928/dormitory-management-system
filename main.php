@@ -11,10 +11,10 @@
   $apply_dorm_states = array("申請等待核准", "通過", "沒通過");
   $apply_cancel_states = array("未申請", "已申請", "通過", "未通過");
   $access_card_states = array("審核中", "通過","未通過");
-  $border_types = array("住宿生", "無效", "學一OA樓長", "學一OB樓長", "學二OE樓長", "學二OF樓長");
+  $border_types = array("住宿生", "無效", "學一男OA樓長", "學一女OB樓長", "學二男OE樓長", "學二女OF樓長");
   $border_apply_story_manager_states = array("未申請", "已申請");
   $quit_dorm_states = array("審核中","通過","未通過");
-  $change_dorm_states = array("等待換宿對象審核","等待舍監審核","通過","未通過");
+  $change_dorm_states = array("等待換宿對象審核","等待系統管理員審核","通過","未通過");
   $bill_types = array("住宿費", "電費", "水費", "網路費", "修繕費");
   $bill_states = array("未繳費", "已繳費");
   $state_classes = array("text-warning", "text-success", "text-danger");
@@ -24,7 +24,7 @@
   $entry_exit_states = array("進", "出");
   $parking_permit_states = array("審核中", "通過", "未通過");
   $clean_states = array("未整理", "整理完");
-  $years = array(109,110,111,112);
+  $years = array(108,107,109,110,111,112);
   $default_year = 110;
 
 

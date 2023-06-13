@@ -1,3 +1,6 @@
+<?php
+// user_reload_session($conn , $_SESSION['account'], $default_year);
+?>
 
 <div class="card m-2 px-4 py-3">
     <div class="d-flex justify-content-between">

@@ -78,7 +78,7 @@
                     "<td class='".$state_classes_defaults[$final_state]."'>" . $final_states[$final_state] . "</td>".
                     "<td>" . $datetime . "</td>";
                   if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
-                    "<td width='15%'>
+                    echo "<td width='15%'>
                       <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateChangeDormRecordModal$id'><i class='fa fa-pencil'></i></button>
                       <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteChangeDormRecordModal$id'><i class='fa fa-trash'></i></button>
                     </td>";
@@ -116,7 +116,7 @@
 
                           <select class='form-select mb-4' name='final_state' required>
                             <option value=''>最終審核狀態</option>";
-                            for($i = 0; $i<4; $i++){
+                            for($i = 2; $i<4; $i++){
                               echo "<option value=$i"; if($final_state ==$i) echo " selected"; echo ">".$final_states[$i]."</option>";
                             }
                           echo "</select>

@@ -10,11 +10,12 @@
     
     if (mysqli_num_rows($result) > 0) {
         $result=mysqli_fetch_array($result);
+        
         $id = $result['apply_dorm_id'];
         $account = $result['account'];
         $state = $result['state'];  // 1
         $year = $result['year']; 
-        $datetime = $result['datetime'];  
+        $datetime = $result['datetime']; 
     } else{
         $state = -1;
     }

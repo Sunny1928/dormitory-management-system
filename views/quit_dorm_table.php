@@ -66,8 +66,8 @@
                     "<td>" . $datetime . "</td>";
                   if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                     echo  "<td>
-                    <button onclick=\"put_apply_dorm('$id','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateQuitDormModal'><i class='fa fa-pencil'></i></button>
-                    <button onclick=\"put_apply_dorm('$id','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteQuitDormModal'><i class='fa fa-trash'></i></button>
+                    <button onclick=\"put_apply_dorm('$id','$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateQuitDormRecordModal$id'><i class='fa fa-pencil'></i></button>
+                    <button onclick=\"put_apply_dorm('$id','$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteQuitDormRecordModal$id'><i class='fa fa-trash'></i></button>
                   </td>";
                      }  
                   
@@ -127,9 +127,6 @@
                     </div>
                   </div>";
                 }
-              }
-              else{
-                echo "<td class='text-center' colspan='100%'>無</td>";
               }
             ?>
           </tbody>
