@@ -105,7 +105,7 @@ function assign_dorm($conn, $year)
     {
         $sql_department = "SELECT department FROM student 
         WHERE account = ?";
-        //提取該帳戶的系所資料
+        //提取該帳戶的系所資料 
         $pair_department = $conn->prepare($sql_department);
         $pair_department->bind_param('s', $account);
 
