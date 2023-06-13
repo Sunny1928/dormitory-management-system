@@ -35,7 +35,7 @@
   <section class="d-flex justify-content-center align-items-center" style="height: 100vh;">
   <div style="width: 26rem;" class="bg-white border rounded-5 p-4">
     <div class="d-flex justify-content-center m-4">
-      <img src="./image/nuk.png">
+      <a href='./index.html'><img src="./image/nuk.png"></a>
     </div>
     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
