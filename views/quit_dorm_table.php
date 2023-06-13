@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">退宿申請紀錄</h4>
     <?php
-      if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
+      if($_SESSION["account"] == 'root'){
        echo "<button class='btn ms-2 btn-primary btn-sm' data-mdb-toggle='modal' data-mdb-target='#addQuitDormRecordModal'><i class='fa fa-add me-1'></i>新增</button>";
       }
     ?>
