@@ -105,7 +105,7 @@ function assign_dorm($conn, $year)
     {
         $sql_department = "SELECT department FROM student 
         WHERE account = ?";
-        //提取該帳戶的系所資料
+        //提取該帳戶的系所資料 
         $pair_department = $conn->prepare($sql_department);
         $pair_department->bind_param('s', $account);
 
@@ -115,7 +115,7 @@ function assign_dorm($conn, $year)
                                 AND dormitory_id = NULL 
                                 AND student.department = ? 
                                 LIMIT 1";
-        //從border與student找帳戶相同，且房號、樓號為空，student 系所相同者
+        //從border與student找帳戶相同，且房號、樓號為空，student 系所相同者 
 
         $pair_result = $conn->prepare($sql_pair_roommate);
 

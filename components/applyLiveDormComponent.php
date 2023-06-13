@@ -1,6 +1,12 @@
+<div class="card m-2 px-4 py-3">
+    <div class="d-flex justify-content-between">
+        <h4 class="mb-0">住宿申請</h4>
+    </div>
+</div>
+
 <?php
     //輸出申請住宿資料
-    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year+1);
+    $result = apply_dorm_read_account_year($conn , $_SESSION['account'] , $default_year);
     
     if (mysqli_num_rows($result) > 0) {
         $result=mysqli_fetch_array($result);
@@ -64,7 +70,7 @@
                             <div class='modal-body'>
                                 <div class='form-outline mb-4'>
                                     <div class='text-center mb-3'>
-                                    <input readonly value=".($default_year+1)." readonly required type='text' name='year' class='form-control' />
+                                    <input readonly value=".($default_year)." readonly required type='text' name='year' class='form-control' />
                                     <label class='form-label'>年度</label>
                                     </div>
                                 </div>

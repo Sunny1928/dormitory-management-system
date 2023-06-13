@@ -232,6 +232,15 @@
       }
       instance.show();
     }
+  } else if (location.hash === "#pills-parking-permit") {
+    const triggerEl = document.querySelector('a[href="#pills-parking-permit"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
   }
 </script>
 

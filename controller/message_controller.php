@@ -11,6 +11,6 @@
         message_update($conn, $_POST['message_id'], $_POST['content']);
     }
 
-    header("Location: ../main.php?status=success#pills-message");
+    header("Location: ../main.php?#pills-message");
 
 ?>
