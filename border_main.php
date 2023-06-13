@@ -137,7 +137,7 @@
     <div class="tab-pane fade" id="pills-apply-dorm" role="tabpanel" aria-labelledby="tab-apply-dorm"> 
       <?php
         require("./components/applyLiveDormComponent.php");
-        // require("./views/apply_dorm_table.php");
+        require("./views/apply_dorm_table.php");
       ?>
     </div>
 
@@ -145,6 +145,8 @@
     <div class="tab-pane fade" id="pills-quit-dorm" role="tabpanel" aria-labelledby="tab-quit-dorm"> 
       <?php
         require("./components/applyQuitDormComponent.php");
+        require("./views/quit_dorm_table.php");
+
       ?>
     </div>
     
@@ -152,6 +154,8 @@
     <div class="tab-pane fade" id="pills-change-dorm" role="tabpanel" aria-labelledby="tab-change-dorm"> 
       <?php
         require("./components/applyChangeDormComponent.php");
+        require("./views/change_dorm_table.php");
+
       ?>
     </div>
 

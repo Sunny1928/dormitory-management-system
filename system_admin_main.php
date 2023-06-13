@@ -265,6 +265,15 @@
       }
       instance.show();
     }
+  } else if (location.hash === "#pills-access-card") {
+    const triggerEl = document.querySelector('a[href="#pills-access-card"]');
+    if (triggerEl) {
+      let instance = mdb.Tab.getInstance(triggerEl)
+      if (!instance) {
+        instance = new mdb.Tab(triggerEl);
+      }
+      instance.show();
+    }
   } 
 </script>
 
