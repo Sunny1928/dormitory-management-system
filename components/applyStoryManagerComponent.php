@@ -86,12 +86,12 @@
                                     
                                 <input value='$type' required type='hidden' name='type' class='form-control' />
                                 <input value='1' required type='hidden' name='apply_story_manager_state' class='form-control' />
-                                <input value='$room_number' required type='hidden' name='room_number' class='form-control' />
-                                <input value='$dormitory_id' required readonly type='hidden' name='dormitory_id' class='form-control' />
+                                <input value=".$_SESSION['room_number']." required type='hidden' name='room_number' class='form-control' />
+                                <input value=".$_SESSION['dormitory_id']." required readonly type='hidden' name='dormitory_id' class='form-control' />
                             </div>
         
                             <div class='modal-footer'>
-                                <button type='submit' class='btn btn-primary btn-block mb-4' name='update' value='apply'>申請</button>
+                                <button type='submit' class='btn btn-primary btn-block mb-4' name='apply' value='apply'>申請</button>
                             </div>
                         </form>
                     </div> ";
