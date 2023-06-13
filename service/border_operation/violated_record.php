@@ -54,7 +54,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE violated_record.account = ?
-                ORDER BY violated_record.datetime DESC";
+                ORDER BY  violated_record.year DESC , violated_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
@@ -89,7 +89,7 @@
                     AND violated_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
-                ORDER BY violated_record.datetime DESC";
+                ORDER BY violated_record.year DESC , violated_record.datetime DESC";
                 
         $result = $conn->query($sql);
         return $result;

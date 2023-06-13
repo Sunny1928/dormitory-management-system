@@ -52,7 +52,7 @@
                     AND entry_and_exit_dormitory_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account
-                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
+                ORDER BY entry_and_exit_dormitory_record.year DESC , entry_and_exit_dormitory_record.datetime DESC";
                 
         $result = $conn->query($sql);
         return $result;
@@ -85,7 +85,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE entry_and_exit_dormitory_record.account = ?
-                ORDER BY entry_and_exit_dormitory_record.datetime DESC";
+                ORDER BY entry_and_exit_dormitory_record.year DESC ,entry_and_exit_dormitory_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);

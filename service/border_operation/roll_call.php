@@ -56,7 +56,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE roll_call_state_record.account = ?
-                ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY roll_call_state_record.year DESC ,roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
@@ -90,7 +90,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE border.year = ?
-                ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY roll_call_state_record.year DESC ,roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $year);
@@ -107,7 +107,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE roll_call_state_record.roll_call_state_record_id = ?
-                ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY roll_call_state_record.year DESC ,roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $roll_call_id);
@@ -123,7 +123,7 @@
                     AND roll_call_state_record.year = border.year 
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account
-                ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY roll_call_state_record.year DESC ,roll_call_state_record.datetime DESC";
 
         $result = $conn->query($sql);
         return $result;
@@ -187,7 +187,7 @@
                 JOIN student ON student.account = border.account 
                 JOIN user ON user.account = student.account 
                 WHERE border.dormitory_id =  ? 
-                ORDER BY roll_call_state_record.datetime DESC";
+                ORDER BY  roll_call_state_record.year DESC , roll_call_state_record.datetime DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' , $dormitory_id);
