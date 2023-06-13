@@ -55,12 +55,14 @@
     // 根據account查詢換宿申請
     function change_dorm_read_account($conn , $account){   
             
+
         $sql = "SELECT * FROM apply_change_dorm 
+                JOIN border ON apply_change_dorm.another_border = border.account 
+                    AND border.year = apply_change_dorm.year
                 JOIN student ON apply_change_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                JOIN border ON apply_change_dorm.another_border = border.account AND border.year = apply_change_dorm.year
                 WHERE apply_change_dorm.account = ? OR apply_change_dorm.another_border = ?
-                ORDER BY apply_change_dorm.datetime	DESC";
+                ORDER BY border.year DESC , apply_change_dorm.datetime	DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ss' ,$account ,$account);
         $stmt->execute();
