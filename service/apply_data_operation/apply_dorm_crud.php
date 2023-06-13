@@ -72,7 +72,7 @@
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON apply_dorm.account = user.account
                 WHERE apply_dorm.account = ? AND apply_dorm.year = ?
-                ORDER BY apply_dorm.datetime DESC";
+                ORDER BY apply_dorm.year DESC , apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt-> bind_param('si' ,$account, $year);
         $stmt-> execute();
@@ -87,7 +87,7 @@
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
                 WHERE user.account = ?
-                ORDER BY apply_dorm.datetime DESC";
+                ORDER BY apply_dorm.year DESC , apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s' ,$account);
         $stmt->execute();
@@ -102,7 +102,7 @@
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
                 WHERE apply_dorm.state = ?
-                ORDER BY apply_dorm.datetime DESC";
+                ORDER BY apply_dorm.year DESC , apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i' ,$state);
         $stmt->execute();
@@ -115,7 +115,7 @@
         $sql = "SELECT * FROM apply_dorm
                 JOIN student ON apply_dorm.account = student.account
                 JOIN user ON user.account = student.account
-                ORDER BY apply_dorm.datetime DESC";
+                ORDER BY apply_dorm.year DESC , apply_dorm.datetime DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();

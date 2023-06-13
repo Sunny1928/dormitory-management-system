@@ -43,7 +43,7 @@
 
         $qrcode_time =  explode("!" , $decrypted_string)[1];
 
-        if(strtotime($current) - strtotime($qrcode_time) > 60)
+        if(strtotime($current) - strtotime($qrcode_time) > 15)
             $message = -1;
 
         return $message;
