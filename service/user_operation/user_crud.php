@@ -136,6 +136,15 @@
             return False;
         }
 
+        user_reload_session($conn , $account, $year);
+
+        return True;
+    }
+
+
+    // user update session
+    function user_reload_session($conn , $account, $year){
+
         user_session_load($conn , $account);
         
         // 家長
