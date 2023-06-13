@@ -10,18 +10,19 @@
         
         set_time_limit(500);
         $department_student_num = 45;
+        # 新增宿舍
+        add_dorm($conn);
+        # 新增房間、設備、公告設備
+        add_room_and_equipment_and_public_equipment($conn);
         # 新增student
         add_student($conn , $department_student_num);
         # 申請變成住宿生 & 更新狀態
         add_apply_dorm($conn , $department_student_num);
-        # 新增宿舍
-        add_dorm($conn);
         # 新增系統管理員
         add_system_admin($conn);
-        # 新增宿舍規則
+        # 新增宿舍規則、違規紀錄
         add_rule($conn);
-        # 新增房間、設備、公告設備
-        add_room_and_equipment_and_public_equipment($conn);
+        add_violate_record($conn);
         # 申請住宿 抽籤 -> 分配房間 -> 新增住宿帳單 -> 新增家長帳號
         // system_admin_dorm_room_allocation_process($conn , 110);
         # 加家長
@@ -40,8 +41,9 @@
         add_roll_call($conn);
         # 新增帳單、公告、留言
         add_announcement_and_message($conn);
-        # 建立退宿申請
-        quit_dorm_create($conn,"A1095551",109);
+        # 建立換宿、退宿申請
+        add_quit_dorm($conn);
+        add_change_dorm($conn);
         
         
         
@@ -71,7 +73,9 @@
             user_delete($conn,$using_arr[$i]);
             student_create($conn,$using_name[$i],$using_arr[$i],$using_arr[$i].'@mail.nuk.edu.tw','0987654321',$using_arr[$i],$gender,3,'資工');
         }
-                
+
+        // demo用的
+        student_create($conn,'王大明'  ,'A1095500','A1095500@asdasdasda','0987654321','A1095500',0,3,'資工');
     }
     
     function add_apply_dorm($conn , $department_student_num){
@@ -102,15 +106,50 @@
             apply_dorm_create($conn , "A10955".$i,109,1,0);
         }
 
-        # 測試用 109學生變成住宿生
-        border_create($conn , 'A1095509' , 109);
-        border_create($conn , 'A1095514' , 109);
-        border_create($conn , 'A1095546' , 109);
-        border_create($conn , 'A1095550' , 109);
-        border_create($conn , 'A1095551' , 109);
-        border_create($conn , 'A1095562' , 109);
-        border_create($conn , 'A1095564' , 109);
-    
+        # 測試用 107~109學生變成住宿生
+        $using_arr_boy = array('A1095514','A1095546','A1095551','A1095564');
+        $using_arr_girl = array('A1095509','A1095550','A1095562');
+
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<2; $i++){
+                apply_dorm_create($conn ,$using_arr_boy[2*$i] , $year, 0 ,2);
+                apply_dorm_create($conn ,$using_arr_boy[2*$i+1], $year, 2 ,0);
+                border_create($conn , $using_arr_boy[2*$i] , $year);
+                border_create($conn , $using_arr_boy[2*$i+1] , $year);
+                border_update_dorm_room($conn , $using_arr_boy[2*$i] , 0 , 101 , $year);
+                border_update_dorm_room($conn , $using_arr_boy[2*$i+1] , 2 , 101 , $year);
+            }
+            for($i=0; $i<3; $i++){
+                apply_dorm_create($conn ,$using_arr_girl[$i] , $year, 1 ,3);
+                border_create($conn , $using_arr_girl[$i] , $year);
+                border_update_dorm_room($conn , $using_arr_girl[$i] , 1 , 101 , $year);
+            }
+            border_update_dorm_room($conn , $using_arr_girl[1] , 3 , 101 , $year);
+        }
+    }
+
+    function add_change_dorm($conn){  
+
+        $using_arr_boy = array('A1095514','A1095546','A1095551','A1095564');
+        $using_arr_girl = array('A1095509','A1095550','A1095562');
+
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<2; $i++){
+                change_dorm_create_process($conn , $using_arr_boy[2*$i], $year, $using_arr_boy[2*$i+1]);
+            }
+            change_dorm_create_process($conn , $using_arr_girl[0], $year, $using_arr_girl[1]);
+        }
+    }
+
+    function add_quit_dorm($conn){  
+
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<7; $i++){
+                quit_dorm_create($conn,$using_arr[$i],$year);
+            }
+        }
+
     }
     
     function add_dorm($conn){
@@ -136,6 +175,19 @@
         rule_create($conn,2,'晚上太吵');
         rule_create($conn,4,'惡意破壞器材');
         rule_create($conn,3,'使用禁用的電器');
+    }
+
+    function add_violate_record($conn){
+
+        $rel = rule_read_all($conn);
+        while ($userinfo = mysqli_fetch_assoc($rel)){
+            $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+            for($year=107; $year<=109; $year++){
+                for($i=0; $i<7; $i++){
+                    violated_record_create($conn , $using_arr[$i] , $userinfo['rule_id'], $year , $send_mail = false);
+                }
+            }
+        }
     }
 
     function add_room_and_equipment_and_public_equipment($conn){
@@ -190,38 +242,53 @@
     }
 
     function add_entry_and_exit($conn){
-        entry_and_exit_create($conn,"A1095509",0,109);
-        entry_and_exit_create($conn,"A1095509",1,109);
-        entry_and_exit_create($conn,"A1095550",1,109);
-        entry_and_exit_create($conn,"A1095550",1,109);
-        entry_and_exit_create($conn,"A1095550",1,109);
-        entry_and_exit_create($conn,"A1095550",1,109);
-        
-    }
-    function add_access_card($conn){
-        access_card_create($conn,"A1095550",109);
-        access_card_create($conn,"A1095551",109);
 
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<7; $i++){
+                entry_and_exit_create($conn,$using_arr[$i],0,$year);
+                entry_and_exit_create($conn,$using_arr[$i],0,$year);
+                entry_and_exit_create($conn,$using_arr[$i],1,$year);
+                entry_and_exit_create($conn,$using_arr[$i],1,$year);
+            }
+        }
     }
+
+    function add_access_card($conn){
+
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<7; $i++){
+                access_card_create($conn,$using_arr[$i],$year);
+                access_card_create($conn,$using_arr[$i],$year);
+            }
+        }
+    }
+
     function add_roll_call($conn){
-        roll_call_create($conn,"A1095514",109,0);
-        roll_call_create($conn,"A1095550",109,0);
-        roll_call_create($conn,"A1095550",109,1);
-        roll_call_create($conn,"A1095509",109,0);
-        roll_call_create($conn,"A1095509",109,0);
-        roll_call_create($conn,"A1095551",109,1);
-        roll_call_create($conn,"A1095551",109,0);
-        roll_call_create($conn,"A1095550",109,0);
-        roll_call_create($conn,"A1095550",109,1);
+
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<7; $i++){
+                roll_call_create($conn,$using_arr[$i],$year,0);
+                roll_call_create($conn,$using_arr[$i],$year,0);
+                roll_call_create($conn,$using_arr[$i],$year,1);
+                roll_call_create($conn,$using_arr[$i],$year,1);
+            }
+        }
     }
 
     function add_announcement_and_message($conn){
         
-        bill_create($conn,"A1095550","1","電費",200,109);
-        bill_create($conn,"A1095509","1","電費",200,109);
-        bill_create($conn,"A1095550","2","水費",200,109);
-        bill_create($conn,"A1095550","3","網路費",200,109);
-        bill_create($conn,"A1095550","4","修繕費",200,109);
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        for($year=107; $year<=109; $year++){
+            for($i=0; $i<7; $i++){
+                bill_create($conn,$using_arr[$i],"1","電費",200,$year);
+                bill_create($conn,$using_arr[$i],"2","水費",200,$year);
+                bill_create($conn,$using_arr[$i],"3","網路費",200,$year);
+                bill_create($conn,$using_arr[$i],"4","修繕費",200,$year);
+            }
+        }
 
         announcement_create($conn,"root","停電通知","6/13凌晨 0200 ~ 0500 因學校高壓電維修檢測，將會暫時停電，請學生多加留意，謝謝");
         announcement_create($conn,"admin1","宿舍分發結果", "宿舍已全數分發完畢，有抽取宿舍的同學請上宿舍網站查詢最終結果，謝謝");
@@ -233,12 +300,12 @@
         message_create($conn,"A1095550","你們好!");
         message_create($conn,"A1095551","Hello!");
     }
+
     # 刪除 table 全部資料 
     function data_delete_all($conn){
         user_delete_all($conn);
         dormitory_delete_all($conn);
         rule_delete_all($conn);
     }
-    
 
 ?>
