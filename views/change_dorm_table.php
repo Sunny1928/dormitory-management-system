@@ -45,7 +45,7 @@
               $final_states  = array("等待同意", "兩位學生同意","系統管理員通過","未通過");
 
               if($_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
-                $result = achange_dorm_read_all($conn);
+                $result = change_dorm_read_all($conn);
               }else if($_SESSION["permission"] == 2){
                 $result = change_dorm_read_account($conn , $_SESSION['student_account']);
               }else{
