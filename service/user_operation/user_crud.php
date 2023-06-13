@@ -143,8 +143,9 @@
 
 
     // user update session
-    function user_reload_session($conn , $account, $year){
-
+    function user_reload_session($conn , $account, $year=112){
+        session_destroy();
+        session_start();
         user_session_load($conn , $account);
         
         // 家長
