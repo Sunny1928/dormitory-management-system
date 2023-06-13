@@ -225,8 +225,10 @@
   <script>
     function modifyState(where) {
       stateObj={}
-      window.history.pushState(stateObj,where, window.location+'#'+where);
+      console.log(window.location.hostname+window.location.pathname)
+      window.history.replaceState(stateObj,where, '#'+where);
     }
+
     function table_filter(idFilter, idTable, index) {
       var filter, tr, td, i;
       filter = document.getElementById(idFilter).value;

@@ -25,20 +25,20 @@
         <a onclick="modifyState('pills-message')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>留言板
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
+        <a onclick="modifyState('pills-apply-dorm')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿
         </a>
-        <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-quit-dorm' data-mdb-toggle='pill' href='#pills-quit-dorm' role='tab' aria-controls='pills-quit-dorm' aria-selected='false'>
+        <a onclick="modifyState('pills-quit-dorm')"  class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-quit-dorm' data-mdb-toggle='pill' href='#pills-quit-dorm' role='tab' aria-controls='pills-quit-dorm' aria-selected='false'>
           <i class='fas fa-building-circle-xmark pe-3'></i>申請退宿
         </a>
-        <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-change-dorm' data-mdb-toggle='pill' href='#pills-change-dorm' role='tab' aria-controls='pills-change-dorm' aria-selected='false'>
+        <a onclick="modifyState('pills-change-dorm')"  class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-change-dorm' data-mdb-toggle='pill' href='#pills-change-dorm' role='tab' aria-controls='pills-change-dorm' aria-selected='false'>
           <i class='fas fa-building-circle-arrow-right pe-3'></i>申請換宿
         </a>
         <?php
           // border
           if($_SESSION['permission']== 4 || $_SESSION['permission']== 5){
             echo "
-            <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-roommate' data-mdb-toggle='pill' href='#pills-roommate' role='tab' aria-controls='pills-roommate' aria-selected='false'>
+            <a onclick=\"modifyState('pills-roommate')\" class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-roommate' data-mdb-toggle='pill' href='#pills-roommate' role='tab' aria-controls='pills-roommate' aria-selected='false'>
               <i class='fas fa-door-open pe-3'></i>室友
             </a>
             <a class='list-group-item list-group-item-action py-2 ripple pb-2' id='tab-equipment' data-mdb-toggle='pill' href='#pills-equipment' role='tab' aria-controls='pills-equipment' aria-selected='false'>
