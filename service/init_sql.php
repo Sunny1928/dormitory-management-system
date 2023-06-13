@@ -227,11 +227,11 @@
         announcement_create($conn,"admin1","宿舍分發結果", "宿舍已全數分發完畢，有抽取宿舍的同學請上宿舍網站查詢最終結果，謝謝");
         announcement_create($conn,"admin2","宿舍辦公室工讀生徵求","在學二一樓的宿舍辦公室這學期需要兩位工讀生，工作時間為每天下午17:00~19:00，處理宿舍相關事項，有興趣的同學歡迎來學二宿舍辦公室洽詢");
         
-        message_create($conn,"A1095514","A1095514");
-        message_create($conn,"admin1","admin1");
-        message_create($conn,"dorm1","dorm1");
-        message_create($conn,"A1095550","A1095550");
-        message_create($conn,"A1095551","A1095551");
+        message_create($conn,"A1095514","大家好 我是廖怡誠 住在學2 332");
+        message_create($conn,"admin1","同學們好!有問題都可以來宿舍辦公室詢問");
+        message_create($conn,"dorm1","大家好，我是這學期學2的樓長");
+        message_create($conn,"A1095550","你們好!");
+        message_create($conn,"A1095551","Hello!");
     }
     # 刪除 table 全部資料 
     function data_delete_all($conn){
