@@ -115,7 +115,7 @@
                                 </div>
                                 <select class='form-select mb-4' name='another_border' required>
                                     <option value=''>另一方學生之帳號</option>";
-                                        $res = border_read_not_roommate($conn , $account , $year , $_SESSION['gender']);
+                                        $res = border_read_not_roommate($conn , $account , $_SESSION['year'] , $_SESSION['gender']);
                                         // $res = border_read_year($conn, $year);
                                         if (mysqli_num_rows($res) > 0) {
                                             while ($info = mysqli_fetch_assoc($res)){
