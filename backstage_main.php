@@ -17,78 +17,78 @@
       </div>
       
       <div class="align-items-end list-group list-group-flush mx-3 mt-4">
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
+        <a onclick="modifyState('pills-main')" class="list-group-item list-group-item-action py-2 ripple pb-2 active" id="tab-main" data-mdb-toggle="pill" href="#pills-main" role="tab" aria-controls="pills-main" aria-selected="true">
           <i class="fas fa-house pe-3"></i>主畫面
         </a>  
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-system-admin" data-mdb-toggle="pill" href="#pills-system-admin" role="tab" aria-controls="pills-system-admin" aria-selected="true">
+        <a onclick="modifyState('pills-system-admin')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-system-admin" data-mdb-toggle="pill" href="#pills-system-admin" role="tab" aria-controls="pills-system-admin" aria-selected="true">
           <i class="fas fa-user-gear pe-3"></i>系統管理員
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dorm-manager" data-mdb-toggle="pill" href="#pills-dorm-manager" role="tab" aria-controls="pills-dorm-manager" aria-selected="true">
+        <a onclick="modifyState('pills-dorm-manager')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dorm-manager" data-mdb-toggle="pill" href="#pills-dorm-manager" role="tab" aria-controls="pills-dorm-manager" aria-selected="true">
           <i class="fas fa-house-person-return pe-3"></i>宿舍管理員
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parents" data-mdb-toggle="pill" href="#pills-parents" role="tab" aria-controls="pills-parents" aria-selected="true">
+        <a onclick="modifyState('pills-parents')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parents" data-mdb-toggle="pill" href="#pills-parents" role="tab" aria-controls="pills-parents" aria-selected="true">
           <i class="fas fa-people-simple pe-3"></i>家長
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
+        <a onclick="modifyState('pills-student')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-student" data-mdb-toggle="pill" href="#pills-student" role="tab" aria-controls="pills-student" aria-selected="true">
           <i class="fas fa-user-graduate pe-3"></i>學生
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
+        <a onclick="modifyState('pills-border')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-border" data-mdb-toggle="pill" href="#pills-border" role="tab" aria-controls="pills-border" aria-selected="true">
           <i class="fas fa-person-shelter pe-3"></i>住宿生
         </a>
         <!-- <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-story-manager" data-mdb-toggle="pill" href="#pills-story-manager" role="tab" aria-controls="pills-story-manager" aria-selected="true">
           <i class="fas fa-school pe-3"></i>樓長
         </a> -->
 
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dormitory" data-mdb-toggle="pill" href="#pills-dormitory" role="tab" aria-controls="pills-dormitory" aria-selected="false">
+        <a onclick="modifyState('pills-dormitory')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-dormitory" data-mdb-toggle="pill" href="#pills-dormitory" role="tab" aria-controls="pills-dormitory" aria-selected="false">
           <i class="fas fa-house-chimney pe-3"></i>宿舍大樓
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-room" data-mdb-toggle="pill" href="#pills-room" role="tab" aria-controls="pills-room" aria-selected="false">
+        <a onclick="modifyState('pills-room')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-room" data-mdb-toggle="pill" href="#pills-room" role="tab" aria-controls="pills-room" aria-selected="false">
           <i class="fas fa-door-open pe-3"></i>宿舍房間
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
+        <a onclick="modifyState('pills-equipment')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-equipment" data-mdb-toggle="pill" href="#pills-equipment" role="tab" aria-controls="pills-equipment" aria-selected="false">
           <i class="fas fa-bed pe-3"></i>宿舍設備
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
+        <a onclick="modifyState('pills-public-equipment')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-public-equipment" data-mdb-toggle="pill" href="#pills-public-equipment" role="tab" aria-controls="pills-public-equipment" aria-selected="false">
           <i class="fas fa-washing-machine pe-3"></i>公共設施 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
+        <a onclick="modifyState('pills-rule')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-rule" data-mdb-toggle="pill" href="#pills-rule" role="tab" aria-controls="pills-rule" aria-selected="false">
           <i class="fas fa-scroll pe-3"></i>宿舍規範
         </a>
         
         
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
+        <a onclick="modifyState('pills-violated-record')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-violated-record" data-mdb-toggle="pill" href="#pills-violated-record" role="tab" aria-controls="pills-violated-record" aria-selected="false">
           <i class="fas fa-book pe-3"></i>違規紀錄
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-entry-and-exit" data-mdb-toggle="pill" href="#pills-entry-and-exit" role="tab" aria-controls="pills-entry-and-exit" aria-selected="false">
+        <a onclick="modifyState('pills-entry-and-exit')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-entry-and-exit" data-mdb-toggle="pill" href="#pills-entry-and-exit" role="tab" aria-controls="pills-entry-and-exit" aria-selected="false">
           <i class="fas fa-note pe-3"></i>進出紀錄
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roll-call" data-mdb-toggle="pill" href="#pills-roll-call" role="tab" aria-controls="pills-roll-call" aria-selected="false">
+        <a onclick="modifyState('pills-roll-call')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-roll-call" data-mdb-toggle="pill" href="#pills-roll-call" role="tab" aria-controls="pills-roll-call" aria-selected="false">
           <i class="fas fa-clipboard-list-check pe-3"></i>點名紀錄 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
+        <a onclick="modifyState('pills-bill')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-bill" data-mdb-toggle="pill" href="#pills-bill" role="tab" aria-controls="pills-bill" aria-selected="false">
           <i class="fas fa-money-bills pe-3"></i>帳單紀錄 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
+        <a onclick="modifyState('pills-access-card')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-access-card" data-mdb-toggle="pill" href="#pills-access-card" role="tab" aria-controls="pills-access-card" aria-selected="false">
           <i class="fas fa-address-card pe-3"></i>通行證紀錄 
         </a>
         
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
+        <a onclick="modifyState('pills-announcement')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-announcement" data-mdb-toggle="pill" href="#pills-announcement" role="tab" aria-controls="pills-announcement" aria-selected="false">
           <i class="fas fa-volume-low pe-3"></i>公告 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
+        <a onclick="modifyState('pills-message')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-message" data-mdb-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message" aria-selected="false">
           <i class="fas fa-comment pe-3"></i>訊息 
         </a>
 
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
+        <a onclick="modifyState('pills-apply-dorm')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-apply-dorm" data-mdb-toggle="pill" href="#pills-apply-dorm" role="tab" aria-controls="pills-apply-dorm" aria-selected="false">
           <i class="fas fa-building-circle-check pe-3"></i>申請住宿 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
+        <a onclick="modifyState('pills-quit-dorm')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-quit-dorm" data-mdb-toggle="pill" href="#pills-quit-dorm" role="tab" aria-controls="pills-quit-dorm" aria-selected="false">
           <i class="fas fa-building-circle-xmark pe-3"></i>申請退宿 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
+        <a onclick="modifyState('pills-change-dorm')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-change-dorm" data-mdb-toggle="pill" href="#pills-change-dorm" role="tab" aria-controls="pills-change-dorm" aria-selected="false">
           <i class="fas fa-building-circle-arrow-right pe-3"></i>申請換宿 
         </a>
-        <a class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
+        <a onclick="modifyState('pills-parking-permit')" class="list-group-item list-group-item-action py-2 ripple pb-2" id="tab-parking-permit" data-mdb-toggle="pill" href="#pills-parking-permit" role="tab" aria-controls="pills-parking-permit" aria-selected="false">
           <i class="fas fa-car pe-3"></i>停車許可
         </a>
       </div>
