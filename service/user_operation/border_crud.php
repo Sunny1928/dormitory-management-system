@@ -77,8 +77,14 @@
         $rel = border_read_student_year($conn , $account , $year);
         if($rel->num_rows == 0)
             return False;
-        else
-            return True;
+        else{
+            $rel = $rel->fetch_assoc();
+            if($rel['type'] == 1)
+                return False;
+            else
+                return True;
+        }
+
     }
 
     // 設定border session資料
