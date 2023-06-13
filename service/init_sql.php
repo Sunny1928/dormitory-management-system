@@ -100,11 +100,20 @@
             apply_dorm_create($conn , "A10939".$i,110, $i % 4 ,($i+2) % 4);
 
         }
-        
+        # 把 大於45號加進去
+        $using_arr = array('A1095546','A1095550','A1095551','A1095564','A1095562');
+        for ($i=0 ; $i < count($using_arr); $i++){
+            if($i<=2){
+                apply_dorm_create($conn , $using_arr[$i],110, $i % 4 ,($i+2) % 4);
+            }
+        }
+
         for($i=1;$i<=10;$i++){
             if($i < 10 ) $i = "0".$i;
             apply_dorm_create($conn , "A10955".$i,109,1,0);
         }
+
+
 
         # 測試用 107~109學生變成住宿生
         $using_arr_boy = array('A1095514','A1095546','A1095551','A1095564');
