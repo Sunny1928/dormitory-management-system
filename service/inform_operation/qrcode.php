@@ -18,12 +18,16 @@
         $encrypted_string = openssl_encrypt($data, $cipher_algo,
         $encrypt_key, $option, $encrypt_iv);
         
-        $message = $url . $path . "?" .  $encrypted_string;
+        $message = $url . $path . "?" .  explode("=", base64_encode($encrypted_string))[0];
+
         return $message;
+        // return $message;
     }
 
     function decrypt_qrcode_data($cipghertext){
 
+        $cipghertext = $cipghertext . "==";
+        $cipghertext = base64_decode($cipghertext);
         
         $cipher_algo = "AES-128-CTR"; //The cipher method, in our case, AES 
         $iv_length = openssl_cipher_iv_length($cipher_algo); //The length of the initialization vector
@@ -43,8 +47,9 @@
 
         $qrcode_time =  explode("!" , $decrypted_string)[1];
 
-        if(strtotime($current) - strtotime($qrcode_time) > 15)
-            $message = -1;
+        
+        // if(strtotime($current) - strtotime($qrcode_time) > 15)
+            // $message = -1;
 
         return $message;
     }
