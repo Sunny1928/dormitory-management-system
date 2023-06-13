@@ -214,8 +214,11 @@ function put_border(a, b, c, d, e){
     elms[i].value=b
 
   var elms = document.querySelectorAll("[id='type']");
-  for(var i = 0; i < elms.length; i++) 
-    elms[i].value=c
+  for(var i = 0; i < elms.length; i++) {
+    if(d != 1) elms[i].value=c
+    else elms[i].value=(parseInt(e[0]) + 2).toString()
+    // console.log(e)
+  }
 
   var elms = document.querySelectorAll("[id='apply_story_manager_state']");
   for(var i = 0; i < elms.length; i++) 

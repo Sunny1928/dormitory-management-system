@@ -90,10 +90,10 @@
                 $i = "0".$i;
             }
 
-            apply_dorm_create($conn , "A10955".$i,110, $i % 4 ,($i+1) % 4);
-            apply_dorm_create($conn , "A10951".$i,110, $i % 4 ,($i+1) % 4);
-            apply_dorm_create($conn , "A10940".$i,110, $i % 4 ,($i+1) % 4);
-            apply_dorm_create($conn , "A10939".$i,110, $i % 4 ,($i+1) % 4);
+            apply_dorm_create($conn , "A10955".$i,110, $i % 4 ,($i+2) % 4);
+            apply_dorm_create($conn , "A10951".$i,110, $i % 4 ,($i+2) % 4);
+            apply_dorm_create($conn , "A10940".$i,110, $i % 4 ,($i+2) % 4);
+            apply_dorm_create($conn , "A10939".$i,110, $i % 4 ,($i+2) % 4);
 
         }
         
