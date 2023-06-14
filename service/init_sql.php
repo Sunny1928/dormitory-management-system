@@ -204,7 +204,7 @@
                 }
             }
         }
-        
+
     }
 
     function add_room_and_equipment_and_public_equipment($conn){
@@ -262,12 +262,10 @@
 
         $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($time = 1 ; $time<=10;$time++){
+            for($time = 1 ; $time<=2;$time++){
                 for($i=0; $i<count($using_arr); $i++){
 
                     entry_and_exit_create($conn,$using_arr[$i],0,$year);
-                    entry_and_exit_create($conn,$using_arr[$i],0,$year);
-                    entry_and_exit_create($conn,$using_arr[$i],1,$year);
                     entry_and_exit_create($conn,$using_arr[$i],1,$year);
                 }
             }
@@ -280,7 +278,7 @@
 
         $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($time = 1 ; $time<=10;$time++){
+            for($time = 1 ; $time<=2;$time++){
                 for($i=0; $i<count($using_arr); $i++){
                     access_card_create($conn,$using_arr[$i],$year);
                     access_card_create($conn,$using_arr[$i],$year);
@@ -296,11 +294,9 @@
 
         $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($time = 1 ; $time<=10;$time++){
+            for($time = 1 ; $time<=2;$time++){
                 for($i=0; $i<count($using_arr); $i++){
                     roll_call_create($conn,$using_arr[$i],$year,0);
-                    roll_call_create($conn,$using_arr[$i],$year,0);
-                    roll_call_create($conn,$using_arr[$i],$year,1);
                     roll_call_create($conn,$using_arr[$i],$year,1);
                 }
             }
