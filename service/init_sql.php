@@ -113,9 +113,12 @@
             if($i < 10 ) $i = "0".$i;
             apply_dorm_create($conn , "A10955".$i,109,1,0);
         }
-
-
-
+        for($year=107; $year<=109; $year++){
+            apply_dorm_create($conn,"A1095500",$year,0,2);
+            border_create($conn ,"A1095500" , $year);
+            border_update_dorm_room($conn , "A1095500" , 1 , 101 , $year);
+        }
+        
         # 測試用 107~109學生變成住宿生
         $using_arr_boy = array('A1095514','A1095546','A1095551','A1095564');
         $using_arr_girl = array('A1095509','A1095550','A1095562');
@@ -150,14 +153,15 @@
             }
             change_dorm_create_process($conn , $using_arr_girl[0], $year, $using_arr_girl[1]);
         }
+        change_dorm_create_process($conn,"A1095500",109,"A1095551");
         change_dorm_set_state($conn,1,2,110);
     }
 
     function add_quit_dorm($conn){  
 
-        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($i=0; $i<7; $i++){
+            for($i=0; $i< count($using_arr); $i++){
                 quit_dorm_create($conn,$using_arr[$i],$year);
             }
         }
@@ -195,11 +199,12 @@
         while ($userinfo = mysqli_fetch_assoc($rel)){
             $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
             for($year=107; $year<=109; $year++){
-                for($i=0; $i<7; $i++){
+                for($i=0; $i<count($using_arr); $i++){
                     violated_record_create($conn , $using_arr[$i] , $userinfo['rule_id'], $year , $send_mail = false);
                 }
             }
         }
+        
     }
 
     function add_room_and_equipment_and_public_equipment($conn){
@@ -255,53 +260,68 @@
 
     function add_entry_and_exit($conn){
 
-        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($i=0; $i<7; $i++){
-                entry_and_exit_create($conn,$using_arr[$i],0,$year);
-                entry_and_exit_create($conn,$using_arr[$i],0,$year);
-                entry_and_exit_create($conn,$using_arr[$i],1,$year);
-                entry_and_exit_create($conn,$using_arr[$i],1,$year);
+            for($time = 1 ; $time<=10;$time++){
+                for($i=0; $i<count($using_arr); $i++){
+
+                    entry_and_exit_create($conn,$using_arr[$i],0,$year);
+                    entry_and_exit_create($conn,$using_arr[$i],0,$year);
+                    entry_and_exit_create($conn,$using_arr[$i],1,$year);
+                    entry_and_exit_create($conn,$using_arr[$i],1,$year);
+                }
             }
+            
         }
+
     }
 
     function add_access_card($conn){
 
-        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($i=0; $i<7; $i++){
-                access_card_create($conn,$using_arr[$i],$year);
-                access_card_create($conn,$using_arr[$i],$year);
+            for($time = 1 ; $time<=10;$time++){
+                for($i=0; $i<count($using_arr); $i++){
+                    access_card_create($conn,$using_arr[$i],$year);
+                    access_card_create($conn,$using_arr[$i],$year);
+                }
             }
         }
+        
+        
         access_card_set_state($conn,1,110);
     }
 
     function add_roll_call($conn){
 
-        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($i=0; $i<7; $i++){
-                roll_call_create($conn,$using_arr[$i],$year,0);
-                roll_call_create($conn,$using_arr[$i],$year,0);
-                roll_call_create($conn,$using_arr[$i],$year,1);
-                roll_call_create($conn,$using_arr[$i],$year,1);
+            for($time = 1 ; $time<=10;$time++){
+                for($i=0; $i<count($using_arr); $i++){
+                    roll_call_create($conn,$using_arr[$i],$year,0);
+                    roll_call_create($conn,$using_arr[$i],$year,0);
+                    roll_call_create($conn,$using_arr[$i],$year,1);
+                    roll_call_create($conn,$using_arr[$i],$year,1);
+                }
             }
         }
+
+    
     }
 
     function add_announcement_and_message($conn){
         
-        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564');
+        $using_arr = array('A1095509','A1095514','A1095546','A1095550','A1095551','A1095562','A1095564',"A1095500");
         for($year=107; $year<=109; $year++){
-            for($i=0; $i<7; $i++){
+            for($i=0; $i<count($using_arr); $i++){
                 bill_create($conn,$using_arr[$i],"1","電費",200,$year);
                 bill_create($conn,$using_arr[$i],"2","水費",200,$year);
                 bill_create($conn,$using_arr[$i],"3","網路費",200,$year);
                 bill_create($conn,$using_arr[$i],"4","修繕費",200,$year);
             }
         }
+
+
         bill_set_state($conn,1,110);
 
         announcement_create($conn,"root","停電通知","6/13凌晨 0200 ~ 0500 因學校高壓電維修檢測，將會暫時停電，請學生多加留意，謝謝");
