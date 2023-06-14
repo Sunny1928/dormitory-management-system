@@ -78,13 +78,15 @@
                             </div>
                         </form>
                     </div> ";
-            }else{
+            }
+            //<p>$parking_permit_url</p>
+            else{
                 $cipgher = parking_permit_gen_qrcode_data($conn , $id);
                 $parking_permit_url = "https://chart.googleapis.com/chart?cht=qr&chs=512x512&chl=".$cipgher;
                 
                 echo "
                 <div class='p-3 mb-2 ' style='border-radius:10px; background:#eee'>
-                    <p>$parking_permit_url</p>
+                    
                     <div class='d-flex hover-overlay justify-content-center ripple' data-mdb-ripple-color='light'>
                         <a href='$parking_permit_url'>
                             <img id='barcode' src='$parking_permit_url' width='256' height='256' />
