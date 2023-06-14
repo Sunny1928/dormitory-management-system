@@ -4,6 +4,13 @@
   <div class="d-flex justify-content-between">
     <h4 class="mb-0">點名紀錄</h4>
     <div class="d-flex">
+    <?php
+      if($_SESSION['permission'] == 5){
+        echo "<div class='form-outline w-auto'>
+          <input type='text' class='form-control form-control-sm' id='rollCallInput' onkeyup=\"searchFunction('rollCallInput', 'rollCallTable', 2)\" />
+          <label class='form-label'>搜尋帳號</label>
+        </div>";
+      }?>
       <select type="text" id="rollCallYearFilter" onchange="table_filter('rollCallYearFilter','rollCallTable',1)" class='form-select-sm ms-2'  required>
         <option value=''>年</option>
         <?php

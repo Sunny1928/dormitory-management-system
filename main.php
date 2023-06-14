@@ -25,6 +25,7 @@
   $parking_permit_states = array("審核中", "通過", "未通過");
   $clean_states = array("未整理", "整理完");
   $years = array(108,107,109,110,111,112);
+  $dormmm = array('學一男','學一女','學二男','學二女');
   $default_year = 110;
 
   user_reload_session($conn , $_SESSION['account'], $default_year);

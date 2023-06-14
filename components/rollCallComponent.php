@@ -55,7 +55,6 @@
                 
                 echo "
                 <div class='p-3 mb-2 ' style='border-radius:10px; background:#eee'>
-                    <p>$access_card_url</p>
                     <div class='d-flex hover-overlay justify-content-center ripple' data-mdb-ripple-color='light'>
                         <a href='$access_card_url'>
                             <img id='barcode' src='$access_card_url' width='256' height='256' />

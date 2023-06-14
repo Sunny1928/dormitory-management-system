@@ -19,10 +19,10 @@
           echo "<p class='m-1'><b>科系：</b>".$_SESSION['department']."</p>";
           if($_SESSION['permission']!=3)
           echo "<p class='m-1'><b>年度：</b>".$_SESSION['year']."</p>".
-          "<p class='m-1'><b>宿舍：</b>".$_SESSION['dormitory_id']."</p>".
+          "<p class='m-1'><b>宿舍：</b>".$dormmm[$_SESSION['dormitory_id']]."</p>".
           "<p class='m-1'><b>房號：</b>".$_SESSION['room_number']."</p>";
           if($_SESSION['permission']!=3)
-            echo "<p class='m-1'><b>住宿生種類：</b>".$_SESSION['border_type']."</p>";
+            echo "<p class='m-1'><b>住宿生種類：</b>".$border_types[$_SESSION['border_type']]."</p>";
         }
         ?>
         

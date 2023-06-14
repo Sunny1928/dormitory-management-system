@@ -113,7 +113,7 @@
         require("./components/rollCallComponent.php");
         require("./components/applyStoryManagerComponent.php");
       }
-      ?>
+      // ?>
 
     </div>
   
