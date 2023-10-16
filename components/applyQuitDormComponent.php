@@ -7,7 +7,7 @@
 <?php
     //輸出退宿資料
 
-    $result = quit_dorm_read_account($conn , $_SESSION['account']);
+    $result = quit_dorm_read_account_year($conn, $_SESSION['account'],$default_year);
     
 
     if (mysqli_num_rows($result) > 0) {

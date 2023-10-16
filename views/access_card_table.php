@@ -75,64 +75,13 @@
                     "<td>" . $datetime . "</td>";
                   if( $_SESSION["permission"] == 0 || $_SESSION["permission"] == 1){
                     echo "<td>
-                      <button class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal$id'><i class='fa fa-pencil'></i></button>
-                      <button class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAccessCardRecordModal$id'><i class='fa fa-trash'></i></button>
+                      <button onclick=\"put_access_card('$id', '$state')\" class='call-btn btn btn-outline-primary btn-floating btn-sm ripple-surface' data-mdb-toggle='modal' data-mdb-target='#updateAccessCardRecordModal'><i class='fa fa-pencil'></i></button>
+                      <button onclick=\"put_access_card('$id', '$state')\" class='message-btn btn ms-2 btn-primary btn-floating btn-sm' data-mdb-toggle='modal' data-mdb-target='#deleteAccessCardRecordModal'><i class='fa fa-trash'></i></button>
                     </td>";
                   }
                   echo  "</tr>";
 
-                  // Update Modal
-                  echo "
-                  <div class='modal fade' id='updateAccessCardRecordModal$id' tabindex='-1' aria-labelledby='updateAccessCardRecordModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                    <form method='post' action='./controller/access_card_controller.php'>
-                    <div class='modal-content'>
-                      <div class='modal-header'>
-                        <h5 class='modal-title' id='updateAccessCardRecordModalLabel'>修改紀錄</h5>
-                      </div>
-                      <div class='modal-body'>
-                        <div class='text-center mb-3'>
-                          <div class='form-outline mb-4'>
-                            <input value='$id' readonly required type='text' name='temporary_access_card_record_id' class='form-control' />
-                            <label class='form-label'>通行證紀錄編號</label>
-                          </div>
-                          <select class='form-select mb-4' name='state' required>
-                            <option value=''>申請狀態</option>";
-                            for($i = 0; $i<3; $i++){
-                              echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$access_card_states[$i]."</option>";
-                            }
-                          echo "</select>
-                        </div>
-                      </div>
-                      <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                        <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
-                      </div>
-                    </div>
-                    </form>
-                    </div>
-                  </div>";
                   
-
-                  // Delete  Modal
-                  echo "
-                  <div class='modal fade' id='deleteAccessCardRecordModal$id' tabindex='-1' aria-labelledby='deleteAccessCardRecordModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <form method='post' action='./controller/access_card_controller.php'>
-                        <div class='modal-content'>
-                          <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteAccessCardRecordModalLabel'>刪除紀錄</h5>
-                          </div>
-                          <div class='modal-body'>您確認要刪除此紀錄嗎？</div>
-                          <div class='modal-footer'>
-                            <input value='$id' required type='hidden' name='temporary_access_card_record_id' class='form-control' />
-                            <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
-                            <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>";
                 }
               }else{
                 echo "<td class='text-center' colspan='100%'>無</td>";
@@ -184,3 +133,73 @@ echo
 </div>";
 }
 ?>
+<?php
+// Update Modal
+echo "
+<div class='modal fade' id='updateAccessCardRecordModal' tabindex='-1' aria-labelledby='updateAccessCardRecordModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+  <div class='modal-content'>
+  <form method='post' action='./controller/access_card_controller.php'>
+  <div class='modal-header'>
+      <h5 class='modal-title' id='updateAccessCardRecordModalLabel'>修改紀錄</h5>
+    </div>
+    <div class='modal-body'>
+      <div class='text-center mb-3'>
+        <div class='form-outline mb-4'>
+          <input id='id' readonly required type='text' name='temporary_access_card_record_id' class='form-control' />
+          <label class='form-label'>通行證紀錄編號</label>
+        </div>
+        <select id='state' class='form-select mb-4' name='state' required>
+          <option value=''>申請狀態</option>";
+          for($i = 0; $i<3; $i++){
+            echo "<option value=$i"; if($state ==$i) echo " selected"; echo ">".$access_card_states[$i]."</option>";
+          }
+        echo "</select>
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+      <button type='submit' class='btn btn-primary' name='update' value='update'>確認</button>
+    </div>
+  </form>
+  </div>
+  </div>
+</div>";
+
+
+// Delete  Modal
+echo "
+<div class='modal fade' id='deleteAccessCardRecordModal' tabindex='-1' aria-labelledby='deleteAccessCardRecordModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+      <div class='modal-content'>
+    <form method='post' action='./controller/access_card_controller.php'>
+    <div class='modal-header'>
+          <h5 class='modal-title' id='deleteAccessCardRecordModalLabel'>刪除紀錄</h5>
+        </div>
+        <div class='modal-body'>您確認要刪除此紀錄嗎？</div>
+        <div class='modal-footer'>
+          <input id='id' required type='hidden' name='temporary_access_card_record_id' class='form-control' />
+          <button type='button' class='btn btn-secondary' data-mdb-dismiss='modal'>取消</button>
+          <button type='submit' class='btn btn-primary' name='delete' value='delete'>確認</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>";
+?>
+
+<script>
+
+function put_access_card(a, b){ 
+  var elms = document.querySelectorAll("[id='id']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=a
+
+  var elms = document.querySelectorAll("[id='state']");
+  for(var i = 0; i < elms.length; i++) 
+    elms[i].value=b
+
+}
+
+
+</script>

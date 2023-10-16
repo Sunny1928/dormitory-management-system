@@ -275,6 +275,21 @@
       instance.show();
     }
   } 
+
+  var idleTime;
+  $(document).ready(function () {
+          reloadPage();
+          $('html').bind('mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick', function () {
+              clearTimeout(idleTime);
+              reloadPage();
+          });
+  });
+  function reloadPage() {
+      clearTimeout(idleTime);
+      idleTime = setTimeout(function () {
+          location.reload();
+      }, 10000);
+  }
 </script>
 
 

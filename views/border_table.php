@@ -148,14 +148,11 @@ echo "
         </div> 
         <select id='type' class='form-select mb-4' name='type' required>
           <option value=''>類別</option>";
-          for($i = 0; $i<2; $i++){
+          for($i = 0; $i<6; $i++){
             echo "<option value=$i"; 
             if($type == $i) echo " selected"; 
             echo ">".$border_types[$i]."</option>";
           }
-          echo "<option value=".$dormitory_id+2; 
-            if($type ==  $dormitory_id+2) echo " selected"; 
-            echo ">".$border_types[$dormitory_id+2]."</option>";
 
         echo "</select>
         <select id='apply_story_manager_state' class='form-select mb-4' name='apply_story_manager_state' required>

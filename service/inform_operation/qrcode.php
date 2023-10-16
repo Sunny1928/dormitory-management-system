@@ -1,7 +1,7 @@
 <?php
 
     
-    $url = 'http://192.168.244.49/SE_final_project/';
+    $url = 'http://172.20.10.2/SE_final_project/';
     // $url = 'http://localhost/';
 
     function encrypt_qrcode_data($url , $data , $path){
@@ -48,8 +48,8 @@
         $qrcode_time =  explode("!" , $decrypted_string)[1];
 
         
-        // if(strtotime($current) - strtotime($qrcode_time) > 15)
-            // $message = -1;
+        if(strtotime($current) - strtotime($qrcode_time) > 15)
+            $message = -1;
 
         return $message;
     }
